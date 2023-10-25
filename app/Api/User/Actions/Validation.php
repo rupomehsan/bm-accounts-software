@@ -34,8 +34,9 @@ class Validation extends FormRequest
     {
         return [
             'full_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email,' . $this->id,
             'password' => 'required',
+            'phone' => 'sometimes',
             'uid' => 'sometimes',
             'telegram_name' => 'sometimes',
             'telegram_id' => 'sometimes',

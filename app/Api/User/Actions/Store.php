@@ -11,7 +11,6 @@ class Store
 
     public static function exec(Validation $request)
     {
-        // dd($request->all());
 
         try {
             $imageName = 'avatar.png';
@@ -19,7 +18,7 @@ class Store
                 $image = $request->file('image');
                 $imageName = image_uploader($image, 'uploads/user');
             }
-            dd($imageName);
+            // dd($imageName);
             if (self::$model::query()->create(array_merge(
                 $request->validated(),
                 [
