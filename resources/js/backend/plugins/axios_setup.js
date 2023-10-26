@@ -30,15 +30,12 @@ axios.interceptors.request.use(
         $("#backend_body .main_content").css({ overflowY: "hidden !mportant" });
         $("form button").prop("disabled", true);
         Pace?.restart();
-
         window.count_left_time_sec = 1;
-
         sessionStorage.setItem(
             "last_time",
             moment().format("DD/MM/YYYY HH:mm:ss")
         );
         localStorage.setItem("last_time", new moment());
-
         return {
             ...config,
             // onUploadProgress,
@@ -99,6 +96,9 @@ window.axios.interceptors.response.use(
             );
         } else {
             console.log(error.response || error);
+            if (error.response.data.status == "server_error") {
+                window.s_warning(error.response.data.message);
+            }
         }
 
         // if(error.response.status == 401){

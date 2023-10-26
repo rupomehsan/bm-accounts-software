@@ -102,12 +102,15 @@ export default {
             user_store: "store",
         }),
 
-        submitHandler: function ($event) {
+        submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
             } else {
-                this.user_store($event.target);
-                this.$router.push({ name: "All" });
+                let response = await this.user_store($event.target);
+                if (response.data.status === "success") {
+                    window.s_alert("Data successcully created");
+                    this.$router.push({ name: `All` });
+                }
             }
         },
     },

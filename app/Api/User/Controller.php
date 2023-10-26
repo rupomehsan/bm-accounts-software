@@ -14,6 +14,7 @@ class Controller extends ControllersController
     public function index()
     {
         try {
+            // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = [];

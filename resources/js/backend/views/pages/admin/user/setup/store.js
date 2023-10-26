@@ -9,14 +9,15 @@ export const user_setup_store = defineStore("user_setup_store", {
         doubleCount: (state) => state.count * 2,
     },
     actions: {
-        all: async function (url) {
+        all: async function (url, pageLimit) {
             let response;
+            let page = `?page=${pageLimit}`;
+
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("users");
+                response = await axios.get("users" + page);
             }
-            // console.log(response.data);
             this.all_data = response.data.data;
         },
         get: async function (id) {
@@ -27,10 +28,8 @@ export const user_setup_store = defineStore("user_setup_store", {
         },
         store: async function (form) {
             let formData = new FormData(form);
-            console.log("store", formData);
             let response = await axios.post("users", formData);
-            window.s_alert("Data successcully created");
-            console.log("res", response.data.data);
+            return response;
         },
         update: async function (form, id) {
             const headers = {

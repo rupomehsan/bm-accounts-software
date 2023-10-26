@@ -5,6 +5,12 @@
                 <li class="page-item" :class="{ active: link.active }">
                     <a
                         class="page-link"
+                        :class="
+                            data.current_page == data.last_page &&
+                            data.links.length - 1 == index
+                                ? 'disabled'
+                                : ''
+                        "
                         @click.prevent="
                             () => (link.url ? method(link.url) : '')
                         "

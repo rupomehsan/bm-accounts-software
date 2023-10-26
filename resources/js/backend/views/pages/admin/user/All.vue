@@ -29,6 +29,7 @@
                         <div class="search">
                             <form action="#">
                                 <input
+                                    v-model.debounce:1000ms="search_data"
                                     placeholder="search..."
                                     type="search"
                                     class="form-control border border-info"
@@ -236,9 +237,9 @@
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="">
-                                    <option value="10">10</option>
+                                <select class="" v-model="offset">
                                     <option value="5">5</option>
+                                    <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
@@ -284,10 +285,12 @@ import { mapActions, mapState } from "pinia";
 import { user_setup_store } from "./setup/store";
 
 export default {
+    data: () => ({
+        offset: "5",
+        search_data: "",
+    }),
     created: async function () {
-        await this.user_get_all();
-
-        // console.log("dataa", this.all_users);
+        await this.user_get_all("users", this.page_limit);
     },
     methods: {
         ...mapActions(user_setup_store, {
@@ -299,6 +302,14 @@ export default {
         ...mapState(user_setup_store, {
             all_users: "all_data",
         }),
+    },
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            await this.user_get_all("users");
+        },
+        search_data: function (newSearchData, oldSearchData) {
+            console.log(newSearchData);
+        },
     },
 };
 </script>
