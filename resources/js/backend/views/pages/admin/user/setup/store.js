@@ -9,14 +9,14 @@ export const user_setup_store = defineStore("user_setup_store", {
         doubleCount: (state) => state.count * 2,
     },
     actions: {
-        all: async function (url, pageLimit) {
+        all: async function (url) {
             let response;
-            let page = `?page=${pageLimit}`;
+            // let page = `?page=${pageLimit}`;
 
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("users" + page);
+                response = await axios.get("users");
             }
             this.all_data = response.data.data;
         },
@@ -33,12 +33,10 @@ export const user_setup_store = defineStore("user_setup_store", {
         },
         update: async function (form, id) {
             const headers = {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/x-www-form-urlencoded',
             };
             let formData = new FormData(form);
-            let response = await axios.patch(`users/${id}`, formData, {
-                headers,
-            });
+            let response = await axios.post(`users/update/${id}`, formData);
             window.s_alert("Data successcully updated");
             console.log("res", response.data);
         },

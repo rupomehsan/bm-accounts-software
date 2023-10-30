@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "reload": "php artisan db:wipe && php artisan migrate && php artisan migrate --path=app/Api/* && php artisan db:seed && php artisan passport:install"
+        "reload": "php artisan db:wipe && php artisan migrate && php artisan migrate --path=app/Modules/* && php artisan db:seed && php artisan passport:install"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

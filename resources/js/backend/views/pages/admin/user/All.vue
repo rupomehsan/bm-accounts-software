@@ -38,7 +38,7 @@
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a
+                                <a @click.prevent=""
                                     href="#"
                                     class="btn px-3 btn-outline-secondary"
                                     ><i class="fa fa-list"></i
@@ -290,7 +290,7 @@ export default {
         search_data: "",
     }),
     created: async function () {
-        await this.user_get_all("users", this.page_limit);
+        await this.user_get_all();
     },
     methods: {
         ...mapActions(user_setup_store, {
