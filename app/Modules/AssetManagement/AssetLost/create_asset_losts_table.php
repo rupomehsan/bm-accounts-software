@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('asset_losts', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-
+            $table->bigInteger('asset_id')->nullable();
+            $table->text('reason')->nullable();
+            $table->string('lost_from_user')->nullable();
+            $table->string('lost_from_user_contact')->nullable();
+            $table->date('lost_date')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

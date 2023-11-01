@@ -34,6 +34,9 @@ class Validation extends FormRequest
     {
         return [
             'title' => 'required',
+            'description' => 'required',
+            'parent_id' => 'required',
+            'image' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

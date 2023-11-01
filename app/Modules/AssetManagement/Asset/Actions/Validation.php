@@ -34,6 +34,17 @@ class Validation extends FormRequest
     {
         return [
             'title' => 'required',
+            'central_division_id' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'memo_no' => 'required',
+            'memo_date' => 'required',
+            'code' => 'required',
+            'asset_location' => 'required',
+            'asset_owner' => 'required',
+            'owner_phone_number' => 'required',
+            'depreciation_amount' => 'required',
+            'depreciation_type' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

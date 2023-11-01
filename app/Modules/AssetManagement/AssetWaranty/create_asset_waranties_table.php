@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('asset_waranties', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-
+            $table->bigInteger('asset_id')->nullable();
+            $table->date('waranty_date')->nullable();
+            $table->text('description')->nullable();
+            $table->string('waranty_card_image')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

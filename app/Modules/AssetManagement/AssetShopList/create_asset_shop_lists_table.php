@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('asset_shop_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-
+            $table->string('shop_name')->nullable();
+            $table->string('owner_name', 100)->nullable();
+            $table->string('contact_number_1', 20)->nullable();
+            $table->string('contact_number_2', 20)->nullable();
+            $table->string('image', 100)->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

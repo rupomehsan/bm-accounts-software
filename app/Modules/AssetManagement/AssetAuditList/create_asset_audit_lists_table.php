@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('asset_audit_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-
+            $table->bigInteger('asset_audit_id')->nullable();
+            $table->bigInteger('asset_id')->nullable();
+            $table->enum('is_ok', ['yes', 'no'])->nullable();
+            $table->text('comment')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

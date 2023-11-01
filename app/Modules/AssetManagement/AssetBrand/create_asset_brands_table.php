@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('asset_brands', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('asset_id')->nullable();
             $table->string('title')->nullable();
-
+            $table->string('logo', 100)->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

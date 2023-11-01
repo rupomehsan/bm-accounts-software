@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('asset_change_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-
+            $table->bigInteger('asset_id')->nullable();
+            $table->string('column_name')->nullable();
+            $table->text('old_value')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

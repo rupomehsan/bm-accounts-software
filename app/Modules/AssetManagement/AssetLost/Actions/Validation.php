@@ -33,7 +33,11 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'asset_id' => 'required',
+            'reason' => 'required',
+            'lost_from_user' => 'required',
+            'lost_from_user_contact' => 'required',
+            'lost_date' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }
