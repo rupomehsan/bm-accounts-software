@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Show
 {
-    static $model = \App\Modules\AccountBranchBudget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchBudget\Model::class;
 
     public static function execute($id)
     {

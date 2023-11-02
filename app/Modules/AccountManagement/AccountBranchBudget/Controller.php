@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+    public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

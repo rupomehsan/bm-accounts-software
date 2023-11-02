@@ -33,7 +33,11 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'cp_application_category_id' => 'required',
+            'field_name' => 'required',
+            'field_type' => 'required',
+            'field_value' => 'required',
+            'pdf_format' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

@@ -4,7 +4,7 @@ namespace App\Modules\AccountManagement\AccountBranchBudget\Actions;
 
 class Delete
 {
-    static $model = \App\Modules\AccountBranchBudget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchBudget\Model::class;
 
     public static function execute($id)
     {
@@ -13,6 +13,7 @@ class Delete
                 return messageResponse('Data not found...', 404, 'error');
             }
             $data->delete();
+            return messageResponse('Item deleted successfully', 201);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }

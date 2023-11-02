@@ -4,7 +4,7 @@ namespace App\Modules\AccountManagement\AccountBranchBudget\Actions;
 
 class All
 {
-    static $model = \App\Modules\AccountBranchBudget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchBudget\Model::class;
 
     public static function execute()
     {

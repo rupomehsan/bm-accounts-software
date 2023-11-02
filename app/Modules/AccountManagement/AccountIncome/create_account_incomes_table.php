@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('branch_id')->nullable();
             $table->string('account_receipt_no', 100)->nullable();
             $table->date('date')->nullable();
-            $table->test('description')->nullable();
+            $table->text('description')->nullable();
             $table->float('amount')->nullable();
             $table->string('amount_in_text', 100)->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
