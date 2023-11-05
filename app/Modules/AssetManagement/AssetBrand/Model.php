@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetBrand;
+namespace App\Modules\AssetManagement\AssetBrand;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

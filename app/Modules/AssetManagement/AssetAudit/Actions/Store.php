@@ -2,12 +2,12 @@
 
 namespace App\Modules\AssetManagement\AssetAudit\Actions;
 
-use App\Modules\AssetAudit\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+use App\Modules\AssetManagement\AssetAudit\Actions\Validation;
+
 
 class Store
 {
-    static $model = \App\Modules\AssetAudit\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetAudit\Model::class;
 
     public static function execute(Validation $request)
     {

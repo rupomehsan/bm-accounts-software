@@ -4,7 +4,7 @@ namespace App\Modules\AccountManagement\AccountCategory\Actions;
 
 class Delete
 {
-    static $model = \App\Modules\AccountCategory\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountCategory\Model::class;
 
     public static function execute($id)
     {
@@ -13,6 +13,7 @@ class Delete
                 return messageResponse('Data not found...', 404, 'error');
             }
             $data->delete();
+            return messageResponse('Item successfully deleted', 200, 'success');
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }

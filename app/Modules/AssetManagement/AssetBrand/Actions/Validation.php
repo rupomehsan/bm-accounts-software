@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetBrand\Actions;
+namespace App\Modules\AssetManagement\AssetBrand\Actions;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;

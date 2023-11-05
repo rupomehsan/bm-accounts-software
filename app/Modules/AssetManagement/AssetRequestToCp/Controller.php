@@ -2,12 +2,12 @@
 
 namespace App\Modules\AssetManagement\AssetRequestToCp;
 
-use App\Modules\AssetRequestToCp\Actions\All;
-use App\Modules\AssetRequestToCp\Actions\Delete;
-use App\Modules\AssetRequestToCp\Actions\Show;
-use App\Modules\AssetRequestToCp\Actions\Store;
-use App\Modules\AssetRequestToCp\Actions\Update;
-use App\Modules\AssetRequestToCp\Actions\Validation;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\All;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\Delete;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\Show;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\Store;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\Update;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

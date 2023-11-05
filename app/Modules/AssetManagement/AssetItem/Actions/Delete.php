@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\AssetItem\Actions;
+namespace App\Modules\AssetManagement\AssetItem\Actions;
 
 class Delete
 {
-    static $model = \App\Modules\AssetItem\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetItem\Model::class;
 
     public static function execute($id)
     {
@@ -13,6 +13,7 @@ class Delete
                 return messageResponse('Data not found...', 404, 'error');
             }
             $data->delete();
+            return messageResponse('Item successfully deleted', 200, 'success');
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }

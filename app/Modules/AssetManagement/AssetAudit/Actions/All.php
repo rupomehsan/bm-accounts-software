@@ -4,7 +4,7 @@ namespace App\Modules\AssetManagement\AssetAudit\Actions;
 
 class All
 {
-    static $model = \App\Modules\AssetAudit\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetAudit\Model::class;
 
     public static function execute()
     {

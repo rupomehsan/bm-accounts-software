@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\QuotationProductPrice\Actions;
+namespace App\Modules\AssetManagement\QuotationProductPrice\Actions;
 
-use App\Modules\QuotationProductPrice\Actions\Validation;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\Validation;
 use Illuminate\Support\Facades\Hash;
 
 class Store
 {
-    static $model = \App\Modules\QuotationProductPrice\Model::class;
+    static $model = \App\Modules\AssetManagement\QuotationProductPrice\Model::class;
 
     public static function execute(Validation $request)
     {

@@ -2,12 +2,12 @@
 
 namespace App\Modules\AccountManagement\AccountBranchTarget;
 
-use App\Modules\AccountBranchTarget\Actions\All;
-use App\Modules\AccountBranchTarget\Actions\Delete;
-use App\Modules\AccountBranchTarget\Actions\Show;
-use App\Modules\AccountBranchTarget\Actions\Store;
-use App\Modules\AccountBranchTarget\Actions\Update;
-use App\Modules\AccountBranchTarget\Actions\Validation;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\All;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Delete;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Show;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Store;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Update;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

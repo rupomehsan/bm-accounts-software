@@ -2,12 +2,12 @@
 
 namespace App\Modules\AccountManagement\AccountReceiptBook;
 
-use App\Modules\AccountReceiptBook\Actions\All;
-use App\Modules\AccountReceiptBook\Actions\Delete;
-use App\Modules\AccountReceiptBook\Actions\Show;
-use App\Modules\AccountReceiptBook\Actions\Store;
-use App\Modules\AccountReceiptBook\Actions\Update;
-use App\Modules\AccountReceiptBook\Actions\Validation;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\All;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\Delete;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\Show;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\Store;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\Update;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

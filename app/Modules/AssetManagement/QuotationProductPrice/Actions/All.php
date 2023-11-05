@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\QuotationProductPrice\Actions;
+namespace App\Modules\AssetManagement\QuotationProductPrice\Actions;
 
 class All
 {
-    static $model = \App\Modules\QuotationProductPrice\Model::class;
+    static $model = \App\Modules\AssetManagement\QuotationProductPrice\Model::class;
 
     public static function execute()
     {

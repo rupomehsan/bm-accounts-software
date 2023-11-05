@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetChangeHistory;
+namespace App\Modules\AssetManagement\AssetChangeHistory;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

@@ -2,11 +2,11 @@
 
 namespace App\Modules\AccountManagement\AccountIncomeExtrafield\Actions;
 
-use App\Modules\AccountIncomeExtrafield\Actions\Validation;
+use App\Modules\AccountManagement\AccountIncomeExtrafield\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AccountIncomeExtrafield\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountIncomeExtrafield\Model::class;
 
     public static function execute(Validation $request,$id)
     {

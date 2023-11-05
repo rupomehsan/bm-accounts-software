@@ -4,7 +4,7 @@ namespace App\Modules\AssetManagement\AssetQuotation\Actions;
 
 class All
 {
-    static $model = \App\Modules\AssetQuotation\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetQuotation\Model::class;
 
     public static function execute()
     {

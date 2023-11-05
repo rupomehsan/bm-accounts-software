@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\QuotationProduct;
+namespace App\Modules\AssetManagement\QuotationProduct;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

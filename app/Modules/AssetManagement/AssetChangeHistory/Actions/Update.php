@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\AssetChangeHistory\Actions;
+namespace App\Modules\AssetManagement\AssetChangeHistory\Actions;
 
-use App\Modules\AssetChangeHistory\Actions\Validation;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AssetChangeHistory\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetChangeHistory\Model::class;
 
     public static function execute(Validation $request,$id)
     {

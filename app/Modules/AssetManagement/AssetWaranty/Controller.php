@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetWaranty;
+namespace App\Modules\AssetManagement\AssetWaranty;
 
-use App\Modules\AssetWaranty\Actions\All;
-use App\Modules\AssetWaranty\Actions\Delete;
-use App\Modules\AssetWaranty\Actions\Show;
-use App\Modules\AssetWaranty\Actions\Store;
-use App\Modules\AssetWaranty\Actions\Update;
-use App\Modules\AssetWaranty\Actions\Validation;
+use App\Modules\AssetManagement\AssetWaranty\Actions\All;
+use App\Modules\AssetManagement\AssetWaranty\Actions\Delete;
+use App\Modules\AssetManagement\AssetWaranty\Actions\Show;
+use App\Modules\AssetManagement\AssetWaranty\Actions\Store;
+use App\Modules\AssetManagement\AssetWaranty\Actions\Update;
+use App\Modules\AssetManagement\AssetWaranty\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

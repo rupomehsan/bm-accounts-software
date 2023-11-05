@@ -2,12 +2,10 @@
 
 namespace App\Modules\AccountManagement\AccountBranchTarget\Actions;
 
-use App\Modules\AccountBranchTarget\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
 
 class Show
 {
-    static $model = \App\Modules\AccountBranchTarget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
 
     public static function execute($id)
     {

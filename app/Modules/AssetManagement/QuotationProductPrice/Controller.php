@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\QuotationProductPrice;
+namespace App\Modules\AssetManagement\QuotationProductPrice;
 
-use App\Modules\QuotationProductPrice\Actions\All;
-use App\Modules\QuotationProductPrice\Actions\Delete;
-use App\Modules\QuotationProductPrice\Actions\Show;
-use App\Modules\QuotationProductPrice\Actions\Store;
-use App\Modules\QuotationProductPrice\Actions\Update;
-use App\Modules\QuotationProductPrice\Actions\Validation;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\All;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\Delete;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\Show;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\Store;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\Update;
+use App\Modules\AssetManagement\QuotationProductPrice\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

@@ -4,7 +4,7 @@ namespace App\Modules\AccountManagement\AccountReceiptBook\Actions;
 
 class All
 {
-    static $model = \App\Modules\AccountReceiptBook\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
 
     public static function execute()
     {

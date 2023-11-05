@@ -4,7 +4,7 @@ namespace App\Modules\AssetManagement\AssetRequestToCp\Actions;
 
 class All
 {
-    static $model = \App\Modules\AssetRequestToCp\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetRequestToCp\Model::class;
 
     public static function execute()
     {

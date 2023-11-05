@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Modules\QuotationProductPrice\Actions;
-
-use App\Modules\QuotationProductPrice\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+namespace App\Modules\AssetManagement\QuotationProductPrice\Actions;
 
 class Show
 {
-    static $model = \App\Modules\QuotationProductPrice\Model::class;
+    static $model = \App\Modules\AssetManagement\QuotationProductPrice\Model::class;
 
     public static function execute($id)
     {

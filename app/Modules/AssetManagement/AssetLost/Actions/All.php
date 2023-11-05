@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\AssetLost\Actions;
+namespace App\Modules\AssetManagement\AssetLost\Actions;
 
 class All
 {
-    static $model = \App\Modules\AssetLost\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetLost\Model::class;
 
     public static function execute()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\AssetShopList\Actions;
+namespace App\Modules\AssetManagement\AssetShopList\Actions;
 
 class All
 {
-    static $model = \App\Modules\AssetShopList\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetShopList\Model::class;
 
     public static function execute()
     {

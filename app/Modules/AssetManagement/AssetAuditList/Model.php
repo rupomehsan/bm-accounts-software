@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetAuditList;
+namespace App\Modules\AssetManagement\AssetAuditList;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

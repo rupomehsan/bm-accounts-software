@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Modules\AssetLost\Actions;
-
-use App\Modules\AssetLost\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+namespace App\Modules\AssetManagement\AssetLost\Actions;
 
 class Show
 {
-    static $model = \App\Modules\AssetLost\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetLost\Model::class;
 
     public static function execute($id)
     {

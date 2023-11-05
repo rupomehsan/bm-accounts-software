@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Modules\AssetWaranty\Actions;
-
-use App\Modules\AssetWaranty\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+namespace App\Modules\AssetManagement\AssetWaranty\Actions;
 
 class Show
 {
-    static $model = \App\Modules\AssetWaranty\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetWaranty\Model::class;
 
     public static function execute($id)
     {

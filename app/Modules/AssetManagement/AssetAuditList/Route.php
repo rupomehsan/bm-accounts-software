@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\AssetAuditList\Controller;
+use App\Modules\AssetManagement\AssetAuditList\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {

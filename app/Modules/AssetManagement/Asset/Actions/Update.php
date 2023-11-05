@@ -2,11 +2,11 @@
 
 namespace App\Modules\AssetManagement\Asset\Actions;
 
-use App\Modules\Asset\Actions\Validation;
+use App\Modules\AssetManagement\Asset\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\Asset\Model::class;
+    static $model = \App\Modules\AssetManagement\Asset\Model::class;
 
     public static function execute(Validation $request,$id)
     {

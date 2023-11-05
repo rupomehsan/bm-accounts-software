@@ -2,11 +2,11 @@
 
 namespace App\Modules\AccountManagement\AccountReceiptBookAssign\Actions;
 
-use App\Modules\AccountReceiptBookAssign\Actions\Validation;
+use App\Modules\AccountManagement\AccountReceiptBookAssign\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AccountReceiptBookAssign\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountReceiptBookAssign\Model::class;
 
     public static function execute(Validation $request,$id)
     {

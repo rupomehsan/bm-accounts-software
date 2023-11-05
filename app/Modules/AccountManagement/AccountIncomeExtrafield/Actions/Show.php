@@ -2,12 +2,10 @@
 
 namespace App\Modules\AccountManagement\AccountIncomeExtrafield\Actions;
 
-use App\Modules\AccountIncomeExtrafield\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
 
 class Show
 {
-    static $model = \App\Modules\AccountIncomeExtrafield\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountIncomeExtrafield\Model::class;
 
     public static function execute($id)
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\AssetBrand\Actions;
+namespace App\Modules\AssetManagement\AssetBrand\Actions;
 
-use App\Modules\AssetBrand\Actions\Validation;
+use App\Modules\AssetManagement\AssetBrand\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AssetBrand\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetBrand\Model::class;
 
     public static function execute(Validation $request,$id)
     {

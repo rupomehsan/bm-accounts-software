@@ -2,11 +2,11 @@
 
 namespace App\Modules\AccountManagement\AccountBranchTarget\Actions;
 
-use App\Modules\AccountBranchTarget\Actions\Validation;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AccountBranchTarget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
 
     public static function execute(Validation $request,$id)
     {

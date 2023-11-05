@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetWaranty;
+namespace App\Modules\AssetManagement\AssetWaranty;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

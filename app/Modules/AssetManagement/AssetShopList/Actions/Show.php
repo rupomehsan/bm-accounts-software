@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Modules\AssetShopList\Actions;
+namespace App\Modules\AssetManagement\AssetShopList\Actions;
 
-use App\Modules\AssetShopList\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
 
 class Show
 {
-    static $model = \App\Modules\AssetShopList\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetShopList\Model::class;
 
     public static function execute($id)
     {

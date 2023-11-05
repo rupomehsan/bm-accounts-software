@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\QuotationProduct\Actions;
+namespace App\Modules\AssetManagement\QuotationProduct\Actions;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;

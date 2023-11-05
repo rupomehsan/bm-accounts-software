@@ -2,12 +2,12 @@
 
 namespace App\Modules\AccountManagement\AccountBranchTarget\Actions;
 
-use App\Modules\AccountBranchTarget\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\Validation;
+
 
 class Store
 {
-    static $model = \App\Modules\AccountBranchTarget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
 
     public static function execute(Validation $request)
     {

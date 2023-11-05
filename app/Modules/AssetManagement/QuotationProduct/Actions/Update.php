@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\QuotationProduct\Actions;
+namespace App\Modules\AssetManagement\QuotationProduct\Actions;
 
-use App\Modules\QuotationProduct\Actions\Validation;
+use App\Modules\AssetManagement\QuotationProduct\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\QuotationProduct\Model::class;
+    static $model = \App\Modules\AssetManagement\QuotationProduct\Model::class;
 
     public static function execute(Validation $request,$id)
     {

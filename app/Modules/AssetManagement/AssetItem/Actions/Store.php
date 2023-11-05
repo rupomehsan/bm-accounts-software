@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetItem\Actions;
+namespace App\Modules\AssetManagement\AssetItem\Actions;
 
-use App\Modules\AssetItem\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+use App\Modules\AssetManagement\AssetItem\Actions\Validation;
+
 
 class Store
 {
-    static $model = \App\Modules\AssetItem\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetItem\Model::class;
 
     public static function execute(Validation $request)
     {

@@ -15,6 +15,7 @@ class Delete
                 unlink($data->image);
             }
             $data->delete();
+            return messageResponse('Item successfully deleted', 200, 'success');
         } else {
             return messageResponse('Data configure found...', 404, 'error');
         }

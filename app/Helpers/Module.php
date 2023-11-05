@@ -60,7 +60,7 @@ if (!function_exists('store')) {
             namespace App\Modules\{moduleName}\Actions;
 
             use App\Modules\{moduleName}\Actions\Validation;
-            use Illuminate\Support\Facades\Hash;
+
 
             class Store
             {
@@ -124,9 +124,6 @@ if (!function_exists('show')) {
 
             namespace App\Modules\{moduleName}\Actions;
 
-            use App\Modules\{moduleName}\Actions\Validation;
-            use Illuminate\Support\Facades\Hash;
-
             class Show
             {
                 static $model = \App\Modules\{moduleName}\Model::class;
@@ -169,6 +166,7 @@ if (!function_exists('delete')) {
                             return messageResponse('Data not found...', 404, 'error');
                         }
                         $data->delete();
+            return messageResponse('Item successfully deleted', 200, 'success');
                     } catch (\Exception $e) {
                         return messageResponse($e->getMessage(), 500, 'server_error');
                     }
@@ -255,6 +253,16 @@ if (!function_exists('Modules')) {
         #------------------ Modules TESTING ----------------#
         #                                               #
 
+        ### Store data canvas
+        ### @prompt title enter title
+        POST {{url}}/1 HTTP/1.1
+        content-type: application/json
+        # Authorization: {{token}}
+
+        {
+            "title": "Title"
+        }
+
         ### get all data without pagination
         ### will return:  {  }
         GET {{url}} HTTP/1.1
@@ -267,17 +275,9 @@ if (!function_exists('Modules')) {
         content-type: application/json
         # Authorization: {{token}}
 
-        ### store data
-        ### @prompt title enter title
-        POST {{url}} HTTP/1.1
-        content-type: application/json
-
-        {
-            "title": "Title"
-        }
 
 
-        ### store data canvas
+        ### Update data canvas
         ### @prompt title enter title
         PATCH {{url}}/1 HTTP/1.1
         content-type: application/json
@@ -441,9 +441,9 @@ if (!function_exists('controller')) {
                 return $data;
             }
 
-            public function update($request, $id)
+            public function update(Validation $request, $id)
             {
-                $data = Update::execute(Validation $request, $id);
+                $data = Update::execute($request, $id);
                 return $data;
             }
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetShopList;
+namespace App\Modules\AssetManagement\AssetShopList;
 
-use App\Modules\AssetShopList\Actions\All;
-use App\Modules\AssetShopList\Actions\Delete;
-use App\Modules\AssetShopList\Actions\Show;
-use App\Modules\AssetShopList\Actions\Store;
-use App\Modules\AssetShopList\Actions\Update;
-use App\Modules\AssetShopList\Actions\Validation;
+use App\Modules\AssetManagement\AssetShopList\Actions\All;
+use App\Modules\AssetManagement\AssetShopList\Actions\Delete;
+use App\Modules\AssetManagement\AssetShopList\Actions\Show;
+use App\Modules\AssetManagement\AssetShopList\Actions\Store;
+use App\Modules\AssetManagement\AssetShopList\Actions\Update;
+use App\Modules\AssetManagement\AssetShopList\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

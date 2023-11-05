@@ -2,12 +2,9 @@
 
 namespace App\Modules\AccountManagement\AccountIncome\Actions;
 
-use App\Modules\AccountIncome\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
-
 class Show
 {
-    static $model = \App\Modules\AccountIncome\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountIncome\Model::class;
 
     public static function execute($id)
     {

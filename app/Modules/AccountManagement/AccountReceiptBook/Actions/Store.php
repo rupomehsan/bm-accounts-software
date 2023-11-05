@@ -2,12 +2,12 @@
 
 namespace App\Modules\AccountManagement\AccountReceiptBook\Actions;
 
-use App\Modules\AccountReceiptBook\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
+use App\Modules\AccountManagement\AccountReceiptBook\Actions\Validation;
+
 
 class Store
 {
-    static $model = \App\Modules\AccountReceiptBook\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
 
     public static function execute(Validation $request)
     {

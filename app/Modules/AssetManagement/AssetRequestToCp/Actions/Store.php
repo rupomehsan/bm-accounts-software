@@ -2,12 +2,12 @@
 
 namespace App\Modules\AssetManagement\AssetRequestToCp\Actions;
 
-use App\Modules\AssetRequestToCp\Actions\Validation;
+use App\Modules\AssetManagement\AssetRequestToCp\Actions\Validation;
 use Illuminate\Support\Facades\Hash;
 
 class Store
 {
-    static $model = \App\Modules\AssetRequestToCp\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetRequestToCp\Model::class;
 
     public static function execute(Validation $request)
     {

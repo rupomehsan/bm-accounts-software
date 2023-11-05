@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Show
 {
-    static $model = \App\Modules\AssetRequestToCp\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetRequestToCp\Model::class;
 
     public static function execute($id)
     {

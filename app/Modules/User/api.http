@@ -29,7 +29,9 @@ POST {{url}} HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Title"
+    "full_name": "Title",
+    "email": "fasdfa@gmail.com",
+    "password": "Ti123456tle"
 }
 
 
@@ -40,8 +42,9 @@ content-type: application/json
 # Authorization: {{token}}
 
 {
-    "full_name": "",
-    "image": "web.jpg"
+   "full_name": "Title sdfasdf",
+    "email": "fasdfasdfa@gmail.com",
+    "password": "Ti123456tle"
 }
 
 

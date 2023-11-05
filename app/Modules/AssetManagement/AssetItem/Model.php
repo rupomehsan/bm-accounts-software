@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetItem;
+namespace App\Modules\AssetManagement\AssetItem;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AssetLost;
+namespace App\Modules\AssetManagement\AssetLost;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;

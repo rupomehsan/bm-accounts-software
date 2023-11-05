@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Modules\AssetChangeHistory\Actions;
+namespace App\Modules\AssetManagement\AssetChangeHistory\Actions;
 
-use App\Modules\AssetChangeHistory\Actions\Validation;
-use Illuminate\Support\Facades\Hash;
 
 class Show
 {
-    static $model = \App\Modules\AssetChangeHistory\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetChangeHistory\Model::class;
 
     public static function execute($id)
     {

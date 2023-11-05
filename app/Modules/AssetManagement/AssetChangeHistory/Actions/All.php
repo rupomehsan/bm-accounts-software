@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\AssetChangeHistory\Actions;
+namespace App\Modules\AssetManagement\AssetChangeHistory\Actions;
 
 class All
 {
-    static $model = \App\Modules\AssetChangeHistory\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetChangeHistory\Model::class;
 
     public static function execute()
     {

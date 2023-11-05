@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetChangeHistory;
+namespace App\Modules\AssetManagement\AssetChangeHistory;
 
-use App\Modules\AssetChangeHistory\Actions\All;
-use App\Modules\AssetChangeHistory\Actions\Delete;
-use App\Modules\AssetChangeHistory\Actions\Show;
-use App\Modules\AssetChangeHistory\Actions\Store;
-use App\Modules\AssetChangeHistory\Actions\Update;
-use App\Modules\AssetChangeHistory\Actions\Validation;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\All;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\Delete;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\Show;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\Store;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\Update;
+use App\Modules\AssetManagement\AssetChangeHistory\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

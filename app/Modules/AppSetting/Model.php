@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
-    protected $table = "app_settings";
+    protected $table = "setting_titles";
     protected $guarded = [];
 
     protected static function booted()

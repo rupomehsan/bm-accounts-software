@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\AssetCategory\Actions;
+namespace App\Modules\AssetManagement\AssetCategory\Actions;
 
-use App\Modules\AssetCategory\Actions\Validation;
+use App\Modules\AssetManagement\AssetCategory\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AssetCategory\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetCategory\Model::class;
 
     public static function execute(Validation $request,$id)
     {

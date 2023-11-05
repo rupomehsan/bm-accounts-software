@@ -2,12 +2,12 @@
 
 namespace App\Modules\AssetManagement\AssetQuotation;
 
-use App\Modules\AssetQuotation\Actions\All;
-use App\Modules\AssetQuotation\Actions\Delete;
-use App\Modules\AssetQuotation\Actions\Show;
-use App\Modules\AssetQuotation\Actions\Store;
-use App\Modules\AssetQuotation\Actions\Update;
-use App\Modules\AssetQuotation\Actions\Validation;
+use App\Modules\AssetManagement\AssetQuotation\Actions\All;
+use App\Modules\AssetManagement\AssetQuotation\Actions\Delete;
+use App\Modules\AssetManagement\AssetQuotation\Actions\Show;
+use App\Modules\AssetManagement\AssetQuotation\Actions\Store;
+use App\Modules\AssetManagement\AssetQuotation\Actions\Update;
+use App\Modules\AssetManagement\AssetQuotation\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

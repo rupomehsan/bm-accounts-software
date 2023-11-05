@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetLost\Actions;
+namespace App\Modules\AssetManagement\AssetLost\Actions;
 
-use App\Modules\AssetLost\Actions\Validation;
+use App\Modules\AssetManagement\AssetLost\Actions\Validation;
 use Illuminate\Support\Facades\Hash;
 
 class Store
 {
-    static $model = \App\Modules\AssetLost\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetLost\Model::class;
 
     public static function execute(Validation $request)
     {

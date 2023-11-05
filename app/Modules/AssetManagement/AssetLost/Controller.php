@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetLost;
+namespace App\Modules\AssetManagement\AssetLost;
 
-use App\Modules\AssetLost\Actions\All;
-use App\Modules\AssetLost\Actions\Delete;
-use App\Modules\AssetLost\Actions\Show;
-use App\Modules\AssetLost\Actions\Store;
-use App\Modules\AssetLost\Actions\Update;
-use App\Modules\AssetLost\Actions\Validation;
+use App\Modules\AssetManagement\AssetLost\Actions\All;
+use App\Modules\AssetManagement\AssetLost\Actions\Delete;
+use App\Modules\AssetManagement\AssetLost\Actions\Show;
+use App\Modules\AssetManagement\AssetLost\Actions\Store;
+use App\Modules\AssetManagement\AssetLost\Actions\Update;
+use App\Modules\AssetManagement\AssetLost\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;

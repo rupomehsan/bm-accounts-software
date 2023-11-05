@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\AssetChangeHistory\Controller;
+use App\Modules\AssetManagement\AssetChangeHistory\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {

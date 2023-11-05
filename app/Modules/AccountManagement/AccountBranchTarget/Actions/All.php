@@ -4,7 +4,7 @@ namespace App\Modules\AccountManagement\AccountBranchTarget\Actions;
 
 class All
 {
-    static $model = \App\Modules\AccountBranchTarget\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
 
     public static function execute()
     {

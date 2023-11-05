@@ -4,7 +4,7 @@ namespace App\Modules\AccountManagement\AccountIncomeExtrafield\Actions;
 
 class All
 {
-    static $model = \App\Modules\AccountIncomeExtrafield\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountIncomeExtrafield\Model::class;
 
     public static function execute()
     {

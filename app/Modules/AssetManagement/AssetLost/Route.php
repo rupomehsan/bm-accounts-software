@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\AssetLost\Controller;
+use App\Modules\AssetManagement\AssetLost\Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {

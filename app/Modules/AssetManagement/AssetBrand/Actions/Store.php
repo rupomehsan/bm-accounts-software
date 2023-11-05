@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetBrand\Actions;
+namespace App\Modules\AssetManagement\AssetBrand\Actions;
 
-use App\Modules\AssetBrand\Actions\Validation;
+use App\Modules\AssetManagement\AssetBrand\Actions\Validation;
 use Illuminate\Support\Facades\Hash;
 
 class Store
 {
-    static $model = \App\Modules\AssetBrand\Model::class;
+    static $model = \App\Modules\AssetManagement\AssetBrand\Model::class;
 
     public static function execute(Validation $request)
     {

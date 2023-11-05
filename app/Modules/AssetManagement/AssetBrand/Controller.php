@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AssetBrand;
+namespace App\Modules\AssetManagement\AssetBrand;
 
-use App\Modules\AssetBrand\Actions\All;
-use App\Modules\AssetBrand\Actions\Delete;
-use App\Modules\AssetBrand\Actions\Show;
-use App\Modules\AssetBrand\Actions\Store;
-use App\Modules\AssetBrand\Actions\Update;
-use App\Modules\AssetBrand\Actions\Validation;
+use App\Modules\AssetManagement\AssetBrand\Actions\All;
+use App\Modules\AssetManagement\AssetBrand\Actions\Delete;
+use App\Modules\AssetManagement\AssetBrand\Actions\Show;
+use App\Modules\AssetManagement\AssetBrand\Actions\Store;
+use App\Modules\AssetManagement\AssetBrand\Actions\Update;
+use App\Modules\AssetManagement\AssetBrand\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update($request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;
