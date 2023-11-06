@@ -29,7 +29,9 @@ POST {{url}} HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Title"
+    "account_category_id": "1",
+    "division_id": "1",
+    "budget_amount": "100"
 }
 
 
@@ -40,7 +42,9 @@ content-type: application/json
 # Authorization: {{token}}
 
 {
-    "title": "Title update"
+    "account_category_id": "1",
+    "division_id": "1",
+    "budget_amount": "100"
 }
 
 
