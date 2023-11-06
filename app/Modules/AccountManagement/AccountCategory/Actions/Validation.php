@@ -36,6 +36,7 @@ class Validation extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'parent' => 'required',
+            'type' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }
