@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('account_branch_budgets', function (Blueprint $table) {
+        Schema::create('account_division_budgets', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('division_id')->nullable();
             $table->bigInteger('account_category_id')->nullable();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('account_branch_budgets');
+        Schema::dropIfExists('account_division_budgets');
     }
 };

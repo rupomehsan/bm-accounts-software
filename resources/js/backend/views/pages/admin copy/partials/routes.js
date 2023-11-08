@@ -4,12 +4,12 @@ import user_routes from "../management/user/setup/routes"
 
 const routes =
 {
-    path: 'admin',
+    path: 'bm-manager',
     component: Layout,
     children: [
         {
             path: '',
-            name: 'adminDashboard',
+            name: 'bmManagerDashboard',
             component: Dashboard,
         },
         user_routes,

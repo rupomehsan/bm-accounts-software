@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
-    protected $table = "account_branch_budgets";
+    protected $table = "account_division_budgets";
     protected $guarded = [];
 
     protected static function booted()

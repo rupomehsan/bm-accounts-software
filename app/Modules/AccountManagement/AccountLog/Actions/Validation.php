@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Modules\User\Actions;
+namespace App\Modules\AccountLog\Actions;
 
-use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -11,7 +10,7 @@ use Illuminate\Validation\Rule;
 class Validation extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the  is authorized to make this request.
      */
     public function authorize(): bool
     {
@@ -34,22 +33,8 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => 'required',
-            'email' => 'required|unique:users,email,' . $this->user->id,
-            'password' => 'required',
-            'phone' => 'sometimes',
-            'uid' => 'sometimes',
-            'telegram_name' => 'sometimes',
-            'telegram_id' => 'sometimes',
-            'image' => 'sometimes',
+            'title' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'full_name.required' => 'The name field is required'
         ];
     }
 

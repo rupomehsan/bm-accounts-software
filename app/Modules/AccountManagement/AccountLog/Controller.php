@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Modules\User;
+namespace App\Modules\AccountLog;
 
-use App\Modules\User\Actions\All;
-use App\Modules\User\Actions\Delete;
-use App\Modules\User\Actions\Show;
-use App\Modules\User\Actions\Store;
-use App\Modules\User\Actions\Update;
-use App\Modules\User\Actions\Validation;
-use \App\Modules\User\Model as User;
+use App\Modules\AccountLog\Actions\All;
+use App\Modules\AccountLog\Actions\Delete;
+use App\Modules\AccountLog\Actions\Show;
+use App\Modules\AccountLog\Actions\Store;
+use App\Modules\AccountLog\Actions\Update;
+use App\Modules\AccountLog\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -33,10 +32,9 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update(User $user, Validation $request)
+    public function update(Validation $request, $id)
     {
-
-        $data = Update::execute($user, $request);
+        $data = Update::execute($request, $id);
         return $data;
     }
 

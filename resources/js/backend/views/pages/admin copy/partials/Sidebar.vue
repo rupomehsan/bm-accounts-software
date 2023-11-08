@@ -9,11 +9,11 @@
         <div class="sidebar-menu">
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `adminDashboard` }">Dashboard</router-link>
+                <router-link :to="{ name: `bmManagerDashboard` }">Dashboard</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center" href="">User</router-link>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">User</router-link>
             </li>
         </div>
     </div>

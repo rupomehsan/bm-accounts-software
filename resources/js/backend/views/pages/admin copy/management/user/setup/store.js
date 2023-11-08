@@ -12,7 +12,6 @@ export const user_setup_store = defineStore("user_setup_store", {
         all: async function (url) {
             let response;
             // let page = `?page=${pageLimit}`;
-
             if (url) {
                 response = await axios.get(url);
             } else {
@@ -32,11 +31,8 @@ export const user_setup_store = defineStore("user_setup_store", {
             return response;
         },
         update: async function (form, id) {
-            const headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            };
             let formData = new FormData(form);
-            let response = await axios.post(`users/update/${id}`, formData);
+            let response = await axios.post(`users/${id}?_method=PATCH`, formData);
             window.s_alert("Data successcully updated");
             console.log("res", response.data);
         },

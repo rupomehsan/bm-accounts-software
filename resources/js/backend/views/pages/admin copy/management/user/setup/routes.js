@@ -8,7 +8,7 @@ const routes = {
     children: [
         {
             path: '',
-            name: "All",
+            name: "AllbmUser",
             component: All
         },
         {

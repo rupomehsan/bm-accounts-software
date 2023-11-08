@@ -13,16 +13,21 @@ return new class extends Migration
     {
         Schema::create('account_incomes', function (Blueprint $table) {
             $table->id();
+
+            $table->bigInteger('account_log_id')->nullable();
             $table->bigInteger('account_receipt_book_id')->nullable();
             $table->bigInteger('account_receipt_book_no')->nullable();
             $table->bigInteger('account_category_id')->nullable();
             $table->bigInteger('central_division_id')->nullable();
             $table->bigInteger('branch_id')->nullable();
+
             $table->string('account_receipt_no', 100)->nullable();
             $table->date('date')->nullable();
             $table->text('description')->nullable();
+
             $table->float('amount')->nullable();
             $table->string('amount_in_text', 100)->nullable();
+
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

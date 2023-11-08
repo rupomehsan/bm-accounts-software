@@ -1,19 +1,26 @@
 <?php
 
-namespace App\Modules\AccountManagement\AccountCategory;
+namespace App\Modules\AccountManagement\AccountLog;
 
 use Illuminate\Database\Seeder as SeedersSeeder;
 
 class Seeder extends SeedersSeeder
 {
     /**
-     php artisan db:seed --class="App\Modules\AccountManagement\AccountCategory\Seeder"
+     php artisan db:seed --class="App\Modules\AccountManagement\AccountLog\Seeder"
      * Run the database seeds.
      */
-    static $model = \App\Modules\AccountManagement\AccountCategory\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountLog\Model::class;
+    static $categoryModel = \App\Modules\AccountManagement\AccountCategory\Model::class;
     public function run(): void
     {
         self::$model::truncate();
+
+        $incomeCtegory = self::$categoryModel::where('type', 'income')->get();
+
+        foreach ($incomeCtegory as $item) {
+           
+        }
         $data = [
             "income" => [
                 "বকেয়া আদায়",

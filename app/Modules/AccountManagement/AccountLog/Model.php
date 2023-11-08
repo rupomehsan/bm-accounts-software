@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Modules\AccountManagement\AccountReceiptBookAssign;
+namespace App\Modules\AccountManagement\AccountLog;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
-    protected $table = "account_receipt_book_assigns";
+    protected $table = "account_logs";
     protected $guarded = [];
-    static $accountReceiptBookModel = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
 
     protected static function booted()
     {
@@ -24,11 +23,5 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
-    }
-
-
-    public function account_receipt_book()
-    {
-        return $this->belongsTo(self::$accountReceiptBookModel);
     }
 }

@@ -9,12 +9,12 @@ class Update
 {
     static $model = \App\Modules\User\Model::class;
 
-    public static function execute(Validation $request, $id)
+    public static function execute($user, $request)
     {
 
         try {
             // dd(request()->all());
-            if (!$query = self::$model::query()->where('id', $id)->first()) {
+            if (!$user) {
                 return messageResponse('Data not found...', 404, 'error');
             }
 
@@ -25,10 +25,10 @@ class Update
                 $imageName = uploader($image, 'uploads/user');
                 $data['image'] = $imageName;
             } else {
-                $data['image'] = $query->image;
+                $data['image'] = $user->image;
             }
 
-            $query->update($data);
+            $user->update($data);
 
             return messageResponse('User updated successfully');
         } catch (\Exception $e) {

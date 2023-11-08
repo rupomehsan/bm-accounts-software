@@ -11,6 +11,7 @@ import Pagination from "../backend/views/components/Pagination.vue";
 
 import App from "./views/App.vue";
 import admin_routes from "./views/pages/admin/partials/routes";
+import bm_manager_routes from "./views/pages/admin copy/partials/routes";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -18,7 +19,10 @@ const router = createRouter({
         {
             path: "/",
             component: App,
-            children: [admin_routes],
+            children: [
+                admin_routes,
+                bm_manager_routes,
+            ],
         },
     ],
 });
