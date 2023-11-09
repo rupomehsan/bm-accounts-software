@@ -13,7 +13,7 @@ import App from "./views/App.vue";
 import MainDashboard from "./views/MainDashboard.vue";
 import admin_routes from "./views/pages/admin/partials/routes";
 import bm_manager_routes from "./views/pages/bm_manager/partials/routes";
-import bm_manager_routes from "./views/pages/cp/partials/routes";
+import cp_route from "./views/pages/cp/partials/routes";
 
 const router = createRouter({
     history: createWebHashHistory(),

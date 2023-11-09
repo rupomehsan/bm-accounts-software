@@ -15,8 +15,8 @@ export default {
         is_auth: {
             handler: function (v) {
                 switch (this.role.name) {
-                    case "super_admin":
 
+                    case "super_admin":
                         break;
 
                     case "admin":
@@ -25,15 +25,15 @@ export default {
                         break;
 
                     case "bm_manager":
-
                         break;
 
                     case "cp":
                         console.log('cp');
                         location.hash = "cp"
                         break;
+
                     default:
-                        console.log('you have permission');
+                        console.log('you have no permission');
 
                 }
             },

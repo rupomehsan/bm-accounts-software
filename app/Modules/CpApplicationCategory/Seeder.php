@@ -1,21 +1,31 @@
 <?php
-namespace App\Modules\AccountManagement\AccountBranchTarget;
+
+namespace App\Modules\CpApplicationCategory;
 
 use Illuminate\Database\Seeder as SeedersSeeder;
 
 class Seeder extends SeedersSeeder
 {
     /**
+     php artisan db:seed --class="App\Modules\CpApplicationCategory\Seeder"
      * Run the database seeds.
      */
-    static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
+    static $model = \App\Modules\CpApplicationCategory\Model::class;
     public function run(): void
     {
         self::$model::truncate();
-        self::$model::create([
-            "account_category_id" => "1",
-            "branch_id" => "1",
-            "target_amount" => "100"
-        ]);
+        $category = [
+            'bm moukuf',
+            'prokasona moukuf',
+            'collection moukuf',
+            'leave application',
+            'testimonial application',
+        ];
+        foreach ($category as $item) {
+            self::$model::create([
+                "title" => $item,
+                "description" => null,
+            ]);
+        }
     }
 }

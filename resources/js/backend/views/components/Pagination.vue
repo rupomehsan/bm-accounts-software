@@ -1,6 +1,6 @@
 <template>
     <nav aria-label="Page navigation example" class="">
-        <ul class="pagination pagination-warning">
+        <ul class="pagination pagination-warning my-2">
             <template v-for="(link, index) in data.links" :key="index">
                 <li class="page-item" :class="{ active: link.active }">
                     <a

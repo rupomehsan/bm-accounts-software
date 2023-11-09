@@ -9,11 +9,47 @@
         <div class="sidebar-menu">
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `bmManagerDashboard` }">Dashboard</router-link>
+                <router-link :to="{ name: `cpDashboard` }">Dashboard</router-link>
+            </li>
+
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllApplications` }" class="d-flex align-items-center"
+                    href="">Applications</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">User</router-link>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Asset
+                    application</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Receipt book
+                    pending</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center"
+                    href="">Notificaiton</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">BM at a
+                    glance</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Division at a
+                    glance</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Income &amp;
+                    Expense</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Logout</router-link>
             </li>
         </div>
     </div>

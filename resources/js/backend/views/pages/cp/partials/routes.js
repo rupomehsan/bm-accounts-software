@@ -1,18 +1,18 @@
 import Layout from "./Layout.vue"
 import Dashboard from "../Dashboard.vue"
-import user_routes from "../management/user/setup/routes"
+import application_routes from "../management/applications/setup/routes"
 
 const routes =
 {
-    path: 'bm-manager',
+    path: 'cp',
     component: Layout,
     children: [
         {
             path: '',
-            name: 'bmManagerDashboard',
+            name: 'cpDashboard',
             component: Dashboard,
         },
-        user_routes,
+        application_routes,
     ]
 };
 
