@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { defineStore } from 'pinia'
 
 export const use_auth_store = defineStore('auth_store', {
@@ -5,8 +6,9 @@ export const use_auth_store = defineStore('auth_store', {
         is_auth: 0,
         auth_info: {
             full_name: "shefat",
-            email: "a@g.com"
-        }
+            email: "a@g.com",
+        },
+        role: {},
     }),
     getters: {
     },
@@ -25,25 +27,35 @@ export const use_auth_store = defineStore('auth_store', {
         },
         check_is_auth: async function () {
             let that = this;
-            await window.cookieStore.get('AXRF-TOKEN')
-                .then(async (cookie) => {
-                    if (!cookie) {
-                        this.log_out();
-                    }
-                    let token = `Bearer ${cookie.value}`;
-                    fetch("/api/v1/user", {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": token,
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                    }).then(res => res.json())
-                        .then(res => {
-                            this.set_is_auth(res.auth_status);
-                            this.auth_info = res.auth_information;
-                        })
-                })
+            let res = await axios.get('/check_user');
+            if (res.status != 200) {
+                localStorage.removeItem('token');
+                return location.href = "/login";
+            }
+            that.auth_info = res.data.user;
+            that.is_auth = 1;
+            that.role = res.data.user.roles[0];
+
+            console.log(res.data);
+            // await window.cookieStore.get('AXRF-TOKEN')
+            //     .then(async (cookie) => {
+            //         if (!cookie) {
+            //             this.log_out();
+            //         }
+            //         let token = `Bearer ${cookie.value}`;
+            //         fetch("/api/v1/user", {
+            //             method: "GET",
+            //             headers: {
+            //                 "Content-Type": "application/json",
+            //                 "Authorization": token,
+            //                 // 'Content-Type': 'application/x-www-form-urlencoded',
+            //             },
+            //         }).then(res => res.json())
+            //             .then(res => {
+            //                 this.set_is_auth(res.auth_status);
+            //                 this.auth_info = res.auth_information;
+            //             })
+            //     })
         }
     },
 })

@@ -45,4 +45,15 @@ class Controller extends ControllersController
         $data = Delete::execute($id);
         return $data;
     }
+
+    public function checkUser()
+    {
+        if(auth()->check()){
+            return response()->json([
+                'user' => auth()->user()->load(['roles']),
+            ], 200);
+        }
+
+        return response()->json([""]);
+    }
 }

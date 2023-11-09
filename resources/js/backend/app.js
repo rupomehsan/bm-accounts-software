@@ -10,8 +10,10 @@ import ImageComponent from "../backend/views/components/ImageComponent.vue";
 import Pagination from "../backend/views/components/Pagination.vue";
 
 import App from "./views/App.vue";
+import MainDashboard from "./views/MainDashboard.vue";
 import admin_routes from "./views/pages/admin/partials/routes";
-import bm_manager_routes from "./views/pages/admin copy/partials/routes";
+import bm_manager_routes from "./views/pages/bm_manager/partials/routes";
+import bm_manager_routes from "./views/pages/cp/partials/routes";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -20,8 +22,13 @@ const router = createRouter({
             path: "/",
             component: App,
             children: [
+                {
+                    path: "",
+                    component: MainDashboard,
+                },
                 admin_routes,
                 bm_manager_routes,
+                cp_route,
             ],
         },
     ],

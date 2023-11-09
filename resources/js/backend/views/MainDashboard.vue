@@ -1,11 +1,12 @@
 <template>
-    <router-view></router-view>
+    <div>
+        <h5>Dashboard root</h5>
+    </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'pinia';
 import { use_auth_store } from '../store/auth_store';
-
 export default {
     created: async function () {
         await this.check_is_auth();
@@ -29,8 +30,7 @@ export default {
                         break;
 
                     case "cp":
-                        console.log('cp');
-                        location.hash = "cp"
+
                         break;
                     default:
                         console.log('you have permission');
