@@ -40,7 +40,7 @@
     <script src="/backend/assets/js/bootstrap.bundle.min.js"></script>
     <!-- Theme js-->
     <script src="/backend/assets/js/script.js" defer></script>
-    @vite(['resources/js/backend/app.js'])
+    @vite(['resources/js/backend/app.js','resources/sass/app.scss'])
 </head>
 
 <body id="app" main-theme-layout="main-theme-layout-4" class="" cz-shortcut-listen="true">

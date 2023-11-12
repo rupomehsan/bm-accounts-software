@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('cp_applications', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('cp_application_category_id')->nullable();
             $table->bigInteger('applicant_id')->nullable();
             $table->string('pdf_submission_file', 100)->nullable();
             $table->tinyInteger('is_approve')->nullable();
             $table->text('remarks')->nullable();
-            $table->text('description')->nullable();
+            $table->text('subject')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

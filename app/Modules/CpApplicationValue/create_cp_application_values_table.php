@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('cp_application_values', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cp_application_id')->nullable();
+            $table->bigInteger('title_id')->nullable();
             $table->string('title')->nullable();
-            $table->text('value')->nullable();
+            $table->longText('value')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

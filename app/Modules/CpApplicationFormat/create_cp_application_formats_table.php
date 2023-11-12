@@ -16,7 +16,6 @@ return new class extends Migration
             $table->bigInteger('cp_application_category_id')->nullable();
             $table->string('field_name')->nullable();
             $table->enum('field_type', ['text', 'select', 'radio', 'checkbox', 'file', 'textarea']);
-            $table->longText('field_value')->nullable();
             $table->string('pdf_format', 100)->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

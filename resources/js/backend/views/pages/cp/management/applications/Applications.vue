@@ -20,13 +20,12 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Applications
+                            All {{ applicationType }} Applications
                             <!---->
                         </h6>
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input placeholder="search..." type="search" class="form-control border border-info" />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
@@ -61,95 +60,52 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
-                                        <input type="checkbox" class="form-check-input" />
-                                    </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
+                                    </th>
+                                    <th>
+                                        Name
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Title
-
+                                        Category
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Approved
-
+                                        Subject
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Disapproved
-
+                                        Created At
                                     </th>
-
-
-                                    <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
-                                    <td style="width: 50px;">
-                                        <input type="checkbox" class="form-check-input" />
-                                    </td>
+                                <tr v-for="(item, index) in all_applications_by_category.applications" :key="item.id">
+
+
                                     <td>{{ index + 1 }}</td>
 
                                     <td>
                                         <span class="text-warning cursor_pointer">
-                                            {{ item.title }}
+                                            {{ item.user.full_name }}
                                         </span>
-                                    </td>
-                                    <td>
-                                        <router-link :to="{ name: 'Applications', params: { type: 'approved', id: item.id } }" title="approved"><span class="fw-bold"> {{
-                                            item.cp_application_approved_count ?? 0 }}</span></router-link>
-                                    </td>
-
-                                    <td>
-                                        <router-link :to="{ name: 'Applications', params: { type: 'disapproved', id: item.id } }" title="disapproved">
-                                            <span class="fw-bold"> {{
-                                                item.cp_application_dis_approved_count ??
-                                                0 }}</span> </router-link>
-                                    </td>
-                                    <td>
-                                        <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
-                                            <ul>
-
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{ name: 'Show', params: { id: item.id } }"
-                                                            title="disapproved"><i class="fa text-secondary fa-eye"></i>
-                                                            Details </router-link>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{
-                                                            name: 'Create',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
-                                                        </router-link>
-                                                        <!---->
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
-                                                            Delete
-                                                        </a>
-                                                    </span>
-                                                </li>
-                                            </ul>
+                                        <div class="text-start action_btns_inline">
+                                            <router-link :to="{ name: 'AppliationDetails', params: { id: 1 } }"
+                                                class="d-inline-block text-info text-capitalize">
+                                                details
+                                            </router-link>
                                         </div>
+                                    </td>
+
+                                    <td>
+                                        {{ all_applications_by_category.title }}
+                                    </td>
+
+                                    <td>
+                                        {{ item.subject }}
+                                    </td>
+
+                                    <td>
+                                        {{ item.created_at }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -157,11 +113,11 @@
                     </div>
                     <div
                         class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_users" :method="get_all_applications" />
+                        <pagination :data="all_applications_by_category" :method="get_applications_by_category" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="" v-model="offset">
+                                <select class="">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -171,7 +127,7 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_users.total }}</span>
+                                <span>{{ 12 }}</span>
                             </div>
                         </div>
                     </div>
@@ -210,30 +166,27 @@ import { application_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
-        offset: "5",
-        search_data: "",
+        applicationType: "",
     }),
     created: async function () {
-        await this.get_all_applications();
+        let id = this.$route.params.id
+        let type = this.$route.params.type
+        this.applicationType = type
+        let is_approve = type == 'approved' ? 1 : 0;
+        console.log(is_approve)
+
+        await this.get_applications_by_category(id, is_approve);
+        // console.log("myRes",this.all_applications_by_category)
     },
     methods: {
         ...mapActions(application_setup_store, {
-            get_all_applications: "all",
-            user_delete: "delete",
+            get_applications_by_category: "get_applications_by_category",
         }),
     },
     computed: {
         ...mapState(application_setup_store, {
-            all_users: "all_data",
+            all_applications_by_category: "all_applications_by_category",
         }),
-    },
-    watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.get_all_applications();
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
-        },
     },
 };
 </script>

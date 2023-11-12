@@ -7,6 +7,9 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+    static $userModel = \App\Modules\User\Model::class;
+    static $cpApplicationValueModel = \App\Modules\CpApplicationValue\Model::class;
+
     protected $table = "cp_applications";
     protected $guarded = [];
 
@@ -23,5 +26,14 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(self::$userModel, 'applicant_id');
+    }
+    public function application_values()
+    {
+        return $this->hasMany(self::$cpApplicationValueModel, "cp_application_id");
     }
 }

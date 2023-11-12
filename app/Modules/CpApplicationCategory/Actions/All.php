@@ -13,7 +13,7 @@ class All
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = [];
-            $data = self::$model::query();
+            $data = self::$model::withCount(['cp_application_approved','cp_application_dis_approved']);
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
             }

@@ -11,6 +11,8 @@ use App\Modules\AccountManagement\AccountIncome\Seeder as AccountIncomeSeeder;
 use App\Modules\AccountManagement\AccountIncomeExtrafield\Seeder as AccountIncomeExtrafieldSeeder;
 use App\Modules\AccountManagement\AccountReceiptBook\Seeder as AccountReceiptBookSeeder;
 use App\Modules\AccountManagement\AccountReceiptBookAssign\Seeder as AccountReceiptBookAssignSeeder;
+use App\Modules\CpApplicationCategory\Seeder as CpApplicationCategorySeeder;
+use App\Modules\CpApplicationFormat\Seeder as CpApplicationFormatSeeder;
 use App\Modules\User\Seeder as UserSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,6 +37,9 @@ class DatabaseSeeder extends Seeder
 
             AccountIncomeSeeder::class,
             AccountIncomeExtrafieldSeeder::class,
+
+            CpApplicationCategorySeeder::class,
+            CpApplicationFormatSeeder::class,
 
 
         ]);

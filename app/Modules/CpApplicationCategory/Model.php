@@ -7,8 +7,12 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+
+    static $cpApplicationModel = \App\Modules\CpApplication\Model::class;
+
     protected $table = "cp_application_categories";
     protected $guarded = [];
+
 
     protected static function booted()
     {
@@ -24,4 +28,21 @@ class Model extends EloquentModel
     {
         return $q->where('status', 'active');
     }
+
+    public function cp_application_approved()
+    {
+        return $this->hasMany(self::$cpApplicationModel, "cp_application_category_id")->where('is_approve', 1);
+    }
+
+    public function cp_application_dis_approved()
+    {
+        return $this->hasMany(self::$cpApplicationModel, "cp_application_category_id")->where('is_approve', 0);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(self::$cpApplicationModel, "cp_application_category_id")->where('is_approve', request()->is_approve);
+    }
+
+   
 }

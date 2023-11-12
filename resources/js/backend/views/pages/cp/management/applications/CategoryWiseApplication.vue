@@ -19,8 +19,8 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Applications
+                        <h6 class="text-capitalize">
+                            {{ all_applications_by_category.title }} Applications
                             <!---->
                         </h6>
                         <div class="search">
@@ -61,65 +61,60 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
+                                    <th style="width: 50px;">
                                         <input type="checkbox" class="form-check-input" />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Title
-
+                                        Applicant
                                     </th>
                                     <th class="cursor_n_resize">
                                         Approved
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Disapproved
-
-                                    </th>
-
 
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
-                                    <td style="width: 50px;">
+                                <tr v-for="(item, index) in all_applications_by_category.applications" :key="item.id">
+                                    <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
                                     <td>{{ index + 1 }}</td>
 
                                     <td>
                                         <span class="text-warning cursor_pointer">
-                                            {{ item.title }}
+                                            {{ item.user.full_name }}
                                         </span>
                                     </td>
                                     <td>
-                                        <router-link :to="{ name: 'Applications', params: { type: 'approved', id: item.id } }" title="approved"><span class="fw-bold"> {{
-                                            item.cp_application_approved_count ?? 0 }}</span></router-link>
+                                        <a href="" title="approved"><span class="fw-bold"> {{
+                                            item.is_approve == 1 ? "Yes" : "No" }}</span></a>
                                     </td>
 
-                                    <td>
-                                        <router-link :to="{ name: 'Applications', params: { type: 'disapproved', id: item.id } }" title="disapproved">
-                                            <span class="fw-bold"> {{
-                                                item.cp_application_dis_approved_count ??
-                                                0 }}</span> </router-link>
-                                    </td>
+
                                     <td>
                                         <div class="table_actions">
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
                                                     class="fa fa-gears"></i></a>
                                             <ul>
-
+                                                <!-- <li>
+                                                    <a href="">
+                                                        <i
+                                                            class="fa text-info fa-eye"
+                                                        ></i>
+                                                        Quick View
+                                                    </a>
+                                                </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{ name: 'Show', params: { id: item.id } }"
-                                                            title="disapproved"><i class="fa text-secondary fa-eye"></i>
-                                                            Details </router-link>
+                                                        <a href="#/user/details/43" class="">
+                                                            <i class="fa text-secondary fa-eye"></i>
+                                                            Details
+                                                        </a>
                                                     </span>
                                                 </li>
                                                 <li>
@@ -157,7 +152,7 @@
                     </div>
                     <div
                         class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_users" :method="get_all_applications" />
+                        <pagination :data="all_applications_by_category" :method="get_applications_by_category" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -171,7 +166,7 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_users.total }}</span>
+                                <span>{{ all_applications_by_category.total }}</span>
                             </div>
                         </div>
                     </div>
@@ -212,29 +207,25 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+
     }),
     created: async function () {
-        await this.get_all_applications();
+        let id = this.$route.params.id
+        // alert(id)
+        await this.get_applications_by_category(id);
+        // console.log("myRes",this.all_applications_by_category)
     },
     methods: {
         ...mapActions(application_setup_store, {
-            get_all_applications: "all",
-            user_delete: "delete",
+            get_applications_by_category: "get_applications_by_category",
         }),
     },
     computed: {
         ...mapState(application_setup_store, {
-            all_users: "all_data",
+            all_applications_by_category: "all_applications_by_category",
         }),
     },
-    watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.get_all_applications();
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
-        },
-    },
+
 };
 </script>
 

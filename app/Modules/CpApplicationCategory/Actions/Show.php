@@ -12,7 +12,7 @@ class Show
     public static function execute($id)
     {
         try {
-            $with = [];
+            $with = ['applications.user:id,full_name'];
             if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
