@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const application_setup_store = defineStore("application_setup_store", {
+export const income_setup_store = defineStore("income_setup_store", {
     state: () => ({
         all_data: {},
         single_data: {},
@@ -17,7 +17,7 @@ export const application_setup_store = defineStore("application_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("cp-application-categories");
+                response = await axios.get("account-incomes");
             }
             this.all_data = response.data.data;
         },
@@ -59,13 +59,5 @@ export const application_setup_store = defineStore("application_setup_store", {
                 console.log(response.data);
             }
         },
-
-        cp_application_approval: async function(id,form){
-            console.log(id);
-            let formData = new FormData(form);
-            formData.append("id",id)
-            let response = await axios.post("cp-application-approval", formData);
-            return response;
-        }
     },
 });

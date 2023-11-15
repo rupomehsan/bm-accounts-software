@@ -2,17 +2,27 @@
     <div class="page-body">
         <div class="pt-2">
             <div class="page-header my-2">
-                <div class="row align-items-center rounded-2">
+                <div class="row align-items-center justify-content-between rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Application Management</h5>
+                        <h5 class="m-0">BM at a glance</h5>
                     </div>
-                    <div class="col-lg-6 text-end">
-                        <span>
-                            <router-link :to="{ name: `Create` }" class="btn rounded-pill btn-outline-info">
-                                <i class="fa fa-pencil me-5px"></i>
-                                Create
-                            </router-link>
-                        </span>
+                    <div class="col-lg-6 text-end w-25 float-right">
+                        <select name="" id="" class="form-select" v-model="page">
+                            <option value="">Goto page</option>
+                            <option value="IncomeLedger">আয়ের লেজার/খতিয়ান</option>
+                            <option value="ExpenseLedger">ব্যয়ের লেজার/খতিয়ান</option>
+                            <option value="LoanRegister">ঋণ রেজিস্টার</option>
+                            <option value="Jamanot">জামানত</option>
+                            <option value="Salary">বেতন</option>
+                            <option value="OfficeRent">অফিস ভাড়া</option>
+                            <option value="HouseRent">বাসা ভাড়া</option>
+                            <option value="AssetList">সম্পদ তালিকা</option>
+                            <option value="BMStockRegister">বিএম স্টক রেজিস্টার</option>
+                            <option value="AssetRegister">সম্পদ রেজিস্টার</option>
+                            <option value="EkkalinProdan">এককালীন প্রদান</option>
+                            <option value="NiyomitoProdan">নিয়মিত প্রদান</option>
+                            <option value="KendriyoSuvakankhiThekeAy">কেন্দ্রীয় শুভাকাঙ্খী থেকে আয়</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -20,15 +30,17 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All {{ applicationType }} Applications
+                            ব্যয়ের লেজার/খতিয়ান
                             <!---->
                         </h6>
                         <div class="search">
                             <form action="#">
-                                <input placeholder="search..." type="search" class="form-control border border-info" />
+                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
+                                    class="form-control border border-info" />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
+                            <router-link :to="{ name: 'Expense' }" class="btn btn-info">খরচের খাতা</router-link>
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -61,51 +73,64 @@
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <th aria-label="id" class="cursor_n_resize">
-                                        ID
-                                    </th>
-                                    <th>
-                                        Name
+                                        ক্রম
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Category
+                                        মাস ও তারিখ
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Subject
+                                        বিবরণ
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Created At
+                                        ফোলিও বা পৃষ্ঠা
                                     </th>
+                                    <th class="cursor_n_resize">
+                                        জমা
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        খরচ
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        জমা বা খরচ
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        অবশিষ্ঠ
+                                    </th>
+
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_applications_by_category.applications" :key="item.id">
-
+                                <tr v-for="(item, index) in all_incomes.data" :key="item.id">
 
                                     <td>{{ index + 1 }}</td>
 
                                     <td>
                                         <span class="text-warning cursor_pointer">
-                                            {{ item.user.full_name }}
+                                            {{ new Date(item.created_at).toDateString() }}
                                         </span>
-                                        <div class="text-start action_btns_inline">
-                                            <router-link :to="{ name: 'AppliationDetails', params: { id: item.id } }"
-                                                class="d-inline-block text-info text-capitalize">
-                                                details
-                                            </router-link>
-                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="text-warning cursor_pointer">
+                                            {{ item.account_logs.receipt_no }}
+                                        </span>
                                     </td>
 
                                     <td>
-                                        {{ all_applications_by_category.title }}
+                                        {{ item.account_logs.description }}
                                     </td>
 
                                     <td>
-                                        {{ item.subject }}
+                                        {{ item.account_logs.amount }}
                                     </td>
-
                                     <td>
-                                        {{ item.created_at }}
+                                        {{ item.account_logs.amount }}
+                                    </td>
+                                    <td>
+                                        {{ item.account_logs.amount }}
+                                    </td>
+                                    <td>
+                                        {{ item.account_logs.amount }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -113,11 +138,11 @@
                     </div>
                     <div
                         class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_applications_by_category" :method="get_applications_by_category" />
+                        <pagination :data="all_incomes" :method="get_all_incomes" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="">
+                                <select class="" v-model="offset">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -127,7 +152,7 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ 12 }}</span>
+                                <span>{{ all_incomes.total }}</span>
                             </div>
                         </div>
                     </div>
@@ -162,31 +187,43 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { application_setup_store } from "./setup/store";
+import { income_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
-        applicationType: "",
+        offset: "5",
+        search_data: "",
+        page: ''
     }),
     created: async function () {
-        let id = this.$route.params.id
-        let type = this.$route.params.type
-        this.applicationType = type
-        let is_approve = type == 'approved' ? 1 : 0;
-        console.log(is_approve)
-
-        await this.get_applications_by_category(id, is_approve);
-        // console.log("myRes",this.all_applications_by_category)
+        await this.get_all_incomes();
     },
     methods: {
-        ...mapActions(application_setup_store, {
-            get_applications_by_category: "get_applications_by_category",
+        ...mapActions(income_setup_store, {
+            get_all_incomes: "all",
+            user_delete: "delete",
         }),
+
+        gotoPage(e) {
+            console.log(e.target.value);
+        }
     },
     computed: {
-        ...mapState(application_setup_store, {
-            all_applications_by_category: "all_applications_by_category",
+        ...mapState(income_setup_store, {
+            all_incomes: "all_data",
         }),
+    },
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            await this.get_all_incomes();
+        },
+        search_data: function (newSearchData, oldSearchData) {
+            console.log(newSearchData);
+        },
+
+        page: function () {
+            this.$router.push({ name: this.page })
+        }
     },
 };
 </script>

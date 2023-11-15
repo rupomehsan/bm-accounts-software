@@ -2,6 +2,7 @@
 
 namespace App\Modules\CpApplication;
 
+use App\Modules\CpApplication\Actions\Approval;
 use App\Modules\CpApplication\Actions\All;
 use App\Modules\CpApplication\Actions\Delete;
 use App\Modules\CpApplication\Actions\Show;
@@ -32,7 +33,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-     public function update(Validation $request, $id)
+    public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;
@@ -41,6 +42,13 @@ class Controller extends ControllersController
     public function destroy($id)
     {
         $data = Delete::execute($id);
+        return $data;
+    }
+
+
+    public function applicationApproval()
+    {
+        $data = Approval::execute();
         return $data;
     }
 }

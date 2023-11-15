@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+    static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
+
     protected $table = "account_incomes";
     protected $guarded = [];
 
@@ -23,5 +25,9 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function account_logs(){
+      return $this->belongsTo(self::$accountLogModel,'account_log_id');
     }
 }

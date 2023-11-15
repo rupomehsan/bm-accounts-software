@@ -25,28 +25,54 @@
                         </div>
                     </div>
                     <div class="card-body p-4 ">
-                        <div>
-                            <table class="table d-inline-block">
-                                <tbody>
-                                    <tr v-for="item in single_applications_data.application_values.filter(i => i.title != 'description')"
-                                        :key="item.id">
-                                        <td>
-                                            {{ item.title }}
-                                        </td>
-                                        <td style="width: 2px;">:</td>
-                                        <td> {{ item.value }} </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4">
-                            <h5>Details</h5>
-                            <div v-html="single_applications_data.application_values.find(i => i.title == 'description').value">
+                        <div class="row gx-5">
+                            <div class="col-md-8">
+                                <div>
+                                    <table class="table d-inline-block">
+                                        <tbody>
+                                            <tr v-for="item in single_applications_data.application_values.filter(i => i.title != 'description')"
+                                                :key="item.id">
+                                                <td>
+                                                    {{ item.title || "N/A" }}
+                                                </td>
+                                                <td style="width: 2px;">:</td>
+                                                <td> {{ item.value || "N/A" }} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-4">
+                                    <h5>Details</h5>
+                                    <div class="text-justify"
+                                        v-html="single_applications_data.application_values.find(i => i.title == 'description').value">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mt-4">
+                                    <form @submit.prevent="submitHandler">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Remarks</label>
+                                                <div class="mt-1 mb-3">
+                                                    <textarea class="form-control" name="remarks" id="" cols="30"
+                                                        rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                            <select name="is_approve" class="form-select" id="">
+                                                <option value="1">Approved</option>
+                                                <option value="0">Disapproved</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
+                    <div class="card-footer py-1 border-top-0 d-flex  align-items-center border border-1">
 
                     </div>
                 </div>
@@ -86,32 +112,28 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        param_id: "",
     }),
     created: async function () {
-        let id = this.$route.params.id
-
-        await this.get_single_application(id);
-
+        this.param_id = this.$route.params.id
+        await this.get_single_application(this.param_id);
         console.log("single_applications_data", this.single_applications_data);
     },
     methods: {
         ...mapActions(application_setup_store, {
             get_single_application: "get_single_application",
+            application_approval: "cp_application_approval",
         }),
+        submitHandler: async function ($event) {
+            this.application_approval(this.param_id,$event.target)
+        },
     },
     computed: {
         ...mapState(application_setup_store, {
             single_applications_data: "single_applications_data",
         }),
     },
-    watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.get_single_application();
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
-        },
-    },
+
 };
 </script>
 

@@ -34,7 +34,7 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">BM at a
+                <router-link :to="{ name: `AtAGlance` }" class="d-flex align-items-center" href="">BM at a
                     glance</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">

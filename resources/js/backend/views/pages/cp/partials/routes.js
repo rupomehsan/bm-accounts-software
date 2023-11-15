@@ -1,6 +1,7 @@
 import Layout from "./Layout.vue"
 import Dashboard from "../Dashboard.vue"
 import application_routes from "../management/applications/setup/routes"
+import bm_at_a_glance_routes from "../management/bm_at_a_glance/setup/routes"
 
 const routes =
 {
@@ -13,6 +14,7 @@ const routes =
             component: Dashboard,
         },
         application_routes,
+        bm_at_a_glance_routes,
     ]
 };
 

@@ -49,6 +49,10 @@ class Seeder extends SeedersSeeder
                     "description" => "income",
 
                 ]);
+
+                $income->account_log_id = $logInfo->id;
+                $income->save();
+
             }
         }
     }
