@@ -14,8 +14,9 @@ class All
             $condition = [];
             $with = [];
             $data = self::$model::query();
-            if (request()->has('status') && request()->input('status')) {
-                $condition['status'] = request()->input('status');
+
+            if (request()->has('is_approvel') && request()->input('is_approvel')) {
+                $condition['is_approvel'] =  request()->input('is_approvel') == 'approved' ? 1 : 0;
             }
 
             if (request()->has('search') && request()->input('search')) {
@@ -26,6 +27,7 @@ class All
                 $data = $data->with($with)->where($condition)->latest()->get();
             } else {
                 $data = $data->with($with)->where($condition)->latest()->paginate($offset);
+                // dd($data);
             }
             return entityResponse($data);
         } catch (\Exception $e) {

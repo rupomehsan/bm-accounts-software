@@ -2,35 +2,14 @@
     <div class="page-body">
         <div class="pt-2">
             <div class="page-header my-2">
-                <div class="row align-items-center justify-content-between rounded-2">
-                    <div class="col-lg-4">
-                        <h5 class="m-0">BM at a glance</h5>
+                <div class="row align-items-center rounded-2">
+                    <div class="col-lg-6">
+                        <h5 class="m-0">Receipt Book Management</h5>
                     </div>
-                    <div class="col-lg-4  w-25 ">
-                        <select name="" id="" class="form-select">
-                            <option value="">Select category</option>
-                            <option v-for="category in all_account_categories" :key="category.id" :value="category.id">
-                                {{ category.title }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-lg-4 text-end w-25 float-right">
-                        <select name="" id="" class="form-select" v-model="page">
-                            <option value="">Goto page</option>
-                            <option value="IncomeLedger">আয়ের লেজার/খতিয়ান</option>
-                            <option value="ExpenseIncomeLedger">ব্যয়ের লেজার/খতিয়ান</option>
-                            <option value="LoanRegister">ঋণ রেজিস্টার</option>
-                            <option value="Jamanot">জামানত</option>
-                            <option value="Salary">বেতন</option>
-                            <option value="OfficeRent">অফিস ভাড়া</option>
-                            <option value="HouseRent">বাসা ভাড়া</option>
-                            <option value="AssetList">সম্পদ তালিকা</option>
-                            <option value="BMStockRegister">বিএম স্টক রেজিস্টার</option>
-                            <option value="AssetRegister">সম্পদ রেজিস্টার</option>
-                            <option value="EkkalinProdan">এককালীন প্রদান</option>
-                            <option value="NiyomitoProdan">নিয়মিত প্রদান</option>
-                            <option value="KendriyoSuvakankhiThekeAy">কেন্দ্রীয় শুভাকাঙ্খী থেকে আয়</option>
-                        </select>
+                    <div class="col-lg-6 text-end ">
+                        <button class="btn btn-primary" @click="getReceiptBookByStatus('approved')">Approved</button>
+                        <button class="btn btn-danger mx-3" @click="getReceiptBookByStatus('not-approved')">Not
+                            approved</button>
                     </div>
                 </div>
             </div>
@@ -38,7 +17,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            জমার খাতা
+                            All Applications
                             <!---->
                         </h6>
                         <div class="search">
@@ -48,7 +27,6 @@
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
-                            <router-link :to="{ name: 'Expense' }" class="btn btn-info">খরচের খাতা</router-link>
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -80,57 +58,63 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-
+                                    <th>
+                                        <input type="checkbox" class="form-check-input" />
+                                    </th>
                                     <th aria-label="id" class="cursor_n_resize">
-                                        ক্রম
+                                        ID
+
                                     </th>
                                     <th class="cursor_n_resize">
-                                        মাস ও তারিখ
+                                        Receipt Book No
+
                                     </th>
                                     <th class="cursor_n_resize">
-                                        রশিদ নাম্বার
+                                        Receipt Start Serial No
+
                                     </th>
                                     <th class="cursor_n_resize">
-                                        বিবরণ
+                                        Receipt End Serial No
+
                                     </th>
                                     <th class="cursor_n_resize">
-                                        ফোলিও
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        পরিমান
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        মোট
+                                        Status
+
                                     </th>
 
+
+                                    <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(  item, index  ) in   all_incomes.data  " :key="item.id">
-
+                                <tr v-for="(item, index) in all_receipt_books.data" :key="item.id">
+                                    <td style="width: 50px;">
+                                        <input type="checkbox" class="form-check-input" />
+                                    </td>
                                     <td>{{ index + 1 }}</td>
 
                                     <td>
                                         <span class="text-warning cursor_pointer">
-                                            {{ new Date(item.created_at).toDateString() }}
+                                            {{ item.receipt_book_no }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ item.account_logs.receipt_no }}
-                                        </span>
+                                        {{ item.receipt_start_serial_no }}
                                     </td>
 
                                     <td>
-                                        {{ item.account_logs.description }}
+                                        {{ item.receipt_end_serial_no }}
                                     </td>
                                     <td>
-                                        {{ item.account_logs.description }}
-                                    </td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                                :checked="item.is_approvel == 1 ? true : false"
+                                                @change="updateStauts(item.is_approvel, item.id)">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">{{ item.is_approvel
+                                                == 1 ? 'Approved' : "Not approved" }}</label>
+                                        </div>
 
-                                    <td>
-                                        {{ item.account_logs.amount }}
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -152,8 +136,7 @@
                                                             query: {
                                                                 id: item.id,
                                                             },
-                                                        }
-                                                            " class="">
+                                                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -181,7 +164,7 @@
                     </div>
                     <div
                         class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_incomes" :method="get_all_incomes" />
+                        <pagination :data="all_receipt_books" :method="get_all_receipt_books" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -195,7 +178,7 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_incomes.total }}</span>
+                                <span>{{ all_receipt_books.total }}</span>
                             </div>
                         </div>
                     </div>
@@ -230,47 +213,44 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { income_setup_store } from "./setup/store";
+import { receipt_book_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        page: ''
     }),
     created: async function () {
-        await this.get_all_incomes();
-        await this.get_all_account_categories();
+        await this.get_all_receipt_books();
     },
     methods: {
-        ...mapActions(income_setup_store, {
-            get_all_incomes: "all",
-            user_delete: "delete",
-            get_all_account_categories: "get_all_account_categories",
+        ...mapActions(receipt_book_setup_store, {
+            get_all_receipt_books: "all",
         }),
 
-        gotoPage(e) {
-            console.log(e.target.value);
-        }
+        getReceiptBookByStatus(status) {
+            this.get_receipt_book_by_status(status)
+        },
 
+        updateStauts(status, id) {
+            let approval = status ? 0 : 1
+            this.update_receipt_book_by_status(approval, id)
+        }
     },
     computed: {
-        ...mapState(income_setup_store, {
-            all_incomes: "all_data",
-            all_account_categories: "all_account_categories",
+        ...mapState(receipt_book_setup_store, {
+            all_receipt_books: "all_data",
+            get_receipt_book_by_status: "get_receipt_book_by_status",
+            update_receipt_book_by_status: "update_receipt_book_by_status",
         }),
     },
     watch: {
         offset: async function (newOffset, oldOffset) {
-            await this.get_all_incomes();
+            await this.get_all_receipt_books();
         },
         search_data: function (newSearchData, oldSearchData) {
             console.log(newSearchData);
         },
-
-        page: function () {
-            this.$router.push({ name: this.page })
-        }
     },
 };
 </script>

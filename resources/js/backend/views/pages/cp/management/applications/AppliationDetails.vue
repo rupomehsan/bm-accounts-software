@@ -55,13 +55,17 @@
                                             <div class="form-group">
                                                 <label for="">Remarks</label>
                                                 <div class="mt-1 mb-3">
-                                                    <textarea class="form-control" name="remarks" id="" cols="30"
-                                                        rows="5"></textarea>
+                                                    <textarea class="form-control" name="remarks" id="" cols="30" rows="5"
+                                                        :value="single_applications_data.remarks"></textarea>
                                                 </div>
                                             </div>
                                             <select name="is_approve" class="form-select" id="">
-                                                <option value="1">Approved</option>
-                                                <option value="0">Disapproved</option>
+                                                <option
+                                                    :selected="single_applications_data.is_approve == '1' ? true : false"
+                                                    value="1">Approved</option>
+                                                <option
+                                                    :selected="single_applications_data.is_approve == '0' ? true : false"
+                                                    value="0">Disapproved</option>
                                             </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -113,11 +117,14 @@ export default {
         offset: "5",
         search_data: "",
         param_id: "",
+
     }),
     created: async function () {
         this.param_id = this.$route.params.id
-        await this.get_single_application(this.param_id);
-        console.log("single_applications_data", this.single_applications_data);
+        let response = await this.get_single_application(this.param_id);
+
+
+        // console.log("single_applications_data", this.single_applications_data);
     },
     methods: {
         ...mapActions(application_setup_store, {
@@ -125,7 +132,7 @@ export default {
             application_approval: "cp_application_approval",
         }),
         submitHandler: async function ($event) {
-            this.application_approval(this.param_id,$event.target)
+            this.application_approval(this.param_id, $event.target)
         },
     },
     computed: {

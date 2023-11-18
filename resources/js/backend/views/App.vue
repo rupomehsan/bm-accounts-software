@@ -14,30 +14,26 @@ export default {
     watch: {
         is_auth: {
             handler: function (v) {
+                let prev_url = window.sessionStorage.getItem('prevurl');
                 switch (this.role.name) {
-
                     case "super_admin":
                         break;
-
                     case "admin":
                         console.log('admin');
-                        location.hash = "admin"
+                        window.location.hash = prev_url || "#/admin";
                         break;
-
                     case "bm_manager":
                         break;
-
                     case "cp":
                         console.log('cp');
-                        location.hash = "cp"
+                        window.location.hash = prev_url || "#/cp";
                         break;
-
                     default:
                         console.log('you have no permission');
-
                 }
             },
             deeps: true,
+
         }
     },
     methods: {

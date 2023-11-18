@@ -5,6 +5,7 @@ export const income_setup_store = defineStore("income_setup_store", {
         all_data: {},
         single_data: {},
         all_applications_by_category: {},
+        all_account_categories: {},
         single_applications_data: {},
     }),
     getters: {
@@ -32,6 +33,12 @@ export const income_setup_store = defineStore("income_setup_store", {
             response = response.data.data;
             // console.log("myyyydata", response);
             this.all_applications_by_category = response;
+        },
+        get_all_account_categories: async function () {
+            let response = await axios.get("account-categories?get_all=1");
+            response = response.data.data;
+            console.log("myyyydata", response);
+            this.all_account_categories = response;
         },
         get_single_application: async function (id) {
             let response = await axios.get("cp-applications/" + id);

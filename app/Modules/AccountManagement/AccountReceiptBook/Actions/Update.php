@@ -8,9 +8,10 @@ class Update
 {
     static $model = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
 
-    public static function execute(Validation $request,$id)
+    public static function execute(Validation $request, $id)
     {
         try {
+            // dd(request()->all());
             if (!$data = self::$model::query()->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }

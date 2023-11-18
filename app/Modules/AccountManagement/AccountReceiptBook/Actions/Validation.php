@@ -33,10 +33,10 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'receipt_book_no' => 'required',
-            'receipt_start_serial_no' => 'required',
-            'receipt_end_serial_no' => 'required',
-            'is_approvel' => 'required',
+            'receipt_book_no' => 'required|sometimes',
+            'receipt_start_serial_no' => 'required|sometimes',
+            'receipt_end_serial_no' => 'required|sometimes',
+            'is_approvel' => 'required|sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }
