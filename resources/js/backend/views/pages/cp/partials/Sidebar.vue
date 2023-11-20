@@ -25,11 +25,11 @@
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link :to="{ name: `ReceiptBook` }" class="d-flex align-items-center" href="">Receipt book
-                    </router-link>
+                </router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center"
+                <router-link :to="{ name: `Notifications` }" class="d-flex align-items-center"
                     href="">Notificaiton</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
