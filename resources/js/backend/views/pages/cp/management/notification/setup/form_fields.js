@@ -13,16 +13,6 @@ export default [
         value: "",
     },
 
-
-    {
-        name: "user_id",
-        label: "Select user",
-        type: "select",
-        value: "",
-        multiple: false,
-        data_list: [],
-    },
-    
     {
         name: "to_all",
         label: "Send to all ? ",

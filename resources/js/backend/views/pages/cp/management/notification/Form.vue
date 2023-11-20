@@ -20,22 +20,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="my-1">
+                <div class="my-1" v-if="loaded">
                     <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-12">
-                                    <div class="admin_form form_1 row">
-                                        <template v-for="(
+                                <div class="col-lg-12" v-for="(
                                                 form_field, index
                                             ) in form_fields" :key="index">
-                                            <common-input :label="form_field.label" :type="form_field.type"
-                                                :name="form_field.name" :multiple="form_field.multiple"
-                                                :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
-                                        </template>
+                                    <div class="admin_form form_1">
+                                        <common-input :label="form_field.label" :type="form_field.type"
+                                            :name="form_field.name" :multiple="form_field.multiple"
+                                            :value="form_field.value" :data_list="form_field.data_list
+                                                " />
                                     </div>
                                 </div>
+                                <dynamicSelect :sourceData="users" :data="tags" :setValue="setTags"></dynamicSelect>
                             </div>
                         </div>
                         <div class="card-footer text-center">
@@ -57,9 +56,11 @@ import form_fields from "./setup/form_fields.js";
 import { notification_setup_store } from "./setup/store";
 export default {
     data: () => ({
+        tags: [],
         form_fields,
         param_id: null,
-        users: []
+        users: [],
+        loaded: false
     }),
 
     created: async function () {
@@ -68,12 +69,13 @@ export default {
             if (item.name == 'user_id') {
                 this.users.forEach((user) => {
                     let dataList = {}
-                    dataList.label = user.full_name,
-                        dataList.value = user.id,
-                        item.data_list.push(dataList)
+                    dataList.label = user.full_name;
+                    dataList.value = user.id;
+                    item.data_list.push(dataList)
                 })
             }
         });
+        this.loaded = true
         // console.log("dddddddd", this.form_fields);
     },
 
@@ -89,13 +91,21 @@ export default {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
             } else {
-                let response = await this.user_store($event.target);
+                let formateUser = this.tags.map(i => i.id)
+                let form_data = new FormData($event.target);
+                form_data.append('user_id', JSON.stringify(formateUser));
+                let response = await this.user_store(form_data);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
                     this.$router.push({ name: `All` });
                 }
             }
         },
+        setTags: function (v) {
+            this.tags = v
+        },
+
+
     },
     computed: {
         ...mapState(notification_setup_store, {

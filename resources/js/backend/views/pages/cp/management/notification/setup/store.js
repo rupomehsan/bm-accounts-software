@@ -35,8 +35,7 @@ export const notification_setup_store = defineStore("notification_setup_store", 
 
         },
         store: async function (form) {
-            let formData = new FormData(form);
-            let response = await axios.post("user-notifications", formData);
+            let response = await axios.post("user-notifications", form);
             return response;
         },
         update: async function (form, id) {

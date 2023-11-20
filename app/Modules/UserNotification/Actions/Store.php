@@ -11,11 +11,15 @@ class Store
 
     public static function execute(Validation $request)
     {
-        dd(request()->all());
+        // dd(request()->all());
         try {
-            if (self::$model::query()->create($request->validated())) {
-                return messageResponse('Item added successfully', 201);
+
+            $users = json_decode($request->input('user_id'));
+            foreach ($users as $user) {
+                $data = array_merge($request->validated(), ['user_id' => $user]);
+                self::$model::query()->create($data);
             }
+            return messageResponse('Notification send successfully', 201);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }

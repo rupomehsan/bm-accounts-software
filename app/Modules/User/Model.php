@@ -5,11 +5,13 @@ namespace App\Modules\User;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Model extends EloquentModel
 {
     protected $table = "users";
     protected $guarded = [];
+    protected $appends = ['title'];
     protected static function booted()
     {
         static::created(function ($data) {
@@ -33,5 +35,14 @@ class Model extends EloquentModel
     public function permissions()
     {
         return $this->belongsToMany(UserPermission::class, 'user_user_permission', 'user_id', 'user_permission_id', 'id', 'permission_serial'); //user::id
+    }
+
+    protected function title(): Attribute
+    {
+        return Attribute::make(
+            function (mixed  $value, array $data) {
+                return $data['full_name'];
+            },
+        );
     }
 }
