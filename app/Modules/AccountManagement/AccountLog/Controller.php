@@ -9,6 +9,7 @@ use App\Modules\AccountManagement\AccountLog\Actions\Store;
 use App\Modules\AccountManagement\AccountLog\Actions\Update;
 use App\Modules\AccountManagement\AccountLog\Actions\Validation;
 use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByCategoryID;
+use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByDatewise;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -46,8 +47,14 @@ class Controller extends ControllersController
     }
     public function getAllIncomeByCategoryID($id)
     {
-   
+
         $data = GetAllIncomeByCategoryID::execute($id);
+        return $data;
+    }
+    public function GetAllIncomeByDatewise()
+    {
+
+        $data = GetAllIncomeByDatewise::execute();
         return $data;
     }
 }

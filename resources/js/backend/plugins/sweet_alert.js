@@ -40,3 +40,12 @@ window.s_warning = async (title) => {
     });
     return result;
 };
+
+window.s_error = async (title) => {
+    let result = Swal.fire({
+        icon: "error",
+        title: "Error",
+        html: `<h5 class='text-danger'>${title}</h5>`,
+    });
+    return result;
+};

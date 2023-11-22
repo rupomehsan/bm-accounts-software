@@ -51,6 +51,7 @@
                         </div>
                         <div>
                             <form @submit.prevent="submitHandler">
+                                <input type="hidden" name="category_id" v-model="account_category_id">
                                 <div class="d-flex gap-2 align-items-center">
                                     <div class="form-group d-flex align-items-center gap-2">
                                         <label for="">From</label>
@@ -240,7 +241,7 @@ export default {
         },
 
         submitHandler: async function ($event) {
-
+            this.get_data_by_datewise($event.target)
         }
 
     },

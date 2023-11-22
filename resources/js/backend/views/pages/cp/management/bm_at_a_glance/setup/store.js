@@ -58,6 +58,11 @@ export const income_setup_store = defineStore("income_setup_store", {
             // console.log("ttt",response);
             this.all_data = response;
         },
+        get_all_income_by_datewise: async function (form) {
+            let formData = new FormData(form);
+            let response = await axios.post("get-all-income-by-datewise", formData);
+            this.all_data = response.data.data;
+        },
         store: async function (form) {
             let formData = new FormData(form);
             let response = await axios.post("cp-application-categories", formData);
