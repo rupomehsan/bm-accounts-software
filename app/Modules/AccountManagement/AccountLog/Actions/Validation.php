@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AccountLog\Actions;
+namespace App\Modules\AccountManagement\AccountLog\Actions;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;

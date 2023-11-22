@@ -7,6 +7,7 @@ export const income_setup_store = defineStore("income_setup_store", {
         all_applications_by_category: {},
         all_account_categories: {},
         single_applications_data: {},
+        all_income_by_category_id_data: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -18,9 +19,10 @@ export const income_setup_store = defineStore("income_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-incomes");
+                response = await axios.get("account-logs");
             }
             this.all_data = response.data.data;
+
         },
         get: async function (id) {
             let response = await axios.get("cp-application-categories/" + id);
@@ -31,20 +33,30 @@ export const income_setup_store = defineStore("income_setup_store", {
         get_applications_by_category: async function (id, is_approve) {
             let response = await axios.get("cp-application-categories/" + id + `?is_approve=${is_approve}`);
             response = response.data.data;
-            // console.log("myyyydata", response);
+
             this.all_applications_by_category = response;
         },
         get_all_account_categories: async function () {
             let response = await axios.get("account-categories?get_all=1");
             response = response.data.data;
-            console.log("myyyydata", response);
             this.all_account_categories = response;
         },
         get_single_application: async function (id) {
             let response = await axios.get("cp-applications/" + id);
             response = response.data.data;
-            console.log("myyyydata", response);
             this.single_applications_data = response;
+        },
+        get_all_income_by_category_id: async function (id) {
+            let response = await axios.get("get-all-income-by-category-id/" + id);
+            response = response.data.data;
+            // console.log("ttt",response);
+            this.all_data = response;
+        },
+        get_all_income_by_category_id: async function (id) {
+            let response = await axios.get("get-all-income-by-category-id/" + id);
+            response = response.data.data;
+            // console.log("ttt",response);
+            this.all_data = response;
         },
         store: async function (form) {
             let formData = new FormData(form);

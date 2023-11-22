@@ -13,7 +13,7 @@ use App\Modules\AccountManagement\AccountReceiptBook\Seeder as AccountReceiptBoo
 use App\Modules\AccountManagement\AccountReceiptBookAssign\Seeder as AccountReceiptBookAssignSeeder;
 use App\Modules\CpApplicationCategory\Seeder as CpApplicationCategorySeeder;
 use App\Modules\CpApplicationFormat\Seeder as CpApplicationFormatSeeder;
-use App\Modules\User\Seeder as UserSeeder;
+use App\Modules\UserNotification\Seeder as UserNotificationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,6 +40,9 @@ class DatabaseSeeder extends Seeder
 
             CpApplicationCategorySeeder::class,
             CpApplicationFormatSeeder::class,
+
+
+            UserNotificationSeeder::class,
 
 
         ]);

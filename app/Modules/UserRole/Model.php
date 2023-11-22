@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+   
+
     protected $table = "user_roles";
     protected $guarded = [];
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\AccountLog\Actions;
+namespace App\Modules\AccountManagement\AccountLog\Actions;
 
 class Show
 {
-    static $model = \App\Modules\AccountLog\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountLog\Model::class;
 
     public static function execute($id)
     {

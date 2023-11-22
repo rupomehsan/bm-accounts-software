@@ -23,7 +23,7 @@
                 <div class="my-1" v-if="loaded">
                     <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-start">
                                 <div class="col-lg-12" v-for="(
                                                 form_field, index
                                             ) in form_fields" :key="index">
@@ -34,7 +34,21 @@
                                                 " />
                                     </div>
                                 </div>
-                                <dynamicSelect :sourceData="users" :data="tags" :setValue="setTags"></dynamicSelect>
+                                <div class="col-lg-12">
+                                    <label for="" class="my-2">Select users</label>
+                                    <div class="admin_form form_1">
+                                        <dynamicSelect :selectType="'checkbox'" :sourceData="users" :data="tags"
+                                            :setValue="setTags"></dynamicSelect>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="" class="my-2">Select Department</label>
+                                    <div class="admin_form form_1">
+                                        <dynamicSelect :selectType="'checkbox'" :sourceData="users" :data="tags"
+                                            :setValue="setTags"></dynamicSelect>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="card-footer text-center">
@@ -104,8 +118,6 @@ export default {
         setTags: function (v) {
             this.tags = v
         },
-
-
     },
     computed: {
         ...mapState(notification_setup_store, {

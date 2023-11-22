@@ -8,6 +8,7 @@ use App\Modules\User\Actions\Show;
 use App\Modules\User\Actions\Store;
 use App\Modules\User\Actions\Update;
 use App\Modules\User\Actions\Validation;
+use App\Modules\User\Actions\AtAGlance;
 use \App\Modules\User\Model as User;
 use App\Http\Controllers\Controller as ControllersController;
 
@@ -48,12 +49,18 @@ class Controller extends ControllersController
 
     public function checkUser()
     {
-        if(auth()->check()){
+        if (auth()->check()) {
             return response()->json([
                 'user' => auth()->user()->load(['roles']),
             ], 200);
         }
 
         return response()->json([""]);
+    }
+
+    public function departmentAtAglance()
+    {
+        $data = AtAGlance::execute();
+        return $data;
     }
 }

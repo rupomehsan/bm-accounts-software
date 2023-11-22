@@ -36,7 +36,7 @@ export const use_auth_store = defineStore('auth_store', {
             that.is_auth = 1;
             that.role = res.data.user.roles[0];
 
-            console.log(res.data);
+            // console.log(res.data);
             // await window.cookieStore.get('AXRF-TOKEN')
             //     .then(async (cookie) => {
             //         if (!cookie) {

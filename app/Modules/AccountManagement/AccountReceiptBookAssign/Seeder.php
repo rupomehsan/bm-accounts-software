@@ -17,13 +17,14 @@ class Seeder extends SeedersSeeder
         self::$model::truncate();
 
         $receiptBook = self::$receiptBookModel::get();
+        $book = 1;
         for ($i = 13; $i <= 18; $i++) {
-            foreach ($receiptBook as $item) {
-                self::$model::create([
-                    "division_id" => $i,
-                    "account_receipt_book_id" => $item->id,
-                ]);
-            }
+            // foreach ($receiptBook as $item) {
+            self::$model::create([
+                "division_id" => $i,
+                "account_receipt_book_id" => $book++,
+            ]);
+            // }
         }
     }
 }

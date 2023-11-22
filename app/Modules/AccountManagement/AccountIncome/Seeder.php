@@ -17,13 +17,19 @@ class Seeder extends SeedersSeeder
     public function run(): void
     {
         self::$model::truncate();
+   
+        self::$accountLogModel::truncate();
+
         for ($i = 13; $i < 18; $i++) {
             $receiptBook = self::$receiptBookAssignModel::where('division_id', $i)->first();
             for ($j = 0; $j < 5; $j++) {
-                $income =   self::$model::create([
+
+                $account_receipt_no = $receiptBook->account_receipt_book->receipt_start_serial_no + $j + 1;
+
+                $income = self::$model::create([
                     "account_receipt_book_id" => $receiptBook->id,
                     "account_receipt_book_no" => $receiptBook->account_receipt_book->receipt_book_no,
-                    "account_receipt_no" => $receiptBook->receipt_start_serial_no + $i + 1,
+                    "account_receipt_no" => $account_receipt_no,
                     "account_category_id" => rand(1, 10),
                     "central_division_id" => $i,
                     "branch_id" => null,
@@ -38,7 +44,7 @@ class Seeder extends SeedersSeeder
                     "user_type" => "central_division",
                     "date" => $income->date,
                     "amount" => $income->amount,
-                    "name" => "Mr ". rand(10,100),
+                    "name" => "Mr " . rand(10, 100),
                     "category_id" => $income->account_category_id,
                     "account_id" => null,
                     "account_number_id" => null,
@@ -52,7 +58,6 @@ class Seeder extends SeedersSeeder
 
                 $income->account_log_id = $logInfo->id;
                 $income->save();
-
             }
         }
     }

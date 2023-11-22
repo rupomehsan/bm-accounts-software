@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Model extends EloquentModel
 {
+    static $userRoleModel = \App\Modules\UserRole\Model::class;
+
     protected $table = "users";
     protected $guarded = [];
     protected $appends = ['title'];
@@ -29,7 +31,7 @@ class Model extends EloquentModel
 
     public function roles()
     {
-        return $this->belongsToMany(UserRole::class, 'user_user_role', 'user_id', 'user_role_id', 'id', 'role_serial');
+        return $this->belongsToMany(self::$userRoleModel, 'user_user_role', 'user_id', 'user_role_id', 'id', 'serial');
     }
 
     public function permissions()

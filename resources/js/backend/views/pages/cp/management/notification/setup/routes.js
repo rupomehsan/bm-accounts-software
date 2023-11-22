@@ -13,7 +13,7 @@ const routes = {
         },
         {
             path: 'create',
-            name: "Create",
+            name: "NotificationCreate",
             component: Form
         },
     ]

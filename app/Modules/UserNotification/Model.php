@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+    static $userModel = \App\Modules\User\Model::class;
     protected $table = "user_notifications";
     protected $guarded = [];
 
@@ -23,5 +24,10 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(self::$userModel, 'user_id');
     }
 }

@@ -13,12 +13,17 @@ class Store
     {
         // dd(request()->all());
         try {
-
-            $users = json_decode($request->input('user_id'));
-            foreach ($users as $user) {
-                $data = array_merge($request->validated(), ['user_id' => $user]);
+            if (array_key_exists("to_all", $request->validated())) {
+                $data = array_merge($request->validated(), ['to_all' => 1, 'user_id' => null]);
                 self::$model::query()->create($data);
+            } else {
+                $users = json_decode($request->input('user_id'));
+                foreach ($users as $user) {
+                    $data = array_merge($request->validated(), ['user_id' => $user, 'to_all' => 0]);
+                    self::$model::query()->create($data);
+                }
             }
+
             return messageResponse('Notification send successfully', 201);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

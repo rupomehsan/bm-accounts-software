@@ -19,7 +19,7 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Asset
+                <router-link :to="{ name: `AllAssetApplications` }" class="d-flex align-items-center" href="">Asset
                     application</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
@@ -39,17 +39,17 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Division at a
+                <router-link :to="{ name: `DivisionAtAGlance` }" class="d-flex align-items-center" href="">Department at a
                     glance</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Income &amp;
+                <router-link :to="{ name: `Income&Expense` }" class="d-flex align-items-center" href="">Income &amp;
                     Expense</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">Logout</router-link>
+                <a class="d-flex align-items-center" href="">Logout</a>
             </li>
         </div>
     </div>

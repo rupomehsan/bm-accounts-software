@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\AccountManagement\AccountBranchTarget;
 
 use Illuminate\Database\Seeder as SeedersSeeder;
@@ -12,10 +13,12 @@ class Seeder extends SeedersSeeder
     public function run(): void
     {
         self::$model::truncate();
-        self::$model::create([
-            "account_category_id" => "1",
-            "branch_id" => "1",
-            "target_amount" => "100"
-        ]);
+        for ($i = 10; $i < 10; $i++) {
+            self::$model::create([
+                "user_id" => rand(1, 15),
+                "topic" => "you have 10 unsee notification",
+                "description" => "you have 10 unsee notification"
+            ]);
+        }
     }
 }

@@ -3,18 +3,20 @@
         <div class="pt-2">
             <div class="page-header my-2">
                 <div class="row align-items-center justify-content-between rounded-2">
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <h5 class="m-0">BM at a glance</h5>
                     </div>
-                    <div class="col-lg-4  w-25 ">
-                        <select name="" id="" class="form-select">
+
+                    <div class="col-lg-3" v-if="loded">
+                        <select name="" id="" class="form-select" v-model="account_category_id"
+                            @change="getAllIncomeByCategoryID">
                             <option value="">Select category</option>
                             <option v-for="category in all_account_categories" :key="category.id" :value="category.id">
                                 {{ category.title }}
                             </option>
                         </select>
                     </div>
-                    <div class="col-lg-4 text-end w-25 float-right">
+                    <div class="col-lg-3">
                         <select name="" id="" class="form-select" v-model="page">
                             <option value="">Goto page</option>
                             <option value="IncomeLedger">আয়ের লেজার/খতিয়ান</option>
@@ -45,6 +47,22 @@
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
+                            </form>
+                        </div>
+                        <div>
+                            <form @submit.prevent="submitHandler">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <div class="form-group d-flex align-items-center gap-2">
+                                        <label for="">From</label>
+                                        <input name="start_date" class="form-control" type="date">
+                                    </div>
+                                    <div class="form-group d-flex align-items-center gap-2">
+                                        <label for="">To</label>
+                                        <input name="end_date" class="form-control" type="date">
+                                    </div>
+                                    <button class="btn btn-dark btn-sm p-2"> <i type="submit" class="fa fa-search-plus"
+                                            aria-hidden="true"></i></button>
+                                </div>
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
@@ -99,15 +117,13 @@
                                     <th class="cursor_n_resize">
                                         পরিমান
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        মোট
-                                    </th>
+
 
                                 </tr>
                             </thead>
 
-                            <tbody class="table-border-bottom-0">
-                                <tr v-for="(  item, index  ) in   all_incomes.data  " :key="item.id">
+                            <tbody class="table-border-bottom-0" v-if="loded">
+                                <tr v-for="(item, index) in all_incomes.data" :key="item.id">
 
                                     <td>{{ index + 1 }}</td>
 
@@ -118,63 +134,22 @@
                                     </td>
                                     <td>
                                         <span class="text-warning cursor_pointer">
-                                            {{ item.account_logs.receipt_no }}
+                                            {{ item.receipt_no ?? '' }}
                                         </span>
                                     </td>
 
                                     <td>
-                                        {{ item.account_logs.description }}
-                                    </td>
-                                    <td>
-                                        {{ item.account_logs.description }}
+                                        {{ item.description }}
                                     </td>
 
-                                    <td>
-                                        {{ item.account_logs.amount }}
-                                    </td>
-                                    <td>
-                                        <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
-                                            <ul>
 
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{ name: 'Show', params: { id: item.id } }"
-                                                            title="disapproved"><i class="fa text-secondary fa-eye"></i>
-                                                            Details </router-link>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{
-                                                            name: 'Create',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }
-                                                            " class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
-                                                        </router-link>
-                                                        <!---->
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
-                                                            Delete
-                                                        </a>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                    <td>
+                                        {{ item.account_incomes?.account_receipt_no }}
                                     </td>
+                                    <td>
+                                        {{ item.amount }}
+                                    </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -236,21 +211,36 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        page: ''
+        page: '',
+        account_category_id: '',
+        loded: false
     }),
     created: async function () {
         await this.get_all_incomes();
         await this.get_all_account_categories();
+        this.loded = true
+
+        // console.log("all_incomes", this.all_incomes);
     },
     methods: {
         ...mapActions(income_setup_store, {
             get_all_incomes: "all",
             user_delete: "delete",
             get_all_account_categories: "get_all_account_categories",
+            get_all_income_by_category_id: "get_all_income_by_category_id",
+            get_data_by_datewise: "get_all_income_by_datewise"
         }),
 
         gotoPage(e) {
             console.log(e.target.value);
+        },
+
+        getAllIncomeByCategoryID() {
+            this.get_all_income_by_category_id(this.account_category_id)
+        },
+
+        submitHandler: async function ($event) {
+
         }
 
     },

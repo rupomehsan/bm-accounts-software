@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Modules\AccountLog;
+namespace App\Modules\AccountManagement\AccountLog;
 
-use App\Modules\AccountLog\Actions\All;
-use App\Modules\AccountLog\Actions\Delete;
-use App\Modules\AccountLog\Actions\Show;
-use App\Modules\AccountLog\Actions\Store;
-use App\Modules\AccountLog\Actions\Update;
-use App\Modules\AccountLog\Actions\Validation;
+use App\Modules\AccountManagement\AccountLog\Actions\All;
+use App\Modules\AccountManagement\AccountLog\Actions\Delete;
+use App\Modules\AccountManagement\AccountLog\Actions\Show;
+use App\Modules\AccountManagement\AccountLog\Actions\Store;
+use App\Modules\AccountManagement\AccountLog\Actions\Update;
+use App\Modules\AccountManagement\AccountLog\Actions\Validation;
+use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByCategoryID;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -41,6 +42,12 @@ class Controller extends ControllersController
     public function destroy($id)
     {
         $data = Delete::execute($id);
+        return $data;
+    }
+    public function getAllIncomeByCategoryID($id)
+    {
+   
+        $data = GetAllIncomeByCategoryID::execute($id);
         return $data;
     }
 }

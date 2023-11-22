@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\AccountLog\Actions;
+namespace App\Modules\AccountManagement\AccountLog\Actions;
 
 class All
 {
-    static $model = \App\Modules\AccountLog\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountLog\Model::class;
 
     public static function execute()
     {
@@ -12,7 +12,7 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = [];
+            $with = ['account_incomes:id,account_log_id,account_receipt_no'];
             $data = self::$model::query();
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');

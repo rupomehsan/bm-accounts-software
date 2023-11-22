@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\AccountLog\Actions;
+namespace App\Modules\AccountManagement\AccountLog\Actions;
 
-use App\Modules\AccountLog\Actions\Validation;
+use App\Modules\AccountManagement\AccountLog\Actions\Validation;
 
 class Update
 {
-    static $model = \App\Modules\AccountLog\Model::class;
+    static $model = \App\Modules\AccountManagement\AccountLog\Model::class;
 
     public static function execute(Validation $request,$id)
     {

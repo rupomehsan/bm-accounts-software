@@ -11,14 +11,19 @@
                 </div>
             </li>
         </ul>
-        <input v-on:keydown.enter="onEnter" ref="input_form" v-model="input_value" type="text" class="form-control">
-        <div>
-            <ul class="select-tools">
-                <li role="button" v-for="(item, index) in sourceData" :key="index" @click="selectData(item)">
-                    <span class="mx-2">
-                        <input role="button" :id="index" type="checkbox">
-                    </span>
-                    <span :for="index">{{ item.title }}</span>
+        <input v-on:keydown.enter="onEnter" ref="input_form" v-model="input_value" type="text"
+            class="form-control position-relative" @click="show = !show">
+        <div v-if="selectType == 'checkbox'">
+            <ul class="select-tools position-absolute" v-if="show">
+                <li class="" v-for="(item, index) in search_result" :key="index" @click="selectData(item)">
+                    <label :for="'select-' + index">
+                        <span class="mx-2">
+                            <input :checked="isExist(item)" :id="'select-' + index" type="checkbox">
+                        </span>
+                        <span>
+                            {{ item.title }}
+                        </span>
+                    </label>
                 </li>
             </ul>
         </div>
@@ -26,6 +31,7 @@
 </template>
 
 <script>
+import { computed } from 'vue';
 export default {
     props: {
         setValue: Function,
@@ -37,16 +43,29 @@ export default {
             type: Array,
             default: [],
         },
+        selectType: {
+            type: String,
+            data: '',
+        },
+        tags: {
+            type: Boolean,
+            default: false,
+        },
 
     },
     data: () => ({
         input_value: '',
         selected: {},
         component_data: [],
+        show: false,
+        search_result: []
     }),
 
     created: function () {
         this.component_data = this.data;
+
+        this.search_result = this.sourceData
+
     },
 
     watch: {
@@ -56,12 +75,27 @@ export default {
                 this.setValue(v)
             },
             deep: true
+        },
+        input_value: {
+            handler: function (v) {
+                if (!v.length) {
+                    this.search_result = this.sourceData
+                    return 0;
+                }
+                this.search_result = this.sourceData.filter(i => i.title.toLowerCase().includes(v.toLowerCase()))
+            },
+            deep: true
         }
     },
 
     methods: {
         onEnter: function () {
             event.preventDefault();
+
+            if (this.tags == false) {
+                return 0
+            }
+
             if (this.input_value.length) {
                 if (this.selected.title) {
                     this.selected.title = this.input_value;
@@ -101,9 +135,17 @@ export default {
                 this.component_data.push(i);
             }
 
+        },
+
+        isExist: function (i) {
+            return this.component_data.find(j => j.id == i.id)
         }
 
-    }
+
+
+    },
+
+
 }
 </script>
 

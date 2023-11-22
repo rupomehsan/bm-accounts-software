@@ -252,13 +252,14 @@ body[main-theme-layout="main-theme-layout-4"] .page-wrapper .page-main-header .m
 
 /*# sourceMappingURL=./custom.css.map */
 ul.select-tools {
-    width: 50%;
+    width: 300px;
     border: 2px solid rgba(31, 31, 31, 0.298);
-    background: rgba(36, 36, 36, 0.177);
+    background: rgb(36 36 36 / 75%);
     line-height: 25px;
     max-height: 200px;
     overflow-y: auto;
     margin-top: 5px;
+    z-index: 999;
 }
 
 ul.select-tools li {

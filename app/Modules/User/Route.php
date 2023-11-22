@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('users', Controller::class);
+    Route::get('department-at-a-glance', [Controller::class, 'departmentAtAglance']);
 });
 
 

@@ -18,9 +18,7 @@ class Store
                 $imageName = uploader($image, 'uploads/user');
                 $data['image'] = $imageName;
             }
-
             // dd($data);
-
             $data['password'] = Hash::make($request->input('password'));
             if (self::$model::query()->create($data)) {
                 return messageResponse('User added successfully', 201);

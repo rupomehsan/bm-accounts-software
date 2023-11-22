@@ -9,7 +9,7 @@ import { use_auth_store } from '../store/auth_store';
 export default {
     created: async function () {
         await this.check_is_auth();
-        console.log("hi");
+        // console.log("hi");
     },
     watch: {
         is_auth: {
@@ -19,13 +19,13 @@ export default {
                     case "super_admin":
                         break;
                     case "admin":
-                        console.log('admin');
+                        // console.log('admin');
                         window.location.hash = prev_url || "#/admin";
                         break;
                     case "bm_manager":
                         break;
                     case "cp":
-                        console.log('cp');
+                        // console.log('cp');
                         window.location.hash = prev_url || "#/cp";
                         break;
                     default:

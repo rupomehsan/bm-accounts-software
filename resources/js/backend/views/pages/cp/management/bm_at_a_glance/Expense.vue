@@ -111,19 +111,19 @@
                                     </td>
                                     <td>
                                         <span class="text-warning cursor_pointer">
-                                            {{ item.account_logs.receipt_no }}
+                                            {{ item.receipt_no }}
                                         </span>
                                     </td>
 
                                     <td>
-                                        {{ item.account_logs.description }}
+                                        {{ item.description }}
                                     </td>
                                     <td>
-                                        {{ item.account_logs.description }}
+                                        {{ item.description }}
                                     </td>
 
                                     <td>
-                                        {{ item.account_logs.amount }}
+                                        {{ item.amount }}
                                     </td>
                                     <td>
                                         <div class="table_actions">
