@@ -101,7 +101,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_incomes.data" :key="item.id">
+                                <tr v-for="(item, index) in []" :key="item.id">
 
                                     <td>{{ index + 1 }}</td>
 

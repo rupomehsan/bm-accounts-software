@@ -26,163 +26,351 @@
                     </div>
                 </div>
             </div>
-            <div class="conatiner">
+            <div class="container">
                 <div class="card list_card">
-                    <div class="card-header align-items-center">
-                        <h6>
-                            আয়ের লেজার/খতিয়ান
-                            <!---->
-                        </h6>
+                    <div class="card-header">
+                        <h4>
+                            Income Ledger ( Oct 24 - Nov 23 )
+                        </h4>
                         <div class="search">
-                            <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
-                            </form>
+                            <input type="date" class="income_expense_date_field" />
+                            To
+                            <input type="date" class="income_expense_date_field" />
                         </div>
+
                         <div class="btns d-flex gap-2 align-items-center">
-                            <router-link :to="{ name: 'Expense' }" class="btn btn-info">খরচের খাতা</router-link>
-                            <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Export All
-                                        </a>
-                                    </li>
-                                    <!---->
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <button type="button" class="btn rounded-pill btn-outline-info">
+                                <i class="fa fa-print me-5px"></i>
+                                Export
+                            </button>
                         </div>
                     </div>
-                    <div class="table-responsive card-body text-nowrap">
-                        <table class="table table-hover table-bordered">
-                            <thead class="table-light">
-                                <tr class="t-head">
-
-                                    <th aria-label="id" class="cursor_n_resize">
-                                        ক্রম
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        মাস ও তারিখ
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        বিবরণ
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        ফোলিও বা পৃষ্ঠা
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        জমা
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        খরচ
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        জমা বা খরচ
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        অবশিষ্ঠ
-                                    </th>
-
-                                </tr>
-                            </thead>
-
-                            <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_incomes.data" :key="item.id">
-
-                                    <td>{{ index + 1 }}</td>
-
-                                    <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ new Date(item.created_at).toDateString() }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ item.account_logs.receipt_no }}
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        {{ item.account_logs.description }}
-                                    </td>
-
-                                    <td>
-                                        {{ item.account_logs.amount }}
-                                    </td>
-                                    <td>
-                                        {{ item.account_logs.amount }}
-                                    </td>
-                                    <td>
-                                        {{ item.account_logs.amount }}
-                                    </td>
-                                    <td>
-                                        {{ item.account_logs.amount }}
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_incomes" :method="get_all_incomes" />
-                        <div class="float-right">
-                            <div class="show-limit d-inline-block">
-                                <span>Limit:</span>
-                                <select class="" v-model="offset">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
+                    <div class="ledger_book card-body text-nowrap">
+                        <div class="ledger_row ledger_heading">
+                            <div class="ledger_col name">Name</div>
+                            <div class="ledger_col date">Date</div>
+                            <div class="ledger_col receipt">Receipt</div>
+                            <div class="ledger_col">Amount</div>
+                            <div class="ledger_col">
+                                অগ্রিম আয়
                             </div>
-                            <div class="show-limit d-inline-block">
-                                <span>Total:</span>
-                                <span>{{ all_incomes.total }}</span>
+                            <div class="ledger_col">
+                                ঈদ কার্ড
+                            </div>
+                            <div class="ledger_col">
+                                এককালীন
+                            </div>
+                            <div class="ledger_col">
+                                ওপেন-বুক
+                            </div>
+                            <div class="ledger_col">
+                                কুরআন
+                            </div>
+                            <div class="ledger_col">
+                                ঘাটতি
+                            </div>
+                            <div class="ledger_col">
+                                টি-শার্ট
+                            </div>
+                            <div class="ledger_col">
+                                নববর্ষ বাবদ
+                            </div>
+                            <div class="ledger_col">
+                                পণ্য বিক্রি আয়
+                            </div>
+                            <div class="ledger_col">
+                                ফ্লাট আয়
+                            </div>
+                            <div class="ledger_col">
+                                বকেয়া আদায়
+                            </div>
+                            <div class="ledger_col">
+                                বমজান ক্যালেন্ডার
+                            </div>
+                            <div class="ledger_col">
+                                বিএম থেকে আয়
+                            </div>
+                            <div class="ledger_col">
+                                বিশেষ আয়
+                            </div>
+                            <div class="ledger_col">
+                                বুকসেট
+                            </div>
+                            <div class="ledger_col">
+                                ব্যাঙ্ক জমার মাধ্যমে আয়
+                            </div>
+                            <div class="ledger_col">
+                                ভুর্তুকি
+                            </div>
+                            <div class="ledger_col">
+                                মওকুফ
+                            </div>
+                            <div class="ledger_col">
+                                সাইন্স সিরিজ
+                            </div>
+                            <div class="ledger_col">
+                                সাধারণ প্রকাশনার বই বিক্রি
+                            </div>
+                            <div class="ledger_col">
+                                সৈজন্য
+                            </div>
+                            <div class="ledger_col">
+                                স্কুল সেটের বই বিক্রি
                             </div>
                         </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
+                        <div class="ledger_row">
+                            <div class="ledger_col name">mr accountant</div>
+                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
+                            <div class="ledger_col receipt">9651713</div>
+                            <div class="ledger_col">19219</div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col">
+                                19219
+                            </div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                            <div class="ledger_col"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="canvas_backdrop">
-                    <!---->
-                </div>
-                <div class="canvas_backdrop">
-                    <div class="content right">
-                        <div class="content_header">
-                            <h3 class="offcanvas-title">Selected Users</h3>
-                            <i class="fa fa-times"></i>
-                        </div>
-                        <div class="cotent_body table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>id</th>
-                                        <th>name</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
+                    <div class="card-footer py-1 border-top-0">
+                        <ul class="d-flex gap-3" style="list-style-type: none;">
+                            <li>Total Income: <b class="text-success">426871</b></li>
+                            <li>Total Expense: <b class="text-warning">29497</b></li>
+                            <li>Total Extra: <b class="text-info"> 397374</b></li>
+                            <li>Previous Extra: <b class="text-danger">-273083</b></li>
+                            <li>Present Extra: <b class="text-success"> 124291</b></li>
+                        </ul>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>

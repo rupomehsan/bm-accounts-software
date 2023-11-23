@@ -266,3 +266,139 @@ ul.select-tools li {
     border: 1px solid rgba(97, 97, 97, 0.345);
     margin: 2px;
 }
+
+.income_expense_date_field {
+    background: transparent;
+    border: 0;
+    -webkit-box-shadow: 0;
+    box-shadow: 0;
+    color: #fff;
+    outline: 0;
+    width: 108px;
+}
+
+.row_sticky {
+    -webkit-box-shadow: 0 4px 5px -3px rgba(0, 0, 0, .541);
+    box-shadow: 0 4px 5px -3px rgba(0, 0, 0, .541);
+    left: 0;
+    position: sticky;
+    top: -2px;
+}
+
+.accounts_at_a_glance {
+    height: calc(100vh - 200px);
+    margin: auto auto 5px;
+    overflow: auto;
+    width: 80%;
+}
+
+.footer_fixed {
+    bottom: -2px;
+    -webkit-box-shadow: 0 -2px 15px -4px rgba(0, 0, 0, .541);
+    box-shadow: 0 -2px 15px -4px rgba(0, 0, 0, .541);
+    left: 0;
+    position: sticky;
+}
+
+.row_sticky td {
+    background: #505c7c;
+}
+
+.footer_fixed td {
+    background: #505c7c;
+}
+
+/* ledger book start */
+
+.ledger_book {
+    overflow: scroll
+}
+
+.ledger_book .ledger_row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content
+}
+
+.ledger_book .ledger_row:hover {
+    background-color: #252c3e
+}
+
+.ledger_book .ledger_row:hover .ledger_col {
+    background-color: #252c3e !important
+}
+
+.ledger_book .ledger_row .ledger_col {
+    text-wrap: wrap;
+    border-color: hsla(0, 0%, 100%, .141);
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    text-align: center;
+    width: 215px
+}
+
+.ledger_book .ledger_row .ledger_col:last-child {
+    border-right-width: 1px
+}
+
+.ledger_book .ledger_row .ledger_col.date,
+.ledger_book .ledger_row .ledger_col.receipt {
+    width: 200px
+}
+
+.ledger_book .ledger_row .ledger_col.name {
+    background-color: #283046;
+    -webkit-box-shadow: 1px 0 0 0 hsla(0, 0%, 100%, .141);
+    box-shadow: 1px 0 0 0 hsla(0, 0%, 100%, .141);
+    left: -21px;
+    position: sticky;
+    width: 200px;
+    z-index: 1
+}
+
+.ledger_book .ledger_row:last-child .ledger_book {
+    border-bottom-width: 1px
+}
+
+.ledger_book .ledger_row.ledger_heading {
+    background-color: #283046;
+    -webkit-box-shadow: 0 5px 10px -7px rgba(0, 0, 0, .549);
+    box-shadow: 0 5px 10px -7px rgba(0, 0, 0, .549);
+    left: 0;
+    position: sticky;
+    top: 0;
+    z-index: 2
+}
+
+.ledger_book .ledger_row.ledger_heading .ledger_col {
+    font-weight: 600
+}
+
+.ledger_book .ledger_row.ledger_heading .ledger_col.name {
+    -webkit-box-shadow: 1px 0 0 0 hsla(0, 0%, 100%, .141);
+    box-shadow: 1px 0 0 0 hsla(0, 0%, 100%, .141)
+}
+
+.ledger_book .ledger_row.ledger_footer {
+    background-color: #283046;
+    bottom: 0;
+    -webkit-box-shadow: 0 -2px 10px -3px rgba(0, 0, 0, .471);
+    box-shadow: 0 -2px 10px -3px rgba(0, 0, 0, .471);
+    left: 0;
+    position: sticky;
+    z-index: 3
+}
+
+.ledger_book .ledger_row.ledger_footer .ledger_col {
+    font-weight: 600
+}
+
+/* ledger book end */

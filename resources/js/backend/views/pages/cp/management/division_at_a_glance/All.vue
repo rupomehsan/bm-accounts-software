@@ -72,7 +72,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody class="table-border-bottom-0">
+                            <tbody class="table-border-bottom-0" v-if="loaded">
                                 <tr v-for="(  item, index  ) in   all_income_expense.data  " :key="item.id">
 
                                     <td>{{ index + 1 }}</td>
@@ -107,16 +107,17 @@ import { mapActions, mapState } from "pinia";
 import { income_setup_store } from "./setup/store";
 
 export default {
+    data: () => ({
+        loaded: false
+    }),
     created: async function () {
         await this.division_at_a_glance();
+        this.loaded = true
     },
     methods: {
         ...mapActions(income_setup_store, {
             division_at_a_glance: "all",
-        }),
-
-
-
+        })
     },
     computed: {
         ...mapState(income_setup_store, {

@@ -10,6 +10,7 @@ use App\Modules\AccountManagement\AccountLog\Actions\Update;
 use App\Modules\AccountManagement\AccountLog\Actions\Validation;
 use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByCategoryID;
 use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByDatewise;
+use App\Modules\AccountManagement\AccountLog\Actions\IncomeExpenseReport;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -55,6 +56,12 @@ class Controller extends ControllersController
     {
 
         $data = GetAllIncomeByDatewise::execute();
+        return $data;
+    }
+     public function IncomeExpenseReport()
+    {
+
+        $data = IncomeExpenseReport::execute();
         return $data;
     }
 }

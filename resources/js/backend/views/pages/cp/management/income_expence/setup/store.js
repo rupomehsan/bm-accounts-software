@@ -2,9 +2,7 @@ import { defineStore } from "pinia";
 
 export const notification_setup_store = defineStore("notification_setup_store", {
     state: () => ({
-        all_data: {},
-        single_data: {},
-        users: {},
+        income_expense: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -20,11 +18,11 @@ export const notification_setup_store = defineStore("notification_setup_store", 
             }
             this.all_data = response.data.data;
         },
-        get: async function (id) {
-            let response = await axios.get("user-notifications/" + id);
+        get_all_income_expense_report: async function () {
+            let response = await axios.get("get-all-income-expense-report");
             response = response.data.data;
-            // console.log("data", response);
-            this.single_data = response;
+            this.income_expense = response;
+            // console.log("income_expense", this.income_expense);
         },
         get_all_users: async function () {
             let response = await axios.get("users?get_all=1");

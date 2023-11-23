@@ -1,9 +1,13 @@
 import "./bootstrap";
+import "./plugins/enToBn.js";
 import "./plugins/axios_setup.js";
 import "./plugins/sweet_alert.js";
+import "./plugins/moment_setup";
+
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { createPinia } from "pinia";
+
 
 import CommonInput from "./views/components/CommonInput.vue";
 import ImageComponent from "../backend/views/components/ImageComponent.vue";
@@ -42,6 +46,7 @@ router.beforeEach((to, from, next) => {
 
 const pinia = createPinia();
 const app = createApp({});
+// Vue.prototype.number_format = (number = 0) => new Intl.NumberFormat().format(number);
 app.component("app", App);
 app.component("common-input", CommonInput);
 app.component("image-component", ImageComponent);

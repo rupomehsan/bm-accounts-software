@@ -20,7 +20,7 @@
                         <select name="" id="" class="form-select" v-model="page">
                             <option value="">Goto page</option>
                             <option value="IncomeLedger">আয়ের লেজার/খতিয়ান</option>
-                            <option value="ExpenseIncomeLedger">ব্যয়ের লেজার/খতিয়ান</option>
+                            <option value="ExpenseLedger">ব্যয়ের লেজার/খতিয়ান</option>
                             <option value="LoanRegister">ঋণ রেজিস্টার</option>
                             <option value="Jamanot">জামানত</option>
                             <option value="Salary">বেতন</option>

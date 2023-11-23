@@ -23,7 +23,7 @@ const routes = {
     children: [
 
         {
-            path: '',
+            path: 'income',
             name: "AtAGlance",
             component: All
         },
@@ -33,67 +33,67 @@ const routes = {
             component: Expense
         },
         {
-            path: 'আয়ের-লেজার/খতিয়ান',
+            path: 'income-ledger',
             name: "IncomeLedger",
             component: IncomeLedger
         },
         {
-            path: 'ব্যয়ের-লেজার/খতিয়ান',
+            path: 'expense-ledger',
             name: "ExpenseLedger",
             component: ExpenseLedger
         },
         {
-            path: 'ঋণ-রেজিস্টার',
+            path: 'loan-register',
             name: "LoanRegister",
             component: LoanRegister
         },
         {
-            path: 'জামানত',
+            path: 'jamanot',
             name: "Jamanot",
             component: Jamanot
         },
         {
-            path: 'বেতন',
+            path: 'salary',
             name: "Salary",
             component: Salary
         },
         {
-            path: 'অফিস-ভাড়া',
+            path: 'office-rent',
             name: "OfficeRent",
             component: OfficeRent
         },
         {
-            path: 'বাসা-ভাড়া',
+            path: 'house-rent',
             name: "HouseRent",
             component: HouseRent
         },
         {
-            path: 'সম্পদ-তালিকা',
+            path: 'asset-list',
             name: "AssetList",
             component: AssetList
         },
         {
-            path: 'বিএম-স্টক-রেজিস্টার',
+            path: 'bm-stock-register',
             name: "BMStockRegister",
             component: BMStockRegister
         },
         {
-            path: 'সম্পদ-রেজিস্টার',
+            path: 'asset-register',
             name: "AssetRegister",
             component: AssetRegister
         },
         {
-            path: 'এককালীন-প্রদান',
+            path: 'lump-sum-payment',
             name: "EkkalinProdan",
             component: EkkalinProdan
         },
         {
-            path: 'নিয়মিত-প্রদান',
+            path: 'regular-paying',
             name: "NiyomitoProdan",
             component: NiyomitoProdan
         },
         {
-            path: 'কেন্দ্রীয়-শুভাকাঙ্খী-থেকে-আয়',
+            path: 'Central-Auspicious-to-Income',
             name: "KendriyoSuvakankhiThekeAy",
             component: KendriyoSuvakankhiThekeAy
         },
