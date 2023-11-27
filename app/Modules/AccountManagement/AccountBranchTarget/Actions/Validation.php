@@ -33,9 +33,11 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'account_category_id' => 'required',
-            'branch_id' => 'required',
-            'target_amount' => 'required',
+            'account_category_id' => 'required | sometimes',
+            'comment' => 'required| sometimes',
+            'session' => 'required| sometimes',
+            'branch_id' => 'required| sometimes',
+            'target_amount' => 'required| sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

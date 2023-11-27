@@ -11,6 +11,8 @@ use App\Modules\AccountManagement\AccountLog\Actions\Validation;
 use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByCategoryID;
 use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByDatewise;
 use App\Modules\AccountManagement\AccountLog\Actions\IncomeExpenseReport;
+use App\Modules\AccountManagement\AccountLog\Actions\IncomeExpenseClosingRange;
+use App\Modules\AccountManagement\AccountLog\Actions\IncomeLedger;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -58,10 +60,21 @@ class Controller extends ControllersController
         $data = GetAllIncomeByDatewise::execute();
         return $data;
     }
-     public function IncomeExpenseReport()
+    public function IncomeExpenseReport()
     {
 
         $data = IncomeExpenseReport::execute();
+        return $data;
+    }
+    public function IncomeExpenseClosingRange()
+    {
+
+        $data = IncomeExpenseClosingRange::execute();
+        return $data;
+    }
+    public function getIncomeLedger()
+    {
+        $data = IncomeLedger::execute();
         return $data;
     }
 }

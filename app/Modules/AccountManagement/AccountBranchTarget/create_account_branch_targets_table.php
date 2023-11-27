@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('account_branch_targets', function (Blueprint $table) {
             $table->id();
             $table->string('account_category_id')->nullable();
+            $table->string('session', 100)->nullable();
+            $table->json('comment', 100)->nullable();
             $table->bigInteger('branch_id')->nullable();
             $table->float('target_amount')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();

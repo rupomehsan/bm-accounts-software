@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AccountManagement\AccountBranchTarget;
+namespace App\Modules\UserNotification;
 
 use Illuminate\Database\Seeder as SeedersSeeder;
 
@@ -9,7 +9,7 @@ class Seeder extends SeedersSeeder
     /**
      * Run the database seeds.
      */
-    static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
+    static $model = \App\Modules\UserNotification\Model::class;
     public function run(): void
     {
         self::$model::truncate();

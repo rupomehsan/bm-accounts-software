@@ -13,8 +13,15 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllbmUser` }" class="d-flex align-items-center" href="">User</router-link>
+                <router-link :to="{ name: `AllReceiptBook` }" class="d-flex align-items-center" href="">Receipt
+                    book</router-link>
             </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">Branch
+                    Target</router-link>
+            </li>
+
         </div>
     </div>
 </template>

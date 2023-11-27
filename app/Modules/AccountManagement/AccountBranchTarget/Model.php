@@ -7,8 +7,15 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+    static $accountModel = \App\Modules\AccountManagement\AccountCategory\Model::class;
+    static $userModel = \App\Modules\User\Model::class;
+
     protected $table = "account_branch_targets";
     protected $guarded = [];
+
+    protected $casts = [
+        "comment" => "array"
+    ];
 
     protected static function booted()
     {
@@ -23,5 +30,15 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function account_category()
+    {
+        return $this->belongsTo(self::$accountModel, 'account_category_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(self::$userModel, 'branch_id');
     }
 }

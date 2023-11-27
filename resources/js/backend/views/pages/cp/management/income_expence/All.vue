@@ -7,12 +7,7 @@
                         <h5 class="m-0">Income & Expense</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <span>
-                            <router-link :to="{ name: `Create` }" class="btn rounded-pill btn-outline-info">
-                                <i class="fa fa-pencil me-5px"></i>
-                                Create
-                            </router-link>
-                        </span>
+                       
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Actions;
 
+use Illuminate\Support\Facades\DB;
 
 class All
 {
@@ -19,6 +20,16 @@ class All
                 $condition['status'] = request()->input('status');
             }
 
+            if (request()->has('branch_user') && request()->input('branch_user')) {
+                $data->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('user_user_role')
+                        ->whereColumn('user_user_role.user_id', 'users.id')
+                        ->where('user_user_role.user_role_id', 10);
+                });
+            }
+
+
             if (request()->has('search') && request()->input('search')) {
                 $data = $data->where('full_name', 'like', '%' . request()->input('search') . '%');
             }
@@ -32,6 +43,5 @@ class All
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }
-
     }
 }

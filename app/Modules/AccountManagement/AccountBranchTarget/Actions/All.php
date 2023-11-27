@@ -12,7 +12,7 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = [];
+            $with = ['account_category:id,title','user:id,full_name'];
             $data = self::$model::query();
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\AccountManagement\AccountBranchTarget;
 
 use Illuminate\Database\Seeder as SeedersSeeder;
@@ -14,8 +15,10 @@ class Seeder extends SeedersSeeder
         self::$model::truncate();
         self::$model::create([
             "account_category_id" => "1",
-            "branch_id" => "1",
-            "target_amount" => "100"
+            "branch_id" => "10",
+            "target_amount" => "100",
+            "session" => "2023",
+            "comment" => ["this is the first commnet"],
         ]);
     }
 }

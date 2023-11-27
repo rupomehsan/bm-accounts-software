@@ -14,6 +14,7 @@ use App\Modules\AccountManagement\AccountReceiptBookAssign\Seeder as AccountRece
 use App\Modules\CpApplicationCategory\Seeder as CpApplicationCategorySeeder;
 use App\Modules\CpApplicationFormat\Seeder as CpApplicationFormatSeeder;
 use App\Modules\UserNotification\Seeder as UserNotificationSeeder;
+use App\Modules\User\Seeder as UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {

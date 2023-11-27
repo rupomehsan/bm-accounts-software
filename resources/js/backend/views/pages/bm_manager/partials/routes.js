@@ -1,6 +1,7 @@
 import Layout from "./Layout.vue"
 import Dashboard from "../Dashboard.vue"
-import user_routes from "../management/user/setup/routes"
+import receipt_book_routes from "../management/receipt_book/setup/routes"
+import branch_target_routes from "../management/branch_target/setup/routes"
 
 const routes =
 {
@@ -12,7 +13,8 @@ const routes =
             name: 'bmManagerDashboard',
             component: Dashboard,
         },
-        user_routes,
+        receipt_book_routes,
+        branch_target_routes,
     ]
 };
 

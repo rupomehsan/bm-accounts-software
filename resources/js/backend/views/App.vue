@@ -23,6 +23,7 @@ export default {
                         window.location.hash = prev_url || "#/admin";
                         break;
                     case "bm_manager":
+                    window.location.hash = prev_url || "#/bm-manager";
                         break;
                     case "cp":
                         // console.log('cp');

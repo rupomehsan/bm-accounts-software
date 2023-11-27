@@ -9,13 +9,18 @@ class All
     public static function execute()
     {
         try {
-            // dd(request()->all());
+
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = [];
             $data = self::$model::query();
+
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
+            }
+            
+            if (request()->has('type') && request()->input('type')) {
+                $condition['type'] = request()->input('type');
             }
 
             if (request()->has('search') && request()->input('search')) {

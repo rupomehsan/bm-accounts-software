@@ -11,10 +11,9 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{ name: `All` }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `AllReceiptBook` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -22,31 +21,19 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-12">
-                                    <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
+                                <div class="col-lg-12" v-for="(
                                                 form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :type="form_field.type"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-                                            />
-                                        </template>
+                                            ) in form_fields" :key="index">
+                                    <div class="admin_form form_1">
+
+                                        <common-input :label="form_field.label" :type="form_field.type"
+                                            :name="form_field.name" :multiple="form_field.multiple"
+                                            :value="form_field.value" :data_list="form_field.data_list
+                                                " />
+
                                     </div>
                                 </div>
                             </div>

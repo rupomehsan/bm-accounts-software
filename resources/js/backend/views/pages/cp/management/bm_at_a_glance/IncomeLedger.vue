@@ -30,12 +30,14 @@
                 <div class="card list_card">
                     <div class="card-header">
                         <h4>
-                            Income Ledger ( Oct 24 - Nov 23 )
+                            Income Ledger ( {{ date_title }} )
                         </h4>
                         <div class="search">
-                            <input type="date" class="income_expense_date_field" />
+                            <input v-model="from_date" type="date" class="income_expense_date_field"
+                                @click="$event.target.showPicker();" />
                             To
-                            <input type="date" class="income_expense_date_field" />
+                            <input v-model="to_date" type="date" class="income_expense_date_field"
+                                @click="$event.target.showPicker();" />
                         </div>
 
                         <div class="btns d-flex gap-2 align-items-center">
@@ -45,327 +47,45 @@
                             </button>
                         </div>
                     </div>
-                    <div class="ledger_book card-body text-nowrap">
+                    <div class="ledger_book card-body text-nowrap" v-if="loaded">
                         <div class="ledger_row ledger_heading">
                             <div class="ledger_col name">Name</div>
                             <div class="ledger_col date">Date</div>
                             <div class="ledger_col receipt">Receipt</div>
                             <div class="ledger_col">Amount</div>
-                            <div class="ledger_col">
-                                অগ্রিম আয়
+                            <div class="ledger_col" v-for="i in all_account_income_categories" :key="i.id">
+                                {{ i.title }}
                             </div>
-                            <div class="ledger_col">
-                                ঈদ কার্ড
-                            </div>
-                            <div class="ledger_col">
-                                এককালীন
-                            </div>
-                            <div class="ledger_col">
-                                ওপেন-বুক
-                            </div>
-                            <div class="ledger_col">
-                                কুরআন
-                            </div>
-                            <div class="ledger_col">
-                                ঘাটতি
-                            </div>
-                            <div class="ledger_col">
-                                টি-শার্ট
-                            </div>
-                            <div class="ledger_col">
-                                নববর্ষ বাবদ
-                            </div>
-                            <div class="ledger_col">
-                                পণ্য বিক্রি আয়
-                            </div>
-                            <div class="ledger_col">
-                                ফ্লাট আয়
-                            </div>
-                            <div class="ledger_col">
-                                বকেয়া আদায়
-                            </div>
-                            <div class="ledger_col">
-                                বমজান ক্যালেন্ডার
-                            </div>
-                            <div class="ledger_col">
-                                বিএম থেকে আয়
-                            </div>
-                            <div class="ledger_col">
-                                বিশেষ আয়
-                            </div>
-                            <div class="ledger_col">
-                                বুকসেট
-                            </div>
-                            <div class="ledger_col">
-                                ব্যাঙ্ক জমার মাধ্যমে আয়
-                            </div>
-                            <div class="ledger_col">
-                                ভুর্তুকি
-                            </div>
-                            <div class="ledger_col">
-                                মওকুফ
-                            </div>
-                            <div class="ledger_col">
-                                সাইন্স সিরিজ
-                            </div>
-                            <div class="ledger_col">
-                                সাধারণ প্রকাশনার বই বিক্রি
-                            </div>
-                            <div class="ledger_col">
-                                সৈজন্য
-                            </div>
-                            <div class="ledger_col">
-                                স্কুল সেটের বই বিক্রি
+
+                        </div>
+                        <div class="ledger_row" v-for="i in all_income_ledger" :key="i.id">
+                            <div class="ledger_col name">{{ i.name }}</div>
+                            <div class="ledger_col date text-start">{{ new Date(i.date).toDateString() }}</div>
+                            <div class="ledger_col receipt">{{ i.receipt_no }}</div>
+                            <div class="ledger_col">{{ i.amount }}</div>
+                            <div class="ledger_col" v-for="j in all_account_income_categories" :key="j.id">
+                                {{ i[`cat_${j.id}`] }}
                             </div>
                         </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
+
+
+                        <div class="ledger_row ledger_footer">
+                            <div class="ledger_col name">Total</div>
+                            <div class="ledger_col date"></div>
+                            <div class="ledger_col receipt"></div>
+                            <div class="ledger_col amount">{{ category_wise_total['total'] }}</div>
+                            <div class="ledger_col" v-for="i in all_account_income_categories" :key="i.id">
+                                {{ category_wise_total[`cat_${i.id}`] }}
                             </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                        </div>
-                        <div class="ledger_row">
-                            <div class="ledger_col name">mr accountant</div>
-                            <div class="ledger_col date text-start">Fri Nov 10 2023</div>
-                            <div class="ledger_col receipt">9651713</div>
-                            <div class="ledger_col">19219</div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col">
-                                19219
-                            </div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
-                            <div class="ledger_col"></div>
                         </div>
                     </div>
                     <div class="card-footer py-1 border-top-0">
                         <ul class="d-flex gap-3" style="list-style-type: none;">
-                            <li>Total Income: <b class="text-success">426871</b></li>
-                            <li>Total Expense: <b class="text-warning">29497</b></li>
-                            <li>Total Extra: <b class="text-info"> 397374</b></li>
-                            <li>Previous Extra: <b class="text-danger">-273083</b></li>
-                            <li>Present Extra: <b class="text-success"> 124291</b></li>
+                            <li>Total Income: <b class="text-success">{{ closing_data.income }}</b> </li>
+                            <li>Total Expense: <b class="text-warning">{{ closing_data.expense }}</b> </li>
+                            <li>Total Extra: <b class="text-info"> {{ closing_data.extra }}</b></li>
+                            <li>Previous Extra: <b class="text-danger">{{ closing_data.extra_before }}</b> </li>
+                            <li>Present Extra: <b class="text-success"> {{ closing_data.preset_extra }}</b> </li>
                         </ul>
                     </div>
                 </div>
@@ -381,40 +101,43 @@ import { income_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
-        offset: "5",
-        search_data: "",
-        page: ''
+        page: '',
+        loaded: false,
+        from_date: '',
+        to_date: '',
+        date_title: '',
     }),
     created: async function () {
-        await this.get_all_incomes();
+        this.from_date = moment().subtract(30, 'd').format('YYYY-MM-DD');
+        this.to_date = moment().format('YYYY-MM-DD');
+        this.date_title = moment(this.from_date).format('MMM DD - ');
+        this.date_title += moment(this.to_date).format('MMM DD');
+
+        await this.get_all_account_income_categories();
+        await this.get_income_expense_closing_in_range({
+            from: this.from_date,
+            to: this.to_date,
+        });
+        await this.fetch_income_ledger();
+
+        this.loaded = true
     },
     methods: {
         ...mapActions(income_setup_store, {
-            get_all_incomes: "all",
-            user_delete: "delete",
+            get_all_account_income_categories: "get_all_account_income_categories",
+            get_income_expense_closing_in_range: "get_income_expense_closing_in_range",
+            fetch_income_ledger: "fetch_income_ledger",
         }),
-
-        gotoPage(e) {
-            console.log(e.target.value);
-        }
     },
     computed: {
         ...mapState(income_setup_store, {
-            all_incomes: "all_data",
+            all_account_income_categories: "all_account_income_categories",
+            closing_data: "all_income_expense_closing_in_range",
+            all_income_ledger: "all_income_ledger",
+            category_wise_total: "category_wise_total",
         }),
     },
-    watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.get_all_incomes();
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
-        },
 
-        page: function () {
-            this.$router.push({ name: this.page })
-        }
-    },
 };
 </script>
 

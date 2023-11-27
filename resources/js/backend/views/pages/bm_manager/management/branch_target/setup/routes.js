@@ -3,17 +3,17 @@ import All from "../All.vue";
 import Form from "../Form.vue";
 
 const routes = {
-    path: 'users',
+    path: 'branch-target',
     component: Layout,
     children: [
         {
             path: '',
-            name: "AllbmUser",
+            name: "AllBranchTarget",
             component: All
         },
         {
             path: 'create',
-            name: "Create",
+            name: "BranchTargetCreate",
             component: Form
         },
     ]

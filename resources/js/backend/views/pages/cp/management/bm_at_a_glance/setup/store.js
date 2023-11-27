@@ -6,8 +6,12 @@ export const income_setup_store = defineStore("income_setup_store", {
         single_data: {},
         all_applications_by_category: {},
         all_account_categories: {},
+        all_account_income_categories: {},
         single_applications_data: {},
         all_income_by_category_id_data: {},
+        all_income_expense_closing_in_range: {},
+        all_income_ledger: {},
+        category_wise_total: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -40,6 +44,25 @@ export const income_setup_store = defineStore("income_setup_store", {
             let response = await axios.get("account-categories?get_all=1");
             response = response.data.data;
             this.all_account_categories = response;
+        },
+        get_all_account_income_categories: async function () {
+            let response = await axios.get("account-categories?get_all=1&type=income");
+            response = response.data.data;
+            this.all_account_income_categories = response;
+        },
+        get_income_expense_closing_in_range: async function (params) {
+            let url = `get-income-expense-closing-in-range?`;
+            url += `from=${params.from}`;
+            url += `&to=${params.to}`;
+            let response = await axios.get(url);
+            response = response.data.data;
+            this.all_income_expense_closing_in_range = response;
+        },
+        fetch_income_ledger: async function () {
+            let response = await axios.get("get-income-ledger?from=2023-10-27&to=2023-11-26&is_income=1");
+            response = response.data.data;
+            this.all_income_ledger = response.ledger_data;
+            this.category_wise_total = response.category_wise_total;
         },
         get_single_application: async function (id) {
             let response = await axios.get("cp-applications/" + id);
