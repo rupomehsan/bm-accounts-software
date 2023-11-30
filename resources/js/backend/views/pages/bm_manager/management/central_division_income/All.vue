@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Branch Target Management</h5>
+                        <h5 class="m-0">Central Division Income</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `BranchTargetCreate` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `ReceiptBookCreate` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -20,7 +20,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Branch Target
+                            All Income
                             <!---->
                         </h6>
                         <div class="search">
@@ -29,8 +29,6 @@
                                     class="form-control border border-info" />
                             </form>
                         </div>
-                        <input v-if="importfile" class="form-control w-25" type="file">
-
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
@@ -44,7 +42,7 @@
                                     </li>
                                     <!---->
                                     <li>
-                                        <a @click.prevent class="">
+                                        <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Import
                                         </a>
@@ -71,18 +69,25 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Account Category
+                                        Receipt Book No
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Branch Name
+                                        Receipt Start Serial No
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Target Amount
+                                        Receipt End Serial No
                                         <!---->
                                     </th>
+                                    <th class="cursor_n_resize">
+                                        is_approvel
 
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Status
+                                        <!---->
+                                    </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
@@ -94,22 +99,48 @@
                                     </td>
                                     <td>{{ index + 1 }}</td>
                                     <td>
-                                        {{ item.account_category?.title }}
+                                        {{ item.receipt_book_no }}
                                     </td>
                                     <td>
-                                        {{ item.user?.full_name }}
+                                        {{ item.receipt_start_serial_no }}
                                     </td>
-                                    <td>{{ item.target_amount }}</td>
-
+                                    <td>{{ item.receipt_end_serial_no }}</td>
+                                    <td>{{ item.is_approvel ?? 0 }}</td>
+                                    <td>
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
+                                        <!---->
+                                    </td>
                                     <td>
                                         <div class="table_actions">
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
                                                     class="fa fa-gears"></i></a>
                                             <ul>
+                                                <!-- <li>
+                                                    <a href="">
+                                                        <i
+                                                            class="fa text-info fa-eye"
+                                                        ></i>
+                                                        Quick View
+                                                    </a>
+                                                </li> -->
+                                                <!-- <li>
+                                                    <span>
+                                                        <a
+                                                            href="#/user/details/43"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-secondary fa-eye"
+                                                            ></i>
+                                                            Details
+                                                        </a>
+
+                                                    </span>
+                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'BranchTargetCreate',
+                                                            name: 'Create',
                                                             query: {
                                                                 id: item.id,
                                                             },
@@ -189,7 +220,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { banch_target_store } from "./setup/store";
+import { user_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
@@ -200,13 +231,13 @@ export default {
         await this.user_get_all();
     },
     methods: {
-        ...mapActions(banch_target_store, {
+        ...mapActions(user_setup_store, {
             user_get_all: "all",
             user_delete: "delete",
         }),
     },
     computed: {
-        ...mapState(banch_target_store, {
+        ...mapState(user_setup_store, {
             all_users: "all_data",
         }),
     },

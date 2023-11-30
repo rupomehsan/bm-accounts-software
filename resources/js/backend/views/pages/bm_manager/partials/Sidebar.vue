@@ -21,6 +21,25 @@
                 <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">Branch
                     Target</router-link>
             </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">Central Division
+                    Income </router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">Branch Income
+                </router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">Daily
+                    Income</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">Payment Method</router-link>
+            </li>
 
         </div>
     </div>

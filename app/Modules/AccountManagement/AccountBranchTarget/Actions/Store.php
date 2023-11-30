@@ -11,8 +11,11 @@ class Store
 
     public static function execute(Validation $request)
     {
+        // dd($request->all());
         try {
-            if (self::$model::query()->create($request->validated())) {
+            $comment = [];
+            $comment[] = $request->input('comment');
+            if (self::$model::query()->create(array_merge($request->validated(), ['comment' => $comment]))) {
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

@@ -3,7 +3,7 @@
         <label for="">
             {{ label || name }}
         </label>
-        <div v-if="['text', 'number', 'password', 'email'].includes(type)" class="mt-1 mb-3">
+        <div v-if="['text', 'number', 'password', 'email', 'date', 'month'].includes(type)" class="mt-1 mb-3">
             <input class="form-control" :type="type" :name="name" :id="name" :value="value" />
         </div>
         <div v-if="type === 'textarea'" class="mt-1 mb-3">

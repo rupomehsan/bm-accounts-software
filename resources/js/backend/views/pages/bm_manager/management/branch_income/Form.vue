@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllBranchTarget` }"
+                                <router-link :to="{ name: `AllReceiptBook` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -23,29 +23,19 @@
                 <div class="my-1">
                     <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
-                            <div class="row justify-content-between">
-                                <div class="col-md-6">
-                                    <div class="col-lg-12" v-for="(
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12" v-for="(
                                                 form_field, index
                                             ) in form_fields" :key="index">
-                                        <div class="admin_form">
+                                    <div class="admin_form form_1">
 
-                                            <common-input :label="form_field.label" :type="form_field.type"
-                                                :name="form_field.name" :multiple="form_field.multiple"
-                                                :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
-                                        </div>
+                                        <common-input :label="form_field.label" :type="form_field.type"
+                                            :name="form_field.name" :multiple="form_field.multiple"
+                                            :value="form_field.value" :data_list="form_field.data_list
+                                                " />
 
                                     </div>
                                 </div>
-                                <div class="col-md-6" v-if="param_id">
-                                    <h6 class="text-center">Comments</h6>
-                                    <div class="border border-primary p-1">
-                                        <p v-for="(comment, index) in single_user.comment" :key="index"
-                                            class="border border-primary px-3 py-1 my-1">{{ comment }}</p>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                         <div class="card-footer text-center">
@@ -64,78 +54,39 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
-import { banch_target_store } from "./setup/store";
+import { user_setup_store } from "./setup/store";
 export default {
     data: () => ({
         form_fields,
         param_id: null,
-        loded: false,
-
     }),
 
     created: async function () {
-
-        await this.get_all_account_category();
-        await this.get_all_branch();
-
-        this.form_fields.forEach((item) => {
-            if (item.name == "account_category_id") {
-                this.all_account_category_data.forEach((category) => {
-                    let dataList = {}
-                    dataList.label = category.title
-                    dataList.value = category.id
-                    item.data_list.push(dataList)
-                })
-            }
-        })
-
-        this.form_fields.forEach((item) => {
-            if (item.name == "branch_id") {
-                this.all_branch_data.forEach((category) => {
-                    let dataList = {}
-                    dataList.label = category.full_name
-                    dataList.value = category.id
-                    item.data_list.push(dataList)
-                })
-            }
-        })
-
         let id = this.$route.query.id;
         if (id) {
             this.param_id = id;
             await this.user_get(id);
             if (this.single_user) {
-                this.form_fields.forEach((field, index) => {
+                form_fields.forEach((field, index) => {
                     Object.entries(this.single_user).forEach((value) => {
-
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
-
-                        if (field.name == "comment") {
-                            this.form_fields[index].value = value[1];
-                        }
-
                     });
                 });
             }
         } else {
-
-            this.form_fields.forEach((item) => {
+            form_fields.forEach((item) => {
                 item.value = "";
             });
         }
-
-
     },
 
     methods: {
-        ...mapActions(banch_target_store, {
+        ...mapActions(user_setup_store, {
             user_update: "update",
             user_get: "get",
             user_store: "store",
-            get_all_account_category: 'get_all_account_category',
-            get_all_branch: 'get_all_branch',
         }),
 
         submitHandler: async function ($event) {
@@ -151,10 +102,8 @@ export default {
         },
     },
     computed: {
-        ...mapState(banch_target_store, {
+        ...mapState(user_setup_store, {
             single_user: "single_data",
-            all_account_category_data: "all_account_category_data",
-            all_branch_data: "all_branch_data"
         }),
     },
 };

@@ -24,11 +24,11 @@ export default [
     {
         name: "session",
         label: "Enter session",
-        type: "text",
+        type: "month",
         value: "",
     },
     {
-        name: "comment[]",
+        name: "comment",
         label: "Enter comment",
         type: "text",
         value: "",

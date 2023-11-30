@@ -2,6 +2,7 @@
 
 namespace App\Modules\AccountManagement\AccountBranchTarget;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 
@@ -12,6 +13,7 @@ class Model extends EloquentModel
 
     protected $table = "account_branch_targets";
     protected $guarded = [];
+    protected $appends = ['last_comment'];
 
     protected $casts = [
         "comment" => "array"
@@ -40,5 +42,15 @@ class Model extends EloquentModel
     public function user()
     {
         return $this->belongsTo(self::$userModel, 'branch_id');
+    }
+
+    protected function lastComment(): Attribute
+    {
+        return Attribute::make(
+            function (mixed  $value, array $data) {
+                $comment = json_decode($data['comment']);
+                return  end($comment);
+            },
+        );
     }
 }

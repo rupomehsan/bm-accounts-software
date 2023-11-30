@@ -16,6 +16,11 @@ class Seeder extends SeedersSeeder
         self::$model::truncate();
         $data = [
             "income" => [
+                "মাসিক আয়",
+                "বার্ষিক আয়",
+                "ত্রাণ",
+                "শহীদ ফান্ড",
+                "কর্যে হাসানা",
                 "বকেয়া আদায়",
                 "নববর্ষ বাবদ",
                 "ফ্লাট আয়",
