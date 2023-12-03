@@ -5,4 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('account-incomes', Controller::class);
+    Route::get('get-amount-to-number/{number}',[Controller::class,'getAmountToNumber']);
 });

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\AccountManagement\AccountIncome;
+namespace App\Modules\AccountManagement\Account;
 
-use App\Modules\AccountManagement\AccountIncome\Actions\All;
-use App\Modules\AccountManagement\AccountIncome\Actions\Delete;
-use App\Modules\AccountManagement\AccountIncome\Actions\Show;
-use App\Modules\AccountManagement\AccountIncome\Actions\Store;
-use App\Modules\AccountManagement\AccountIncome\Actions\Update;
-use App\Modules\AccountManagement\AccountIncome\Actions\Validation;
+use App\Modules\AccountManagement\Account\Actions\All;
+use App\Modules\AccountManagement\Account\Actions\Delete;
+use App\Modules\AccountManagement\Account\Actions\Show;
+use App\Modules\AccountManagement\Account\Actions\Store;
+use App\Modules\AccountManagement\Account\Actions\Update;
+use App\Modules\AccountManagement\Account\Actions\Validation;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,7 +32,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function update(Validation $request, $id)
+     public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;
@@ -42,10 +42,5 @@ class Controller extends ControllersController
     {
         $data = Delete::execute($id);
         return $data;
-    }
-
-    public function getAmountToNumber($number)
-    {
-       return numercToAlphabet($number);
     }
 }

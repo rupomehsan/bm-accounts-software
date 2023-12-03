@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Branch Income Management</h5>
+                        <h5 class="m-0">Payment Method Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateBranchIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `ReceiptBookCreate` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -20,7 +20,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Branch Income
+                            All Daily Income
                             <!---->
                         </h6>
                         <div class="search">

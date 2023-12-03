@@ -4,10 +4,6 @@ export const user_setup_store = defineStore("user_setup_store", {
     state: () => ({
         all_data: {},
         single_data: {},
-        all_account_receipt_book_data: {},
-        all_account_categories: {},
-        all_central_division: {},
-        all_branch: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -23,45 +19,15 @@ export const user_setup_store = defineStore("user_setup_store", {
             }
             this.all_data = response.data.data;
         },
-
         get: async function (id) {
             let response = await axios.get("account-receipt-books/" + id);
             response = response.data.data;
             // console.log("data", response);
             this.single_data = response;
         },
-
-        get_all_account_receipt_book: async function () {
-            let response = await axios.get("account-receipt-books?get_all=1");
-            response = response.data.data;
-            // console.log("data", response);
-            this.all_account_receipt_book_data = response;
-        },
-
-        get_all_account_categories: async function () {
-            let response = await axios.get("account-categories?get_all=1");
-            response = response.data.data;
-            // console.log("data", response);
-            this.all_account_categories = response;
-        },
-
-        get_all_central_division: async function () {
-            let response = await axios.get("users?get_all=1&division=division");
-            response = response.data.data;
-            // console.log("data", response);
-            this.all_central_division = response;
-        },
-
-        get_all_branch: async function () {
-            let response = await axios.get("users?get_all=1&branch_user=branch_user");
-            response = response.data.data;
-            // console.log("data", response);
-            this.all_branch = response;
-        },
-
         store: async function (form) {
             let formData = new FormData(form);
-            let response = await axios.post("account-incomes", formData);
+            let response = await axios.post("account-receipt-books", formData);
             return response;
         },
         update: async function (form, id) {

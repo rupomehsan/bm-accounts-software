@@ -7,7 +7,7 @@
             <input class="form-control" :type="type" :name="name" :id="name" :value="value" />
         </div>
         <div v-if="type === 'textarea'" class="mt-1 mb-3">
-            <textarea class="form-control" type="text" :name="name"></textarea>
+            <textarea class="form-control" type="text" :name="name" ></textarea>
             <div :id="name"></div>
         </div>
         <div v-if="type === 'checkbox'" class="mt-1 mb-3">

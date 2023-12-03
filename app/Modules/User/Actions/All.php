@@ -21,11 +21,22 @@ class All
             }
 
             if (request()->has('branch_user') && request()->input('branch_user')) {
+
                 $data->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('user_user_role')
                         ->whereColumn('user_user_role.user_id', 'users.id')
                         ->where('user_user_role.user_role_id', 10);
+                });
+            }
+
+            if (request()->has('division') && request()->input('division')) {
+               
+                $data->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('user_user_role')
+                        ->whereColumn('user_user_role.user_id', 'users.id')
+                        ->where('user_user_role.user_role_id', 7);
                 });
             }
 

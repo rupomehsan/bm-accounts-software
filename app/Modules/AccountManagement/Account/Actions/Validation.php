@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\AccountManagement\AccountIncome\Actions;
+namespace App\Modules\AccountManagement\Account\Actions;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -33,16 +33,10 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'account_receipt_book_id' => 'required|sometimes',
-            'account_receipt_book_no' => 'required|sometimes',
-            'account_category_id' => 'required|sometimes',
-            'central_division_id' => 'required|sometimes',
-            'account_receipt_no' => 'required|sometimes',
-            'branch_id' => 'required|sometimes',
-            'date' => 'required|sometimes',
-            'description' => 'required|sometimes',
-            'amount' => 'required|sometimes',
-            'amount_in_text' => 'required|sometimes',
+            'title' => 'required',
+            'description' => 'required',
+            'parent' => 'required',
+            'type' => 'required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

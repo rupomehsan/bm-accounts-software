@@ -153,6 +153,12 @@
 
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-end">Total</td>
+                                    <th class="text-center">{{ all_incomes.data?.reduce((t,i)=>t+=i.amount,0) }}</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <div

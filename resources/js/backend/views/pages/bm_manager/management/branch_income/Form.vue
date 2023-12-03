@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} user
+                                {{ param_id ? "Update" : "Create new" }} Branch Income
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -24,16 +24,16 @@
                     <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-12" v-for="(
+                                <div class="col-lg-12">
+                                    <div class="admin_form form_1">
+                                        <template v-for="(
                                                 form_field, index
                                             ) in form_fields" :key="index">
-                                    <div class="admin_form form_1">
-
-                                        <common-input :label="form_field.label" :type="form_field.type"
-                                            :name="form_field.name" :multiple="form_field.multiple"
-                                            :value="form_field.value" :data_list="form_field.data_list
-                                                " />
-
+                                            <common-input :label="form_field.label" :type="form_field.type"
+                                                :name="form_field.name" :multiple="form_field.multiple"
+                                                :value="form_field.value" :data_list="form_field.data_list
+                                                    " />
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -55,13 +55,64 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { user_setup_store } from "./setup/store";
+import axios from 'axios';
 export default {
     data: () => ({
         form_fields,
         param_id: null,
+        amount: 0
     }),
 
     created: async function () {
+
+        await this.get_all_account_receipt_book()
+        await this.get_all_account_categories()
+        await this.get_all_central_division()
+        await this.get_all_branch()
+
+
+        this.form_fields.forEach((field) => {
+
+            if (field.name == 'account_receipt_book_id') {
+                this.all_account_receipt_book_data.forEach((item) => {
+
+                    let fielData = {}
+                    fielData.label = item.receipt_book_no
+                    fielData.value = item.id
+                    field.data_list.push(fielData)
+                })
+            }
+
+            if (field.name == 'account_category_id') {
+                this.all_account_categories.forEach((item) => {
+                    let formData = {}
+                    formData.label = item.title
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
+            }
+
+            if (field.name == 'central_division_id') {
+                this.all_central_division.forEach((item) => {
+                    let formData = {}
+                    formData.label = item.full_name
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
+            }
+
+            if (field.name == 'branch_id') {
+                this.all_branch.forEach((item) => {
+                    let formData = {}
+                    formData.label = item.full_name
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
+            }
+
+        })
+
+
         let id = this.$route.query.id;
         if (id) {
             this.param_id = id;
@@ -84,28 +135,63 @@ export default {
 
     methods: {
         ...mapActions(user_setup_store, {
-            user_update: "update",
-            user_get: "get",
-            user_store: "store",
+            get_all_account_receipt_book: "get_all_account_receipt_book",
+            get_all_account_categories: "get_all_account_categories",
+            get_all_central_division: "get_all_central_division",
+            get_all_branch: "get_all_branch",
+            store: "store",
+            income_update: "update",
+
         }),
 
         submitHandler: async function ($event) {
             if (this.param_id) {
-                this.user_update($event.target, this.param_id);
+                this.update($event.target, this.param_id);
             } else {
-                let response = await this.user_store($event.target);
+                let response = await this.store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
                     this.$router.push({ name: `All` });
                 }
             }
         },
+
+        async handleKeyup(event) {
+            const inputValue = event.target.value;
+            try {
+                const result = await axios.get(`get-amount-to-number/${inputValue}`);
+                if (result.data) {
+                    let toText = document.getElementById('amount_in_text');
+                    toText.value = result.data.toString(); // Use toString() method
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+
+            // Do something with the input value
+        },
+
     },
+
     computed: {
         ...mapState(user_setup_store, {
             single_user: "single_data",
+            all_account_receipt_book_data: "all_account_receipt_book_data",
+            all_account_categories: "all_account_categories",
+            all_central_division: "all_central_division",
+            all_branch: "all_branch",
+
         }),
     },
+
+    mounted() {
+        const inputElement = document.getElementById('amount');
+        if (inputElement) {
+            inputElement.addEventListener('keyup', this.handleKeyup);
+        }
+    },
+
+
 };
 </script>
 
