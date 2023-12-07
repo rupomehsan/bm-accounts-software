@@ -97,7 +97,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr v-for="(item, index) in all_notifications.data" :key="item.id">
                                     <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
@@ -145,24 +145,11 @@
 
                                                     </span>
                                                 </li> -->
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{
-                                                            name: 'Create',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
-                                                        </router-link>
-                                                        <!---->
-                                                    </span>
-                                                </li>
+
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
+                                                            nitificatin_delete(
                                                                 item.id
                                                             )
                                                             " href="#" class="">
@@ -179,7 +166,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="user_get_all" />
+                        <pagination :data="all_notifications" :method="notification_get_all" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -193,7 +180,7 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_users.total }}</span>
+                                <span>{{ all_notifications.total }}</span>
                             </div>
                         </div>
                     </div>
@@ -234,24 +221,26 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded: false
     }),
     created: async function () {
-        await this.user_get_all();
+        await this.notification_get_all();
+        this.loaded = true
     },
     methods: {
         ...mapActions(notification_setup_store, {
-            user_get_all: "all",
-            user_delete: "delete",
+            notification_get_all: "all",
+            nitificatin_delete: "delete",
         }),
     },
     computed: {
         ...mapState(notification_setup_store, {
-            all_users: "all_data",
+            all_notifications: "all_data",
         }),
     },
     watch: {
         offset: async function (newOffset, oldOffset) {
-            await this.user_get_all("users");
+            await this.notification_get_all();
         },
         search_data: function (newSearchData, oldSearchData) {
             console.log(newSearchData);

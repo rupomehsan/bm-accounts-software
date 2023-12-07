@@ -54,7 +54,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
-import { user_setup_store } from "./setup/store";
+import { receipt_book_store } from "./setup/store";
 export default {
     data: () => ({
         form_fields,
@@ -83,7 +83,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(user_setup_store, {
+        ...mapActions(receipt_book_store, {
             user_update: "update",
             user_get: "get",
             user_store: "store",
@@ -102,7 +102,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(user_setup_store, {
+        ...mapState(receipt_book_store, {
             single_user: "single_data",
         }),
     },

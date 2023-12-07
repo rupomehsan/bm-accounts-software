@@ -13,6 +13,7 @@ use App\Modules\AccountManagement\AccountLog\Actions\GetAllIncomeByDatewise;
 use App\Modules\AccountManagement\AccountLog\Actions\IncomeExpenseReport;
 use App\Modules\AccountManagement\AccountLog\Actions\IncomeExpenseClosingRange;
 use App\Modules\AccountManagement\AccountLog\Actions\IncomeLedger;
+use App\Modules\AccountManagement\AccountLog\Actions\getIncomeTotal;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -75,6 +76,11 @@ class Controller extends ControllersController
     public function getIncomeLedger()
     {
         $data = IncomeLedger::execute();
+        return $data;
+    }
+    public function getIncomeTotal()
+    {
+        $data = getIncomeTotal::execute();
         return $data;
     }
 }

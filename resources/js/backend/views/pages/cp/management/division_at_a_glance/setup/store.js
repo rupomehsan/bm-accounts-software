@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const income_setup_store = defineStore("income_setup_store", {
+export const division_at_a_glance_setup_store = defineStore("division_at_a_glance_setup_store", {
     state: () => ({
         all_data: {},
         single_data: {},

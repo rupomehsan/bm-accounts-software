@@ -5,6 +5,7 @@
                 <div class="row align-items-center justify-content-between rounded-2">
                     <div class="col-lg-6">
                         <h5 class="m-0">BM at a glance</h5>
+
                     </div>
                     <div class="col-lg-6 text-end w-25 float-right">
                         <select name="" id="" class="form-select" v-model="page">

@@ -62,6 +62,15 @@ window.remove_form_action_classes = function () {
     $(`.error.text-warning`).remove();
 };
 
+
+// window.errorReset = function (event) {
+//     console.log(event.target)
+// }
+
+function errorReset(event){
+    console.log(event.target)
+}
+
 window.render_form_errors = function (object, selector = "name") {
     for (const key in object) {
         if (Object.hasOwnProperty.call(object, key)) {

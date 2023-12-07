@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const user_setup_store = defineStore("user_setup_store", {
+export const branch_income_setup_store = defineStore("branch_income_setup_store", {
     state: () => ({
         all_data: {},
         single_data: {},
@@ -8,6 +8,7 @@ export const user_setup_store = defineStore("user_setup_store", {
         all_account_categories: {},
         all_central_division: {},
         all_branch: {},
+        all_accounts: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -19,13 +20,13 @@ export const user_setup_store = defineStore("user_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-receipt-books");
+                response = await axios.get("account-incomes?branch_id=true");
             }
             this.all_data = response.data.data;
         },
 
         get: async function (id) {
-            let response = await axios.get("account-receipt-books/" + id);
+            let response = await axios.get("account-incomes/" + id);
             response = response.data.data;
             // console.log("data", response);
             this.single_data = response;
@@ -58,6 +59,12 @@ export const user_setup_store = defineStore("user_setup_store", {
             // console.log("data", response);
             this.all_branch = response;
         },
+        get_all_accounts: async function () {
+            let response = await axios.get("accounts?get_all=1");
+            response = response.data.data;
+            // console.log("data", response);
+            this.all_accounts = response;
+        },
 
         store: async function (form) {
             let formData = new FormData(form);
@@ -66,7 +73,7 @@ export const user_setup_store = defineStore("user_setup_store", {
         },
         update: async function (form, id) {
             let formData = new FormData(form);
-            let response = await axios.post(`account-receipt-books/${id}?_method=PATCH`, formData);
+            let response = await axios.post(`account-incomes/${id}?_method=PATCH`, formData);
             window.s_alert("Data successcully updated");
             console.log("res", response.data);
         },

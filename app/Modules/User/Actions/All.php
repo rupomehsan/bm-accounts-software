@@ -14,7 +14,7 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = [];
+            $with = ['roles'];
             $data = self::$model::query();
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
@@ -31,7 +31,7 @@ class All
             }
 
             if (request()->has('division') && request()->input('division')) {
-               
+
                 $data->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('user_user_role')

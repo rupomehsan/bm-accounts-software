@@ -12,6 +12,7 @@ export const income_setup_store = defineStore("income_setup_store", {
         all_income_expense_closing_in_range: {},
         all_income_ledger: {},
         category_wise_total: {},
+        income_total: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -85,6 +86,10 @@ export const income_setup_store = defineStore("income_setup_store", {
             let formData = new FormData(form);
             let response = await axios.post("get-all-income-by-datewise", formData);
             this.all_data = response.data.data;
+        },
+        get_all_incomes_total: async function (category_id) {
+            let response = await axios.get(`get-all-income-total?category_id=${category_id}`);
+            this.income_total = response.data.data;
         },
         store: async function (form) {
             let formData = new FormData(form);

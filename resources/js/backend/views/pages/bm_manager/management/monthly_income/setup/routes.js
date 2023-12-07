@@ -3,17 +3,17 @@ import All from "../All.vue";
 import Form from "../Form.vue";
 
 const routes = {
-    path: 'payment-methods',
+    path: 'monthly-income',
     component: Layout,
     children: [
         {
             path: '',
-            name: "AllPaymentMethod",
+            name: "AllDailyIncome",
             component: All
         },
         {
             path: 'create',
-            name: "CreatePaymentMethod",
+            name: "CreateDailyIncome",
             component: Form
         },
     ]

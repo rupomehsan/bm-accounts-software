@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} Branch Income
+                                {{ param_id ? "Update" : "Create new" }} Daily  Income
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -54,7 +54,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
-import { branch_income_setup_store } from "./setup/store";
+import { monthly_income_setup_store } from "./setup/store";
 import axios from 'axios';
 export default {
     data: () => ({
@@ -158,7 +158,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(branch_income_setup_store, {
+        ...mapActions(monthly_income_setup_store, {
             get_all_account_receipt_book: "get_all_account_receipt_book",
             get_all_account_categories: "get_all_account_categories",
             get_all_central_division: "get_all_central_division",
@@ -214,7 +214,7 @@ export default {
     },
 
     computed: {
-        ...mapState(branch_income_setup_store, {
+        ...mapState(monthly_income_setup_store, {
             single_data: "single_data",
             all_account_receipt_book_data: "all_account_receipt_book_data",
             all_account_categories: "all_account_categories",

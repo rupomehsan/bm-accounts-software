@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllReceiptBook` }"
+                                <router-link :to="{ name: `AllUser` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -24,16 +24,16 @@
                     <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-12" v-for="(
+                                <div class="col-lg-12">
+                                    <div class="admin_form form_1">
+                                        <template v-for="(
                                                 form_field, index
                                             ) in form_fields" :key="index">
-                                    <div class="admin_form form_1">
-
-                                        <common-input :label="form_field.label" :type="form_field.type"
-                                            :name="form_field.name" :multiple="form_field.multiple"
-                                            :value="form_field.value" :data_list="form_field.data_list
-                                                " />
-
+                                            <common-input :label="form_field.label" :type="form_field.type"
+                                                :name="form_field.name" :multiple="form_field.multiple"
+                                                :value="form_field.value" :data_list="form_field.data_list
+                                                    " />
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -62,21 +62,47 @@ export default {
     }),
 
     created: async function () {
+
+        console.log(this.form_fields);
+
+        await this.get_all_roles()
+
+
+        this.form_fields.forEach((field) => {
+            if (field.name == 'user_role_id') {
+                this.role_data.forEach((item) => {
+                    let fielData = {}
+                    fielData.label = item.name
+                    fielData.value = item.id
+                    field.data_list.push(fielData)
+                })
+            }
+        })
+
         let id = this.$route.query.id;
         if (id) {
+            this.form_fields = this.form_fields.filter(i => i.name !== 'password')
             this.param_id = id;
             await this.user_get(id);
             if (this.single_user) {
-                form_fields.forEach((field, index) => {
+                this.form_fields.forEach((field, index) => {
                     Object.entries(this.single_user).forEach((value) => {
+
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
+                        }
+
+                        if (field.name == 'user_role_id') {
+                            if (value[0] == 'roles') {
+                                console.log("value", value[1])
+                                this.form_fields[index].value = value[1][0].id;
+                            }
                         }
                     });
                 });
             }
         } else {
-            form_fields.forEach((item) => {
+            this.form_fields.forEach((item) => {
                 item.value = "";
             });
         }
@@ -87,6 +113,7 @@ export default {
             user_update: "update",
             user_get: "get",
             user_store: "store",
+            get_all_roles: "get_all_roles",
         }),
 
         submitHandler: async function ($event) {
@@ -95,8 +122,8 @@ export default {
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
-                    window.s_alert("Data successcully created");
-                    this.$router.push({ name: `All` });
+                    window.s_alert("Data successfully created");
+                    this.$router.push({ name: `AllUser` });
                 }
             }
         },
@@ -104,6 +131,7 @@ export default {
     computed: {
         ...mapState(user_setup_store, {
             single_user: "single_data",
+            role_data: "role_data",
         }),
     },
 };

@@ -2,6 +2,8 @@
 
 namespace App\Modules\AccountManagement\AccountIncome\Actions;
 
+use Illuminate\Support\Facades\DB;
+
 class All
 {
     static $model = \App\Modules\AccountManagement\AccountIncome\Model::class;
@@ -12,8 +14,21 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = ['account_logs'];
+            $with = ['user_roles:id,name', 'account_category:id,title'];
             $data = self::$model::query();
+
+            if (request()->has('branch_id') && request()->input('branch_id')) {
+                $data = $data->whereNotNull('branch_id');
+            }
+
+            if (request()->has('central_division_id') && request()->input('central_division_id')) {
+                $data = $data->whereNotNull('central_division_id');
+            }
+
+            if (request()->has('account_category_id') && request()->input('account_category_id')) {
+                $condition['account_category_id'] = request()->input('account_category_id');
+            }
+
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
             }

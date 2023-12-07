@@ -68,20 +68,25 @@
                                         ID
                                         <!---->
                                     </th>
+
                                     <th class="cursor_n_resize">
-                                        Receipt Book No
+                                        Date
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Receipt Start Serial No
+                                        Account receipt book No
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Receipt End Serial No
+                                        Account category
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        is_approvel
+                                        Account receipt no
+
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Amount
 
                                     </th>
                                     <th class="cursor_n_resize">
@@ -98,14 +103,14 @@
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
                                     <td>{{ index + 1 }}</td>
+                                   
                                     <td>
-                                        {{ item.receipt_book_no }}
+                                        {{ item.date }}
                                     </td>
-                                    <td>
-                                        {{ item.receipt_start_serial_no }}
-                                    </td>
-                                    <td>{{ item.receipt_end_serial_no }}</td>
-                                    <td>{{ item.is_approvel ?? 0 }}</td>
+                                    <td>{{ item.account_receipt_book_no }}</td>
+                                    <td>{{ item.account_category.title }}</td>
+                                    <td>{{ item.account_receipt_no }}</td>
+                                    <td>{{ item.amount }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
                                         <!---->
@@ -140,7 +145,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'Create',
+                                                            name: 'CreateBranchIncome',
                                                             query: {
                                                                 id: item.id,
                                                             },
@@ -154,7 +159,7 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
+                                                            delete_branch_income(
                                                                 item.id
                                                             )
                                                             " href="#" class="">
@@ -171,7 +176,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="user_get_all" />
+                        <pagination :data="all_users" :method="get_all_branch_income" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -220,7 +225,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { user_setup_store } from "./setup/store";
+import { branch_income_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
@@ -228,22 +233,22 @@ export default {
         search_data: "",
     }),
     created: async function () {
-        await this.user_get_all();
+        await this.get_all_branch_income();
     },
     methods: {
-        ...mapActions(user_setup_store, {
-            user_get_all: "all",
-            user_delete: "delete",
+        ...mapActions(branch_income_setup_store, {
+            get_all_branch_income: "all",
+            delete_branch_income: "delete",
         }),
     },
     computed: {
-        ...mapState(user_setup_store, {
+        ...mapState(branch_income_setup_store, {
             all_users: "all_data",
         }),
     },
     watch: {
         offset: async function (newOffset, oldOffset) {
-            await this.user_get_all("users");
+            await this.get_all_branch_income();
         },
         search_data: function (newSearchData, oldSearchData) {
             console.log(newSearchData);

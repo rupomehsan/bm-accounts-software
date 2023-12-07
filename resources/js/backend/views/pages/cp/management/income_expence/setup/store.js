@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const notification_setup_store = defineStore("notification_setup_store", {
+export const income_expense_setup_store = defineStore("income_expense_setup_store", {
     state: () => ({
         income_expense: {},
     }),

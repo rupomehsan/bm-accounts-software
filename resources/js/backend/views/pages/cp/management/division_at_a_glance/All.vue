@@ -104,7 +104,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { income_setup_store } from "./setup/store";
+import { division_at_a_glance_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
@@ -115,12 +115,12 @@ export default {
         this.loaded = true
     },
     methods: {
-        ...mapActions(income_setup_store, {
+        ...mapActions(division_at_a_glance_setup_store, {
             division_at_a_glance: "all",
         })
     },
     computed: {
-        ...mapState(income_setup_store, {
+        ...mapState(division_at_a_glance_setup_store, {
             all_income_expense: "all_data",
         }),
     },

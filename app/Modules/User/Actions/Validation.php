@@ -35,13 +35,14 @@ class Validation extends FormRequest
     {
         return [
             'full_name' => 'required',
-            'email' => 'required|unique:users,email,' . $this->user->id,
-            'password' => 'required',
+            'email' => 'required|unique:users,email,' . $this->user?->id,
+            'password' => 'required | sometimes',
             'phone' => 'sometimes',
             'uid' => 'sometimes',
             'telegram_name' => 'sometimes',
             'telegram_id' => 'sometimes',
             'image' => 'sometimes',
+            'user_role_id' => 'sometimes | required',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

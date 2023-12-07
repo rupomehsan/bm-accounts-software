@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
+    static $userRoleModel = \App\Modules\UserRole\Model::class;
+    static $accountCategoryModel = \App\Modules\AccountManagement\AccountCategory\Model::class;
 
     protected $table = "account_incomes";
     protected $guarded = [];
@@ -27,7 +29,18 @@ class Model extends EloquentModel
         return $q->where('status', 'active');
     }
 
-    public function account_logs(){
-      return $this->belongsTo(self::$accountLogModel,'account_log_id');
+    public function account_logs()
+    {
+        return $this->belongsTo(self::$accountLogModel, 'account_log_id');
     }
+    public function user_roles()
+    {
+        return $this->belongsTo(self::$userRoleModel, 'branch_id');
+    }
+    public function account_category()
+    {
+        return $this->belongsTo(self::$accountCategoryModel, 'account_category_id');
+    }
+
+
 }

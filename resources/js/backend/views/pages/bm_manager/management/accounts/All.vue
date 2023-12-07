@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Central division Income Management</h5>
+                        <h5 class="m-0">Account Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateCentralDivisionIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `CreatePaymentMethod` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -20,7 +20,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Branch Income
+                            All Accounts
                             <!---->
                         </h6>
                         <div class="search">
@@ -68,27 +68,11 @@
                                         ID
                                         <!---->
                                     </th>
-
                                     <th class="cursor_n_resize">
-                                        Date
+                                       Name
                                         <!---->
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Account receipt book No
-                                        <!---->
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Account category
-                                        <!---->
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Account receipt no
 
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Amount
-
-                                    </th>
                                     <th class="cursor_n_resize">
                                         Status
                                         <!---->
@@ -103,16 +87,14 @@
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
                                     <td>{{ index + 1 }}</td>
+                                    <td>
+                                        {{ item.name }}
+                                    </td>
 
                                     <td>
-                                        {{ item.date }}
-                                    </td>
-                                    <td>{{ item.account_receipt_book_no }}</td>
-                                    <td>{{ item.account_category.title }}</td>
-                                    <td>{{ item.account_receipt_no }}</td>
-                                    <td>{{ item.amount }}</td>
-                                    <td>
-                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
+                                        <span class="badge bg-label-success me-1">{{ item.status == 1 ? 'active' :
+                                            'inactive'
+                                        }}</span>
                                         <!---->
                                     </td>
                                     <td>
@@ -145,7 +127,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateBranchIncome',
+                                                            name: 'CreatePaymentMethod',
                                                             query: {
                                                                 id: item.id,
                                                             },
@@ -159,7 +141,7 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            delete_branch_income(
+                                                            user_delete(
                                                                 item.id
                                                             )
                                                             " href="#" class="">
@@ -176,7 +158,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="get_all_branch_income" />
+                        <pagination :data="all_users" :method="get_all_accounts" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -225,7 +207,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { central_division_income_setup_store } from "./setup/store";
+import { account_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
@@ -233,22 +215,22 @@ export default {
         search_data: "",
     }),
     created: async function () {
-        await this.get_all_branch_income();
+        await this.get_all_accounts();
     },
     methods: {
-        ...mapActions(central_division_income_setup_store, {
-            get_all_branch_income: "all",
-            delete_branch_income: "delete",
+        ...mapActions(account_setup_store, {
+            get_all_accounts: "all",
+            user_delete: "delete",
         }),
     },
     computed: {
-        ...mapState(central_division_income_setup_store, {
+        ...mapState(account_setup_store, {
             all_users: "all_data",
         }),
     },
     watch: {
         offset: async function (newOffset, oldOffset) {
-            await this.get_all_branch_income();
+            await this.get_all_accounts("users");
         },
         search_data: function (newSearchData, oldSearchData) {
             console.log(newSearchData);

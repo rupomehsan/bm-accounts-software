@@ -10,4 +10,5 @@ Route::prefix('v1')->group(function () {
     Route::get('get-all-income-expense-report', [Controller::class, 'IncomeExpenseReport']);
     Route::get('get-income-expense-closing-in-range', [Controller::class, 'IncomeExpenseClosingRange']);
     Route::get('get-income-ledger', [Controller::class, 'getIncomeLedger']);
+    Route::get('get-all-income-total', [Controller::class, 'getIncomeTotal']);
 });

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const central_division_income_setup_store = defineStore("central_division_income_setup_store", {
+export const monthly_income_setup_store = defineStore("monthly_income_setup_store", {
     state: () => ({
         all_data: {},
         single_data: {},
@@ -20,7 +20,7 @@ export const central_division_income_setup_store = defineStore("central_division
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-incomes?central_division_id=true");
+                response = await axios.get("account-incomes?account_category_id=1");
             }
             this.all_data = response.data.data;
         },
@@ -54,7 +54,7 @@ export const central_division_income_setup_store = defineStore("central_division
         },
 
         get_all_branch: async function () {
-            let response = await axios.get("users?get_all=1&division=true");
+            let response = await axios.get("users?get_all=1&branch_user=branch_user");
             response = response.data.data;
             // console.log("data", response);
             this.all_branch = response;

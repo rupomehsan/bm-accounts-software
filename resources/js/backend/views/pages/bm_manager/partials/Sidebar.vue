@@ -28,17 +28,24 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllCentralDivisionIncome` }" class="d-flex align-items-center" href="">Central Division
+                <router-link :to="{ name: `AllCentralDivisionIncome` }" class="d-flex align-items-center" href="">Central
+                    Division
                     Income </router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllDailyIncome` }" class="d-flex align-items-center" href="">Daily
+                <router-link :to="{ name: `AllDailyIncome` }" class="d-flex align-items-center" href="">Monthly
                     Income</router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllPaymentMethod` }" class="d-flex align-items-center" href="">Payment Method</router-link>
+                <router-link :to="{ name: `AllPaymentMethod` }" class="d-flex align-items-center"
+                    href="">Accounts</router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center"
+                    href="">Users</router-link>
             </li>
 
         </div>

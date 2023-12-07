@@ -58,7 +58,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
-import { notification_setup_store } from "./setup/store";
+import { income_expense_setup_store } from "./setup/store";
 export default {
     data: () => ({
         tags: [],
@@ -85,7 +85,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(notification_setup_store, {
+        ...mapActions(income_expense_setup_store, {
             user_update: "update",
             user_get: "get",
             user_store: "store",
@@ -111,7 +111,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(notification_setup_store, {
+        ...mapState(income_expense_setup_store, {
             single_user: "single_data",
         }),
     },

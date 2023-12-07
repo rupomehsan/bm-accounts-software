@@ -7,7 +7,7 @@
                         <h5 class="m-0">Income & Expense</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                       
+
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { notification_setup_store } from "./setup/store";
+import { income_expense_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
@@ -137,7 +137,7 @@ export default {
         console.log("newdata", this.data);
     },
     methods: {
-        ...mapActions(notification_setup_store, {
+        ...mapActions(income_expense_setup_store, {
             get_all_income_expense_report: "get_all_income_expense_report",
         }),
         get_sum: function (array) {
@@ -155,7 +155,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(notification_setup_store, {
+        ...mapState(income_expense_setup_store, {
             data: "income_expense",
         }),
     },

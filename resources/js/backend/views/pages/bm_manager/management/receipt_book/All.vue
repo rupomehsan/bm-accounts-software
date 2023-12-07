@@ -81,7 +81,7 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        is_approvel
+                                        is approvel
 
                                     </th>
                                     <th class="cursor_n_resize">
@@ -92,8 +92,8 @@
                                 </tr>
                             </thead>
 
-                            <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                            <tbody class="table-border-bottom-0" v-if="loaded">
+                                <tr v-for="(item, index) in all_receipt_books.data" :key="item.id">
                                     <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
@@ -171,7 +171,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="user_get_all" />
+                        <pagination :data="all_receipt_books" :method="get_all_receipt_books" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -185,7 +185,7 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_users.total }}</span>
+                                <span>{{ all_receipt_books.total }}</span>
                             </div>
                         </div>
                     </div>
@@ -220,35 +220,30 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { user_setup_store } from "./setup/store";
+import { receipt_book_store } from "./setup/store";
 
 export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded: false
     }),
     created: async function () {
-        await this.user_get_all();
+        await this.get_all_receipt_books();
+        this.loaded = true
     },
     methods: {
-        ...mapActions(user_setup_store, {
-            user_get_all: "all",
+        ...mapActions(receipt_book_store, {
+            get_all_receipt_books: "all",
             user_delete: "delete",
         }),
     },
     computed: {
-        ...mapState(user_setup_store, {
-            all_users: "all_data",
+        ...mapState(receipt_book_store, {
+            all_receipt_books: "all_data",
         }),
     },
-    watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.user_get_all("users");
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
-        },
-    },
+
 };
 </script>
 

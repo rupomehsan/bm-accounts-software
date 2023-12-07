@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const user_setup_store = defineStore("user_setup_store", {
+export const receipt_book_store = defineStore("receipt_book_store", {
     state: () => ({
         all_data: {},
         single_data: {},

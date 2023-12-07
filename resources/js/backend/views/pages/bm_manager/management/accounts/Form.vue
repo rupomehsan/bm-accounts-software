@@ -54,7 +54,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
-import { user_setup_store } from "./setup/store";
+import { account_setup_store } from "./setup/store";
 export default {
     data: () => ({
         form_fields,
@@ -83,17 +83,17 @@ export default {
     },
 
     methods: {
-        ...mapActions(user_setup_store, {
+        ...mapActions(account_setup_store, {
             user_update: "update",
             user_get: "get",
-            user_store: "store",
+            account_store: "store",
         }),
 
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
             } else {
-                let response = await this.user_store($event.target);
+                let response = await this.account_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
                     this.$router.push({ name: `All` });
@@ -102,7 +102,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(user_setup_store, {
+        ...mapState(account_setup_store, {
             single_user: "single_data",
         }),
     },

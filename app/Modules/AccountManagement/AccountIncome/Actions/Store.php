@@ -14,13 +14,14 @@ class Store
     public static function execute(Validation $request)
     {
         try {
+            // dd($request->all());
             if ($income = self::$model::query()->create($request->validated())) {
                 $userName = self::$userModel::find($income->branch_id);
                 $accountLogModel = new self::$accountLogModel();
                 $accountLogModel->user_id = $income->branch_id;
-                $accountLogModel->user_type = "banch";
+                $accountLogModel->user_type = "branch";
                 $accountLogModel->date = $income->date;
-                $accountLogModel->name = $userName->full_name;
+                $accountLogModel->name = $userName->full_name ?? "";
                 $accountLogModel->amount = $income->amount;
                 $accountLogModel->category_id = $income->account_category_id;
                 $accountLogModel->account_id = $request->input('account_id');
@@ -29,6 +30,9 @@ class Store
                 $accountLogModel->receipt_no = $income->account_receipt_no;
                 $accountLogModel->is_income = 1;
                 $accountLogModel->description = $income->description;
+                $accountLogModel->save();
+                $income->account_log_id = $accountLogModel->id;
+                $income->update();
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

@@ -3,8 +3,11 @@
         <div class="pt-2">
             <div class="page-header my-2">
                 <div class="row align-items-center justify-content-between rounded-2">
-                    <div class="col-lg-2">
-                        <h5 class="m-0">BM at a glance</h5>
+                    <div class="col-lg-4">
+                        <div class="d-flex gap-3">
+                            <h5 class="m-0">BM at a glance</h5>
+                            <h5 class="fw-bold">Total - {{ income_total }}</h5>
+                        </div>
                     </div>
 
                     <div class="col-lg-3" v-if="loded">
@@ -156,7 +159,7 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="5" class="text-end">Total</td>
-                                    <th class="text-center">{{ all_incomes.data?.reduce((t,i)=>t+=i.amount,0) }}</th>
+                                    <th class="text-center">{{ all_incomes.data?.reduce((t, i) => t += i.amount, 0) }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -224,6 +227,7 @@ export default {
     }),
     created: async function () {
         await this.get_all_incomes();
+        await this.get_all_incomes_total(this.account_category_id);
         await this.get_all_account_categories();
         this.loded = true
 
@@ -232,6 +236,7 @@ export default {
     methods: {
         ...mapActions(income_setup_store, {
             get_all_incomes: "all",
+            get_all_incomes_total: "get_all_incomes_total",
             user_delete: "delete",
             get_all_account_categories: "get_all_account_categories",
             get_all_income_by_category_id: "get_all_income_by_category_id",
@@ -244,6 +249,7 @@ export default {
 
         getAllIncomeByCategoryID() {
             this.get_all_income_by_category_id(this.account_category_id)
+            this.get_all_incomes_total(this.account_category_id);
         },
 
         submitHandler: async function ($event) {
@@ -255,6 +261,7 @@ export default {
         ...mapState(income_setup_store, {
             all_incomes: "all_data",
             all_account_categories: "all_account_categories",
+            income_total: "income_total",
         }),
     },
     watch: {

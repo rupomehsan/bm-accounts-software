@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Payment Method Management</h5>
+                        <h5 class="m-0">User Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `ReceiptBookCreate` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `CreateUser` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -20,7 +20,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Daily Income
+                            All Users
                             <!---->
                         </h6>
                         <div class="search">
@@ -69,20 +69,24 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Receipt Book No
+                                        Photo
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Receipt Start Serial No
+                                        Name
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Receipt End Serial No
+                                        User Role
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        is_approvel
-
+                                        Email
+                                        <!---->
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Mobile NO
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
@@ -92,20 +96,27 @@
                                 </tr>
                             </thead>
 
-                            <tbody class="table-border-bottom-0">
+                            <tbody class="table-border-bottom-0" v-if="loaded">
                                 <tr v-for="(item, index) in all_users.data" :key="item.id">
                                     <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
                                     <td>{{ index + 1 }}</td>
                                     <td>
-                                        {{ item.receipt_book_no }}
+                                        <img :src="item.image" alt="Avatar" class="rounded-circle" style="height: 30px ;width: 30px;" />
                                     </td>
                                     <td>
-                                        {{ item.receipt_start_serial_no }}
+                                        <span class="text-warning cursor_pointer">
+                                            {{ item.full_name }}
+                                        </span>
                                     </td>
-                                    <td>{{ item.receipt_end_serial_no }}</td>
-                                    <td>{{ item.is_approvel ?? 0 }}</td>
+                                    <td>
+                                        <span class="text-warning cursor_pointer">
+                                            {{ item.roles?.[0].name }}
+                                        </span>
+                                    </td>
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.phone ?? "N/A" }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
                                         <!---->
@@ -140,7 +151,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'Create',
+                                                            name: 'CreateUser',
                                                             query: {
                                                                 id: item.id,
                                                             },
@@ -226,9 +237,11 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded: false
     }),
     created: async function () {
         await this.user_get_all();
+        this.loaded = true
     },
     methods: {
         ...mapActions(user_setup_store, {

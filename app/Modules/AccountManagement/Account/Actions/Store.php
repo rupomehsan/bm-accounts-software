@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Hash;
 class Store
 {
     static $model = \App\Modules\AccountManagement\Account\Model::class;
+    static $accountModel = \App\Modules\AccountManagement\AccountNumber\Model::class;
 
     public static function execute(Validation $request)
     {
         try {
             if (self::$model::query()->create($request->validated())) {
+                $accountNumber = new self::$accountModel();
+                $accountNumber->value = $request->input('value');
+                $accountNumber->save();
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

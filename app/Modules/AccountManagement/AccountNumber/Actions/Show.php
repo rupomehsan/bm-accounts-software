@@ -9,7 +9,15 @@ class Show
     public static function execute($id)
     {
         try {
+
             $with = [];
+
+            if (request()->input('account_id')) {
+      
+                $data = self::$model::query()->with($with)->where('account_id', $id)->first();
+                return entityResponse($data);
+            }
+
             if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
