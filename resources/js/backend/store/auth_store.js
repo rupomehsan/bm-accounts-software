@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { defineStore } from 'pinia'
+import axios from "axios";
+import { defineStore } from "pinia";
 
-export const use_auth_store = defineStore('auth_store', {
+export const use_auth_store = defineStore("auth_store", {
     state: () => ({
         is_auth: 0,
         auth_info: {
@@ -10,27 +10,29 @@ export const use_auth_store = defineStore('auth_store', {
         },
         role: {},
     }),
-    getters: {
-    },
+    getters: {},
     actions: {
         set_is_auth: function (status) {
             this.is_auth = status;
         },
         log_out: async function () {
-            await fetch('/api-logout', {
+            await fetch("/api-logout", {
                 method: "POST",
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
+                    "X-CSRF-TOKEN": document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute("content"),
+                },
             });
-            return location.href = "/login";
+            window.sessionStorage.removeItem("prevurl");
+            return (location.href = "/login");
         },
         check_is_auth: async function () {
             let that = this;
-            let res = await axios.get('/check_user');
+            let res = await axios.get("/check_user");
             if (res.status != 200) {
-                localStorage.removeItem('token');
-                return location.href = "/login";
+                localStorage.removeItem("token");
+                return (location.href = "/login");
             }
             that.auth_info = res.data.user;
             that.is_auth = 1;
@@ -56,6 +58,6 @@ export const use_auth_store = defineStore('auth_store', {
             //                 this.auth_info = res.auth_information;
             //             })
             //     })
-        }
+        },
     },
-})
+});
