@@ -44,8 +44,13 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center"
-                    href="">Users</router-link>
+                <router-link :to="{ name: `AllSohidFund` }" class="d-flex align-items-center" href="">Sohid
+                    Fund</router-link>
+            </li>
+          
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center" href="">Users</router-link>
             </li>
 
         </div>

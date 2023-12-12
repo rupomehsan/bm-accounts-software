@@ -13,6 +13,8 @@ include_once  base_path("app/Modules/AccountManagement/AccountNumber/Route.php")
 
 include_once  base_path("app/Modules/AppSetting/Route.php");
 
+include_once  base_path("app/Modules/SohidFamily/Route.php");
+
 include_once  base_path("app/Modules/AssetManagement/Asset/Route.php");
 include_once  base_path("app/Modules/AssetManagement/Asset/Route.php");
 include_once  base_path("app/Modules/AssetManagement/AssetAudit/Route.php");
