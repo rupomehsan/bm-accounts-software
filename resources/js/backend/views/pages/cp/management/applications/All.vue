@@ -6,14 +6,6 @@
                     <div class="col-lg-6">
                         <h5 class="m-0">Application Management</h5>
                     </div>
-                    <div class="col-lg-6 text-end">
-                        <span>
-                            <router-link :to="{ name: `Create` }" class="btn rounded-pill btn-outline-info">
-                                <i class="fa fa-pencil me-5px"></i>
-                                Create
-                            </router-link>
-                        </span>
-                    </div>
                 </div>
             </div>
             <div class="conatiner">
@@ -25,31 +17,49 @@
                         </h6>
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
                                     <!---->
                                     <li>
                                         <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href="#"
+                                            title="display data that has been deactivated"
+                                            class="d-flex"
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Deactivated data
                                         </a>
                                     </li>
@@ -62,102 +72,121 @@
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <th>
-                                        <input type="checkbox" class="form-check-input" />
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                        />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Title
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Approved
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Disapproved
-
-                                    </th>
-
-
-                                    <th aria-label="actions">Actions</th>
+                                    <th class="cursor_n_resize">Title</th>
+                                    <th class="cursor_n_resize">Approved</th>
+                                    <th class="cursor_n_resize">Disapproved</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
-                                    <td style="width: 50px;">
-                                        <input type="checkbox" class="form-check-input" />
+                                <tr
+                                    v-for="item in all_users.data"
+                                    :key="item.id"
+                                >
+                                    <td style="width: 50px">
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                        />
                                     </td>
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.title }}
                                         </span>
                                     </td>
                                     <td>
-                                        <router-link :to="{ name: 'Applications', params: { type: 'approved', id: item.id } }" title="approved"><span class="fw-bold"> {{
-                                            item.cp_application_approved_count ?? 0 }}</span></router-link>
-                                    </td>
-
-                                    <td>
-                                        <router-link :to="{ name: 'Applications', params: { type: 'disapproved', id: item.id } }" title="disapproved">
-                                            <span class="fw-bold"> {{
-                                                item.cp_application_dis_approved_count ??
-                                                0 }}</span> </router-link>
-                                    </td>
-                                    <td>
-                                        <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
-                                            <ul>
-
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{ name: 'Show', params: { id: item.id } }"
-                                                            title="disapproved"><i class="fa text-secondary fa-eye"></i>
-                                                            Details </router-link>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{
-                                                            name: 'Create',
-                                                            query: {
+                                        <router-link
+                                            :to="{
+                                                name: 'ApplicationsCategory',
+                                                params: {
+                                                    type: 'approved',
+                                                    id: item.id,
+                                                },
+                                            }"
+                                            title="approved"
+                                            ><span class="fw-bold">
+                                                {{
+                                                    item.cp_application_approved_count ??
+                                                    0
+                                                }}
+                                                <div
+                                                    class="text-center action_btns_inline"
+                                                >
+                                                    <router-link
+                                                        :to="{
+                                                            name: 'ApplicationsCategory',
+                                                            params: {
+                                                                type: 'approved',
                                                                 id: item.id,
                                                             },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
-                                                        </router-link>
-                                                        <!---->
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
-                                                            Delete
-                                                        </a>
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                        }"
+                                                        class="d-inline-block text-info text-capitalize"
+                                                    >
+                                                        details
+                                                    </router-link>
+                                                </div>
+                                            </span>
+                                        </router-link>
+                                    </td>
+
+                                    <td>
+                                        <router-link
+                                            :to="{
+                                                name: 'ApplicationsCategory',
+                                                params: {
+                                                    type: 'disapproved',
+                                                    id: item.id,
+                                                },
+                                            }"
+                                            title="disapproved"
+                                        >
+                                            <span class="fw-bold">
+                                                {{
+                                                    item.cp_application_dis_approved_count ??
+                                                    0
+                                                }}
+                                                <div
+                                                    class="text-center action_btns_inline"
+                                                >
+                                                    <router-link
+                                                        :to="{
+                                                            name: 'ApplicationsCategory',
+                                                            params: {
+                                                                type: 'disapproved',
+                                                                id: item.id,
+                                                            },
+                                                        }"
+                                                        class="d-inline-block text-info text-capitalize"
+                                                    >
+                                                        details
+                                                    </router-link>
+                                                </div>
+                                            </span>
+                                        </router-link>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_users" :method="get_all_applications" />
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1"
+                    >
+                        <pagination
+                            :data="all_users"
+                            :method="get_all_applications"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>

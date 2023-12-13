@@ -4,51 +4,59 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Application Management</h5>
-                    </div>
-                    <div class="col-lg-6 text-end">
-                        <span>
-                            <router-link :to="{ name: `Create` }" class="btn rounded-pill btn-outline-info">
-                                <i class="fa fa-pencil me-5px"></i>
-                                Create
-                            </router-link>
-                        </span>
+                        <h5 class="m-0">
+                            All {{ applicationType }} Applications
+                        </h5>
                     </div>
                 </div>
             </div>
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All {{ applicationType }} Applications
-                            <!---->
-                        </h6>
                         <div class="search">
                             <form action="#">
-                                <input placeholder="search..." type="search" class="form-control border border-info" />
+                                <input
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
                                     <!---->
                                     <li>
                                         <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href="#"
+                                            title="display data that has been deactivated"
+                                            class="d-flex"
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Deactivated data
                                         </a>
                                     </li>
@@ -63,34 +71,38 @@
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                     </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Category
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Subject
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Created At
-                                    </th>
+                                    <th>Name</th>
+                                    <th class="cursor_n_resize">Category</th>
+                                    <th class="cursor_n_resize">Subject</th>
+                                    <th class="cursor_n_resize">Created At</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_applications_by_category.applications" :key="item.id">
-
-
+                                <tr
+                                    v-for="(
+                                        item, index
+                                    ) in all_applications_by_category.applications"
+                                    :key="item.id"
+                                >
                                     <td>{{ index + 1 }}</td>
 
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.user.full_name }}
                                         </span>
-                                        <div class="text-start action_btns_inline">
-                                            <router-link :to="{ name: 'AppliationDetails', params: { id: item.id } }"
-                                                class="d-inline-block text-info text-capitalize">
+                                        <div
+                                            class="text-start action_btns_inline"
+                                        >
+                                            <router-link
+                                                :to="{
+                                                    name: 'ApplicationsDetails',
+                                                    params: { id: item.id },
+                                                }"
+                                                class="d-inline-block text-info text-capitalize"
+                                            >
                                                 details
                                             </router-link>
                                         </div>
@@ -112,8 +124,12 @@
                         </table>
                     </div>
                     <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_applications_by_category" :method="get_applications_by_category" />
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1"
+                    >
+                        <pagination
+                            :data="all_applications_by_category"
+                            :method="get_applications_by_category"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -169,11 +185,11 @@ export default {
         applicationType: "",
     }),
     created: async function () {
-        let id = this.$route.params.id
-        let type = this.$route.params.type
-        this.applicationType = type
-        let is_approve = type == 'approved' ? 1 : 0;
-        console.log(is_approve)
+        let id = this.$route.params.id;
+        let type = this.$route.params.type;
+        this.applicationType = type;
+        let is_approve = type == "approved" ? 1 : 0;
+        console.log(is_approve);
 
         await this.get_applications_by_category(id, is_approve);
         // console.log("myRes",this.all_applications_by_category)

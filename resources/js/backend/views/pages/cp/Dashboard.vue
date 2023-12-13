@@ -6,22 +6,27 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5> CP Dashboard </h5>
+                            <h5>CP Dashboard</h5>
                         </div>
-                        <div class="col-lg-6">
-
-                        </div>
+                        <div class="col-lg-6"></div>
                     </div>
                 </div>
-            </div><!-- Container-fluid Ends -->
+            </div>
+            <!-- Container-fluid Ends -->
             <!-- Container-fluid starts -->
             <div class="container-fluid">
                 <div class="card border-widgets shadow mb-4">
                     <div class="row m-0">
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-user font-primary align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Application</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-user font-primary align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0"
+                                            >Total Application</span
+                                        >
                                         <h4 class="counter">15</h4>
                                     </div>
                                 </div>
@@ -29,8 +34,14 @@
                         </div>
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-id-badge font-secondary align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Receipt Book</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-id-badge font-secondary align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0"
+                                            >Total Receipt Book</span
+                                        >
                                         <h4 class="counter">457</h4>
                                     </div>
                                 </div>
@@ -38,8 +49,14 @@
                         </div>
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-camera font-success align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Notification</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-camera font-success align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0"
+                                            >Total Notification</span
+                                        >
                                         <h4 class="counter">37</h4>
                                     </div>
                                 </div>
@@ -47,8 +64,12 @@
                         </div>
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-video-camera font-info align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Income</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-video-camera font-info align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Total Income</span>
                                         <h4 class="counter">16</h4>
                                     </div>
                                 </div>
@@ -60,8 +81,12 @@
                     <div class="row m-0">
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-harddrives font-primary align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Expense</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-harddrives font-primary align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Total Expense</span>
                                         <h4 class="counter">27</h4>
                                     </div>
                                 </div>
@@ -69,8 +94,12 @@
                         </div>
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-files font-secondary align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Notices</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-files font-secondary align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Total Notices</span>
                                         <h4 class="counter">457</h4>
                                     </div>
                                 </div>
@@ -78,8 +107,14 @@
                         </div>
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-zip font-success align-self-center me-3"></i>
-                                    <div><span class="mt-0">Total Asset Application</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-zip font-success align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0"
+                                            >Total Asset Application</span
+                                        >
                                         <h4 class="counter">37</h4>
                                     </div>
                                 </div>
@@ -87,8 +122,12 @@
                         </div>
                         <div class="col-xl-3 col-6 xs-width-100">
                             <div class="crm-top-widget card-body">
-                                <div class="d-flex"><i class="icon-book font-info align-self-center me-3"></i>
-                                    <div><span class="mt-0">Digital Books</span>
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-book font-info align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Digital Books</span>
                                         <h4 class="counter">16</h4>
                                     </div>
                                 </div>
@@ -96,15 +135,14 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Container-fluid starts -->
+            </div>
+            <!-- Container-fluid starts -->
         </div>
     </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style></style>

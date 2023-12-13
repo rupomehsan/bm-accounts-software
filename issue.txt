@@ -1,0 +1,46 @@
+// cp part
+Application Management
+
+common->
+id hobe field er id
+order by latest
+notificatin show icon
+page link thik kora lagbe
+
+
+-> receipt book
+   -> action button thkbena kono
+   -> date add korte hobe
+-> notification
+   -> select user and dempertment issue
+-> income expence search
+
+ 
+// bm part
+// target moukuf alada table
+
+-> application formate Management
+    -> title ,field name and type
+    -> show all application button
+
+Applicatin management
+
+Branch Target Management
+    -> date wise filter
+    -> session show
+
+2020 target 1000 tk  = 12000 = 1200
+2021 target 1500 tk  - 18000 = 1600
+2022 target 2000 tk  - 24000
+2023 target 2500 tk  - 28000
+                total=82,000 - 60000 - 2000
+                due = 12000
+
+
+ accounts -> cash and banc account fixed
+          -> account delete korar somoy oi account e jode kono income theke thle delete kora jabe na
+
+
+user role -> wellwisher user crate hobe
+
+account category managemnet

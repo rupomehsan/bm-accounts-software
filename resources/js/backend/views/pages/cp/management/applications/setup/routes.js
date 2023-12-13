@@ -1,41 +1,38 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
-import Form from "../Form.vue";
 import CategoryWiseApplication from "../CategoryWiseApplication.vue";
 import Applications from "../Applications.vue";
 import AppliationDetails from "../AppliationDetails.vue";
+import setup from ".";
+
+let route_prefix = setup.route_prefix;
 
 const routes = {
-    path: 'applications',
+    path: "applications",
     component: Layout,
     children: [
         {
-            path: '',
-            name: "AllApplications",
-            component: All
+            path: "",
+            name: route_prefix + "All",
+            component: All,
         },
-        {
-            path: 'create',
-            name: "Create",
-            component: Form
-        },
-        {
-            path: 'category/:id',
-            name: "Show",
-            component: CategoryWiseApplication
-        },
-        {
-            path: ':type/:id',
-            name: "Applications",
-            component: Applications
-        },
-        {
-            path: ':id',
-            name: "AppliationDetails",
-            component: AppliationDetails
-        },
-    ]
-}
 
+        // {
+        //     path: "category/:id",
+        //     name: route_prefix + "Show",
+        //     component: CategoryWiseApplication,
+        // },
+        {
+            path: ":id",
+            name: route_prefix + "Details",
+            component: AppliationDetails,
+        },
+        {
+            path: ":type/category/:id",
+            name: route_prefix + "Category",
+            component: Applications,
+        },
+    ],
+};
 
 export default routes;

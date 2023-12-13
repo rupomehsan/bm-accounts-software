@@ -4,48 +4,53 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Application Management</h5>
-                    </div>
-                    <div class="col-lg-6 text-end">
-
+                        <h5 class="m-0">Application Details</h5>
                     </div>
                 </div>
             </div>
-            <div class="conatiner" v-if="single_applications_data.application_values?.length">
+            <div
+                class="conatiner"
+                v-if="single_applications_data.application_values?.length"
+            >
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            Application Details
-                        </h6>
-                        <div class="search">
-
-                        </div>
-                        <div class="btns d-flex gap-2 align-items-center">
-
-                        </div>
+                        <div class="search"></div>
+                        <div class="btns d-flex gap-2 align-items-center"></div>
                     </div>
-                    <div class="card-body p-4 ">
+                    <div class="card-body p-4">
                         <div class="row gx-5">
                             <div class="col-md-8">
                                 <div>
                                     <table class="table d-inline-block">
                                         <tbody>
-                                            <tr v-for="item in single_applications_data.application_values.filter(i => i.title != 'description')"
-                                                :key="item.id">
+                                            <tr
+                                                v-for="item in single_applications_data.application_values.filter(
+                                                    (i) =>
+                                                        i.title != 'description'
+                                                )"
+                                                :key="item.id"
+                                            >
                                                 <td>
                                                     {{ item.title || "N/A" }}
                                                 </td>
-                                                <td style="width: 2px;">:</td>
-                                                <td> {{ item.value || "N/A" }} </td>
+                                                <td style="width: 2px">:</td>
+                                                <td>
+                                                    {{ item.value || "N/A" }}
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="mt-4">
                                     <h5>Details</h5>
-                                    <div class="text-justify"
-                                        v-html="single_applications_data.application_values.find(i => i.title == 'description').value">
-                                    </div>
+                                    <div
+                                        class="text-justify"
+                                        v-html="
+                                            single_applications_data.application_values.find(
+                                                (i) => i.title == 'description'
+                                            ).value
+                                        "
+                                    ></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -55,53 +60,61 @@
                                             <div class="form-group">
                                                 <label for="">Remarks</label>
                                                 <div class="mt-1 mb-3">
-                                                    <textarea class="form-control" name="remarks" id="" cols="30" rows="5"
-                                                        :value="single_applications_data.remarks"></textarea>
+                                                    <textarea
+                                                        class="form-control"
+                                                        name="remarks"
+                                                        id=""
+                                                        cols="30"
+                                                        rows="5"
+                                                        :value="
+                                                            single_applications_data.remarks
+                                                        "
+                                                    ></textarea>
                                                 </div>
                                             </div>
-                                            <select name="is_approve" class="form-select" id="">
+                                            <select
+                                                name="is_approve"
+                                                class="form-select"
+                                                id=""
+                                            >
                                                 <option
-                                                    :selected="single_applications_data.is_approve == '1' ? true : false"
-                                                    value="1">Approved</option>
+                                                    :selected="
+                                                        single_applications_data.is_approve ==
+                                                        '1'
+                                                            ? true
+                                                            : false
+                                                    "
+                                                    value="1"
+                                                >
+                                                    Approved
+                                                </option>
                                                 <option
-                                                    :selected="single_applications_data.is_approve == '0' ? true : false"
-                                                    value="0">Disapproved</option>
+                                                    :selected="
+                                                        single_applications_data.is_approve ==
+                                                        '0'
+                                                            ? true
+                                                            : false
+                                                    "
+                                                    value="0"
+                                                >
+                                                    Disapproved
+                                                </option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary mt-3"
+                                        >
+                                            Submit
+                                        </button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex  align-items-center border border-1">
-
-                    </div>
-                </div>
-                <div class="canvas_backdrop">
-                    <!---->
-                </div>
-                <div class="canvas_backdrop">
-                    <div class="content right">
-                        <div class="content_header">
-                            <h3 class="offcanvas-title">Selected Users</h3>
-                            <i class="fa fa-times"></i>
-                        </div>
-                        <div class="cotent_body table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>id</th>
-                                        <th>name</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex align-items-center border border-1"
+                    ></div>
                 </div>
             </div>
         </div>
@@ -117,12 +130,10 @@ export default {
         offset: "5",
         search_data: "",
         param_id: "",
-
     }),
     created: async function () {
-        this.param_id = this.$route.params.id
+        this.param_id = this.$route.params.id;
         let response = await this.get_single_application(this.param_id);
-
 
         // console.log("single_applications_data", this.single_applications_data);
     },
@@ -132,7 +143,7 @@ export default {
             application_approval: "cp_application_approval",
         }),
         submitHandler: async function ($event) {
-            this.application_approval(this.param_id, $event.target)
+            this.application_approval(this.param_id, $event.target);
         },
     },
     computed: {
@@ -140,7 +151,6 @@ export default {
             single_applications_data: "single_applications_data",
         }),
     },
-
 };
 </script>
 

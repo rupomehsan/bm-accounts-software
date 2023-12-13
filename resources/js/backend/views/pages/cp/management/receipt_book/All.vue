@@ -6,10 +6,25 @@
                     <div class="col-lg-6">
                         <h5 class="m-0">Receipt Book Management</h5>
                     </div>
-                    <div class="col-lg-6 text-end ">
-                        <button class="btn btn-primary" @click="getReceiptBookByStatus('approved')">Approved</button>
-                        <button class="btn btn-danger mx-3" @click="getReceiptBookByStatus('not-approved')">Not
-                            approved</button>
+                    <div class="col-lg-6 text-end">
+                        <button
+                            class="btn btn-info"
+                            @click="get_all_receipt_books()"
+                        >
+                            All
+                        </button>
+                        <button
+                            class="btn btn-primary mx-3"
+                            @click="getReceiptBookByStatus('approved')"
+                        >
+                            Approved
+                        </button>
+                        <button
+                            class="btn btn-danger"
+                            @click="getReceiptBookByStatus('not-approved')"
+                        >
+                            Not approved
+                        </button>
                     </div>
                 </div>
             </div>
@@ -17,36 +32,54 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Applications
+                            All Receipt Books
                             <!---->
                         </h6>
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
                                     <!---->
                                     <li>
                                         <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href="#"
+                                            title="display data that has been deactivated"
+                                            class="d-flex"
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Deactivated data
                                         </a>
                                     </li>
@@ -59,43 +92,44 @@
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <th>
-                                        <input type="checkbox" class="form-check-input" />
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                        />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
                                     <th class="cursor_n_resize">
                                         Receipt Book No
-
                                     </th>
                                     <th class="cursor_n_resize">
                                         Receipt Start Serial No
-
                                     </th>
                                     <th class="cursor_n_resize">
                                         Receipt End Serial No
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Status
-
-                                    </th>
-
-
-                                    <th aria-label="actions">Actions</th>
+                                    <th class="cursor_n_resize">Status</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_receipt_books.data" :key="item.id">
-                                    <td style="width: 50px;">
-                                        <input type="checkbox" class="form-check-input" />
+                                <tr
+                                    v-for="item in all_receipt_books.data"
+                                    :key="item.id"
+                                >
+                                    <td style="width: 50px">
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                        />
                                     </td>
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.receipt_book_no }}
                                         </span>
                                     </td>
@@ -108,54 +142,31 @@
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-                                                :checked="item.is_approvel == 1 ? true : false"
-                                                @change="updateStauts(item.is_approvel, item.id)">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">{{ item.is_approvel
-                                                == 1 ? 'Approved' : "Not approved" }}</label>
-                                        </div>
-
-                                    </td>
-                                    <td>
-                                        <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
-                                            <ul>
-
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{ name: 'Show', params: { id: item.id } }"
-                                                            title="disapproved"><i class="fa text-secondary fa-eye"></i>
-                                                            Details </router-link>
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <router-link :to="{
-                                                            name: 'Create',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
-                                                        </router-link>
-                                                        <!---->
-                                                    </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
-                                                            Delete
-                                                        </a>
-                                                    </span>
-                                                </li>
-                                            </ul>
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                :id="
+                                                    'flexSwitchCheck_' + item.id
+                                                "
+                                                :checked="
+                                                    item.is_approvel === 1
+                                                "
+                                                @change="
+                                                    updateStatus(
+                                                        item.is_approvel,
+                                                        item.id
+                                                    )
+                                                "
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="flexSwitchCheckDefault"
+                                                >{{
+                                                    item.is_approvel == 1
+                                                        ? "Approved"
+                                                        : "Not approved"
+                                                }}</label
+                                            >
                                         </div>
                                     </td>
                                 </tr>
@@ -163,8 +174,12 @@
                         </table>
                     </div>
                     <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_receipt_books" :method="get_all_receipt_books" />
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1"
+                    >
+                        <pagination
+                            :data="all_receipt_books"
+                            :method="get_all_receipt_books"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -229,13 +244,23 @@ export default {
         }),
 
         getReceiptBookByStatus(status) {
-            this.get_receipt_book_by_status(status)
+            this.get_receipt_book_by_status(status);
         },
 
-        updateStauts(status, id) {
-            let approval = status ? 0 : 1
-            this.update_receipt_book_by_status(approval, id)
-        }
+        async updateStatus(status, id) {
+            var data = await window.s_confirm();
+            if (data) {
+                let approval = status ? 0 : 1;
+                this.update_receipt_book_by_status(approval, id);
+            } else {
+                const checkboxRef = document.getElementById(
+                    `flexSwitchCheck_${id}`
+                );
+                if (checkboxRef) {
+                    checkboxRef.checked = !checkboxRef.checked;
+                }
+            }
+        },
     },
     computed: {
         ...mapState(receipt_book_setup_store, {
