@@ -41,7 +41,8 @@
                         ><input
                             type="checkbox"
                             id="sidebar-toggle"
-                            checked="checked" /><span
+                            v-model="toggleSwitch"
+                            :checked="toggleSwitch" /><span
                             class="switch-state"
                         ></span
                     ></label>
@@ -49,6 +50,54 @@
             </div>
             <div class="nav-right col">
                 <ul class="nav-menus">
+                    <li class="onhover-dropdown mx-3">
+                        <a href="#!" class="txt-dark">
+                            <img
+                                class="align-self-center pull-right me-2"
+                                src="https://admin.pixelstrap.com/universal/assets/images/dashboard/notification.png"
+                                alt="header-notification"
+                            />
+                            <span
+                                class="badge rounded-pill badge-primary notification"
+                                >3</span
+                            >
+                        </a>
+                        <ul class="notification-dropdown onhover-show-div">
+                            <li>
+                                Notification
+                                <span
+                                    class="badge rounded-pill badge-secondary text-white text-uppercase pull-right"
+                                    >3 New</span
+                                >
+                            </li>
+                            <li>
+                                <div class="d-flex">
+                                    <i
+                                        class="flex-shrink-0 align-self-center notification-icon icofont icofont-shopping-cart bg-primary"
+                                    ></i>
+                                    <div>
+                                        <h6 class="mt-0">
+                                            Your order ready for Ship..!
+                                        </h6>
+                                        <p class="mb-0">
+                                            Lorem ipsum dolor sit amet,
+                                            consectetuer elit.
+                                        </p>
+                                        <span
+                                            ><i
+                                                class="icofont icofont-clock-time p-r-5"
+                                            ></i
+                                            >Just Now</span
+                                        >
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="text-center">
+                                You have Check <a href="#">all</a> notification
+                            </li>
+                        </ul>
+                    </li>
                     <li class="onhover-dropdown">
                         <div class="d-flex align-items-center">
                             <img
@@ -91,10 +140,28 @@
 import { mapActions } from "pinia";
 import { use_auth_store } from "../../../../store/auth_store";
 export default {
+    data: () => ({
+        toggleSwitch: true,
+    }),
     methods: {
         ...mapActions(use_auth_store, {
             log_out: "log_out",
         }),
+    },
+
+    watch: {
+        toggleSwitch: async function () {
+            let pageSidebar =
+                document.getElementsByClassName("page-sidebar")[0];
+            let pageBody = document.getElementsByClassName("page-body")[0];
+            if (!this.toggleSwitch) {
+                pageSidebar.classList.add("d-none");
+                pageBody.style.marginLeft = "0";
+            } else {
+                pageSidebar.classList.remove("d-none");
+                pageBody.style.marginLeft = "250px";
+            }
+        },
     },
 };
 </script>

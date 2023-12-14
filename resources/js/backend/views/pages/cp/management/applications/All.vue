@@ -71,12 +71,6 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
-                                        <input
-                                            type="checkbox"
-                                            class="form-check-input"
-                                        />
-                                    </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                     </th>
@@ -91,12 +85,6 @@
                                     v-for="item in all_users.data"
                                     :key="item.id"
                                 >
-                                    <td style="width: 50px">
-                                        <input
-                                            type="checkbox"
-                                            class="form-check-input"
-                                        />
-                                    </td>
                                     <td>{{ item.id }}</td>
 
                                     <td>

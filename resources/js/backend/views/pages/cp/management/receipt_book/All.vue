@@ -91,12 +91,6 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
-                                        <input
-                                            type="checkbox"
-                                            class="form-check-input"
-                                        />
-                                    </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                     </th>
@@ -109,6 +103,7 @@
                                     <th class="cursor_n_resize">
                                         Receipt End Serial No
                                     </th>
+                                    <th class="cursor_n_resize">Date</th>
                                     <th class="cursor_n_resize">Status</th>
                                 </tr>
                             </thead>
@@ -118,12 +113,6 @@
                                     v-for="item in all_receipt_books.data"
                                     :key="item.id"
                                 >
-                                    <td style="width: 50px">
-                                        <input
-                                            type="checkbox"
-                                            class="form-check-input"
-                                        />
-                                    </td>
                                     <td>{{ item.id }}</td>
 
                                     <td>
@@ -139,6 +128,13 @@
 
                                     <td>
                                         {{ item.receipt_end_serial_no }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            new Date(
+                                                item.created_at
+                                            ).toLocaleString()
+                                        }}
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">

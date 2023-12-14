@@ -14,6 +14,8 @@ class IncomeExpenseReport
 
         try {
 
+            // dd(request()->all());
+
             $from = request()->input('from');
             $to = request()->input('to');
 

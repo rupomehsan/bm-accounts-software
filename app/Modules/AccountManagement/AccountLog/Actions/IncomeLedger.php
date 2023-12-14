@@ -13,6 +13,7 @@ class IncomeLedger
     public static function execute()
     {
         try {
+            // dd(request()->all());
             $from = Carbon::parse(request()->from);
             $to = Carbon::parse(request()->to);
             $query = self::$accountLogModel::whereBetween('date', [$from, $to]);

@@ -49,18 +49,4 @@ Route::post('login', function () {
 });
 
 Route::get('/test-telegram', function () {
-
-    $bot_token = env('BOT_TOKEN');
-    $method = "sendMessage";
-
-    $parameters = [
-        // 'chat_id' => 812239513,//shifat
-        'chat_id' => 6555657006,
-        'text' => "this is texdt message",
-    ];
-
-    $url = "https://api.telegram.org/bot$bot_token/$method";
-
-    $response = Http::get($url . '?chat_id=' . $parameters['chat_id'] . '&text=' . $parameters['text']);
-    return $response->json();
 });

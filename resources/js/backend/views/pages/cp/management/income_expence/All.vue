@@ -6,9 +6,7 @@
                     <div class="col-lg-6">
                         <h5 class="m-0">Income & Expense</h5>
                     </div>
-                    <div class="col-lg-6 text-end">
-
-                    </div>
+                    <div class="col-lg-6 text-end"></div>
                 </div>
             </div>
             <div class="container">
@@ -30,11 +28,19 @@
                             <tr>
                                 <td>তারিখ</td>
                                 <td colspan="2" class="text-center">
-                                    <input type="date" v-model="from_date" class="income_expense_date_field"
-                                        @click="$event.target.showPicker();">
+                                    <input
+                                        type="date"
+                                        v-model="from_date"
+                                        class="income_expense_date_field"
+                                        @click="$event.target.showPicker()"
+                                    />
                                     To
-                                    <input type="date" v-model="to_date" class="income_expense_date_field"
-                                        @click="$event.target.showPicker();">
+                                    <input
+                                        type="date"
+                                        v-model="to_date"
+                                        class="income_expense_date_field"
+                                        @click="$event.target.showPicker()"
+                                    />
                                 </td>
                                 <td class="text-end">২০২৩</td>
                             </tr>
@@ -49,12 +55,34 @@
                                 <td>পরিমান</td>
                             </tr>
                             <template v-if="data.data?.length">
-                                <tr v-for="i in data.data[1]?.categories.length" :key="i">
-                                    <template v-if="data.data[0].categories[i - 1]">
-                                        <td>{{ data.data[0].categories[i - 1].title }}</td>
+                                <tr
+                                    v-for="i in data.data[1]?.categories.length"
+                                    :key="i"
+                                >
+                                    <template
+                                        v-if="data.data[0].categories[i - 1]"
+                                    >
                                         <td>
-                                            <span v-if="data.data[0].categories[i - 1].logs_sum_total">
-                                                {{ data.data[0].categories[i - 1].logs_sum_total?.toString().enToBn() }}
+                                            {{
+                                                data.data[0].categories[i - 1]
+                                                    .title
+                                            }}
+                                        </td>
+                                        <td>
+                                            <span
+                                                v-if="
+                                                    data.data[0].categories[
+                                                        i - 1
+                                                    ].logs_sum_total
+                                                "
+                                            >
+                                                {{
+                                                    data.data[0].categories[
+                                                        i - 1
+                                                    ].logs_sum_total
+                                                        ?.toString()
+                                                        .enToBn()
+                                                }}
                                             </span>
                                         </td>
                                     </template>
@@ -62,11 +90,30 @@
                                         <td></td>
                                         <td></td>
                                     </template>
-                                    <template v-if="data.data[1].categories[i - 1]">
-                                        <td>{{ data.data[1].categories[i - 1].title }}</td>
+                                    <template
+                                        v-if="data.data[1].categories[i - 1]"
+                                    >
                                         <td>
-                                            <span v-if="data.data[1].categories[i - 1].logs_sum_total">
-                                                {{ data.data[1].categories[i - 1].logs_sum_total?.toString().enToBn() }}
+                                            {{
+                                                data.data[1].categories[i - 1]
+                                                    .title
+                                            }}
+                                        </td>
+                                        <td>
+                                            <span
+                                                v-if="
+                                                    data.data[1].categories[
+                                                        i - 1
+                                                    ].logs_sum_total
+                                                "
+                                            >
+                                                {{
+                                                    data.data[1].categories[
+                                                        i - 1
+                                                    ].logs_sum_total
+                                                        ?.toString()
+                                                        .enToBn()
+                                                }}
                                             </span>
                                         </td>
                                     </template>
@@ -79,7 +126,7 @@
 
                             <tr>
                                 <td colspan="3" class="text-end">মোট আয়</td>
-                                <td>{{ data.total_income  }}</td>
+                                <td>{{ data.total_income }}</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-end">মোট ব্যয়</td>
@@ -88,34 +135,51 @@
                             <tr>
                                 <td colspan="3" class="text-end">উদ্ধৃত্ত</td>
                                 <td>
-                                    {{ (data.total_income - data.total_expense).toString().enToBn() }}
+                                    {{
+                                        (data.total_income - data.total_expense)
+                                            .toString()
+                                            .enToBn()
+                                    }}
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3" class="text-end">বিগত উদ্ধৃত্ত</td>
+                                <td colspan="3" class="text-end">
+                                    বিগত উদ্ধৃত্ত
+                                </td>
                                 <td>
-                                    {{ data.get_previous_extra_money?.toString().enToBn() }}
+                                    {{
+                                        data.get_previous_extra_money
+                                            ?.toString()
+                                            .enToBn()
+                                    }}
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3" class="text-end">বর্তমান উদ্ধৃত্ত</td>
+                                <td colspan="3" class="text-end">
+                                    বর্তমান উদ্ধৃত্ত
+                                </td>
                                 <td>
-                                    {{ (data.get_previous_extra_money + (get_sum(data[0]).en -
-                                        get_sum(data[1]).en)).toString().enToBn() }}
+                                    {{
+                                        (
+                                            data.get_previous_extra_money +
+                                            (get_sum(data[0]).en -
+                                                get_sum(data[1]).en)
+                                        )
+                                            .toString()
+                                            .enToBn()
+                                    }}
                                 </td>
                             </tr>
                             <tr class="footer_fixed" v-if="data.length">
                                 <td>মোট আয়</td>
                                 <td>{{ get_sum(data[0]).bn }}</td>
                                 <td>মোট ব্যয়</td>
-                                <td>{{ get_sum(data[1]).bn }} </td>
+                                <td>{{ get_sum(data[1]).bn }}</td>
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -126,13 +190,13 @@ import { income_expense_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
-        to_date: '',
-        from_date: '',
-
-
+        from_date: "",
+        to_date: "",
     }),
     created: async function () {
-        await this.get_all_income_expense_report();
+        this.from_date = moment().startOf("month").format("YYYY-MM-DD");
+        this.to_date = moment().format("YYYY-MM-DD");
+        await this.get_all_income_expense_report(this.from_date, this.to_date);
         // this.date_title = moment(this.data.date_title).format('MMM DD - ');
         console.log("newdata", this.data);
     },
@@ -145,14 +209,17 @@ export default {
                 return {
                     bn: 0,
                     en: 0,
-                }
+                };
             }
-            let sum = array.categories.reduce((t, i) => t += (+i.logs_sum_total), 0);
+            let sum = array.categories.reduce(
+                (t, i) => (t += +i.logs_sum_total),
+                0
+            );
             return {
                 bn: sum.toString().enToBn(),
                 en: sum,
             };
-        }
+        },
     },
     computed: {
         ...mapState(income_expense_setup_store, {
@@ -160,6 +227,20 @@ export default {
         }),
     },
 
+    watch: {
+        from_date: async function () {
+            await this.get_all_income_expense_report(
+                this.from_date,
+                this.to_date
+            );
+        },
+        to_date: async function () {
+            await this.get_all_income_expense_report(
+                this.from_date,
+                this.to_date
+            );
+        },
+    },
 };
 </script>
 

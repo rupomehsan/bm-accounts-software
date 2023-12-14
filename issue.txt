@@ -2,10 +2,10 @@
 Application Management
 
 common->
-id hobe field er id
-order by latest
-notificatin show icon
-page link thik kora lagbe
+id hobe field er id -dn
+order by latest -dn
+notificatin show icon -dn
+page link thik kora lagbe -dn
 
 
 -> receipt book
@@ -15,7 +15,7 @@ page link thik kora lagbe
    -> select user and dempertment issue
 -> income expence search
 
- 
+
 // bm part
 // target moukuf alada table
 

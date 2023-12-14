@@ -15,91 +15,87 @@ import KendriyoSuvakankhiThekeAy from "../KendriyoSuvakankhiThekeAy.vue";
 import IncomeLedger from "../IncomeLedger.vue";
 import ExpenseLedger from "../ExpenseLedger.vue";
 
-
 const routes = {
-    path: 'bm-at-a-glance',
+    path: "bm-at-a-glance",
     component: Layout,
 
     children: [
-
         {
-            path: 'income',
+            path: "income",
             name: "AtAGlance",
-            component: All
+            component: All,
         },
         {
-            path: 'expense',
+            path: "expense",
             name: "Expense",
-            component: Expense
+            component: Expense,
         },
         {
-            path: 'income-ledger',
+            path: "income-ledger",
             name: "IncomeLedger",
-            component: IncomeLedger
+            component: IncomeLedger,
         },
         {
-            path: 'expense-ledger',
+            path: "expense-ledger",
             name: "ExpenseLedger",
-            component: ExpenseLedger
+            component: ExpenseLedger,
         },
         {
-            path: 'loan-register',
+            path: "loan-register",
             name: "LoanRegister",
-            component: LoanRegister
+            component: LoanRegister,
         },
         {
-            path: 'jamanot',
+            path: "jamanot",
             name: "Jamanot",
-            component: Jamanot
+            component: Jamanot,
         },
         {
-            path: 'salary',
+            path: "salary",
             name: "Salary",
-            component: Salary
+            component: Salary,
         },
         {
-            path: 'office-rent',
+            path: "office-rent",
             name: "OfficeRent",
-            component: OfficeRent
+            component: OfficeRent,
         },
         {
-            path: 'house-rent',
+            path: "house-rent",
             name: "HouseRent",
-            component: HouseRent
+            component: HouseRent,
         },
         {
-            path: 'asset-list',
+            path: "asset-list",
             name: "AssetList",
-            component: AssetList
+            component: AssetList,
         },
         {
-            path: 'bm-stock-register',
+            path: "bm-stock-register",
             name: "BMStockRegister",
-            component: BMStockRegister
+            component: BMStockRegister,
         },
         {
-            path: 'asset-register',
+            path: "asset-register",
             name: "AssetRegister",
-            component: AssetRegister
+            component: AssetRegister,
         },
         {
-            path: 'lump-sum-payment',
+            path: "lump-sum-payment",
             name: "EkkalinProdan",
-            component: EkkalinProdan
+            component: EkkalinProdan,
         },
         {
-            path: 'regular-paying',
+            path: "regular-paying",
             name: "NiyomitoProdan",
-            component: NiyomitoProdan
+            component: NiyomitoProdan,
         },
         {
-            path: 'Central-Auspicious-to-Income',
+            path: "Central-Auspicious-to-Income",
             name: "KendriyoSuvakankhiThekeAy",
-            component: KendriyoSuvakankhiThekeAy
+            component: KendriyoSuvakankhiThekeAy,
         },
-
-    ]
-}
-
+    ],
+};
 
 export default routes;

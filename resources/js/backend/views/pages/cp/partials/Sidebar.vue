@@ -84,14 +84,27 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <a class="d-flex align-items-center" href="">Logout</a>
+                <a
+                    role="button"
+                    @click="log_out"
+                    class="d-flex align-items-center"
+                    >Logout</a
+                >
             </li>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+import { mapActions } from "pinia";
+import { use_auth_store } from "../../../../store/auth_store";
+export default {
+    methods: {
+        ...mapActions(use_auth_store, {
+            log_out: "log_out",
+        }),
+    },
+};
 </script>
 
 <style></style>

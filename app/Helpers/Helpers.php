@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\support\Str;
@@ -24,7 +25,21 @@ if (!function_exists('messageResponse')) {
         return response(['status' => $status, 'statusCode' => $statusCode, 'message' => $message], $statusCode);
     }
 }
-
+if (!function_exists('sendToTelegram')) {
+    function sendToTelegram($chatId = '6555657006', $text = 'this is test message')
+    {
+        $bot_token = env('BOT_TOKEN');
+        $method = "sendMessage";
+        $parameters = [
+            // 'chat_id' => 812239513,//shifat
+            'chat_id' => $chatId,
+            'text' => $text,
+        ];
+        $url = "https://api.telegram.org/bot$bot_token/$method";
+        $response = Http::get($url . '?chat_id=' . $parameters['chat_id'] . '&text=' . $parameters['text']);
+        return $response->json();
+    }
+}
 
 if (!function_exists('uploader')) {
     function uploader($source, $path, $width = null, $height = null, $file_name = null)
