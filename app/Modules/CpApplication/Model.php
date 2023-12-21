@@ -9,7 +9,7 @@ class Model extends EloquentModel
 {
     static $userModel = \App\Modules\User\Model::class;
     static $cpApplicationValueModel = \App\Modules\CpApplicationValue\Model::class;
-
+    static $applicationCategoryModel = \App\Modules\CpApplicationCategory\Model::class;
     protected $table = "cp_applications";
     protected $guarded = [];
 
@@ -35,5 +35,9 @@ class Model extends EloquentModel
     public function application_values()
     {
         return $this->hasMany(self::$cpApplicationValueModel, "cp_application_id");
+    }
+    public function application_category()
+    {
+        return $this->belongsTo(self::$applicationCategoryModel, 'cp_application_category_id');
     }
 }

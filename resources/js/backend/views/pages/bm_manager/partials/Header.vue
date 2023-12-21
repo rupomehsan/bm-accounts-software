@@ -41,7 +41,8 @@
                         ><input
                             type="checkbox"
                             id="sidebar-toggle"
-                            checked="checked" /><span
+                            v-model="toggleSwitch"
+                            :checked="toggleSwitch" /><span
                             class="switch-state"
                         ></span
                     ></label>
@@ -91,10 +92,28 @@
 import { mapActions } from "pinia";
 import { use_auth_store } from "../../../../store/auth_store";
 export default {
+    data: () => ({
+        toggleSwitch: true,
+    }),
     methods: {
         ...mapActions(use_auth_store, {
             log_out: "log_out",
         }),
+    },
+
+    watch: {
+        toggleSwitch: async function () {
+            let pageSidebar =
+                document.getElementsByClassName("page-sidebar")[0];
+            let pageBody = document.getElementsByClassName("page-body")[0];
+            if (!this.toggleSwitch) {
+                pageSidebar.classList.add("d-none");
+                pageBody.style.marginLeft = "0";
+            } else {
+                pageSidebar.classList.remove("d-none");
+                pageBody.style.marginLeft = "250px";
+            }
+        },
     },
 };
 </script>

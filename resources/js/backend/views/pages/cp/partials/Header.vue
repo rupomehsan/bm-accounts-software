@@ -83,11 +83,12 @@
                                             Lorem ipsum dolor sit amet,
                                             consectetuer elit.
                                         </p>
-                                        <span
+                                        <spa
+                                        n
                                             ><i
                                                 class="icofont icofont-clock-time p-r-5"
                                             ></i
-                                            >Just Now</span
+                                            >Just Now</spa
                                         >
                                     </div>
                                 </div>

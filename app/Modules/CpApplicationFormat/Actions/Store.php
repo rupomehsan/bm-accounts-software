@@ -12,7 +12,20 @@ class Store
     public static function execute(Validation $request)
     {
         try {
-            if (self::$model::query()->create($request->validated())) {
+            $fields = json_decode($request->input('extra_fields'));
+            if ($fields && count($fields)) {
+                foreach ($fields as $field) {
+              
+                    $data = [
+                        'cp_application_category_id' => $request->input('cp_application_category_id'),
+                        'field_name' => $field->field_name,
+                        'field_type' => $field->field_type,
+                    ];
+                    self::$model::query()->create($data);
+                }
+                return messageResponse('Item added successfully', 201);
+            } else {
+                self::$model::query()->create(['cp_application_category_id' => $request->input('cp_application_category_id')]);
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

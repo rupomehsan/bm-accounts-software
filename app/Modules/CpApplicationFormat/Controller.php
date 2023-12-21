@@ -8,6 +8,7 @@ use App\Modules\CpApplicationFormat\Actions\Show;
 use App\Modules\CpApplicationFormat\Actions\Store;
 use App\Modules\CpApplicationFormat\Actions\Update;
 use App\Modules\CpApplicationFormat\Actions\Validation;
+use App\Modules\CpApplicationFormat\Actions\getDataByApplicationCategory;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -41,6 +42,11 @@ class Controller extends ControllersController
     public function destroy($id)
     {
         $data = Delete::execute($id);
+        return $data;
+    }
+
+    public function getDataByApplicationCategory($id){
+        $data = getDataByApplicationCategory::execute($id);
         return $data;
     }
 }

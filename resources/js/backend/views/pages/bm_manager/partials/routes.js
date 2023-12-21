@@ -9,6 +9,8 @@ import accounts_routes from "../management/accounts/setup/routes"
 import sohid_family_fund_routes from "../management/sohid_family_fund/setup/routes"
 import sohid_fund_routes from "../management/sohid_fund/setup/routes"
 import sohid_family_routes from "../management/sohid_family/setup/routes"
+import application_format_route from "../management/application_format/setup/routes"
+import application_route from "../management/application/setup/routes"
 import user_routes from "../management/user/setup/routes"
 
 const routes =
@@ -30,6 +32,8 @@ const routes =
         sohid_fund_routes,
         sohid_family_fund_routes,
         sohid_family_routes,
+        application_format_route,
+        application_route,
         user_routes,
     ]
 };

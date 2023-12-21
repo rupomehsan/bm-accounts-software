@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+    static $model = \App\Modules\CpApplicationCategory\Model::class;
     protected $table = "cp_application_formats";
     protected $guarded = [];
 
@@ -23,5 +24,10 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function application_category()
+    {
+        return $this->belongsTo(self::$model, 'cp_application_category_id');
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->tinyInteger('to_all')->default(0);
             $table->bigInteger('to_department')->nullable();
+            $table->enum('seen', ['active', 'inactive'])->default('active');
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

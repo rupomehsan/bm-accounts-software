@@ -33,11 +33,11 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'applicant_id' => 'required',
-            'pdf_submission_file' => 'required',
-            'is_approve' => 'required',
-            'remarks' => 'required',
-            'description' => 'required',
+            'applicant_id' => 'sometimes',
+            'pdf_submission_file' => 'sometimes',
+            'is_approve' => 'sometimes',
+            'remarks' => 'sometimes',
+            'description' => 'sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }
