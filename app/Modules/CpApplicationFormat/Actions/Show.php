@@ -13,7 +13,7 @@ class Show
     {
         try {
             $with = [];
-            if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
+            if (!$data = self::$model::query()->with($with)->where('cp_application_category_id', $id)->get()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
             return entityResponse($data);

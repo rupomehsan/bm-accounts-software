@@ -33,7 +33,9 @@ class Validation extends FormRequest
     public function rules(): array
     {
         return [
-            'applicant_id' => 'sometimes',
+            'applicant_id' => 'required|sometimes',
+            'subject' => 'required|sometimes',
+            'cp_application_category_id' => 'required|sometimes',
             'pdf_submission_file' => 'sometimes',
             'is_approve' => 'sometimes',
             'remarks' => 'sometimes',
@@ -50,4 +52,6 @@ class Validation extends FormRequest
         }
         parent::failedValidation($validator);
     }
+
+
 }

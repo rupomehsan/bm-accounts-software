@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} user
+                                {{ param_id ? "Update" : "Create new" }} Application Format
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -107,20 +107,18 @@ export default {
         if (id) {
             this.param_id = id;
             await this.application_format_get(id);
-            if (this.single_data) {
-                this.form_fields.forEach((field, index) => {
-                    Object.entries(this.single_data).forEach((value) => {
-                        if (field.name == value[0]) {
-                            this.form_fields[index].value = value[1];
-                        }
-
-                        if (field.name == 'user_role_id') {
-                            if (value[0] == 'roles') {
-                                console.log("value", value[1])
-                                this.form_fields[index].value = value[1][0].id;
-                            }
-                        }
-                    });
+            if (this.single_data && this.single_data.length > 0) {
+                if (field.name == 'cp_application_category_id') {
+                    if (this.single_data[0] == 'cp_application_category_id') {
+               
+                        this.form_fields[index].value = value[1][0].id;
+                    }
+                }
+                this.single_data.forEach(element => {
+                    let dataFiled = {}
+                    dataFiled.field_name = element.field_name
+                    dataFiled.field_type = element.field_type
+                    this.extra_fields.push(dataFiled)
                 });
             }
         } else {
@@ -142,7 +140,7 @@ export default {
             if (this.param_id) {
                 this.application_format_update($event.target, this.param_id);
             } else {
-                let response = await this.application_format_store($event.target,this.extra_fields);
+                let response = await this.application_format_store($event.target, this.extra_fields);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
                     this.$router.push({ name: `ApplicationFormatAll` });

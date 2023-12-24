@@ -77,14 +77,7 @@
                                         Application Category
                                         <!---->
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Field Name
-                                        <!---->
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Field Type
-                                        <!---->
-                                    </th>
+
                                     <th class="cursor_n_resize">
                                         Status
                                         <!---->
@@ -94,27 +87,18 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr v-for="(item, index) in all_application_formats" :key="index">
                                     <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
-                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.length ? item[0].id : 'N/A' }}</td>
                                     <td>
-                                        {{ item.application_category?.title }}
-                                    </td>
-                                    <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ item.field_name }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ item.field_type }}
-                                        </span>
+                                        {{ item.length ? item[0].application_category?.title : 'N/A' }}
                                     </td>
 
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
+                                        <span class="badge bg-label-success me-1">{{ item.length ? item[0].status :
+                                            'N/A' }}</span>
                                         <!---->
                                     </td>
                                     <td>
@@ -147,9 +131,9 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateUser',
+                                                            name: 'ApplicationFormatCreate',
                                                             query: {
-                                                                id: item.id,
+                                                                id: item.length ? item[0].cp_application_category_id : '',
                                                             },
                                                         }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
@@ -162,7 +146,7 @@
                                                     <span>
                                                         <a @click.prevent="
                                                             user_delete(
-                                                                item.id
+                                                                item.length ? item[0].cp_application_category_id : ''
                                                             )
                                                             " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
@@ -233,10 +217,12 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        loaded: false
+        loaded: false,
+        all_application_formats: [],
     }),
     created: async function () {
         await this.user_get_all();
+        this.all_application_formats = Object.values(this.all_users)
         this.loaded = true
     },
     methods: {

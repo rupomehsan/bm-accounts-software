@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('cp_application_category_id')->nullable();
             $table->bigInteger('applicant_id')->nullable();
             $table->string('pdf_submission_file', 100)->nullable();
-            $table->tinyInteger('is_approve')->nullable();
+            $table->tinyInteger('is_approve')->default(0);
             $table->text('remarks')->nullable();
             $table->text('subject')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();

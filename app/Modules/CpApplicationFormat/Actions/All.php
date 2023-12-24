@@ -25,8 +25,9 @@ class All
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data->with($with)->where($condition)->latest()->get();
             } else {
-                $data = $data->with($with)->where($condition)->latest()->paginate($offset);
+                $data = $data->with($with)->where($condition)->latest()->paginate($offset)->groupBy('cp_application_category_id');
             }
+
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

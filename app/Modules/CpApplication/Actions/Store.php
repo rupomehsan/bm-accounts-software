@@ -8,12 +8,29 @@ use Illuminate\Support\Facades\Hash;
 class Store
 {
     static $model = \App\Modules\CpApplication\Model::class;
+    static $applicationModelValue = \App\Modules\CpApplicationValue\Model::class;
 
     public static function execute(Validation $request)
     {
         try {
-            dd($request->all());
-            if (self::$model::query()->create($request->validated())) {
+
+            $data = $request->validated();
+            $extraField = json_decode($request->input('extraField'));
+            unset($data['extraField']);
+            if ($request->hasFile('pdf_submission_file')) {
+                $pdf_submission_file = $request->file('pdf_submission_file');
+                $fileName = uploader($pdf_submission_file, 'uploads/application');
+                $data['pdf_submission_file'] = $fileName;
+            }
+            // dd($extraField);
+            if ($applicationData = self::$model::query()->create($data)) {
+                $applicationValue = [];
+                $applicationValue['cp_application_id'] = $applicationData->id;
+                foreach ($extraField as $key => $value) {
+                    $applicationValue["title"] = $key;
+                    $applicationValue["value"] = $value;
+                    self::$applicationModelValue::query()->create($applicationValue);
+                }
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

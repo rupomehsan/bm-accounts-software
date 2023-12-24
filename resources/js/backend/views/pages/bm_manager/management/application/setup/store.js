@@ -40,17 +40,18 @@ export const application_setup_store = defineStore("application_setup_store", {
         get_all_application_format_by_category: async function (id) {
             let response = await axios.get("cp-application-formats-by-application-category/" + id);
             response = response.data.data;
-            console.log("data", response);
             this.application_format_by_category_data = response;
+            // console.log("application_format_by_category_data", this.application_format_by_category_data);
         },
         get_all_applications: async function (id) {
             let response = await axios.get("users?get_all=1");
             response = response.data.data;
-            console.log("data", response);
+            // console.log("data", response);
             this.applications_data = response;
         },
-        store: async function (form) {
+        store: async function (form, extraField) {
             let formData = new FormData(form);
+            formData.append('extraField', JSON.stringify(extraField))
             let response = await axios.post("cp-applications", formData);
             return response;
         },

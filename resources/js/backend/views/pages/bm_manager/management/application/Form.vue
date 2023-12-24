@@ -28,7 +28,7 @@
                                     <div class="admin_form">
                                         <div class="form-group">
                                             <label for="" class="my-2">Select applicant</label>
-                                            <select name="applicant_id" id="" class="form-control">
+                                            <select name="applicant_id" id="applicant_id" class="form-control">
                                                 <option value="">Select applicant</option>
                                                 <template v-for="item in applications_data" :key="item.id">
                                                     <option :value="item.id">{{ item.full_name }}</option>
@@ -36,29 +36,41 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label for="" class="my-2">Application subject</label>
+                                            <input type="text" id="subject" class="form-control" name="subject">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="" class="my-2">Select application category</label>
-                                            <select name="" id="" class="form-control" v-model="application_category">
+                                            <select name="cp_application_category_id" id="cp_application_category_id"
+                                                class="form-control" v-model="application_category">
                                                 <option value="">Select application category</option>
                                                 <template v-for="item in application_categories_data" :key="item.id">
                                                     <option :value="item.id">{{ item.title }}</option>
                                                 </template>
                                             </select>
                                         </div>
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <label for="" class="my-2">Pdf submission file</label>
                                             <input type="file" class="form-control" name="pdf_submission_file" id="">
                                         </div>
                                         <template v-for="item in application_format_by_category_data" :key="item.id">
                                             <div class="form-group my-2" v-if="item.field_type !== 'textarea'">
                                                 <label for="" class="my-2">{{ item.field_name }}</label>
-                                                <input :type="item.field_type" :name="item.field_name" class="form-control">
+                                                <input :type="item.field_type" v-model="formData[item.field_name]"
+                                                    class="form-control">
                                             </div>
                                             <div v-if="item.field_type == 'textarea'">
                                                 <label for="" class="my-2 ">{{ item.field_name }}</label>
-                                                <textarea :name="
-                                                item.field_name" id="" class="form-control" cols="" rows="5"></textarea>
+                                                <textarea v-model="formData[item.field_name]" id="" class="form-control"
+                                                    cols="" rows="5"></textarea>
                                             </div>
                                         </template>
+
+
+
+
+
+
                                     </div>
                                 </div>
 
@@ -88,7 +100,9 @@ export default {
     data: () => ({
         form_fields,
         param_id: null,
-        application_category: ''
+        application_category: '',
+        extrafield: {},
+        formData: {},
     }),
 
     created: async function () {
@@ -154,7 +168,7 @@ export default {
             if (this.param_id) {
                 this.application_format_update($event.target, this.param_id);
             } else {
-                let response = await this.application_store($event.target);
+                let response = await this.application_store($event.target, this.formData);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
                     this.$router.push({ name: `ApplicationAll` });
@@ -177,19 +191,25 @@ export default {
     },
 
     computed: {
+
         ...mapState(application_setup_store, {
             single_data: "single_data",
             application_categories_data: "application_categories_data",
             application_format_by_category_data: "application_format_by_category_data",
             applications_data: "applications_data",
         }),
+
     },
 
     watch: {
-        application_category(newVal, oldVal) {
-            this.get_all_application_format_by_category(newVal)
-            console.log("application_format_by_category_data", this.application_format_by_category_data)
+
+        application_category(id) {
+            this.get_all_application_format_by_category(id)
+            console.log(this.application_format_by_category_data);
+            // this.extrafield = this.application_format_by_category_data
+            // this.extrafield.map(item => item.field_name)
         }
+
     }
 
 };

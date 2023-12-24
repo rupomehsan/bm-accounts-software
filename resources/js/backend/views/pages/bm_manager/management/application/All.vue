@@ -95,15 +95,15 @@
                                     </td>
                                     <td>{{ item.id }}</td>
                                     <td>
-                                        {{ item.application_category?.title }}
+                                        {{ item.application_category?.title ?? "N/A" }}
                                     </td>
                                     <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ item.subject }}
+                                        <span >
+                                            {{ item.subject ?? "N/A" }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span :class="item.is_approve == 0 ? 'text-warning' : 'text-success'"
+                                        <span :class="item.is_approve == 0 || item.is_approve == null ? 'text-warning' : 'text-success'"
                                             class=" cursor_pointer">
                                             {{ item.is_approve == 1 ? 'Apprived' : 'Not approved' }}
                                         </span>
@@ -255,7 +255,7 @@ export default {
             console.log(newSearchData);
         },
     },
-    
+
 };
 </script>
 
