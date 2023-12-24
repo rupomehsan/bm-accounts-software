@@ -108,12 +108,11 @@ export default {
             this.param_id = id;
             await this.application_format_get(id);
             if (this.single_data && this.single_data.length > 0) {
-                if (field.name == 'cp_application_category_id') {
-                    if (this.single_data[0] == 'cp_application_category_id') {
-               
-                        this.form_fields[index].value = value[1][0].id;
-                    }
+                if (this.single_data[0].cp_application_category_id) {
+
+                    this.form_fields[0].value = this.single_data[0].cp_application_category_id;
                 }
+
                 this.single_data.forEach(element => {
                     let dataFiled = {}
                     dataFiled.field_name = element.field_name
