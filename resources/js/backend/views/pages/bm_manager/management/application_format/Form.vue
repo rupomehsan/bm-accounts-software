@@ -50,9 +50,15 @@
                                                 <input type="text" v-model="field.field_name" placeholder="field name"
                                                     class="form-control">
                                             </div>
+
                                             <div class="col-md-5">
-                                                <input type="text" class="form-control" v-model="field.field_type"
-                                                    placeholder="field type">
+                                                <select name="" class="form-control" v-model="field.field_type">
+                                                    <option value="text">Text</option>
+                                                    <option value="file">File</option>
+                                                    <option value="checkbox">Checkbox</option>
+                                                    <option value="radio">Radio</option>
+                                                    <option value="textarea">Textarea</option>
+                                                </select>
                                             </div>
                                             <div class="col-md-2">
                                                 <i class="fa fa-minus" role="button" @click="deleteExtraField(index)"></i>
@@ -137,7 +143,8 @@ export default {
 
         submitHandler: async function ($event) {
             if (this.param_id) {
-                this.application_format_update($event.target, this.param_id);
+                this.application_format_update($event.target, this.param_id, this.extra_fields);
+                this.$router.push({ name: `ApplicationFormatAll` });
             } else {
                 let response = await this.application_format_store($event.target, this.extra_fields);
                 if (response.data.status === "success") {

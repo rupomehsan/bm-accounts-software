@@ -4,15 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Application Format Management</h5>
+                        <h5 class="m-0">Application category Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `ApplicationFormatCreate` }"
-                                class="btn rounded-pill btn-outline-info">
-                                <i class="fa fa-pencil me-5px"></i>
-                                All Applications
-                            </router-link> <router-link :to="{ name: `ApplicationFormatCreate` }"
+                            <router-link :to="{ name: `CreateApplicationCategory` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -25,7 +21,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Application format
+                            All application category
                             <!---->
                         </h6>
                         <div class="search">
@@ -74,7 +70,7 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Application Category
+                                        Name
                                         <!---->
                                     </th>
 
@@ -87,18 +83,17 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr v-for="(item, index) in all_application_formats" :key="index">
-                                    <td>
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                    <td style="width: 10px;">
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
-                                    <td>{{ item.length ? item[0].id : 'N/A' }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>
-                                        {{ item.length ? item[0].application_category?.title : 'N/A' }}
+                                       {{ item.title  }}
                                     </td>
 
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{ item.length ? item[0].status :
-                                            'N/A' }}</span>
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
                                         <!---->
                                     </td>
                                     <td>
@@ -131,9 +126,9 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'ApplicationFormatCreate',
+                                                            name: 'CreateApplicationCategory',
                                                             query: {
-                                                                id: item.length ? item[0].id : '',
+                                                                id: item.id,
                                                             },
                                                         }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
@@ -146,7 +141,7 @@
                                                     <span>
                                                         <a @click.prevent="
                                                             user_delete(
-                                                                item.length ? item[0].cp_application_category_id : ''
+                                                                item.id
                                                             )
                                                             " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
@@ -211,28 +206,26 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { application_format_setup_store } from "./setup/store";
+import { application_category_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        loaded: false,
-        all_application_formats: [],
+        loaded: false
     }),
     created: async function () {
         await this.user_get_all();
-        this.all_application_formats = Object.values(this.all_users)
         this.loaded = true
     },
     methods: {
-        ...mapActions(application_format_setup_store, {
+        ...mapActions(application_category_setup_store, {
             user_get_all: "all",
             user_delete: "delete",
         }),
     },
     computed: {
-        ...mapState(application_format_setup_store, {
+        ...mapState(application_category_setup_store, {
             all_users: "all_data",
         }),
     },

@@ -13,9 +13,10 @@ class Show
     {
         try {
             $with = [];
-            if (!$data = self::$model::query()->with($with)->where('cp_application_category_id', $id)->get()) {
+            if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
+            $data = self::$model::where('cp_application_category_id', $data->cp_application_category_id)->get();
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

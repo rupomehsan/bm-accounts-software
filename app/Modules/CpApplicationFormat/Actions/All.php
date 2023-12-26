@@ -10,7 +10,7 @@ class All
     {
         try {
             // dd(request()->all());
-            $offset = request()->input('offset') ?? 10;
+            $offset = request()->input('offset') ?? 20;
             $condition = [];
             $with = ['application_category:id,title'];
             $data = self::$model::query();
