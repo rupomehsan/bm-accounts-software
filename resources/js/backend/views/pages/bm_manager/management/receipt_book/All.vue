@@ -140,7 +140,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'Create',
+                                                            name: 'ReceiptBookCreate',
                                                             query: {
                                                                 id: item.id,
                                                             },

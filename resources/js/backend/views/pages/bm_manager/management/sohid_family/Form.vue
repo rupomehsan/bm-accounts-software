@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllUser` }"
+                                <router-link :to="{ name: `AllSohidFamily` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -97,6 +97,7 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
+                this.$router.push({ name: `AllSohidFamily` });
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {

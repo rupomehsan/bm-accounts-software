@@ -6,12 +6,12 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} Daily  Income
+                                {{ param_id ? "Update" : "Create new" }} Monthly Income
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllReceiptBook` }"
+                                <router-link :to="{ name: `AllDailyIncome` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -173,11 +173,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
+                this.$router.push({ name: `AllDailyIncome` });
             } else {
                 let response = await this.store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `All` });
+                    this.$router.push({ name: `AllDailyIncome` });
                 }
             }
         },

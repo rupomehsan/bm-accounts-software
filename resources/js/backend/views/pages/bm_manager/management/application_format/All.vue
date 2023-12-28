@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `ApplicationFormatCreate` }"
+                            <router-link :to="{ name: `ApplicationAll` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 All Applications
@@ -66,7 +66,7 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
+                                    <th class="w-10">
                                         <input type="checkbox" class="form-check-input" />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">

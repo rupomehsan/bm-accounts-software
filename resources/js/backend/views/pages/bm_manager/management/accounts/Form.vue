@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllReceiptBook` }"
+                                <router-link :to="{ name: `AllPaymentMethod` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -68,9 +68,14 @@ export default {
             await this.user_get(id);
             if (this.single_user) {
                 form_fields.forEach((field, index) => {
-                    Object.entries(this.single_user).forEach((value) => {
-                        if (field.name == value[0]) {
-                            this.form_fields[index].value = value[1];
+                    Object.entries(this.single_user).forEach((item) => {
+                        if (field.name == item[0]) {
+                            this.form_fields[index].value = item[1];
+                        }
+                        if (field.name == 'value') {
+                            if (item[0] == 'account_number') {
+                                this.form_fields[index].value = item[1]?.value
+                            }
                         }
                     });
                 });
@@ -92,11 +97,13 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
+                this.$router.push({ name: `AllPaymentMethod` });
+
             } else {
                 let response = await this.account_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `All` });
+                    this.$router.push({ name: `AllPaymentMethod` });
                 }
             }
         },

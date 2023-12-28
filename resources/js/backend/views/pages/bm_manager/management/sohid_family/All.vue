@@ -61,7 +61,7 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
+                                    <th class="w-10">
                                         <input type="checkbox" class="form-check-input" />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">

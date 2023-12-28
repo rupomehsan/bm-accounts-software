@@ -18,13 +18,14 @@ class Update
                 return messageResponse('Data not found...', 404, 'error');
             }
 
+
             $data->update($request->validated());
             $userName = self::$userModel::find($data->branch_id);
             $accountLogModel = self::$accountLogModel::query()->where('id', $data->account_log_id)->first();
             $accountLogModel->user_id = $data->branch_id;
             $accountLogModel->user_type = "branch";
             $accountLogModel->date = $data->date;
-            $accountLogModel->name = $userName->full_name;
+            $accountLogModel->name = $userName->full_name ?? "";
             $accountLogModel->amount = $data->amount;
             $accountLogModel->category_id = $data->account_category_id;
             $accountLogModel->account_id = $request->input('account_id');

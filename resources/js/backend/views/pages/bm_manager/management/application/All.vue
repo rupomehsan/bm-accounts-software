@@ -105,7 +105,7 @@
                                     <td>
                                         <span :class="item.is_approve == 0 || item.is_approve == null ? 'text-warning' : 'text-success'"
                                             class=" cursor_pointer">
-                                            {{ item.is_approve == 1 ? 'Apprived' : 'Not approved' }}
+                                            {{ item.is_approve == 1 ? 'Approved' : 'Not approved' }}
                                         </span>
                                     </td>
 
@@ -118,32 +118,11 @@
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
                                                     class="fa fa-gears"></i></a>
                                             <ul>
-                                                <!-- <li>
-                                                    <a href="">
-                                                        <i
-                                                            class="fa text-info fa-eye"
-                                                        ></i>
-                                                        Quick View
-                                                    </a>
-                                                </li> -->
-                                                <!-- <li>
-                                                    <span>
-                                                        <a
-                                                            href="#/user/details/43"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-secondary fa-eye"
-                                                            ></i>
-                                                            Details
-                                                        </a>
 
-                                                    </span>
-                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateUser',
+                                                            name: 'ApplicationCreate',
                                                             query: {
                                                                 id: item.id,
                                                             },

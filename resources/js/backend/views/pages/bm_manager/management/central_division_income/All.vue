@@ -4,11 +4,12 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Central division Income Management</h5>
+                        <h5 class="m-0">Department Income Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateCentralDivisionIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `CreateCentralDivisionIncome` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -145,7 +146,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateBranchIncome',
+                                                            name: 'CreateCentralDivisionIncome',
                                                             query: {
                                                                 id: item.id,
                                                             },

@@ -8,8 +8,9 @@ use App\Modules\AccountManagement\AccountBranchTarget\Actions\Show;
 use App\Modules\AccountManagement\AccountBranchTarget\Actions\Store;
 use App\Modules\AccountManagement\AccountBranchTarget\Actions\Update;
 use App\Modules\AccountManagement\AccountBranchTarget\Actions\Validation;
+use App\Modules\AccountManagement\AccountBranchTarget\Actions\getBranchTargetByBranchId;
 use App\Http\Controllers\Controller as ControllersController;
-
+use PhpParser\Node\Expr\FuncCall;
 
 class Controller extends ControllersController
 {
@@ -32,7 +33,7 @@ class Controller extends ControllersController
         return $data;
     }
 
-     public function update(Validation $request, $id)
+    public function update(Validation $request, $id)
     {
         $data = Update::execute($request, $id);
         return $data;
@@ -41,6 +42,12 @@ class Controller extends ControllersController
     public function destroy($id)
     {
         $data = Delete::execute($id);
+        return $data;
+    }
+
+    public function getBranchTargetByBranchId($id)
+    {
+        $data = getBranchTargetByBranchId::execute($id);
         return $data;
     }
 }

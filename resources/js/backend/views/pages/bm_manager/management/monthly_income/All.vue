@@ -68,7 +68,7 @@
                                         ID
                                         <!---->
                                     </th>
-                                   
+
                                     <th class="cursor_n_resize">
                                         Date
                                         <!---->
@@ -145,7 +145,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateBranchIncome',
+                                                            name: 'CreateDailyIncome',
                                                             query: {
                                                                 id: item.id,
                                                             },

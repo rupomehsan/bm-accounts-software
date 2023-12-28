@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} user
+                                {{ param_id ? "Update" : "Create new" }} Application
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -28,7 +28,8 @@
                                     <div class="admin_form">
                                         <div class="form-group">
                                             <label for="" class="my-2">Select applicant</label>
-                                            <select name="applicant_id" id="applicant_id" class="form-control">
+                                            <select v-model="applicant_id" name="applicant_id" id="applicant_id"
+                                                class="form-control">
                                                 <option value="">Select applicant</option>
                                                 <template v-for="item in applications_data" :key="item.id">
                                                     <option :value="item.id">{{ item.full_name }}</option>
@@ -37,7 +38,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="my-2">Application subject</label>
-                                            <input type="text" id="subject" class="form-control" name="subject">
+                                            <input v-model="subject" type="text" id="subject" class="form-control"
+                                                name="subject">
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="my-2">Select application category</label>
@@ -53,21 +55,22 @@
                                             <label for="" class="my-2">Pdf submission file</label>
                                             <input type="file" class="form-control" name="pdf_submission_file" id="">
                                         </div>
+
                                         <template v-for="item in application_format_by_category_data" :key="item.id">
-                                            <div class="form-group my-2" v-if="item.field_type !== 'textarea'">
-                                                <label for="" class="my-2">{{ item.field_name }}</label>
-                                                <input :type="item.field_type" v-model="formData[item.field_name]"
-                                                    class="form-control">
-                                            </div>
-                                            <div v-if="item.field_type == 'textarea'">
-                                                <label for="" class="my-2 ">{{ item.field_name }}</label>
-                                                <textarea v-model="formData[item.field_name]" id="" class="form-control"
-                                                    cols="" rows="5"></textarea>
+                                            <div class="form-group my-2">
+                                                <label class="my-2">{{ item.field_name }}</label>
+
+                                                <template v-if="item.field_type !== 'textarea'">
+                                                    <input :type="item.field_type" v-model="formData[item.field_name]"
+                                                        class="form-control">
+                                                </template>
+
+                                                <template v-else>
+                                                    <textarea v-model="formData[item.field_name]" class="form-control"
+                                                        rows="5"></textarea>
+                                                </template>
                                             </div>
                                         </template>
-
-
-
 
 
 
@@ -103,6 +106,8 @@ export default {
         application_category: '',
         extrafield: {},
         formData: {},
+        applicant_id: '',
+        subject: '',
     }),
 
     created: async function () {
@@ -112,38 +117,42 @@ export default {
         await this.get_all_application_categories()
         await this.get_all_applications()
 
-        this.form_fields.forEach((field) => {
 
-            if (field.name == 'cp_application_category_id') {
-                field.data_list = []
-                this.application_categories_data.forEach((item) => {
-                    let fielData = {}
-                    fielData.label = item.title
-                    fielData.value = item.id
-                    field.data_list.push(fielData)
-                })
-            }
-
-        })
 
         if (id) {
             this.param_id = id;
-            await this.application_format_get(id);
+            await this.application_singledata_get(id);
             if (this.single_data) {
                 this.form_fields.forEach((field, index) => {
+
                     Object.entries(this.single_data).forEach((value) => {
 
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
 
-                        if (field.name == 'user_role_id') {
-                            if (value[0] == 'roles') {
-                                console.log("value", value[1])
-                                this.form_fields[index].value = value[1][0].id;
-                            }
+                        if (value[0] == 'cp_application_category_id') {
+                            this.application_category = value[1];
                         }
+
+                        if (value[0] == 'applicant_id') {
+                            this.applicant_id = value[1]
+                        }
+
+                        if (value[0] == 'subject') {
+                            this.subject = value[1]
+                        }
+                        if (value[0] == 'application_values') {
+                            let application_value = value[1];
+                            this.editData = application_value.map((item) => ({
+                                title: item.title,
+                                value: item.value
+                            }));
+                            console.log("test", this.editData);
+                        }
+
                     });
+
                 });
             }
         } else {
@@ -157,7 +166,7 @@ export default {
 
         ...mapActions(application_setup_store, {
             application_format_update: "update",
-            application_format_get: "get",
+            application_singledata_get: "get",
             application_store: "store",
             get_all_application_categories: "get_all_application_categories",
             get_all_application_format_by_category: "get_all_application_format_by_category",
@@ -167,31 +176,19 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.application_format_update($event.target, this.param_id);
+                this.$router.push({ name: `ApplicationAll` });
             } else {
                 let response = await this.application_store($event.target, this.formData);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
                     this.$router.push({ name: `ApplicationAll` });
                 }
+
             }
         },
-
-        addExtraField: function () {
-            let dataFiled = {}
-            dataFiled.field_name = ''
-            dataFiled.field_type = ''
-            this.extra_fields.push(dataFiled)
-        },
-
-        deleteExtraField: function (index) {
-            this.extra_fields.splice(index, 1)
-        }
-
-
     },
 
     computed: {
-
         ...mapState(application_setup_store, {
             single_data: "single_data",
             application_categories_data: "application_categories_data",
@@ -202,12 +199,8 @@ export default {
     },
 
     watch: {
-
         application_category(id) {
             this.get_all_application_format_by_category(id)
-            console.log(this.application_format_by_category_data);
-            // this.extrafield = this.application_format_by_category_data
-            // this.extrafield.map(item => item.field_name)
         }
 
     }

@@ -13,7 +13,9 @@ body[main-theme-layout="main-theme-layout-4"] .page-wrapper .page-body-wrapper .
     font-size: 17px !important;
     font-weight: 400 !important;
 }
-
+.w-10{
+  width: 10px;
+}
 .setting_pages_body {
     display: grid;
     grid-template-columns: 310px calc(100vw - 360px);

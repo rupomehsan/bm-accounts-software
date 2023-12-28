@@ -80,7 +80,7 @@ export const monthly_income_setup_store = defineStore("monthly_income_setup_stor
         delete: async function (id) {
             var data = await window.s_confirm();
             if (data) {
-                let response = await axios.delete("account-receipt-books/" + id);
+                let response = await axios.delete("account-incomes/" + id);
                 window.s_alert("Data deleted");
                 this.all();
                 console.log(response.data);

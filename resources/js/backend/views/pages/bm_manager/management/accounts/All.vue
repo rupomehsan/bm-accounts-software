@@ -61,7 +61,7 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
+                                    <th class="w-10">
                                         <input type="checkbox" class="form-check-input" />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
@@ -69,7 +69,11 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                       Name
+                                        Name
+                                        <!---->
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Account Number
                                         <!---->
                                     </th>
 
@@ -89,6 +93,9 @@
                                     <td>{{ index + 1 }}</td>
                                     <td>
                                         {{ item.name }}
+                                    </td>
+                                    <td>
+                                        {{ item.account_number?.value ?? 'N/A' }}
                                     </td>
 
                                     <td>
@@ -124,21 +131,19 @@
 
                                                     </span>
                                                 </li> -->
-                                                <li>
+                                                <li v-if="item.name !== 'cash'">
                                                     <span>
                                                         <router-link :to="{
                                                             name: 'CreatePaymentMethod',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
+                                                            query: { id: item.id, },
                                                         }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <li v-if="item.name !== 'bank_account' && item.name !== 'cash'">
                                                     <span>
                                                         <a @click.prevent="
                                                             user_delete(

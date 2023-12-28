@@ -92,11 +92,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
+                this.$router.push({ name: `AllReceiptBook` });
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `All` });
+                    this.$router.push({ name: `AllReceiptBook` });
                 }
             }
         },

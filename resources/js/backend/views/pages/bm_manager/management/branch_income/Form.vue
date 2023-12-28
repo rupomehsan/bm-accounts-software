@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllReceiptBook` }"
+                                <router-link :to="{ name: `AllBranchIncome` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -38,6 +38,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div v-if="branch_target_data.length" class="m-5">
+                            <h3 class="text-center border py-2">Target</h3>
+                            <table class="table table-hover table-bordered">
+                                <thead class="table-light">
+                                    <tr class="t-head">
+                                        <td>Name</td>
+                                        <td>Session</td>
+                                        <td>Amount</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in branch_target_data" :key="item">
+                                        <td>{{ item.user?.full_name }}</td>
+                                        <td>{{ item.session }}</td>
+                                        <td>{{ item.target_amount }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-outline-info">
                                 <i class="fa fa-upload"></i>
@@ -46,6 +65,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
@@ -60,10 +80,13 @@ export default {
     data: () => ({
         form_fields,
         param_id: null,
-        amount: 0
+        amount: 0,
+        branch_target_data: []
     }),
 
     created: async function () {
+
+
 
         await this.get_all_account_receipt_book()
         await this.get_all_account_categories()
@@ -103,12 +126,14 @@ export default {
             }
 
             if (field.name == 'branch_id') {
+
                 this.all_branch.forEach((item) => {
                     let formData = {}
                     formData.label = item.full_name
                     formData.value = item.id
                     field.data_list.push(formData)
                 })
+
             }
 
             if (field.name == 'account_id') {
@@ -167,17 +192,19 @@ export default {
             store: "store",
             get_single_branch_income: "get",
             income_update: "update",
+            get_branch_target_by_brach_id: 'get_branch_target_by_brach_id'
 
         }),
 
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
+                this.$router.push({ name: `AllBranchIncome` });
             } else {
                 let response = await this.store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `All` });
+                    this.$router.push({ name: `AllBranchIncome` });
                 }
             }
         },
@@ -211,6 +238,13 @@ export default {
             // Do something with the input value
         },
 
+        async get_branch_target(event) {
+            let brachId = event.target.value
+            let response = await this.get_branch_target_by_brach_id(brachId)
+            this.branch_target_data = response
+            console.log("target", this.branch_target_data);
+        }
+
     },
 
     computed: {
@@ -227,12 +261,16 @@ export default {
 
     mounted() {
         const amount = document.getElementById('amount');
-        const accountId = document.getElementById('account_id');
         if (amount) {
             amount.addEventListener('keyup', this.amountHandleKeyup);
         }
+        const accountId = document.getElementById('account_id');
         if (accountId) {
             accountId.addEventListener('change', this.accountHandler);
+        }
+        const branchId = document.getElementById('branch_id')
+        if (branchId) {
+            branchId.addEventListener('change', this.get_branch_target)
         }
     },
 

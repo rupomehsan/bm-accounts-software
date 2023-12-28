@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class Model extends EloquentModel
 {
+    static $accountNumberModel = \App\Modules\AccountManagement\AccountNumber\Model::class;
     protected $table = "accounts";
     protected $guarded = [];
 
@@ -23,5 +24,10 @@ class Model extends EloquentModel
     public function scopeActive($q)
     {
         return $q->where('status', 'active');
+    }
+
+    public function account_number()
+    {
+        return $this->hasOne(self::$accountNumberModel, 'account_id');
     }
 }

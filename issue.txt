@@ -9,22 +9,24 @@ page link thik kora lagbe -dn
 
 
 -> receipt book
-   -> action button thkbena kono
-   -> date add korte hobe
+   -> action button thkbena kono -dn
+   -> date add korte hobe -dn
 -> notification
-   -> select user and dempertment issue
--> income expence search
+   -> select user and dempertment issue -dn
+-> income expence search -dn
 
 
 // bm part
 // target moukuf alada table
 
 -> application formate Management
-    -> title ,field name and type
-    -> show all application button
+    -> title ,field name and type -dn
+    -> show all application button -dn
 
 
-Applicatin management
+
+
+Applicatin management -dn (edit issue)
 
 Branch Target Management
     -> date wise filter
@@ -34,14 +36,14 @@ Branch Target Management
 2021 target 1500 tk  - 18000 = 1600
 2022 target 2000 tk  - 24000
 2023 target 2500 tk  - 28000
-                total=82,000 - 60000 - 2000
-                due = 12000
+            total    = 82,000 - 60000 - 2000
+                due  = 12000
 
 
- accounts -> cash and banc account fixed
-          -> account delete korar somoy oi account e jode kono income theke thle delete kora jabe na
+ accounts -> cash and banc account fixed -dn
+          -> account delete korar somoy oi account e jode kono income theke thle delete kora jabe na -dn
 
 
-user role -> wellwisher user crate hobe
+user role -> wellwisher user crate hobe -dn
 
-account category managemnet
+account category managemnet -dn

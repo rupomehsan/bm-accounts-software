@@ -21,7 +21,6 @@
                     <div class="card-header align-items-center">
                         <h6>
                             All Branch Income
-                            <!---->
                         </h6>
                         <div class="search">
                             <form action="#">
@@ -103,7 +102,7 @@
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
                                     <td>{{ index + 1 }}</td>
-                                   
+
                                     <td>
                                         {{ item.date }}
                                     </td>

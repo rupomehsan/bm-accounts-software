@@ -14,10 +14,22 @@ return new class extends Migration
         Schema::create('account_branch_targets', function (Blueprint $table) {
             $table->id();
             $table->string('account_category_id')->nullable();
-            $table->string('session', 100)->nullable();
+            $table->date('session')->nullable();
             $table->json('comment', 100)->nullable();
             $table->bigInteger('branch_id')->nullable();
             $table->float('target_amount')->nullable();
+            $table->bigInteger('creator')->unsigned()->nullable();
+            $table->string('slug', 50)->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
+        });
+
+        Schema::create('target_moukuf', function (Blueprint $table) {
+            $table->id();
+            $table->string('account_category_id')->nullable();
+            $table->string('application_id')->nullable();
+            $table->string('user_id', 100)->nullable();
+            $table->float('amount')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -59,11 +59,17 @@ export const branch_income_setup_store = defineStore("branch_income_setup_store"
             // console.log("data", response);
             this.all_branch = response;
         },
+
         get_all_accounts: async function () {
             let response = await axios.get("accounts?get_all=1");
             response = response.data.data;
             // console.log("data", response);
             this.all_accounts = response;
+        },
+        get_branch_target_by_brach_id: async function (id) {
+            let response = await axios.get("get-account-branch-target-branch-id/" + id);
+            response = response.data.data;
+            return response
         },
 
         store: async function (form) {
@@ -80,7 +86,7 @@ export const branch_income_setup_store = defineStore("branch_income_setup_store"
         delete: async function (id) {
             var data = await window.s_confirm();
             if (data) {
-                let response = await axios.delete("account-receipt-books/" + id);
+                let response = await axios.delete("account-incomes/" + id);
                 window.s_alert("Data deleted");
                 this.all();
                 console.log(response.data);

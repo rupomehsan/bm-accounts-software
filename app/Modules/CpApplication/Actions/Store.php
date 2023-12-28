@@ -13,7 +13,7 @@ class Store
     public static function execute(Validation $request)
     {
         try {
-
+            // dd($request->all());
             $data = $request->validated();
             $extraField = json_decode($request->input('extraField'));
             unset($data['extraField']);

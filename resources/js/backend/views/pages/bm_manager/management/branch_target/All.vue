@@ -89,7 +89,7 @@
 
                             <tbody class="table-border-bottom-0">
                                 <tr v-for="(item, index) in all_users.data" :key="item.id">
-                                    <td>
+                                    <td class="w-10">
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
                                     <td>{{ index + 1 }}</td>

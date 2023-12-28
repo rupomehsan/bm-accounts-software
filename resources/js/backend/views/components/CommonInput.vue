@@ -18,6 +18,7 @@
         </div>
         <div v-if="type === 'select'" class="mt-1 mb-3">
             <select :name="name" class="form-select" :id="name" @change="errorReset">
+                <option value="">Select item</option>
                 <option v-for="data in data_list" :key="data" :value="data.value" :selected="data.value == value">
                     {{ data.label }}
                 </option>

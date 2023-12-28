@@ -5,12 +5,17 @@ namespace App\Modules\AccountManagement\Account\Actions;
 class Delete
 {
     static $model = \App\Modules\AccountManagement\Account\Model::class;
+    static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
 
     public static function execute($id)
     {
         try {
-            if (!$data=self::$model::find($id)) {
+            if (!$data = self::$model::find($id)) {
                 return messageResponse('Data not found...', 404, 'error');
+            }
+            $isExistAccountLog = self::$accountLogModel::where('account_id', $id)->first();
+            if ($isExistAccountLog) {
+                return messageResponse("You can't delete item its already use for payment ", 400, 'error');
             }
             $data->delete();
             return messageResponse('Item successfully deleted', 200, 'success');

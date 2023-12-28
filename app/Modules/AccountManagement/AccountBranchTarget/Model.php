@@ -10,6 +10,7 @@ class Model extends EloquentModel
 {
     static $accountModel = \App\Modules\AccountManagement\AccountCategory\Model::class;
     static $userModel = \App\Modules\User\Model::class;
+    static $cpApplicationModel = \App\Modules\CpApplication\Model::class;
 
     protected $table = "account_branch_targets";
     protected $guarded = [];
@@ -53,4 +54,11 @@ class Model extends EloquentModel
             },
         );
     }
+
+    public function cp_application()
+    {
+        return $this->hasOne(self::$cpApplicationModel, 'applicant_id', 'branch_id');
+    }
+
+
 }

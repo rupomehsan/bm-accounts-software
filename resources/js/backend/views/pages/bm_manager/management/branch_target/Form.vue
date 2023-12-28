@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} user
+                                {{ param_id ? "Update" : "Create new" }} branch target
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -66,6 +66,7 @@ import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { banch_target_store } from "./setup/store";
 export default {
+
     data: () => ({
         form_fields,
         param_id: null,
@@ -141,15 +142,17 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
+                this.$router.push({ name: `AllBranchTarget` });
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `All` });
+                    this.$router.push({ name: `AllBranchTarget` });
                 }
             }
         },
     },
+
     computed: {
         ...mapState(banch_target_store, {
             single_user: "single_data",
@@ -157,6 +160,7 @@ export default {
             all_branch_data: "all_branch_data"
         }),
     },
+
 };
 </script>
 

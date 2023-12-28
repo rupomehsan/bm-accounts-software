@@ -123,7 +123,7 @@ export default {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
-                    this.$router.push({ name: `AllUser` });
+                    this.$router.push({ name: `AllApplicationCategory` });
                 }
             }
         },
