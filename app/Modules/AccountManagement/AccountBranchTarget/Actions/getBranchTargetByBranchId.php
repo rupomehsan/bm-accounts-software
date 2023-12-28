@@ -61,7 +61,8 @@ class getBranchTargetByBranchId
                 $data = [
                     'data' => $sessionData,
                     'totalPayable' => $totalPayable,
-                    'totalPaid' => $totalPaid
+                    'totalPaid' => $totalPaid,
+                    'due' => abs($totalPayable - $totalPaid),
                 ];
                 return entityResponse($data);
             } else {
@@ -70,7 +71,8 @@ class getBranchTargetByBranchId
                         "session" => null,
                         "target_amount" => null,
                         "total_payable" => null,
-                        "total_paid" => null
+                        "total_paid" => null,
+                        "due" => null
                     ],
                     'totalPayable' => 0,
                     'totalPaid' => 0
