@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Branch Target Management</h5>
+                        <h5 class="m-0">Account category Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `BranchTargetCreate` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `CreateAccountCategory` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -20,27 +20,15 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All Branch Target
-
-
+                            All application category
+                            <!---->
                         </h6>
-                        <div class="search w-25">
+                        <div class="search">
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
                             </form>
                         </div>
-                        <div class="w-25 d-flex gap-2">
-                            <input type="date" v-model="startDate" class="form-control w-50" @change="getstartDate">
-                            <input type="date" v-model="endDate" class="form-control w-50" @change="getendDate">
-                        </div>
-                        <select name="session" v-model="session" class="form-select w-25">
-                            <option value="" selected>Session</option>
-                            <template v-for="(sessionData, index) in all_branch_target_data.session" :key="index">
-                                <option :value="sessionData">{{ sessionData }}</option>
-                            </template>
-                        </select>
-
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
@@ -54,7 +42,7 @@
                                     </li>
                                     <!---->
                                     <li>
-                                        <a @click.prevent class="">
+                                        <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Import
                                         </a>
@@ -81,50 +69,63 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Account Category
-                                        <!---->
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Branch Name
-                                        <!---->
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Target Amount
-                                        <!---->
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Session
+                                        Name
                                         <!---->
                                     </th>
 
+                                    <th class="cursor_n_resize">
+                                        Status
+                                        <!---->
+                                    </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
-                            <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_branch_target_data.data?.data" :key="item.id">
-                                    <td class="w-10">
+                            <tbody class="table-border-bottom-0" v-if="loaded">
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                    <td style="width: 10px;">
                                         <input type="checkbox" class="form-check-input" />
                                     </td>
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>
-                                        {{ item.account_category?.title }}
+                                        {{ item.title }}
                                     </td>
-                                    <td>
-                                        {{ item.user?.full_name }}
-                                    </td>
-                                    <td>{{ item.target_amount }}</td>
-                                    <td>{{ item.session }}</td>
 
+                                    <td>
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
+                                        <!---->
+                                    </td>
                                     <td>
                                         <div class="table_actions">
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
                                                     class="fa fa-gears"></i></a>
                                             <ul>
+                                                <!-- <li>
+                                                    <a href="">
+                                                        <i
+                                                            class="fa text-info fa-eye"
+                                                        ></i>
+                                                        Quick View
+                                                    </a>
+                                                </li> -->
+                                                <!-- <li>
+                                                    <span>
+                                                        <a
+                                                            href="#/user/details/43"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-secondary fa-eye"
+                                                            ></i>
+                                                            Details
+                                                        </a>
+
+                                                    </span>
+                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'BranchTargetCreate',
+                                                            name: 'CreateAccountCategory',
                                                             query: {
                                                                 id: item.id,
                                                             },
@@ -155,7 +156,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_branch_target_data" :method="get_all_data" />
+                        <pagination :data="all_users" :method="user_get_all" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -169,12 +170,34 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_branch_target_data.total }}</span>
+                                <span>{{ all_users.total }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="canvas_backdrop">
+                    <!---->
+                </div>
+                <div class="canvas_backdrop">
+                    <div class="content right">
+                        <div class="content_header">
+                            <h3 class="offcanvas-title">Selected Users</h3>
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <div class="cotent_body table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>id</th>
+                                        <th>name</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -182,59 +205,37 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { banch_target_store } from "./setup/store";
-
+import { account_category_setup_store } from "./setup/store";
 
 export default {
-
     data: () => ({
         offset: "5",
         search_data: "",
-        session: '',
-        startDate: '',
-        endDate: ""
+        loaded: false
     }),
-
     created: async function () {
-        this.startDate = moment().subtract(1, 'months').startOf('month').format("YYYY-MM-DD")
-        this.endDate = moment().format("YYYY-MM-DD")
-        await this.get_all_data();
+        await this.user_get_all();
+        this.loaded = true
     },
-
     methods: {
-        ...mapActions(banch_target_store, {
-            get_all_data: "all",
+        ...mapActions(account_category_setup_store, {
+            user_get_all: "all",
             user_delete: "delete",
-            get_session_wise_data: "get_session_wise_data",
-            get_date_wise_data: "get_date_wise_data",
         }),
-        getstartDate: async function () {
-            this.get_date_wise_data(this.startDate, this.endDate)
-        },
-        getendDate: async function () {
-            this.get_date_wise_data(this.startDate, this.endDate)
-        }
     },
-
     computed: {
-        ...mapState(banch_target_store, {
-            all_branch_target_data: "all_data",
+        ...mapState(account_category_setup_store, {
+            all_users: "all_data",
         }),
     },
-
     watch: {
         offset: async function (newOffset, oldOffset) {
-            await this.get_all_data("users");
+            await this.user_get_all("users");
         },
         search_data: function (newSearchData, oldSearchData) {
             console.log(newSearchData);
         },
-        session: async function (data) {
-            this.get_session_wise_data(data)
-        },
-
     },
-
 };
 </script>
 

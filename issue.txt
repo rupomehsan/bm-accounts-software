@@ -23,8 +23,7 @@ page link thik kora lagbe -dn
     -> title ,field name and type -dn
     -> show all application button -dn
 
-
-
+785979
 
 Applicatin management -dn (edit issue)
 

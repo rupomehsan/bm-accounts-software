@@ -38,25 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="branch_target_data.length" class="m-5">
-                            <h3 class="text-center border py-2">Target</h3>
-                            <table class="table table-hover table-bordered">
-                                <thead class="table-light">
-                                    <tr class="t-head">
-                                        <td>Name</td>
-                                        <td>Session</td>
-                                        <td>Amount</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="item in branch_target_data" :key="item">
-                                        <td>{{ item.user?.full_name }}</td>
-                                        <td>{{ item.session }}</td>
-                                        <td>{{ item.target_amount }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-outline-info">
                                 <i class="fa fa-upload"></i>
@@ -64,6 +46,33 @@
                             </button>
                         </div>
                     </form>
+                </div>
+                <div v-if="branch_target_data.data?.length" class="mx-5">
+                    <h6 class="text-center border py-2">History</h6>
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr class="t-head text-center">
+                                <td>Session</td>
+                                <td>Target amount</td>
+                                <td>Total payable</td>
+                                <td>Total paid</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in branch_target_data.data" :key="item" class="text-white text-center">
+                                <td>{{ item.session }}</td>
+                                <td>{{ item.target_amount ?? 0 }}</td>
+                                <td>{{ item.total_payable ?? 0 }}</td>
+                                <td>{{ item.total_paid ?? 0}}</td>
+                            </tr>
+                            <tr class="text-white text-center">
+                                <td class="fw-bold text-primary">Summery : -> </td>
+                                <td class="fw-bold text-primary">Total paid : {{ branch_target_data.totalPaid }}</td>
+                                <td class="fw-bold text-primary">Total payable : {{ branch_target_data.totalPayable }}</td>
+                                <td class="fw-bold text-primary">Total due : {{ branch_target_data.due }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
@@ -85,7 +94,6 @@ export default {
     }),
 
     created: async function () {
-
 
 
         await this.get_all_account_receipt_book()
@@ -240,7 +248,8 @@ export default {
 
         async get_branch_target(event) {
             let brachId = event.target.value
-            let response = await this.get_branch_target_by_brach_id(brachId)
+            let account_category = document.getElementById('account_category_id').value
+            let response = await this.get_branch_target_by_brach_id(account_category, brachId)
             this.branch_target_data = response
             console.log("target", this.branch_target_data);
         }

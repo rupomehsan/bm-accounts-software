@@ -12,6 +12,7 @@ import sohid_family_routes from "../management/sohid_family/setup/routes"
 import application_format_route from "../management/application_format/setup/routes"
 import application_route from "../management/application/setup/routes"
 import application_category_route from "../management/application_category/setup/routes"
+import account_category_route from "../management/account_category/setup/routes"
 import user_routes from "../management/user/setup/routes"
 
 const routes =
@@ -36,6 +37,7 @@ const routes =
         application_format_route,
         application_route,
         application_category_route,
+        account_category_route,
         user_routes,
     ]
 };

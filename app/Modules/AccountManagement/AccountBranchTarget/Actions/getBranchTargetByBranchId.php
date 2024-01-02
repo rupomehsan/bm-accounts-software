@@ -10,17 +10,18 @@ class getBranchTargetByBranchId
     static $model = \App\Modules\AccountManagement\AccountBranchTarget\Model::class;
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
 
-    public static function execute($userId)
+    public static function execute()
     {
         try {
+            // dd(request()->all());
 
-            $accountCategory = 1;
-            if ($accountCategory && $userId) {
+            $accountCategory = request()->input('account_category_id');
 
+            if ($accountCategory && request()->input('branch_id')) {
                 $totalPayable = 0;
                 $totalPaid = 0;
                 $sessionData = [];
-                $getSessiontData = self::$model::query()->where('branch_id', $userId)->orderBy('session', 'asc')->get();
+                $getSessiontData = self::$model::query()->where('branch_id', request()->input('branch_id'))->orderBy('session', 'asc')->get();
                 foreach ($getSessiontData as $item) {
                     $sessionData[] = [
                         "session" => $item->session,
@@ -31,6 +32,7 @@ class getBranchTargetByBranchId
                 foreach ($sessionData as $key  => $item) {
 
                     $startDate = Carbon::parse($sessionData[$key]['session']);
+
                     $endDate = null;
 
                     if (isset($sessionData[$key + 1])) {
@@ -49,12 +51,10 @@ class getBranchTargetByBranchId
 
 
                     $sessionData[$key]['total_paid'] = self::$accountLogModel::where('category_id', $accountCategory)
-                        ->where('user_id', $userId)
+                        ->where('user_id', request()->input('branch_id'))
                         ->whereDate('date', '>=', $startDate->clone()->format('Y-m-d'))
                         ->whereDate('date', '<', $endDate->clone()->format('Y-m-d'))
                         ->sum('amount');
-
-
                     $totalPaid += $sessionData[$key]['total_paid'];
                 }
 
@@ -68,6 +68,7 @@ class getBranchTargetByBranchId
             } else {
                 return [
                     'data' => [
+
                         "session" => null,
                         "target_amount" => null,
                         "total_payable" => null,

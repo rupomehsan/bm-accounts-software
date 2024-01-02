@@ -66,8 +66,8 @@ export const branch_income_setup_store = defineStore("branch_income_setup_store"
             // console.log("data", response);
             this.all_accounts = response;
         },
-        get_branch_target_by_brach_id: async function (id) {
-            let response = await axios.get("get-account-branch-target-branch-id/" + id);
+        get_branch_target_by_brach_id: async function (account_category, branch_id) {
+            let response = await axios.get(`get-account-branch-target-branch-id?account_category_id=${account_category}&branch_id=${branch_id}`);
             response = response.data.data;
             return response
         },

@@ -45,9 +45,9 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function getBranchTargetByBranchId($id)
+    public function getBranchTargetByBranchId()
     {
-        $data = getBranchTargetByBranchId::execute($id);
+        $data = getBranchTargetByBranchId::execute();
         return $data;
     }
 }

@@ -49,15 +49,18 @@
                     Fund</router-link>
             </li>
 
-            <li class="my-2 d-flex align-items-center gap-2">
-                <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center" href="">Users</router-link>
-            </li>
+
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link :to="{ name: `AllApplicationCategory` }" class="d-flex align-items-center" href="">Application
                     Category</router-link>
             </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllAccountCategory` }" class="d-flex align-items-center" href="">Account
+                    Category</router-link>
+            </li>
+
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link :to="{ name: `ApplicationFormatAll` }" class="d-flex align-items-center" href="">Application
@@ -67,6 +70,10 @@
                 <i class="icon-desktop"></i>
                 <router-link :to="{ name: `ApplicationAll` }" class="d-flex align-items-center" href="">Application
                 </router-link>
+            </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center" href="">Users</router-link>
             </li>
         </div>
     </div>

@@ -24,7 +24,7 @@ export default [
     {
         name: "session",
         label: "Enter session",
-        type: "month",
+        type: "date",
         value: "",
     },
     {
