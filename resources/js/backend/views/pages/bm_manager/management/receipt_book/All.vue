@@ -30,6 +30,7 @@
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
+                            <button v-if="child_item.length" class="btn btn-primary" @click="bulkActions">Delete</button>
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -62,7 +63,7 @@
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <th>
-                                        <input type="checkbox" class="form-check-input" />
+                                        <input type="checkbox" class="form-check-input" @click="toggleParentItem" />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
@@ -95,7 +96,8 @@
                             <tbody class="table-border-bottom-0" v-if="loaded">
                                 <tr v-for="(item, index) in all_receipt_books.data" :key="item.id">
                                     <td>
-                                        <input type="checkbox" class="form-check-input" />
+                                        <input type="checkbox" class="form-check-input"
+                                            :checked="child_item.includes(item.id)" @click="toggleChildItem(item.id)" />
                                     </td>
                                     <td>{{ index + 1 }}</td>
                                     <td>
@@ -226,9 +228,12 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        loaded: false
+        loaded: false,
+        child_item: [],
+        parent_item: false
     }),
     created: async function () {
+
         await this.get_all_receipt_books();
         this.loaded = true
     },
@@ -237,6 +242,29 @@ export default {
             get_all_receipt_books: "all",
             user_delete: "delete",
         }),
+
+        toggleParentItem() {
+            this.child_item = event.target.checked ? this.all_receipt_books.data.map(item => item.id) : []
+        },
+
+        toggleChildItem(id) {
+            let isChecked = event.target.checked
+            if (isChecked) {
+                this.child_item.push(id)
+            } else {
+                this.child_item = this.child_item.filter(item => item != id)
+            }
+
+        },
+        async bulkActions() {
+            let response = await axios.delete(`account-receipt-books/${null}?items=${this.child_item}`);
+            if (response.data.status == 'success') {
+                window.s_alert(response.data?.message);
+                this.get_all_receipt_books()
+                this.parent_item = false
+                this.child_item = []
+            }
+        }
     },
     computed: {
         ...mapState(receipt_book_store, {

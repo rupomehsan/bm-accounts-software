@@ -21,8 +21,6 @@
                     <div class="card-header align-items-center">
                         <h6>
                             All Branch Target
-
-
                         </h6>
                         <div class="search w-25">
                             <form action="#">
@@ -208,6 +206,7 @@ export default {
             get_session_wise_data: "get_session_wise_data",
             get_date_wise_data: "get_date_wise_data",
         }),
+
         getstartDate: async function () {
             this.get_date_wise_data(this.startDate, this.endDate)
         },
