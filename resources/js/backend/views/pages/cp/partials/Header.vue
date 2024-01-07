@@ -51,7 +51,10 @@
             <div class="nav-right col">
                 <ul class="nav-menus">
                     <li class="onhover-dropdown mx-3">
-                        <a href="#!" class="txt-dark">
+                        <router-link
+                            :to="{ name: 'MyNotification' }"
+                            class="txt-dark"
+                        >
                             <img
                                 class="align-self-center pull-right me-2"
                                 src="https://admin.pixelstrap.com/universal/assets/images/dashboard/notification.png"
@@ -59,15 +62,15 @@
                             />
                             <span
                                 class="badge rounded-pill badge-primary notification"
-                                >3</span
+                                >0</span
                             >
-                        </a>
+                        </router-link>
                         <ul class="notification-dropdown onhover-show-div">
                             <li>
                                 Notification
                                 <span
                                     class="badge rounded-pill badge-secondary text-white text-uppercase pull-right"
-                                    >3 New</span
+                                    >0 New</span
                                 >
                             </li>
                             <li>
@@ -76,26 +79,28 @@
                                         class="flex-shrink-0 align-self-center notification-icon icofont icofont-shopping-cart bg-primary"
                                     ></i>
                                     <div>
-                                        <h6 class="mt-0">
-                                            Your order ready for Ship..!
-                                        </h6>
+                                        <h6 class="mt-0">title</h6>
                                         <p class="mb-0">
                                             Lorem ipsum dolor sit amet,
-                                            consectetuer elit.
                                         </p>
-                                        <spa
-                                        n
+                                        <span
                                             ><i
                                                 class="icofont icofont-clock-time p-r-5"
                                             ></i
-                                            >Just Now</spa
+                                            >Just Now</span
                                         >
                                     </div>
                                 </div>
                             </li>
 
                             <li class="text-center">
-                                You have Check <a href="#">all</a> notification
+                                You have Check
+                                <router-link
+                                    :to="{ name: 'MyNotification' }"
+                                    href="#"
+                                    >all</router-link
+                                >
+                                notification
                             </li>
                         </ul>
                     </li>

@@ -4,27 +4,7 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Notification Management</h5>
-                    </div>
-                    <div class="col-lg-6 text-end">
-                        <span class="mx-2">
-                            <router-link
-                                :to="{ name: `MyNotification` }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
-                                <i class="fa fa-pencil me-5px"></i>
-                                My Notification
-                            </router-link>
-                        </span>
-                        <span>
-                            <router-link
-                                :to="{ name: `NotificationCreate` }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
-                                <i class="fa fa-pencil me-5px"></i>
-                                Create
-                            </router-link>
-                        </span>
+                        <h5 class="m-0">My all Notifications</h5>
                     </div>
                 </div>
             </div>
@@ -45,13 +25,6 @@
                                 />
                             </form>
                         </div>
-                        <button
-                            v-show="child_item.length"
-                            class="btn btn-primary texte"
-                            @click="deleteItems"
-                        >
-                            Delete
-                        </button>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a
@@ -102,8 +75,6 @@
                                         <input
                                             type="checkbox"
                                             class="form-check-input"
-                                            v-model="parent_item"
-                                            @click="parentToggleCheckbox"
                                         />
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
@@ -151,12 +122,6 @@
                                         <input
                                             type="checkbox"
                                             class="form-check-input"
-                                            :checked="
-                                                child_item.includes(item.id)
-                                            "
-                                            @click="
-                                                childToggleCheckbox(item.id)
-                                            "
                                         />
                                     </td>
                                     <td>{{ item.id }}</td>
@@ -304,8 +269,6 @@ export default {
         offset: "5",
         search_data: "",
         loaded: false,
-        parent_item: false,
-        child_item: [],
     }),
     created: async function () {
         await this.notification_get_all();
@@ -316,32 +279,6 @@ export default {
             notification_get_all: "all",
             nitificatin_delete: "delete",
         }),
-
-        parentToggleCheckbox() {
-            this.child_item = event.target.checked
-                ? this.all_notifications.data.map((item) => item.id)
-                : [];
-        },
-        childToggleCheckbox(id) {
-            let isChecked = event.target.checked;
-            if (isChecked) {
-                this.child_item.push(id);
-            } else {
-                this.child_item = this.child_item.filter((item) => item != id);
-            }
-            console.log(this.child_item);
-        },
-        async deleteItems() {
-            let response = await axios.delete(
-                `user-notifications/${null}?items=${this.child_item}`
-            );
-            if (response.data.status == "success") {
-                window.s_alert(response.data?.message);
-                this.get_all_receipt_books();
-                this.parent_item = false;
-                this.child_item = [];
-            }
-        },
     },
     computed: {
         ...mapState(notification_setup_store, {

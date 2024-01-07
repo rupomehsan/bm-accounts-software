@@ -1,23 +1,28 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
+import MyNotification from "../MyNotification.vue";
 import Form from "../Form.vue";
 
 const routes = {
-    path: 'notifications',
+    path: "notifications",
     component: Layout,
     children: [
         {
-            path: '',
+            path: "",
             name: "Notifications",
-            component: All
+            component: All,
         },
         {
-            path: 'create',
+            path: "create",
             name: "NotificationCreate",
-            component: Form
+            component: Form,
         },
-    ]
-}
-
+        {
+            path: "my-notifications",
+            name: "MyNotification",
+            component: MyNotification,
+        },
+    ],
+};
 
 export default routes;

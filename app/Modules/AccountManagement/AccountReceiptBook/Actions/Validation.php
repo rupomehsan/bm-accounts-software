@@ -21,6 +21,7 @@ class Validation extends FormRequest
      */
     public function validateError($data)
     {
+        // dd($data);
         $errorPayload =  $data->getMessages();
         return response(['status' => 'validation_error', 'errors' => $errorPayload], 422);
     }
@@ -32,10 +33,11 @@ class Validation extends FormRequest
      */
     public function rules(): array
     {
+        // dd($this->account_receipt_book);
         return [
-            'receipt_book_no' => 'required|sometimes',
-            'receipt_start_serial_no' => 'required|sometimes',
-            'receipt_end_serial_no' => 'required|sometimes',
+            'receipt_book_no' => 'required|unique:account_receipt_books,receipt_book_no,' . $this->account_receipt_book?->id,
+            'receipt_start_serial_no' => 'required|unique:account_receipt_books,receipt_start_serial_no,' . $this->account_receipt_book?->id,
+            'receipt_end_serial_no' => 'required|unique:account_receipt_books,receipt_end_serial_no,' . $this->account_receipt_book?->id,
             'is_approvel' => 'required|sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];

@@ -8,6 +8,7 @@ use App\Modules\AccountManagement\AccountReceiptBook\Actions\Show;
 use App\Modules\AccountManagement\AccountReceiptBook\Actions\Store;
 use App\Modules\AccountManagement\AccountReceiptBook\Actions\Update;
 use App\Modules\AccountManagement\AccountReceiptBook\Actions\Validation;
+use \App\Modules\AccountManagement\AccountReceiptBook\Model as AccountReceiptBook;
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -32,9 +33,9 @@ class Controller extends ControllersController
         return $data;
     }
 
-     public function update(Validation $request, $id)
+    public function update(AccountReceiptBook $account_receipt_book, Validation $request)
     {
-        $data = Update::execute($request, $id);
+        $data = Update::execute($account_receipt_book, $request);
         return $data;
     }
 

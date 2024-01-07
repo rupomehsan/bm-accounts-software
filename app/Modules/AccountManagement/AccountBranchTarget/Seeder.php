@@ -17,7 +17,7 @@ class Seeder extends SeedersSeeder
             "account_category_id" => "1",
             "branch_id" => "10",
             "target_amount" => "100",
-            "session" => "2023",
+            "session" => "2023-01-01",
             "comment" => ["this is the first commnet"],
         ]);
     }

@@ -46,9 +46,9 @@
                                     <div
                                         class="text-justify"
                                         v-html="
-                                            single_applications_data.application_values.find(
+                                            single_applications_data.application_values?.find(
                                                 (i) => i.title == 'description'
-                                            ).value
+                                            )?.value
                                         "
                                     ></div>
                                 </div>

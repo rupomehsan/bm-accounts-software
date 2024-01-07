@@ -12,7 +12,7 @@ page link thik kora lagbe -dn
    -> action button thkbena kono -dn
    -> date add korte hobe -dn
 -> notification
-   -> select user and dempertment issue -dn
+   -> select user and dempertment issue -dn (how to send user token )
 -> income expence search -dn
 
 
@@ -46,3 +46,28 @@ Branch Target Management
 user role -> wellwisher user crate hobe -dn
 
 account category managemnet -dn
+
+
+
+-------------------------------------------------------
+all checkbox are hidden
+text editor
+approved not approved with count and button
+
+
+
+recieipt book --
+1- start data and end date in between error show
+2- unique error fiexed on update
+3- approved and dissapproved  show
+
+application cateogry --
+1- application jode thake tahole deactivate
+
+application --
+1- approved not approved button
+2- add income cateogory field
+
+Branch Income --
+1- jokhon kono cateogry select korbe tokhonoi cateogryyr jode kono application thake seitar hisab ashbe
+
