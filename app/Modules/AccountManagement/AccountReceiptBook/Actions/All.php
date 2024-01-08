@@ -29,7 +29,12 @@ class All
                 $data = $data->with($with)->where($condition)->latest()->paginate($offset);
                 // dd($data);
             }
-            return entityResponse($data);
+            $response = [
+                'data' => $data,
+                'totalApproved' => self::$model::where('is_approvel', 1)->count(),
+                'totalNotApproved' => self::$model::where('is_approvel', 0)->count(),
+            ];
+            return entityResponse($response);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }

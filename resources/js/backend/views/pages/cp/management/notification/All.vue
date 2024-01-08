@@ -98,14 +98,14 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
+                                    <!-- <th>
                                         <input
                                             type="checkbox"
                                             class="form-check-input"
                                             v-model="parent_item"
                                             @click="parentToggleCheckbox"
                                         />
-                                    </th>
+                                    </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                         <!---->
@@ -147,7 +147,7 @@
                                     v-for="item in all_notifications.data"
                                     :key="item.id"
                                 >
-                                    <td>
+                                    <!-- <td>
                                         <input
                                             type="checkbox"
                                             class="form-check-input"
@@ -158,7 +158,7 @@
                                                 childToggleCheckbox(item.id)
                                             "
                                         />
-                                    </td>
+                                    </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
                                         <img

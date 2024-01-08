@@ -4,7 +4,7 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Messages </h5>
+                        <h5 class="m-0">Messages</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
@@ -82,12 +82,12 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
+                                    <!-- <th>
                                         <input
                                             type="checkbox"
                                             class="form-check-input"
                                         />
-                                    </th>
+                                    </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                         <!---->
@@ -118,26 +118,23 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
-                                        
+
                                         <!---->
                                     </th>
-
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
                                 <tr
-                                    v-for="(
-                                        item
-                                    ) in all_notifications.data"
+                                    v-for="item in all_notifications.data"
                                     :key="item.id"
                                 >
-                                    <td>
+                                    <!-- <td>
                                         <input
                                             type="checkbox"
                                             class="form-check-input"
                                         />
-                                    </td>
+                                    </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
                                         <img
@@ -164,7 +161,6 @@
                                         >
                                         <!---->
                                     </td>
-
                                 </tr>
                             </tbody>
                         </table>

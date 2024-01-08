@@ -8,7 +8,10 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `BranchTargetCreate` }" class="btn rounded-pill btn-outline-info">
+                            <router-link
+                                :to="{ name: `BranchTargetCreate` }"
+                                class="btn rounded-pill btn-outline-info"
+                            >
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,47 +22,84 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Branch Target
-                        </h6>
+                        <h6>All Branch Target</h6>
                         <div class="search w-25">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="w-25 d-flex gap-2">
-                            <input type="date" v-model="startDate" class="form-control w-50" @change="getstartDate">
-                            <input type="date" v-model="endDate" class="form-control w-50" @change="getendDate">
+                            <input
+                                type="date"
+                                v-model="startDate"
+                                class="form-control w-50"
+                                @change="getstartDate"
+                            />
+                            <input
+                                type="date"
+                                v-model="endDate"
+                                class="form-control w-50"
+                                @change="getendDate"
+                            />
                         </div>
-                        <select name="session" v-model="session" class="form-select w-25">
+                        <select
+                            name="session"
+                            v-model="session"
+                            class="form-select w-25"
+                        >
                             <option value="" selected>Session</option>
-                            <template v-for="(sessionData, index) in all_branch_target_data.session" :key="index">
-                                <option :value="sessionData">{{ sessionData }}</option>
+                            <template
+                                v-for="(
+                                    sessionData, index
+                                ) in all_branch_target_data.session"
+                                :key="index"
+                            >
+                                <option :value="sessionData">
+                                    {{ sessionData }}
+                                </option>
                             </template>
                         </select>
 
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
                                     <!---->
                                     <li>
                                         <a @click.prevent class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href="#"
+                                            title="display data that has been deactivated"
+                                            class="d-flex"
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Deactivated data
                                         </a>
                                     </li>
@@ -72,7 +112,7 @@
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <th>
-                                        <input type="checkbox" class="form-check-input" />
+                                        <!-- <input type="checkbox" class="form-check-input" /> -->
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
@@ -100,9 +140,14 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_branch_target_data.data?.data" :key="item.id">
+                                <tr
+                                    v-for="(
+                                        item, index
+                                    ) in all_branch_target_data.data?.data"
+                                    :key="item.id"
+                                >
                                     <td class="w-10">
-                                        <input type="checkbox" class="form-check-input" />
+                                        <!-- <input type="checkbox" class="form-check-input" /> -->
                                     </td>
                                     <td>{{ index + 1 }}</td>
                                     <td>
@@ -116,18 +161,27 @@
 
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{
-                                                            name: 'BranchTargetCreate',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
+                                                        <router-link
+                                                            :to="{
+                                                                name: 'BranchTargetCreate',
+                                                                query: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-warning fa-pencil"
+                                                            ></i>
                                                             Edit
                                                         </router-link>
                                                         <!---->
@@ -135,12 +189,18 @@
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
+                                                        <a
+                                                            @click.prevent="
+                                                                user_delete(
+                                                                    item.id
+                                                                )
+                                                            "
+                                                            href="#"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-danger fa-trash"
+                                                            ></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -152,8 +212,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_branch_target_data" :method="get_all_data" />
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
+                    >
+                        <pagination
+                            :data="all_branch_target_data"
+                            :method="get_all_data"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -172,7 +237,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -182,20 +246,21 @@
 import { mapActions, mapState } from "pinia";
 import { banch_target_store } from "./setup/store";
 
-
 export default {
-
     data: () => ({
         offset: "5",
         search_data: "",
-        session: '',
-        startDate: '',
-        endDate: ""
+        session: "",
+        startDate: "",
+        endDate: "",
     }),
 
     created: async function () {
-        this.startDate = moment().subtract(1, 'months').startOf('month').format("YYYY-MM-DD")
-        this.endDate = moment().format("YYYY-MM-DD")
+        this.startDate = moment()
+            .subtract(1, "months")
+            .startOf("month")
+            .format("YYYY-MM-DD");
+        this.endDate = moment().format("YYYY-MM-DD");
         await this.get_all_data();
     },
 
@@ -208,11 +273,11 @@ export default {
         }),
 
         getstartDate: async function () {
-            this.get_date_wise_data(this.startDate, this.endDate)
+            this.get_date_wise_data(this.startDate, this.endDate);
         },
         getendDate: async function () {
-            this.get_date_wise_data(this.startDate, this.endDate)
-        }
+            this.get_date_wise_data(this.startDate, this.endDate);
+        },
     },
 
     computed: {
@@ -229,11 +294,9 @@ export default {
             console.log(newSearchData);
         },
         session: async function (data) {
-            this.get_session_wise_data(data)
+            this.get_session_wise_data(data);
         },
-
     },
-
 };
 </script>
 

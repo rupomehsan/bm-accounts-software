@@ -12,18 +12,21 @@
                             @click="get_all_receipt_books()"
                         >
                             All
+                            <span v-if="all_receipt_books" class="fw-bold">{{
+                                `(${all_receipt_books?.totalApproved})`
+                            }}</span>
                         </button>
                         <button
                             class="btn btn-primary mx-3"
                             @click="getReceiptBookByStatus('approved')"
                         >
-                            Approved
+                            Approved <span class="fw-bold">(0)</span>
                         </button>
                         <button
                             class="btn btn-danger"
                             @click="getReceiptBookByStatus('not-approved')"
                         >
-                            Not approved
+                            Not approved <span class="fw-bold">(0)</span>
                         </button>
                     </div>
                 </div>
@@ -110,7 +113,7 @@
 
                             <tbody class="table-border-bottom-0">
                                 <tr
-                                    v-for="item in all_receipt_books.data"
+                                    v-for="item in all_receipt_books.data?.data"
                                     :key="item.id"
                                 >
                                     <td>{{ item.id }}</td>

@@ -8,7 +8,10 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateSohidFamily` }" class="btn rounded-pill btn-outline-info">
+                            <router-link
+                                :to="{ name: `CreateSohidFamily` }"
+                                class="btn rounded-pill btn-outline-info"
+                            >
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -25,31 +28,49 @@
                         </h6>
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
                                     <!---->
                                     <li>
                                         <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href="#"
+                                            title="display data that has been deactivated"
+                                            class="d-flex"
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Deactivated data
                                         </a>
                                     </li>
@@ -62,7 +83,7 @@
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <th class="w-10">
-                                        <input type="checkbox" class="form-check-input" />
+                                        <!-- <input type="checkbox" class="form-check-input" /> -->
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
@@ -75,8 +96,12 @@
                                     </th>
 
                                     <th class="cursor_n_resize">
-                                      Address
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        Address
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
@@ -87,27 +112,39 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr
+                                    v-for="(item, index) in all_users.data"
+                                    :key="item.id"
+                                >
                                     <td>
-                                        <input type="checkbox" class="form-check-input" />
+                                        <!-- <input type="checkbox" class="form-check-input" /> -->
                                     </td>
                                     <td>{{ index + 1 }}</td>
 
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.name }}
                                         </span>
                                     </td>
 
-                                    <td>{{ item.address}}</td>
+                                    <td>{{ item.address }}</td>
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
+                                        <span
+                                            class="badge bg-label-success me-1"
+                                            >{{ item.status }}</span
+                                        >
                                         <!---->
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -133,13 +170,18 @@
                                                 </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{
-                                                            name: 'CreateSohidFamily',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
+                                                        <router-link
+                                                            :to="{
+                                                                name: 'CreateSohidFamily',
+                                                                query: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-warning fa-pencil"
+                                                            ></i>
                                                             Edit
                                                         </router-link>
                                                         <!---->
@@ -147,12 +189,18 @@
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
+                                                        <a
+                                                            @click.prevent="
+                                                                user_delete(
+                                                                    item.id
+                                                                )
+                                                            "
+                                                            href="#"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-danger fa-trash"
+                                                            ></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -164,7 +212,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
+                    >
                         <pagination :data="all_users" :method="user_get_all" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
@@ -220,11 +270,11 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        loaded: false
+        loaded: false,
     }),
     created: async function () {
         await this.user_get_all();
-        this.loaded = true
+        this.loaded = true;
     },
     methods: {
         ...mapActions(sohid_family_setup_store, {
