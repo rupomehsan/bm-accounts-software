@@ -1,0 +1,8 @@
+
+notification chek kora lagbe
+
+message check kora lagbe
+
+expense
+dashboard -> total income expense monthlydue current month income
+
