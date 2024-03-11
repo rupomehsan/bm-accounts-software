@@ -103,7 +103,9 @@ class ApprovalVoucher
                     if ($countTotalSubVoucher == $count) {
                         $voucher->approved = 1;
                         $voucher->update();
+                        // dd($voucher);
                     }
+
                     $logData = [
                         "user_id" => auth()->id(),
                         "user_type" => auth()->user()->roles[0]->name ?? '',

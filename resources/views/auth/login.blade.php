@@ -206,12 +206,12 @@
 </head>
 
 <body>
+
     <div id="toasterMessage">
         <p id="showMessage"></p>
     </div>
+
     <div class="container">
-
-
         <div class="background">
             <div class="shape"></div>
             <div class="shape"></div>
@@ -222,8 +222,7 @@
                     <h3>Login Here</h3>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="Enter your email" name="email"
-                            onchange="errorReset(event)">
+                        <input type="email" placeholder="Enter your email" name="email" onchange="errorReset(event)">
                         <p class="alert-danger" id="email"></p>
                     </div>
                     <div class="form-group">
@@ -254,21 +253,21 @@
                         </thead>
                         <tbody>
                             @php
-                                $users = \App\Models\User::get();
+                            $users = \App\Models\User::get();
+                            // @dd($users->toArray());
                             @endphp
                             @foreach ($users as $user)
-                                <tr>
-                                    <th scope="row">{{ $user->email }}</th>
-                                    <td>***********</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-primary"
-                                            onclick="setPassword('{{ $user->email }}')">Copy</button>
-                                    </td>
-
-                                </tr>
+                            @if ($user->id == 3 || $user->id == 5 || $user->id == 6  || $user->id == 7 || $user->id == 8 || $user->id == 9)
+                            <tr>
+                                <th scope="row">{{ $user->email }}</th>
+                                <td>***********</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary"
+                                        onclick="setPassword('{{ $user->email }}')">Copy</button>
+                                </td>
+                            </tr>
+                            @endif
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
@@ -282,7 +281,6 @@
 
             let spiner = document.getElementById('spiner')
             loadHandler(spiner, response = false)
-
             //  spiner.classList.remove('d-none')
             fetch('login', {
                     method: "POST",

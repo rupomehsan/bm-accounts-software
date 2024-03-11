@@ -21,12 +21,81 @@
                             <div class="crm-top-widget card-body">
                                 <div class="d-flex">
                                     <i
-                                        class="icon-user font-primary align-self-center me-3"
+                                        class="icon-money font-primary align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Total Income</span>
+                                        <h4 class="counter">
+                                            {{ result.totalIncome ?? 0 }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-6 xs-width-100">
+                            <div class="crm-top-widget card-body">
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-widgetized font-secondary align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Total Expense</span>
+                                        <h4 class="counter">
+                                            {{ result.totalExpense ?? 0 }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-6 xs-width-100">
+                            <div class="crm-top-widget card-body">
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-anchor font-success align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Monthly Due</span>
+                                        <h4 class="counter">
+                                            {{
+                                                result.monthlyIncome -
+                                                    result.monthlyExpense ?? 0
+                                            }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-6 xs-width-100">
+                            <div class="crm-top-widget card-body">
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-bell font-info align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0"
+                                            >Current Month Income</span
+                                        >
+                                        <h4 class="counter">
+                                            {{ result.monthlyIncome ?? 0 }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-widgets shadow mb-4">
+                    <div class="row m-0">
+                        <div class="col-xl-3 col-6 xs-width-100">
+                            <div class="crm-top-widget card-body">
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-book font-primary align-self-center me-3"
                                     ></i>
                                     <div>
                                         <span class="mt-0">Receipt Books</span>
                                         <h4 class="counter">
-                                            {{ totalReceiptBooks }}
+                                            {{ result.totalReceiptBooks ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -41,7 +110,7 @@
                                     <div>
                                         <span class="mt-0">Users</span>
                                         <h4 class="counter">
-                                            {{ totalUsers }}
+                                            {{ result.totalUsers ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -51,12 +120,12 @@
                             <div class="crm-top-widget card-body">
                                 <div class="d-flex">
                                     <i
-                                        class="icon-camera font-success align-self-center me-3"
+                                        class="icon-notepad font-success align-self-center me-3"
                                     ></i>
                                     <div>
                                         <span class="mt-0">Application</span>
                                         <h4 class="counter">
-                                            {{ totalApplication }}
+                                            {{ result.totalApplication ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -66,12 +135,12 @@
                             <div class="crm-top-widget card-body">
                                 <div class="d-flex">
                                     <i
-                                        class="icon-video-camera font-info align-self-center me-3"
+                                        class="icon-bookmark font-info align-self-center me-3"
                                     ></i>
                                     <div>
                                         <span class="mt-0">Category</span>
                                         <h4 class="counter">
-                                            {{ totalCategory }}
+                                            {{ result.totalCategory ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -90,7 +159,7 @@
                                     <div>
                                         <span class="mt-0">Vouchers</span>
                                         <h4 class="counter">
-                                            {{ totalVouchers }}
+                                            {{ result.totalVouchers ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -105,7 +174,40 @@
                                     <div>
                                         <span class="mt-0">Books Assign</span>
                                         <h4 class="counter">
-                                            {{ totalBookAssign }}
+                                            {{ result.totalBookAssign ?? 0 }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-6 xs-width-100">
+                            <div class="crm-top-widget card-body">
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-announcement font-success align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Total loan</span>
+                                        <h4 class="counter">
+                                            {{ result.loanProvide ?? 0 }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-6 xs-width-100">
+                            <div class="crm-top-widget card-body">
+                                <div class="d-flex">
+                                    <i
+                                        class="icon-bookmark-alt font-info align-self-center me-3"
+                                    ></i>
+                                    <div>
+                                        <span class="mt-0">Load Due</span>
+                                        <h4 class="counter">
+                                            {{
+                                                result.loanProvide -
+                                                    result.loanPayment ?? 0
+                                            }}
                                         </h4>
                                     </div>
                                 </div>
@@ -122,12 +224,7 @@
 <script>
 export default {
     data: () => ({
-        totalReceiptBooks: 0,
-        totalUsers: 0,
-        totalVouchers: 0,
-        totalCategory: 0,
-        totalBookAssign: 0,
-        totalApplication: 0,
+        result: {},
     }),
     created: async function () {
         this.get_dashboard_analytics();
@@ -138,12 +235,7 @@ export default {
             let response = await axios.get("get-dashboard-analytics");
             response = response.data;
             if (response.status == "success") {
-                this.totalReceiptBooks = response.data.totalReceiptBooks;
-                this.totalUsers = response.data.totalUsers;
-                this.totalVouchers = response.data.totalVouchers;
-                this.totalCategory = response.data.totalCategory;
-                this.totalBookAssign = response.data.totalBookAssign;
-                this.totalApplication = response.data.totalApplication;
+                this.result = response.data;
             }
         },
     },
