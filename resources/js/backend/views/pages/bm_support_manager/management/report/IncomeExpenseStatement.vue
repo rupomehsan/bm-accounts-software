@@ -33,29 +33,32 @@
                             <div class="ledger_row ledger_heading">
                                 <div class="ledger_col date">মাস ও তারিখ</div>
                                 <div class="ledger_col receipt">বিবরণ</div>
-                                <div class="ledger_col ">ফোলিও বা পৃষ্ঠা</div>
-                                <div class="ledger_col">জমা বা খরচ</div>
-                                <div class="ledger_col">জমা</div>
-                                <div class="ledger_col">খরচ</div>
-                                <div class="ledger_col">অবশিষ্ঠ</div>
+                                <div class="ledger_col receipt">ফোলিও বা পৃষ্ঠা</div>
+                                <div class="ledger_col receipt">জমা বা খরচ</div>
+                                <div class="ledger_col receipt">জমা</div>
+                                <div class="ledger_col receipt">খরচ</div>
+                                <div class="ledger_col receipt">অবশিষ্ঠ</div>
                             </div>
                             <div class="ledger_row" v-for="i in statement_data?.statements" :key="i.id">
                                 <div class="ledger_col date text-start">{{ i.date }}</div>
                                 <div class="ledger_col receipt">{{ i.description }}</div>
                                 <div class="ledger_col name">{{ i.folio }}</div>
                                 <div class="ledger_col name">{{ i.income_or_expense }}</div>
-                                <div class="ledger_col">{{ i.income }}</div>
-                                <div class="ledger_col">{{ i.expense }}</div>
-                                <div class="ledger_col">{{ i.balance }}</div>
+                                <div class="ledger_col receipt">{{ i.income }}</div>
+                                <div class="ledger_col receipt">{{ i.expense }}</div>
+                                <div class="ledger_col receipt">{{ i.balance }}</div>
                             </div>
 
                             <div class="ledger_row ledger_footer">
                                 <div class="ledger_col date"></div>
                                 <div class="ledger_col receipt"></div>
                                 <div class="ledger_col name">Total</div>
-                                <div class="ledger_col amount">{{ statement_data.statements_total?.total_income }}</div>
-                                <div class="ledger_col amount">{{ statement_data.statements_total?.total_expense }}</div>
-                                <div class="ledger_col amount">{{ statement_data.statements_total?.total_balance }}</div>
+                                <div class="ledger_col receipt">{{ statement_data.statements_total?.total_income }}
+                                </div>
+                                <div class="ledger_col receipt">{{ statement_data.statements_total?.total_expense }}
+                                </div>
+                                <div class="ledger_col receipt">{{ statement_data.statements_total?.total_balance }}
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer py-1 border-top-0">

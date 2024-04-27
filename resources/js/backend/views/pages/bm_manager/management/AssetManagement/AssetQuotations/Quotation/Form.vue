@@ -78,10 +78,16 @@
                                                             v-model="productDetails.id">
 
                                                         <div class="form-group"><label for=""> shope name</label>
-                                                            <div class="mt-1 mb-3"><input class="form-control"
-                                                                    type="text"
+                                                            <div class="mt-1 mb-3 position-relative"><input
+                                                                    class="form-control" type="text"
                                                                     :name="`product[${index}][details][${detailsIndex}][shope_name]`"
                                                                     v-model="productDetails.shope_name">
+                                                                <ul class="border bg-dark position-absolute ">
+                                                                    <li class="border p-1" style="width: 270px;">one
+                                                                    </li>
+                                                                    <li class="border p-1">one</li>
+                                                                    <li class="border p-1">one</li>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                         <div class="form-group"><label for=""> address</label>
@@ -90,7 +96,6 @@
                                                                     :name="`product[${index}][details][${detailsIndex}][address]`"
                                                                     id="address" v-model="productDetails.address">
                                                             </div>
-
                                                         </div>
                                                         <div class="form-group"><label for=""> shop
                                                                 contact</label>
@@ -234,7 +239,7 @@ export default {
                 if (this.single_data.quotation_product_price && this.single_data.quotation_product_price.length > 0) {
                     this.prductData = []
                     this.single_data?.quotation_product_price?.forEach((item, index) => {
-                        const { product_id, id, shope_name,qty, address, shop_contact, price, brand, quotation_image } = item;
+                        const { product_id, id, shope_name, qty, address, shop_contact, price, brand, quotation_image } = item;
                         const { title: product_name } = item.product || {};
                         const existingProductIndex = this.prductData.findIndex(product => product.id === product_id);
 
