@@ -31,7 +31,7 @@
                                         <template v-for="(
                                             form_field, index
                                         ) in form_fields" :key="index">
-                                            <common-input :label="form_field.label" :onchange="getRespose"
+                                            <common-input :label="form_field.label"
                                                 :type="form_field.type" :name="form_field.name"
                                                 :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
                                     " />
@@ -81,8 +81,10 @@
                                                             <div class="mt-1 mb-3 position-relative"><input
                                                                     class="form-control" type="text"
                                                                     :name="`product[${index}][details][${detailsIndex}][shope_name]`"
-                                                                    v-model="productDetails.shope_name">
-                                                                <ul class="border bg-dark position-absolute ">
+                                                                    v-model="productDetails.shope_name"
+                                                                    @change="getShopName(proIndex, detailsIndex)">
+                                                                <ul class="border bg-dark position-absolute d-none"
+                                                                    :id="`ShopList-${index}`">
                                                                     <li class="border p-1" style="width: 270px;">one
                                                                     </li>
                                                                     <li class="border p-1">one</li>
@@ -206,7 +208,6 @@ export default {
         prductData: {
             handler: function (value) {
                 localStorage.setItem("prductData", JSON.stringify(value));
-                console.log("myd", this.prductData);
             },
             deep: true
         }
@@ -363,11 +364,16 @@ export default {
             } else {
                 this.prductData[data.index].details.splice(data.detailsIndex, 1)
             }
+        },
+        getShopName(proIndex, detailsIndex) {
+            console.log(proIndex);
+            let target = document.getElementById(`ShopName-${proIndex}`)
+            console.log(target);
         }
     },
 
     computed: {
-        ...mapState(quotation_setup_store, {
+        ...mapState (quotation_setup_store, {
             single_data: "single_data",
             all_data: 'all_data',
         }),
