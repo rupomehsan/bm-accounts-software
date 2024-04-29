@@ -19,7 +19,7 @@ class All
             }
 
             if (request()->has('search') && request()->input('search')) {
-                $data = $data->where('title', 'like', '%' . request()->input('search') . '%');
+                $data = $data->where('shop_name', 'like', '%' . request()->input('search') . '%');
             }
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {

@@ -14,17 +14,26 @@ class Store
         try {
             $start = $request->input('receipt_start_serial_no');
             $end = $request->input('receipt_end_serial_no');
-            // $check_serial_no = self::$model::whereBetween('receipt_start_serial_no', [$start, $end])
-            //     ->whereBetween('receipt_end_serial_no', [$start, $end])
-            //     ->count();
-            $check_serial_no = self::$model::where('receipt_start_serial_no', '>', $start)
-                ->where('receipt_end_serial_no', '<', $end)
+            // 1 - 115
+            // 20 - 50
+            // 400 - 500
+            $check_serial_no = self::$model::where(function ($q) use ($start, $end) {
+                $q->where('receipt_start_serial_no', '<=', $start)
+                    ->orWhere('receipt_start_serial_no', '>=', $end);
+            })
+                ->where(function ($q) use ($start, $end) {
+                    $q->where('receipt_end_serial_no', '>=', $start)
+                        ->orWhere('receipt_end_serial_no', '>=', $end);
+                })
+
                 ->count();
+
             if ($check_serial_no) {
+                $data= self::$model::orderBy('receipt_end_serial_no', 'desc')->first();
                 return response()->json([
                     'errors' => [
                         'receipt_start_serial_no' => [
-                            'receipt start serial no is exist'
+                            'receipt start serial no is exist, input > '.($data->receipt_end_serial_no +1)
                         ],
                         'receipt_end_serial_no' => [
                             'receipt end serial no is exist'

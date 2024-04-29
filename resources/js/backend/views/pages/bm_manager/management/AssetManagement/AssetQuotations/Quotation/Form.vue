@@ -31,9 +31,9 @@
                                         <template v-for="(
                                             form_field, index
                                         ) in form_fields" :key="index">
-                                            <common-input :label="form_field.label"
-                                                :type="form_field.type" :name="form_field.name"
-                                                :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
+                                            <common-input :label="form_field.label" :type="form_field.type"
+                                                :name="form_field.name" :multiple="form_field.multiple"
+                                                :value="form_field.value" :data_list="form_field.data_list
                                     " />
                                         </template>
                                     </div>
@@ -78,17 +78,20 @@
                                                             v-model="productDetails.id">
 
                                                         <div class="form-group"><label for=""> shope name</label>
-                                                            <div class="mt-1 mb-3 position-relative"><input
-                                                                    class="form-control" type="text"
+                                                            <div class="mt-1 mb-3 position-relative">
+                                                                <input class="form-control" type="text"
                                                                     :name="`product[${index}][details][${detailsIndex}][shope_name]`"
                                                                     v-model="productDetails.shope_name"
-                                                                    @change="getShopName(proIndex, detailsIndex)">
-                                                                <ul class="border bg-dark position-absolute d-none"
+                                                                    @keyup="getShopName(index, detailsIndex)">
+                                                                <ul class="border bg-dark position-absolute"
+                                                                    v-show="productDetails.preview"
                                                                     :id="`ShopList-${index}`">
-                                                                    <li class="border p-1" style="width: 270px;">one
+                                                                    <li v-for="shop in shopList" :key="shop.id"
+                                                                        @click="productDetails.shope_name = shop.shop_name, prductData[index].details[detailsIndex].preview = false"
+                                                                        class="border p-1" style="width: 270px;">
+                                                                        {{ shop.shop_name }}
                                                                     </li>
-                                                                    <li class="border p-1">one</li>
-                                                                    <li class="border p-1">one</li>
+
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -177,6 +180,7 @@ import { mapActions, mapState } from 'pinia'
 import { quotation_setup_store } from './setup/store';
 import setup from "./setup";
 import form_fields from "./setup/form_fields";
+import debounce from 'debounce';
 
 export default {
     data: () => ({
@@ -190,6 +194,7 @@ export default {
                 id: '',
                 details: [
                     {
+                        preview: false,
                         id: '',
                         shope_name: '',
                         address: "",
@@ -202,7 +207,7 @@ export default {
                 ]
             }
         ],
-
+        shopList: []
     }),
     watch: {
         prductData: {
@@ -291,6 +296,8 @@ export default {
             store_data: 'store',
             update_data: 'update',
 
+            get_shop_list_by_shop_name: 'get_shop_list_by_shop_name',
+
         }),
 
         submitHandler: async function ($event) {
@@ -365,21 +372,28 @@ export default {
                 this.prductData[data.index].details.splice(data.detailsIndex, 1)
             }
         },
-        getShopName(proIndex, detailsIndex) {
-            console.log(proIndex);
-            let target = document.getElementById(`ShopName-${proIndex}`)
-            console.log(target);
-        }
+        getShopName: debounce(async function (proIndex, detailsIndex) {
+            this.shopList = []
+            let shopName = this.prductData[proIndex].details[detailsIndex].shope_name
+            if (shopName !== "") {
+                let response = await this.get_shop_list_by_shop_name(shopName)
+                if (response.data?.status == 'success') {
+                    if (response.data?.data?.length) {
+                        this.shopList = response.data.data
+                        this.prductData[proIndex].details[detailsIndex].preview = true
+                    }
+                }
+            }
+        }, 500),
     },
 
+
+
     computed: {
-        ...mapState (quotation_setup_store, {
+        ...mapState(quotation_setup_store, {
             single_data: "single_data",
             all_data: 'all_data',
         }),
     },
-
-
-
 }
 </script>

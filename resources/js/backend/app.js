@@ -3,6 +3,7 @@ import "./plugins/enToBn.js";
 import "./plugins/axios_setup.js";
 import "./plugins/sweet_alert.js";
 import "./plugins/moment_setup";
+import "./plugins/number_format.js";
 import "./store/role.js";
 
 import { createApp } from "vue";

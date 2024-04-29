@@ -35,6 +35,11 @@ export default {
             type: Function,
             default: () => ''
         },
+        dateFormat: {
+            required: false,
+            type: String,
+            default: 'YYYY-MM-DD'
+        }
     },
     data: () => ({
         formated_value: null,
@@ -55,7 +60,12 @@ export default {
     methods: {
         format_date: function () {
             let date = moment(this.$refs.date_input.value);
-            this.formated_value = date.format('DD MMMM YYYY')
+            if (this.dateFormat) {
+                console.log(this.dateFormat);
+                this.formated_value = date.format(this.dateFormat)
+            } else {
+                this.formated_value = date.format('DD MMMM YYYY')
+            }
             if (this.onchange) {
                 this.onchange(event)
             }

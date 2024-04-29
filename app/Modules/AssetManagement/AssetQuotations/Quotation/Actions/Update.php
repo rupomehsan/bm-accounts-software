@@ -9,6 +9,7 @@ class Update
     static $model = \App\Modules\AssetManagement\AssetQuotations\Quotation\Models\Model::class;
     static $quotaionProductModel = \App\Modules\AssetManagement\AssetQuotations\Product\Models\Model::class;
     static $quotaionProductPriceModel = \App\Modules\AssetManagement\AssetQuotations\ProductPrice\Models\Model::class;
+    static $shopNameModel = \App\Modules\AssetManagement\AssetShopList\Models\Model::class;
 
     public static function execute(Validation $request, $id)
     {
@@ -64,9 +65,23 @@ class Update
                                         $existItem = self::$quotaionProductPriceModel::find($item['id']);
                                         if ($existItem) {
                                             $existItem->update($itemData);
+                                            $assetShopNameExist = self::$shopNameModel::where('shop_name', $itemData['shope_name'])->first();
+                                            if (!$assetShopNameExist) {
+                                                self::$shopNameModel::create([
+                                                    'shop_name' => $itemData['shope_name'] ?? "",
+                                                    'contact_number_1' => $itemData['shop_contact'] ?? "",
+                                                ]);
+                                            }
                                         }
                                     } else {
                                         self::$quotaionProductPriceModel::create($itemData);
+                                        $assetShopNameExist = self::$shopNameModel::where('shop_name', $itemData['shope_name'])->first();
+                                        if (!$assetShopNameExist) {
+                                            self::$shopNameModel::create([
+                                                'shop_name' => $itemData['shope_name'] ?? "",
+                                                'contact_number_1' => $itemData['shop_contact'] ?? "",
+                                            ]);
+                                        }
                                     }
                                 }
                             }

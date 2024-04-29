@@ -31,23 +31,23 @@ class DatabaseSeeder extends Seeder
 
             UserSeeder::class,
 
-            AccountReceiptBookSeeder::class,
-            AccountReceiptBookAssignSeeder::class,
+            // AccountReceiptBookSeeder::class,
+            // AccountReceiptBookAssignSeeder::class,
 
-            AccountBranchBudgetSeeder::class,
-            AccountBranchTargetSeeder::class,
+            // AccountBranchBudgetSeeder::class,
+            // AccountBranchTargetSeeder::class,
 
             AccountCategorySeeder::class,
 
-            AccountIncomeSeeder::class,
-            AccountIncomeExtrafieldSeeder::class,
-            
-            AccountExpenseSeeder::class,
+            // AccountIncomeSeeder::class,
+            // AccountIncomeExtrafieldSeeder::class,
 
-            CpApplicationCategorySeeder::class,
-            CpApplicationFormatSeeder::class,
+            // AccountExpenseSeeder::class,
 
-            UserNotificationSeeder::class,
+            // CpApplicationCategorySeeder::class,
+            // CpApplicationFormatSeeder::class,
+
+            // UserNotificationSeeder::class,
 
             AccountSeeder::class,
             AccountNumberSeeder::class,

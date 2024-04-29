@@ -21,4 +21,17 @@ class Update
             return messageResponse($e->getMessage(), 500, 'server_error');
         }
     }
+    public static function acceptReceiptBook($id)
+    {
+        try {
+            // dd(request()->all());
+            if (!$data = self::$model::query()->where('id', $id)->first()) {
+                return messageResponse('Data not found...', 404, 'error');
+            }
+            $data->update(['is_approvel' => request()->is_approvel]);
+            return messageResponse('Item updated successfully');
+        } catch (\Exception $e) {
+            return messageResponse($e->getMessage(), 500, 'server_error');
+        }
+    }
 }

@@ -32,8 +32,8 @@
 
                                             <common-input :label="form_field.label" :type="form_field.type"
                                                 :name="form_field.name" :multiple="form_field.multiple"
-                                                :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
+                                                :value="form_field.value" :data_list="form_field.data_list"
+                                                :dateFormat="form_field.dateFormat" />
                                         </div>
 
                                     </div>

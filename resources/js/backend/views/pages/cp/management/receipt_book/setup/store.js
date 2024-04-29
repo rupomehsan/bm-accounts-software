@@ -55,7 +55,7 @@ export const receipt_book_setup_store = defineStore(
                 let formData = new FormData();
                 formData.append("is_approvel", status);
                 let response = await axios.post(
-                    this.api_route + `/${id}?_method=PATCH`,
+                    `accept-receipt-book/${id}`,
                     formData
                 );
                 window.s_alert("Data successcully updated");

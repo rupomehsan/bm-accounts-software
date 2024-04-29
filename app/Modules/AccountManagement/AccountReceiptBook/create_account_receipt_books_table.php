@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('account_receipt_books', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('receipt_book_no')->nullable();
-            $table->string('receipt_start_serial_no', 100)->nullable();
-            $table->string('receipt_end_serial_no', 100)->nullable();
+            $table->bigInteger('receipt_book_no')->unsigned()->nullable();
+            $table->bigInteger('receipt_start_serial_no')->unsigned()->nullable();
+            $table->bigInteger('receipt_end_serial_no')->unsigned()->nullable();
             $table->tinyInteger('is_approvel')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

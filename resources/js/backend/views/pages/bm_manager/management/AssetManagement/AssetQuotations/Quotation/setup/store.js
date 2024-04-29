@@ -60,7 +60,10 @@ export const quotation_setup_store = defineStore("quotation_setup_store", {
 
         // additional function
         // additional function
-
+        get_shop_list_by_shop_name: async function (shopName) {
+            let response = await axios.get(`asset-shop-lists?get_all=1&search=${shopName}`);
+            return response
+        },
 
     },
 });

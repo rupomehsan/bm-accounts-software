@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('attachment', 100)->nullable();
             $table->text('description')->nullable();
             $table->string('payment_status')->default('Due');
-            $table->bigInteger('due_amount')->nullable();
+            $table->bigInteger('total_paid')->unsigned()->nullable();
+            $table->bigInteger('due_amount')->unsigned()->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -33,6 +33,12 @@ class Controller extends ControllersController
         return $data;
     }
 
+    public function latestAccountReceiptBook()
+    {
+        $data = Show::latestAccountReceiptBook();
+        return $data;
+    }
+
     public function update(AccountReceiptBook $account_receipt_book, Validation $request)
     {
         $data = Update::execute($account_receipt_book, $request);
@@ -42,6 +48,11 @@ class Controller extends ControllersController
     public function destroy($id)
     {
         $data = Delete::execute($id);
+        return $data;
+    }
+    public function acceptReceiptBook($id)
+    {
+        $data = Update::acceptReceiptBook($id);
         return $data;
     }
 }

@@ -52,5 +52,12 @@ export const receipt_book_store = defineStore("receipt_book_store", {
             // console.log("data", response);
             this.all_data = response.data.data;
         },
+        latest_account_receipt_book: async function () {
+            let response = await axios.get(
+                "latest-account-receipt-book"
+            );
+            // console.log("data", response);
+            this.latest_account_receipt_book_data = response.data.data;
+        },
     },
 });

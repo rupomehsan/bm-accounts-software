@@ -18,4 +18,15 @@ class Show
             return messageResponse($e->getMessage(), 500, 'server_error');
         }
     }
+    public static function latestAccountReceiptBook()
+    {
+        try {
+
+            $data = self::$model::orderBy('receipt_end_serial_no', 'desc')->first();
+
+            return entityResponse($data);
+        } catch (\Exception $e) {
+            return messageResponse($e->getMessage(), 500, 'server_error');
+        }
+    }
 }

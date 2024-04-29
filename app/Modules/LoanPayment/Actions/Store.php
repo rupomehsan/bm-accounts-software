@@ -21,18 +21,18 @@ class Store
 
 
 
-            if ($data['amount'] < $loanRegister->due_amount) {
-                $data['due'] = $loanRegister->due_amount - $data['amount'];
-                $data['payment_status'] = 'Due';
-                $loanRegister->due_amount =  $data['due'];
-            }
+            // if ($data['amount'] < $loanRegister->due_amount) {
+            //     $data['due'] = $loanRegister->due_amount - $data['amount'];
+            //     $data['payment_status'] = 'Due';
+            //     $loanRegister->due_amount =  $data['due'];
+            // }
 
-            if ($data['amount'] >= $loanRegister->due_amount) {
-                $data['due'] = $loanRegister->due_amount - $data['amount'];
-                $data['payment_status'] = 'paid';
-                $loanRegister->payment_status = 'paid';
-                $loanRegister->due_amount =  $data['due'];
-            }
+            // if ($data['amount'] >= $loanRegister->due_amount) {
+            //     $data['due'] = $loanRegister->due_amount - $data['amount'];
+            //     $data['payment_status'] = 'paid';
+            //     $loanRegister->payment_status = 'paid';
+            //     $loanRegister->due_amount =  $data['due'];
+            // }
 
             $data['category_id'] = $loanRegister->category_id;
 
@@ -45,6 +45,12 @@ class Store
             }
 
             if ($loanPayment = self::$model::query()->create($data)) {
+                $totalGiven = self::$model::where('user_id', $data['user_id'])
+                    ->where('category_id', $loanPayment->category_id)
+                    ->sum('amount');
+                $loanPayment->due_amount = $loanRegister->due_amount =  $loanRegister->amount - $totalGiven;
+                $loanRegister->total_paid = $totalGiven;
+                
                 $user = self::$userModel::find($request->user_id);
                 $logData = [
                     'user_id' => $request->user_id,
