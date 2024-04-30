@@ -82,6 +82,11 @@ export default {
             type: Function,
             default: () => "",
         },
+        onchangeAction: {
+            required: false,
+            type: String,
+            default: null,
+        },
     },
 
     methods: {
@@ -94,7 +99,11 @@ export default {
             }
 
             if (this.onchange) {
-                this.onchange(event);
+                if (this.onchangeAction) {
+                    this.onchange(this.onchangeAction, event, this)
+                } else {
+                    this.onchange(event);
+                }
             }
         },
     },

@@ -24,4 +24,8 @@ class Model extends EloquentModel
     {
         return $q->where('status', 'active');
     }
+
+    public function account_logs(){
+      return $this->hasMany('App\Modules\AccountManagement\AccountLog\Model', 'account_number_id', 'id');
+    }
 }

@@ -4,6 +4,8 @@ export const account_setup_store = defineStore("account_setup_store", {
     state: () => ({
         all_data: {},
         single_data: {},
+        account_info_data: {},
+        selected_account_numbers: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -44,6 +46,15 @@ export const account_setup_store = defineStore("account_setup_store", {
                 this.all();
                 console.log(response.data);
             }
+        },
+
+        get_accounts_info: async function (id) {
+            let response = await axios.get("accounts-info");
+            this.account_info_data = response.data;
+        },
+
+        set_selected_account_numbers: function (data) {
+            this.selected_account_numbers = data;
         },
     },
 });

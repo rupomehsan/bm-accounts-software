@@ -41,6 +41,12 @@ class Controller extends ControllersController
         $data = Update::execute($user, $request);
         return $data;
     }
+    public function userUnblock($id)
+    {
+
+        $data = Update::userUnblock($id);
+        return $data;
+    }
 
     public function destroy($id)
     {

@@ -48,9 +48,10 @@ class Store
                 $totalGiven = self::$model::where('user_id', $data['user_id'])
                     ->where('category_id', $loanPayment->category_id)
                     ->sum('amount');
-                $loanPayment->due_amount = $loanRegister->due_amount =  $loanRegister->amount - $totalGiven;
+                $loanPayment->due = $loanRegister->due_amount =  $loanRegister->amount - $totalGiven;
+
                 $loanRegister->total_paid = $totalGiven;
-                
+
                 $user = self::$userModel::find($request->user_id);
                 $logData = [
                     'user_id' => $request->user_id,

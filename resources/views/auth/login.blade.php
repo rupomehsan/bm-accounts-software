@@ -158,6 +158,7 @@
             top: 20px;
             right: 0px;
             display: none;
+            z-index: 999;
         }
 
         #toasterMessage p {
@@ -306,6 +307,7 @@
                         let toasterMessage = document.getElementById('toasterMessage')
                         toasterMessage.style.display = 'block'
                         showMessage.innerText = data.message
+
                         setTimeout(() => {
                             toasterMessage.style.display = 'none'
                         }, 3000);

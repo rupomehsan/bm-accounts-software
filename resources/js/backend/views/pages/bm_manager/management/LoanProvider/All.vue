@@ -8,7 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `Create${route_prefix}` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `Create${route_prefix}` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -77,6 +78,14 @@
                                         <!---->
                                     </th>
                                     <th class="cursor_n_resize">
+                                        Amount
+                                        <!---->
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Paid
+                                        <!---->
+                                    </th>
+                                    <th class="cursor_n_resize">
                                         Purpose
                                         <!---->
                                     </th>
@@ -100,6 +109,8 @@
                                     <td>
                                         {{ item.given_date }}
                                     </td>
+                                    <td>{{ item.amount }}</td>
+                                    <td>{{ item.due_amount }}</td>
                                     <td>{{ item.purpose }}</td>
 
                                     <td>
@@ -132,11 +143,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateLoan',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                            name: 'CreateLoan',
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -146,10 +157,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            delete_data(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                            delete_data(
+                                item.id
+                            )
+                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -191,6 +202,7 @@
 import { mapActions, mapState } from 'pinia'
 import { loan_setup_store } from './setup/store';
 import setup from "./setup";
+import axios from 'axios';
 export default {
     data: () => ({
         route_prefix: '',
@@ -207,6 +219,10 @@ export default {
         await this.get_all_data()
         // console.log(this.all_data.data);
         this.loaded = true
+
+        let response = await axios.get('accounts-info')
+
+        console.log(response);
     },
     methods: {
         ...mapActions(loan_setup_store, {

@@ -9,14 +9,28 @@ export default [
         multiple: false,
         data_list: []
     },
-
-
-
     {
         name: "amount",
         label: "Enter your amount",
         type: "number",
         value: "",
+    },
+    {
+        name: "account_id",
+        label: " account",
+        type: "select",
+        value: "",
+        multiple: false,
+        data_list: [],
+        onchangeAction: 'getSelectedAccount'
+    },
+    {
+        name: "account_number_id",
+        label: "account number",
+        type: "select",
+        value: "",
+        multiple: false,
+        data_list: []
     },
     {
         name: "amount_in_text",

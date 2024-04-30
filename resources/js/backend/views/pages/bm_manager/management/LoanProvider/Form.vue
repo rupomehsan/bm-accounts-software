@@ -30,9 +30,10 @@
                                                 form_field, index
                                             ) in form_fields" :key="index">
                                             <common-input :label="form_field.label" :type="form_field.type"
+                                                :onchange="changeAction" :onchangeAction="form_field.onchangeAction"
                                                 :name="form_field.name" :multiple="form_field.multiple"
                                                 :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
+                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -54,6 +55,7 @@
 <script>
 import { mapActions, mapState } from 'pinia'
 import { loan_setup_store } from './setup/store';
+import { account_setup_store } from '../accounts/setup/store';
 import setup from "./setup";
 import form_fields from "./setup/form_fields";
 
@@ -69,6 +71,9 @@ export default {
         await this.get_all_data()
         await this.get_all_users()
         await this.get_all_account_categories()
+        await this.get_accounts_info()
+
+        // console.log(this.account_info_data);
 
         if (this.all_users_data.length) {
             this.form_fields.forEach((field) => {
@@ -90,6 +95,15 @@ export default {
                         field.data_list.push(dataList)
                     })
                 }
+                if (field.name == 'account_id') {
+                    field.data_list = []
+                    this.account_info_data.forEach((item) => {
+                        let dataList = {}
+                        dataList.label = item.name
+                        dataList.value = item.id
+                        field.data_list.push(dataList)
+                    })
+                }
             })
         }
 
@@ -104,9 +118,29 @@ export default {
                                 this.form_fields[index].value = value[1];
                             }
                         }
-
                     });
                 });
+
+
+                if (this.single_data.account_log?.account_id) {
+                    this.form_fields[2].value = this.single_data.account_log?.account_id
+
+                    let selectedValue = this.single_data.account_log?.account_id
+
+                    let selectedAccount = this.account_info_data.find(item => item.id == selectedValue)
+                    let item = this.form_fields.find(item => item.name == "account_number_id")
+                    let data_list = []
+                    selectedAccount.account_number.forEach((item) => {
+                        let dataList = {}
+                        dataList.label = item.value
+                        dataList.value = item.id
+                        data_list.push(dataList)
+                    })
+                    item.data_list = data_list
+                    this.form_fields[3].value = this.single_data.account_log?.account_number_id
+                }
+
+
             }
         } else {
             // this.form_fields.forEach((item) => {
@@ -123,7 +157,13 @@ export default {
             update_data: 'update',
             get_all_users: 'get_all_users',
             get_all_account_categories: 'get_all_account_categories',
+
         }),
+        ...mapActions(account_setup_store, {
+            get_accounts_info: 'get_accounts_info',
+            set_selected_account_numbers: 'set_selected_account_numbers',
+        }),
+
 
         submitHandler: async function ($event) {
             if (this.param_id) {
@@ -153,6 +193,27 @@ export default {
             }
         },
 
+
+        getSelectedAccount: function (actionTitle, event, ref) {
+            let selectedValue = event.target.value
+            let selectedAccount = this.account_info_data.find(item => item.id == selectedValue)
+            let item = this.form_fields.find(item => item.name == "account_number_id")
+            let data_list = []
+            selectedAccount.account_number.forEach((item) => {
+                let dataList = {}
+                dataList.label = item.value
+                dataList.value = item.id
+                data_list.push(dataList)
+            })
+            item.data_list = data_list
+            console.log(item, selectedAccount);
+        },
+
+        changeAction: function (actionTitle, event, ref) {
+            this[actionTitle](actionTitle, event, ref);
+        }
+
+
     },
 
     computed: {
@@ -161,6 +222,10 @@ export default {
             all_data: 'all_data',
             all_users_data: 'all_users_data',
             all_account_categories_data: 'all_account_categories_data',
+        }),
+        ...mapState(account_setup_store, {
+            account_info_data: 'account_info_data',
+            selected_account_numbers: 'selected_account_numbers'
         }),
     },
 

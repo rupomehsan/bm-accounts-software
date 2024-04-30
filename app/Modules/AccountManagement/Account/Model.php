@@ -28,6 +28,11 @@ class Model extends EloquentModel
 
     public function account_number()
     {
-        return $this->hasOne(self::$accountNumberModel, 'account_id');
+        return $this->hasMany(self::$accountNumberModel, 'account_id');
+    }
+
+    public function account_logs()
+    {
+        return $this->hasMany('App\Modules\AccountManagement\AccountLog\Model', 'account_number_id', 'id');
     }
 }

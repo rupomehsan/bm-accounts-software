@@ -1,5 +1,7 @@
 <?php
 
+
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -164,3 +166,49 @@ function facker()
 
     return   Faker::create();
 }
+
+
+/**
+ * ```js
+  logEntry([
+        "user_id" => $data['user_id'],
+        "user_type" => $data['user_type'],
+        "date" => $data['date'],
+        "name" => $data['name'],
+        "amount" => $data['amount'],
+        "category_id" => $data['category_id'],
+        "account_id" => $data['account_id'],
+        "account_number_id" => $data['account_number_id'],
+        "trx_id" => $data['trx_id'],
+        "receipt_no" => $data['receipt_no'],
+        "is_income" => $data['is_income'],
+        "is_expense" => $data['is_expense'],
+        "description" => $data['description'],
+        "random_user" => $data['random_user'],
+    ])
+ */
+function logEntry($data)
+{
+    $model = \App\Modules\AccountManagement\AccountLog\Model::class;
+    $accountLogModel = $model::create([
+        "user_id" => $data['user_id'] ?? null,
+        "user_type" => $data['user_type'] ?? null,
+        "date" => $data['date'] ?? null,
+        "name" => $data['name'] ?? null,
+        "amount" => $data['amount'] ?? null,
+        "category_id" => $data['category_id'] ?? null,
+        "account_id" => $data['account_id'] ?? null,
+        "account_number_id" => $data['account_number_id'] ?? null,
+        "trx_id" => $data['trx_id'] ?? null,
+        "receipt_no" => $data['receipt_no'] ?? null,
+        "is_income" => $data['is_income'] ?? null,
+        "is_expense" => $data['is_expense'] ?? null,
+        "description" => $data['description'] ?? null,
+        "random_user" => $data['random_user'] ?? null,
+    ]);
+
+    return $accountLogModel;
+}
+
+// dd(__DIR__);
+include_once(__DIR__.'\Account.php');

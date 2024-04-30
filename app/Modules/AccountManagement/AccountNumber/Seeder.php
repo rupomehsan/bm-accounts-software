@@ -35,7 +35,9 @@ class Seeder extends SeedersSeeder
             // ],
             // bank account
             "2" => [
-                '20503110201262812',
+                '2812',
+                '2813',
+                '2814',
                 // 'Agrani bank 874524',
                 // 'City bank 874525',
             ],

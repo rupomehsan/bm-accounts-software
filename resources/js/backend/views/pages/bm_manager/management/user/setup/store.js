@@ -16,7 +16,7 @@ export const user_setup_store = defineStore("user_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("users");
+                response = await axios.get("users?is_blocked=1");
             }
             this.all_data = response.data.data;
         },
@@ -48,6 +48,15 @@ export const user_setup_store = defineStore("user_setup_store", {
             if (data) {
                 let response = await axios.delete("users/" + id);
                 window.s_alert("Data deleted");
+                this.all();
+                console.log(response.data);
+            }
+        },
+        unblock_user: async function (id) {
+            var data = await window.s_confirm('Are you sure you want to unblock this user?');
+            if (data) {
+                let response = await axios.post("user-unblock/" + id);
+                window.s_alert("Successfully unblock user");
                 this.all();
                 console.log(response.data);
             }

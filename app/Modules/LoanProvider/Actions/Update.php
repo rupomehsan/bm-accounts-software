@@ -9,10 +9,12 @@ class Update
 {
     static $model = \App\Modules\LoanProvider\Model::class;
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
+    static $userModel = \App\Modules\User\Model::class;
 
     public static function execute(Validation $request, $id)
     {
         try {
+
             if (!$data = self::$model::query()->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
@@ -22,16 +24,20 @@ class Update
                 $image = $request->file('attachment');
                 $imageName = uploader($image, 'uploads/loan');
                 $requestdata['attachment'] = $imageName;
-            } else {
-                $requestdata['attachment'] = $data->attachment;
             }
 
             if ($data->update($requestdata)) {
                 $accLog = self::$accountLogModel::find($data->account_log_id);
+                $user = self::$userModel::find($request->user_id);
                 $logData = [
-                    'user_id' => $request->user_id,
-                    'amount' => $request->amount,
-                    'category_id' => $request->category_id,
+                    "user_id" => $request->user_id,
+                    "user_type" => $user->roles[0]->name,
+                    "date" =>  $request->taken_date,
+                    "name" => $user->name,
+                    "amount" => $request->amount,
+                    "creator" => auth()->id(),
+                    'account_id' => $request->account_id,
+                    'account_number_id' => $request->account_number_id,
                 ];
                 $accLog->update($logData);
                 $data->update();

@@ -9,6 +9,7 @@ class Model extends EloquentModel
 {
     static $userModel = \App\Modules\User\Model::class;
     static $loanPaymentModel = \App\Modules\LoanPayment\Model::class;
+    static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
 
     protected $table = "loan_providers";
     protected $guarded = [];
@@ -35,5 +36,13 @@ class Model extends EloquentModel
     public function loan_payment()
     {
         return $this->hasOne(self::$loanPaymentModel, 'loan_provide_id');
+    }
+    public function loan_payments()
+    {
+        return $this->hasMany(self::$loanPaymentModel, 'loan_provide_id');
+    }
+    public function account_log()
+    {
+        return $this->belongsTo(self::$accountLogModel, 'account_log_id');
     }
 }

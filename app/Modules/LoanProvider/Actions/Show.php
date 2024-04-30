@@ -12,7 +12,7 @@ class Show
     {
         try {
 
-            $with = [];
+            $with = ['account_log'];
 
             if (request()->input('multiple') == 'true') {
                 if (!$data = self::$model::query()->with($with)->where('user_id', $id)->get()) {

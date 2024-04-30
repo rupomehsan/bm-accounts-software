@@ -49,6 +49,7 @@
                                                 :data_list="
                                                     form_field.data_list
                                                 "
+
                                             />
                                         </template>
                                     </div>
@@ -102,7 +103,7 @@ import { mapActions, mapState } from "pinia";
 import { loan_payment_setup_store } from "./setup/store";
 import setup from "./setup";
 import form_fields from "./setup/form_fields";
-
+import { account_setup_store } from '../accounts/setup/store';
 export default {
     data: () => ({
         route_prefix: "",
@@ -116,6 +117,7 @@ export default {
         await this.get_all_data();
         await this.get_all_users();
         await this.get_all_account_categories();
+        await this.get_accounts_info()
 
         if (this.all_users_data.length) {
             this.form_fields.forEach((field) => {
@@ -174,11 +176,16 @@ export default {
             get_user_loan_register: "get_user_loan_register",
         }),
 
-        async getRespose(res) {
-            if (res && res.target?.name == "user_id") {
-                console.log(res);
+        ...mapActions(account_setup_store, {
+            get_accounts_info: 'get_accounts_info',
+            set_selected_account_numbers: 'set_selected_account_numbers',
+        }),
+
+        async getRespose(event) {
+            if (event && event.target?.name == "user_id") {
+                console.log(event);
                 this.loanHistory = true;
-                await this.get_user_loan_register(res.target.value);
+                await this.get_user_loan_register(event.target.value);
                 if (this.user_loan_register_data) {
                     this.form_fields[1].data_list = [];
                     this.user_loan_register_data.data.forEach((item) => {

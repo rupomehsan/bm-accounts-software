@@ -46,4 +46,6 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(self::$AccountCateogryModel, 'category_id');
     }
+
+    
 }

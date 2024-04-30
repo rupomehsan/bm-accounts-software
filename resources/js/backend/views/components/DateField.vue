@@ -61,7 +61,7 @@ export default {
         format_date: function () {
             let date = moment(this.$refs.date_input.value);
             if (this.dateFormat) {
-                console.log(this.dateFormat);
+                // console.log(this.dateFormat);
                 this.formated_value = date.format(this.dateFormat)
             } else {
                 this.formated_value = date.format('DD MMMM YYYY')
