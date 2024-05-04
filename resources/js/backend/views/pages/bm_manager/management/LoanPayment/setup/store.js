@@ -10,6 +10,7 @@ export const loan_payment_setup_store = defineStore(
             all_account_categories_data: {},
             single_data: {},
             role_data: {},
+            account_number_data: {},
             api: "loan-payments",
         }),
         getters: {
@@ -87,6 +88,12 @@ export const loan_payment_setup_store = defineStore(
                 );
                 response = response.data;
                 this.user_loan_register_data = response;
+            },
+            get_account_numbers_by_account_id: async function (id) {
+                let response = await axios.get("accounts/" + id);
+                response = response.data.data;
+                // console.log("data", response);
+                this.account_number_data = response;
             },
         },
     }

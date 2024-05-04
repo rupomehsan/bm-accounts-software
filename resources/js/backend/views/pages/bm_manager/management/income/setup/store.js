@@ -9,6 +9,7 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
         all_central_division: {},
         all_branch: {},
         all_accounts: {},
+        account_number_data: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -100,5 +101,13 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
                 console.log(response.data);
             }
         },
+
+        get_account_numbers_by_account_id: async function (id) {
+            let response = await axios.get("accounts/" + id);
+            response = response.data.data;
+            // console.log("data", response);
+            this.account_number_data = response;
+        },
+
     },
 });

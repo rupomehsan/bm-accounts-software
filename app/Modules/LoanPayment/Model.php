@@ -8,7 +8,8 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $userModel = \App\Modules\User\Model::class;
-    
+    static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
+
     protected $table = "loan_payments";
     protected $guarded = [];
 
@@ -29,5 +30,9 @@ class Model extends EloquentModel
     public function user()
     {
         return $this->belongsTo(self::$userModel, 'user_id');
+    }
+    public function account_log()
+    {
+        return $this->belongsTo(self::$accountLogModel, 'account_log_id');
     }
 }

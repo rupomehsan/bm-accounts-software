@@ -17,6 +17,7 @@ class Store
     public static function execute(Validation $request)
     {
         try {
+            // dd($request->all());
 
             if ($income = self::$model::query()->create($request->validated())) {
                 $userName = null;

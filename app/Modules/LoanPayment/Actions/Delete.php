@@ -18,17 +18,23 @@ class Delete
             }
 
             $accoutntCategory = self::$accoutnCategryModel::where('title', 'ঋণ ডিলিট')->first();
-            if ($accoutntCategory) {
+            $log = self::$logModel::find($data->account_log_id);
+            if ($log) {
                 $voucherData = [
-                    "department_id" => auth()->user()->parent ? auth()->user()->parent : auth()->id(),
-                    "creator" => auth()->id(),
-                    "account_expense_category_id" => $accoutntCategory->id,
-                    "amount" => $data->amount,
+                    "user_id" => auth()->id(),
+                    "user_type" => auth()->user()->roles()->first()?->name,
                     "date" =>  Carbon::now()->toDateString(),
-                    'description' => "Account balance for loan payment deleted, related log id: " . $data->account_log_id,
+                    "name" => auth()->user()->name,
+                    "amount" => $data->amount,
+                    "category_id" => $accoutntCategory->id,
+                    "creator" => auth()->id(),
+                    'description' => "Account balance for loan  deleted, related log id: " . $data->account_log_id,
+                    'is_income' => 0,
+                    'is_expense' => 1,
                 ];
 
-                if (self::$logModel::create($voucherData)) {
+                $acLog = logEntry($voucherData);
+                if ($acLog) {
                     $data->delete();
                     return messageResponse('Item Successfully deleted', 200, 'success');
                 }

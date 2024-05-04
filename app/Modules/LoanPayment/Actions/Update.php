@@ -9,6 +9,7 @@ class Update
     static $model = \App\Modules\LoanPayment\Model::class;
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
     static $loanRegisterModel = \App\Modules\LoanProvider\Model::class;
+    static $userModel = \App\Modules\User\Model::class;
 
     public static function execute(Validation $request, $id)
     {
@@ -18,37 +19,27 @@ class Update
             }
 
             $requestdata = $request->validated();
+            $loanRegister = self::$loanRegisterModel::where('user_id', $data['user_id'])->where('id', $requestdata['loan_provide_id'])->first();
 
-            $loanRegister = self::$loanRegisterModel::find($requestdata['loan_provide_id']);
-
-            if ($data['amount'] < $loanRegister->amount) {
-                $data['due'] = $loanRegister->amount - $data['amount'];
-                $data['payment_status'] = 'due';
-                $loanRegister->payment_status = 'due';
-            }
-
-            if ($data['amount'] >= $loanRegister->amount) {
-                $data['due'] = $loanRegister->amount - $data['amount'];
-                $data['payment_status'] = 'paid';
-                $loanRegister->payment_status = 'paid';
-            }
-            $requestdata['category_id'] = $loanRegister->category_id;
             if ($request->hasFile('attachment')) {
                 $image = $request->file('attachment');
                 $imageName = uploader($image, 'uploads/loan');
                 $requestdata['attachment'] = $imageName;
-            } else {
-                $requestdata['attachment'] = $data->attachment;
             }
 
             if ($data->update($requestdata)) {
+                $totalGiven = self::$model::where('user_id', $data['user_id'])
+                    ->where('loan_provide_id', $data->loan_provide_id)
+                    ->sum('amount');
+                $data->due = $loanRegister->due_amount =  $loanRegister->amount - $totalGiven;
                 $accLog = self::$accountLogModel::find($data->account_log_id);
-                $logData = [
-                    'user_id' => $request->user_id,
-                    'amount' => $request->amount,
-                    'category_id' => $loanRegister->category_id,
+                $Log = [
+                    "amount" => $request->amount,
+                    'account_id' => $request->account_id,
+                    'account_number_id' => $request->account_number_id,
                 ];
-                $accLog->update($logData);
+
+                $accLog->update($Log);
                 $loanRegister->update();
                 $data->update();
                 return messageResponse('Item updated successfully');

@@ -75,37 +75,37 @@ export default {
 
         // console.log(this.account_info_data);
 
-        if (this.all_users_data.length) {
-            this.form_fields.forEach((field) => {
-                if (field.name == 'user_id') {
-                    field.data_list = []
-                    this.all_users_data.forEach((item) => {
-                        let dataList = {}
-                        dataList.label = item.full_name
-                        dataList.value = item.id
-                        field.data_list.push(dataList)
-                    })
-                }
-                if (field.name == 'category_id') {
-                    field.data_list = []
-                    this.all_account_categories_data.forEach((item) => {
-                        let dataList = {}
-                        dataList.label = item.title
-                        dataList.value = item.id
-                        field.data_list.push(dataList)
-                    })
-                }
-                if (field.name == 'account_id') {
-                    field.data_list = []
-                    this.account_info_data.forEach((item) => {
-                        let dataList = {}
-                        dataList.label = item.name
-                        dataList.value = item.id
-                        field.data_list.push(dataList)
-                    })
-                }
-            })
-        }
+
+        this.form_fields.forEach((field) => {
+            if (field.name == 'user_id') {
+                field.data_list = []
+                this.all_users_data.forEach((item) => {
+                    let dataList = {}
+                    dataList.label = item.full_name
+                    dataList.value = item.id
+                    field.data_list.push(dataList)
+                })
+            }
+            if (field.name == 'category_id') {
+                field.data_list = []
+                this.all_account_categories_data.forEach((item) => {
+                    let dataList = {}
+                    dataList.label = item.title
+                    dataList.value = item.id
+                    field.data_list.push(dataList)
+                })
+            }
+            if (field.name == 'account_id') {
+                field.data_list = []
+                this.account_info_data.forEach((item) => {
+                    let dataList = {}
+                    dataList.label = item.name
+                    dataList.value = item.id
+                    field.data_list.push(dataList)
+                })
+            }
+        })
+
 
         if (id) {
             this.param_id = id;
@@ -124,9 +124,7 @@ export default {
 
                 if (this.single_data.account_log?.account_id) {
                     this.form_fields[2].value = this.single_data.account_log?.account_id
-
                     let selectedValue = this.single_data.account_log?.account_id
-
                     let selectedAccount = this.account_info_data.find(item => item.id == selectedValue)
                     let item = this.form_fields.find(item => item.name == "account_number_id")
                     let data_list = []
@@ -139,8 +137,6 @@ export default {
                     item.data_list = data_list
                     this.form_fields[3].value = this.single_data.account_log?.account_number_id
                 }
-
-
             }
         } else {
             // this.form_fields.forEach((item) => {
@@ -210,6 +206,7 @@ export default {
         },
 
         changeAction: function (actionTitle, event, ref) {
+            console.log("ac", actionTitle);
             this[actionTitle](actionTitle, event, ref);
         }
 

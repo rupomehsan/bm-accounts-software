@@ -1,6 +1,7 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
+import BalanceForm from "../../balanceForm/BalanceForm.vue";
 
 const routes = {
     path: 'income',
@@ -15,6 +16,11 @@ const routes = {
             path: 'create',
             name: "CreateIncome",
             component: Form
+        },
+        {
+            path: 'balance',
+            name: "BalanceForm",
+            component: BalanceForm
         },
     ]
 }

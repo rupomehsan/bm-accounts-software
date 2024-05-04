@@ -30,9 +30,9 @@
                                                 form_field, index
                                             ) in form_fields" :key="index">
                                             <common-input :label="form_field.label" :type="form_field.type"
-                                                :name="form_field.name" :multiple="form_field.multiple"
-                                                :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
+                                                :onchange="getRespose" :name="form_field.name"
+                                                :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
+                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -71,7 +71,8 @@
                             <tr class="text-white text-center">
                                 <td class="fw-bold text-primary">Summery : -> </td>
                                 <td class="fw-bold text-primary">Total paid : {{ branch_target_data.totalPaid }}</td>
-                                <td class="fw-bold text-primary">Total payable : {{ branch_target_data.totalPayable }}</td>
+                                <td class="fw-bold text-primary">Total payable : {{ branch_target_data.totalPayable }}
+                                </td>
                                 <td class="fw-bold text-primary">Total due : {{ branch_target_data.due }}</td>
                             </tr>
                         </tbody>
@@ -89,7 +90,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in branch_target_data.application" :key="item" class="text-white text-center">
+                            <tr v-for="item in branch_target_data.application" :key="item"
+                                class="text-white text-center">
                                 <td v-if="!item.applied"><input name="application_id" :value="item.id"
                                         v-model="application_id" type="radio">
                                 </td>
@@ -199,15 +201,13 @@ export default {
                         }
 
                         if (field.name == 'account_id') {
-
                             if (value[0] == 'account_logs') {
-                                // console.log("value", value[1].account.id)
                                 this.form_fields[index].value = value[1].account_id;
                             }
                         }
+                        
                         if (field.name == 'account_number_id') {
                             if (value[0] == 'account_logs') {
-                                // console.log("value", value[1].account.id)
                                 this.form_fields[index].value = value[1].account_number_id;
                             }
                         }
@@ -231,7 +231,8 @@ export default {
             store: "store",
             get_single_branch_income: "get",
             income_update: "update",
-            get_branch_target_by_brach_id: 'get_branch_target_by_brach_id'
+            get_branch_target_by_brach_id: 'get_branch_target_by_brach_id',
+            get_account_numbers_by_account_id: 'get_account_numbers_by_account_id'
 
         }),
 
@@ -262,21 +263,39 @@ export default {
             }
         },
 
-        async accountHandler(event) {
-
-            const inputValue = event.target.value;
-
-            try {
-                const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
-                if (result.data) {
-                    let toText = document.getElementById('account_number_id');
-                    toText.value = result.data?.data?.value; // Use toString() method
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
+        getRespose: async function () {
+            if (event.target.name == 'account_id') {
+                await this.get_account_numbers_by_account_id(event.target.value)
+                let account_number = this.account_number_data?.account_number
+                this.form_fields.forEach((item) => {
+                    if (item.name == 'account_number_id') {
+                        item.data_list = []
+                        account_number.forEach((number) => {
+                            let dataList = {}
+                            dataList.label = number.value
+                            dataList.value = number.id
+                            item.data_list.push(dataList)
+                        })
+                    }
+                })
             }
-
         },
+
+        // async accountHandler(event) {
+
+        //     const inputValue = event.target.value;
+
+        //     try {
+        //         const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
+        //         if (result.data) {
+        //             let toText = document.getElementById('account_number_id');
+        //             toText.value = result.data?.data?.value; // Use toString() method
+        //         }
+        //     } catch (error) {
+        //         console.error('Error fetching data:', error);
+        //     }
+
+        // },
 
         async showDetails() {
             let account_category_id = document.getElementById('account_category_id').value;
@@ -297,6 +316,7 @@ export default {
             all_central_division: "all_central_division",
             all_branch: "all_branch",
             all_accounts: "all_accounts",
+            account_number_data: "account_number_data",
 
         }),
     },
@@ -309,10 +329,10 @@ export default {
             amount.addEventListener('keyup', this.amountHandleKeyup);
         }
 
-        const accountId = document.getElementById('account_id');
-        if (accountId) {
-            accountId.addEventListener('change', this.accountHandler);
-        }
+        // const accountId = document.getElementById('account_id');
+        // if (accountId) {
+        //     accountId.addEventListener('change', this.accountHandler);
+        // }
 
 
     },

@@ -14,10 +14,9 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{ name: `All${route_prefix}` }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `All${route_prefix}` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -25,32 +24,18 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
+                                        <template v-for="(
                                                 form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :onchange="getRespose"
-                                                :type="form_field.type"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-
-                                            />
+                                            ) in form_fields" :key="index">
+                                            <common-input :label="form_field.label" :onchange="getRespose"
+                                                :type="form_field.type" :name="form_field.name"
+                                                :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
+                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -78,11 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="item in user_loan_register_data.data"
-                                :key="item"
-                                class="text-white text-center"
-                            >
+                            <tr v-for="item in user_loan_register_data.data" :key="item" class="text-white text-center">
                                 <td>{{ item.amount }}</td>
                                 <td>{{ item.purpose }}</td>
                                 <td>{{ item.taken_date }}</td>
@@ -130,6 +111,15 @@ export default {
                         field.data_list.push(dataList);
                     });
                 }
+                if (field.name == "account_id") {
+                    field.data_list = [];
+                    this.account_info_data.forEach((item) => {
+                        let dataList = {};
+                        dataList.label = item.name;
+                        dataList.value = item.id;
+                        field.data_list.push(dataList);
+                    });
+                }
             });
         }
 
@@ -153,8 +143,35 @@ export default {
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
+                        if (field.name == 'account_id') {
+                            if (value[0] == 'account_log') {
+                                this.form_fields[index].value = value[1].account_id;
+                            }
+                        }
+                        if (field.name == 'account_number_id') {
+                            if (value[0] == 'account_log') {
+                                this.form_fields[index].value = value[1].account_number_id;
+                            }
+                        }
                     });
                 });
+
+
+
+                await this.get_account_numbers_by_account_id(this.single_data.account_log?.account_id)
+                let account_number = this.account_number_data?.account_number
+                this.form_fields.forEach((item) => {
+                    if (item.name == 'account_number_id') {
+                        item.data_list = []
+                        account_number.forEach((number) => {
+                            let dataList = {}
+                            dataList.label = number.value
+                            dataList.value = number.id
+                            item.data_list.push(dataList)
+                        })
+
+                    }
+                })
             }
         } else {
             form_fields.forEach((item) => {
@@ -174,6 +191,7 @@ export default {
             get_all_users: "get_all_users",
             get_all_account_categories: "get_all_account_categories",
             get_user_loan_register: "get_user_loan_register",
+            get_account_numbers_by_account_id: "get_account_numbers_by_account_id",
         }),
 
         ...mapActions(account_setup_store, {
@@ -181,12 +199,17 @@ export default {
             set_selected_account_numbers: 'set_selected_account_numbers',
         }),
 
-        async getRespose(event) {
+        getRespose: async function () {
             if (event && event.target?.name == "user_id") {
                 console.log(event);
-                this.loanHistory = true;
+
                 await this.get_user_loan_register(event.target.value);
                 if (this.user_loan_register_data) {
+                    if (this.user_loan_register_data.data.length) {
+                        this.loanHistory = true;
+                    } else {
+                        this.loanHistory = false;
+                    }
                     this.form_fields[1].data_list = [];
                     this.user_loan_register_data.data.forEach((item) => {
                         let dataList = {};
@@ -195,6 +218,21 @@ export default {
                         this.form_fields[1].data_list.push(dataList);
                     });
                 }
+            }
+            if (event.target.name == 'account_id') {
+                await this.get_account_numbers_by_account_id(event.target.value)
+                let account_number = this.account_number_data?.account_number
+                this.form_fields.forEach((item) => {
+                    if (item.name == 'account_number_id') {
+                        item.data_list = []
+                        account_number.forEach((number) => {
+                            let dataList = {}
+                            dataList.label = number.value
+                            dataList.value = number.id
+                            item.data_list.push(dataList)
+                        })
+                    }
+                })
             }
         },
 
@@ -239,6 +277,11 @@ export default {
             all_users_data: "all_users_data",
             all_account_categories_data: "all_account_categories_data",
             user_loan_register_data: "user_loan_register_data",
+            account_number_data: "account_number_data",
+        }),
+        ...mapState(account_setup_store, {
+            account_info_data: 'account_info_data',
+            selected_account_numbers: 'selected_account_numbers'
         }),
     },
 

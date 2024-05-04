@@ -16,15 +16,9 @@ class Delete
             if (!$data = self::$model::find($id)) {
                 return messageResponse('Data not found...', 404, 'error');
             }
-            // $paymentCount = $data->loan_payments->count();
-            // if($paymentCount > 0) {
-            //     return messageResponse("$paymentCount payment(s) found for this loan, could not delete", 400, 'error');
-            // }
-
             $accoutntCategory = self::$accoutnCategryModel::where('title', 'ঋণ ডিলিট')->first();
             $log = self::$logModel::find($data->account_log_id);
             if ($log) {
-
                 $voucherData = [
                     "user_id" => auth()->user()->parent ? auth()->user()->parent : auth()->id(),
                     "user_type" => auth()->user()->roles()->first()?->name,
@@ -39,14 +33,11 @@ class Delete
                 ];
 
                 $acLog = logEntry($voucherData);
-
                 if ($acLog) {
                     $data->delete();
                     return messageResponse('Item Successfully deleted', 200, 'success');
                 }
             }
-            $data->delete();
-            return messageResponse('Item Successfully deleted', 200, 'success');
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }
