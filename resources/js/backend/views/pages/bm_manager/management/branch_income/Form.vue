@@ -205,7 +205,7 @@ export default {
                                 this.form_fields[index].value = value[1].account_id;
                             }
                         }
-                        
+
                         if (field.name == 'account_number_id') {
                             if (value[0] == 'account_logs') {
                                 this.form_fields[index].value = value[1].account_number_id;
@@ -281,21 +281,21 @@ export default {
             }
         },
 
-        // async accountHandler(event) {
+        async accountHandler(event) {
 
-        //     const inputValue = event.target.value;
+            const inputValue = event.target.value;
 
-        //     try {
-        //         const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
-        //         if (result.data) {
-        //             let toText = document.getElementById('account_number_id');
-        //             toText.value = result.data?.data?.value; // Use toString() method
-        //         }
-        //     } catch (error) {
-        //         console.error('Error fetching data:', error);
-        //     }
+            try {
+                const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
+                if (result.data) {
+                    let toText = document.getElementById('account_number_id');
+                    toText.value = result.data?.data?.value; // Use toString() method
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
 
-        // },
+        },
 
         async showDetails() {
             let account_category_id = document.getElementById('account_category_id').value;

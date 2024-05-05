@@ -9,6 +9,7 @@ export const central_division_income_setup_store = defineStore("central_division
         all_central_division: {},
         all_branch: {},
         all_accounts: {},
+        account_number_data: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -91,6 +92,13 @@ export const central_division_income_setup_store = defineStore("central_division
             formData.append('user_id', user_id)
             let response = await axios.post("account-incomes-search", formData);
             this.all_data = response.data.data;
+        },
+
+        get_account_numbers_by_account_id: async function (id) {
+            let response = await axios.get("accounts/" + id);
+            response = response.data.data;
+            // console.log("data", response);
+            this.account_number_data = response;
         },
     },
 });

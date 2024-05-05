@@ -41,7 +41,7 @@
                                             </template>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="pt-2">
                                         <button class="btn btn-primary mt-4">Search</button>
                                     </div>
@@ -169,18 +169,18 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateCentralDivisionIncome',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                                name: 'BalanceForm',
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
+                                                            Balance
                                                         </router-link>
                                                         <!---->
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <a @click.prevent="
                                                             delete_branch_income(
@@ -191,7 +191,7 @@
                                                             Delete
                                                         </a>
                                                     </span>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>

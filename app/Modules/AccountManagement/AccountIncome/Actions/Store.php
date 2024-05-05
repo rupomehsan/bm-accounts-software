@@ -28,7 +28,7 @@ class Store
                 }
 
                 $data = [
-                    "user_id" => $request->input('branch_id'),
+                    "user_id" => $request->input('branch_id') ?? $request->input('central_division_id'),
                     "user_type" => $userName ? $userName->roles[0]->name : '',
                     "date" => $income->date,
                     "name" => $userName->full_name ?? "",

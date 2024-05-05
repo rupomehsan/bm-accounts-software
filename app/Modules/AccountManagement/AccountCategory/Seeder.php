@@ -89,23 +89,35 @@ class Seeder extends SeedersSeeder
                 "শিশুকল্যাণ",
                 "দা.কার্যক্রম",
                 "ঋণ ডিলিট",
+                'আয় সমন্নয়'
             ]
+        ];
+        $defaultIncome = [
+            "মাসিক আয়",
+            "বার্ষিক আয়",
+        ];
+
+        $defaultExpense = [
+            "ঋণ ডিলিট",
+            'আয় সমন্নয়'
         ];
 
         foreach ($data['income'] as $item) {
-            self::$model::create([
+            $income = self::$model::create([
                 "title" => $item,
                 "description" => " ",
                 "parent" => "1",
                 "type" => "income",
+                "is_default" => in_array($item, $defaultIncome) ? '1' : '0',
             ]);
         }
         foreach ($data['expense'] as $item) {
-            self::$model::create([
+            $expense = self::$model::create([
                 "title" => $item,
                 "description" => " ",
                 "parent" => "1",
                 "type" => "expense",
+                "is_default" => in_array($item, $defaultExpense) ? '1' : '0'
             ]);
         }
     }

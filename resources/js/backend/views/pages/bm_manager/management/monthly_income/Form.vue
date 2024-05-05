@@ -30,7 +30,7 @@
                                                 form_field, index
                                             ) in form_fields" :key="index">
                                             <common-input :label="form_field.label" :type="form_field.type"
-                                                :name="form_field.name" :multiple="form_field.multiple"
+                                            :onchange="getRespose" :name="form_field.name" :multiple="form_field.multiple"
                                                 :value="form_field.value" :data_list="form_field.data_list
                                                     " />
                                         </template>
@@ -226,8 +226,8 @@ methods: {
         store: "store",
         get_single_branch_income: "get",
         income_update: "update",
-        get_branch_target_by_brach_id: 'get_branch_target_by_brach_id'
-
+        get_branch_target_by_brach_id: 'get_branch_target_by_brach_id',
+        get_account_numbers_by_account_id: 'get_account_numbers_by_account_id'
     }),
 
     submitHandler: async function ($event) {
@@ -257,21 +257,37 @@ methods: {
         }
     },
 
-    async accountHandler(event) {
 
-        const inputValue = event.target.value;
 
-        try {
-            const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
-            if (result.data) {
-                let toText = document.getElementById('account_number_id');
-                toText.value = result.data?.data?.value; // Use toString() method
+    // async accountHandler(event) {
+    //     const inputValue = event.target.value;
+    //     try {
+    //         const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
+    //         if (result.data) {
+    //             let toText = document.getElementById('account_number_id');
+    //             toText.value = result.data?.data?.value; // Use toString() method
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching data:', error);
+    //     }
+    // },
+    getRespose: async function () {
+            if (event.target.name == 'account_id') {
+                await this.get_account_numbers_by_account_id(event.target.value)
+                let account_number = this.account_number_data?.account_number
+                this.form_fields.forEach((item) => {
+                    if (item.name == 'account_number_id') {
+                        item.data_list = []
+                        account_number.forEach((number) => {
+                            let dataList = {}
+                            dataList.label = number.value
+                            dataList.value = number.id
+                            item.data_list.push(dataList)
+                        })
+                    }
+                })
             }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-
-    },
+        },
 
     async showDetails() {
         let account_category_id = document.getElementById('account_category_id').value;
@@ -292,7 +308,7 @@ computed: {
         all_central_division: "all_central_division",
         all_branch: "all_branch",
         all_accounts: "all_accounts",
-
+        account_number_data: "account_number_data",
     }),
 },
 

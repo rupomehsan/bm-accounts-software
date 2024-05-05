@@ -30,7 +30,7 @@
                                         <label for="">End date</label>
                                         <date-field :label="`End Date`" :name="`end_date`" />
                                     </div>
-                                   
+
                                     <div v-if="loaded">
                                         <label for="" class="my-1">Branch</label>
                                         <select v-model="user_id" name="branch_id" class="form-control" id="">
@@ -167,18 +167,18 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateBranchIncome',
+                                                            name: 'BalanceForm',
                                                             query: {
                                                                 id: item.id,
                                                             },
                                                         }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
+                                                            Balance
                                                         </router-link>
                                                         <!---->
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <a @click.prevent="
                                                             delete_branch_income(
@@ -189,7 +189,7 @@
                                                             Delete
                                                         </a>
                                                     </span>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>

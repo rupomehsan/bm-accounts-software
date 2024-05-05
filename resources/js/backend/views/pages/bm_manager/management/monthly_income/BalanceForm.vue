@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} Income
+                                Balance Income
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -26,37 +26,39 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-
+                                        <input type="hidden" name="random_user" value="''">
                                         <div class="form-group"><label for="">Enter amount</label>
                                             <div class="mt-1 mb-3"><input class="form-control" type="number"
-                                                    name="amount" id="amount"></div>
+                                                    name="amount" id="amount" v-model="amount"></div>
 
                                         </div>
                                         <div class="form-group"><label for="">Enter amount in text</label>
                                             <div class="mt-1 mb-3"><input class="form-control" type="text"
-                                                    name="amount_in_text" id="amount_in_text"></div>
+                                                    name="amount_in_text" id="amount_in_text" v-model="amount_in_text">
+                                            </div>
 
                                         </div>
                                         <div class="form-group"><label for="">Enter
-                                                comment</label>
+                                                comment</label><!--v-if--><!--v-if-->
                                             <div class="mt-1 mb-3"><textarea class="form-control" type="text"
-                                                    name="description"></textarea>
+                                                    name="description" v-model="description"></textarea>
                                                 <div id="description"></div>
-                                            </div>
+                                            </div><!--v-if--><!--v-if--><!--v-if-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-outline-info">
                                 <i class="fa fa-upload"></i>
                                 Submit
                             </button>
+
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -64,40 +66,36 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import form_fields from "./setup/form_fields.js";
-import { income_setup_store } from "./setup/store";
+
+import { monthly_income_setup_store } from "./setup/store";
 import axios from 'axios';
 export default {
-    data: () => ({
-        form_fields,
-        param_id: null,
-        amount: 0,
-        branch_target_data: [],
-        application_id: null
-    }),
-    created: async function () {
-        let id = this.$route.query.id;
-        if (id) {
-            this.param_id = id;
-            await this.get_single_branch_income(id);
-            if (this.single_data) {
 
+    data: () => ({
+        amount: '',
+        amount_in_text: '',
+        description: '',
+        param_id: null,
+    }),
+
+    created: async function () {
+
+
+        this.param_id = this.$route.query.id;
+        if (this.param_id) {
+            await this.get_single_branch_income(this.param_id);
+            if (this.single_data) {
+                this.amount = this.single_data.amount
+                this.amount_in_text = this.single_data.amount_in_text
+                this.description = this.single_data.description
             }
         }
     },
 
     methods: {
-        ...mapActions(income_setup_store, {
-            get_all_account_receipt_book: "get_all_account_receipt_book",
-            get_all_account_categories: "get_all_account_categories",
-            get_all_central_division: "get_all_central_division",
-            get_all_branch: "get_all_branch",
-            get_all_accounts: "get_all_accounts",
-            store: "store",
+        ...mapActions(monthly_income_setup_store, {
             get_single_branch_income: "get",
             income_update: "update",
-            get_branch_target_by_brach_id: 'get_branch_target_by_brach_id',
-            get_account_numbers_by_account_id: 'get_account_numbers_by_account_id'
         }),
 
         submitHandler: async function ($event) {
@@ -105,7 +103,6 @@ export default {
                 this.income_update($event.target, this.param_id);
                 this.$router.push({ name: `AllIncome` });
             } else {
-
                 let response = await this.store($event.target, this.application_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
@@ -113,7 +110,6 @@ export default {
                 }
             }
         },
-
         async amountHandleKeyup(event) {
             const inputValue = event.target.value;
             try {
@@ -127,79 +123,19 @@ export default {
             }
         },
 
-        // async accountHandler(event) {
-
-        //     const inputValue = event.target.value;
-
-        //     try {
-        //         const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
-        //         if (result.data) {
-        //             let toText = document.getElementById('account_number_id');
-        //             toText.value = result.data?.data?.value; // Use toString() method
-        //         }
-        //     } catch (error) {
-        //         console.error('Error fetching data:', error);
-        //     }
-
-        // },
-
-        async showDetails() {
-            let account_category_id = document.getElementById('account_category_id').value;
-            let branch_id = document.getElementById('branch_id').value;
-            if (account_category_id && branch_id) {
-                let response = await this.get_branch_target_by_brach_id(account_category_id, branch_id)
-                this.branch_target_data = response
-            }
-        },
-
-        getRespose: async function () {
-            if (event.target.name == 'account_id') {
-                await this.get_account_numbers_by_account_id(event.target.value)
-                let account_number = this.account_number_data?.account_number
-                this.form_fields.forEach((item) => {
-                    if (item.name == 'account_number_id') {
-                        item.data_list = []
-                        account_number.forEach((number) => {
-                            let dataList = {}
-                            dataList.label = number.value
-                            dataList.value = number.id
-                            item.data_list.push(dataList)
-                        })
-
-                    }
-                })
-            }
-        }
-
     },
 
     computed: {
-        ...mapState(income_setup_store, {
+        ...mapState(monthly_income_setup_store, {
             single_data: "single_data",
-            all_account_receipt_book_data: "all_account_receipt_book_data",
-            all_account_categories: "all_account_categories",
-            all_central_division: "all_central_division",
-            all_branch: "all_branch",
-            all_accounts: "all_accounts",
-            account_number_data: "account_number_data",
-
         }),
     },
 
     mounted() {
-
         const amount = document.getElementById('amount');
-
         if (amount) {
             amount.addEventListener('keyup', this.amountHandleKeyup);
         }
-
-        // const accountId = document.getElementById('account_id');
-        // if (accountId) {
-        //     accountId.addEventListener('change', this.accountHandler);
-        // }
-
-
     },
 
 

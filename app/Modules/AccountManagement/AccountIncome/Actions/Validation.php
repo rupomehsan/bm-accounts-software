@@ -47,9 +47,9 @@ class Validation extends FormRequest
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
 
-        if (!$this->input('branch_id')) {
-            $rules['random_user'] = 'required';
-        }
+        // if (!$this->input('branch_id')) {
+        //     $rules['random_user'] = 'required';
+        // }
 
         return $rules;
     }
