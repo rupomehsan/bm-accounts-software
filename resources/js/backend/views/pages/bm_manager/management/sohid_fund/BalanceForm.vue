@@ -67,7 +67,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 
-import { income_setup_store } from "./setup/store";
+import { sohid_fund_setup_store } from "./setup/store";
 import axios from 'axios';
 export default {
 
@@ -93,7 +93,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(income_setup_store, {
+        ...mapActions(sohid_fund_setup_store, {
             get_single_branch_income: "get",
             income_update: "update",
         }),
@@ -101,12 +101,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
-                this.$router.push({ name: `AllIncome` });
+                this.$router.push({ name: `AllSohidFund` });
             } else {
                 let response = await this.store($event.target, this.application_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllIncome` });
+                    this.$router.push({ name: `AllSohidFund` });
                 }
             }
         },
@@ -126,7 +126,7 @@ export default {
     },
 
     computed: {
-        ...mapState(income_setup_store, {
+        ...mapState(sohid_fund_setup_store, {
             single_data: "single_data",
         }),
     },

@@ -331,24 +331,18 @@ export default {
             all_branch: "all_branch",
             all_accounts: "all_accounts",
             account_number_data: "account_number_data",
-
         }),
     },
 
     mounted() {
-
         const amount = document.getElementById('amount');
-
         if (amount) {
             amount.addEventListener('keyup', this.amountHandleKeyup);
         }
-
         // const accountId = document.getElementById('account_id');
         // if (accountId) {
         //     accountId.addEventListener('change', this.accountHandler);
         // }
-
-
     },
 
 

@@ -21,62 +21,37 @@
             </div>
             <div class="conatiner">
                 <div class="card list_card">
-                    <div class="card-header align-items-center">
-                        <h6>
-                            All Branch Income
-                            <!---->
-                        </h6>
-                        <div class="search">
-                            <form action="#">
-                                <input
-                                    v-model.debounce:1000ms="search_data"
-                                    placeholder="search..."
-                                    type="search"
-                                    class="form-control border border-info"
-                                />
+                    <div class="card-header align-items-center ">
+                        <div>
+                            <!-- <h6>All Branch Income</h6> -->
+                            <form @submit.prevent="incomeSearchHandler">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" />
+                                    </div>
+                                    <div v-if="loaded">
+                                        <label for="" class="my-1">Depertment</label>
+                                        <select v-model="user_id" name="central_division_id" class="form-control" id="">
+                                            <option value="">Selecet depertment</option>
+                                            <template v-for="user in all_central_division" :key="user.id">
+                                                <option :value="user.id">{{ user.full_name }}</option>
+                                            </template>
+                                        </select>
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                        <div class="btns d-flex gap-2 align-items-center">
-                            <div class="table_actions">
-                                <a
-                                    @click.prevent=""
-                                    href="#"
-                                    class="btn px-3 btn-outline-secondary"
-                                    ><i class="fa fa-list"></i
-                                ></a>
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Export All
-                                        </a>
-                                    </li>
-                                    <!---->
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            title="display data that has been deactivated"
-                                            class="d-flex"
-                                        >
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+
+
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -287,7 +262,11 @@ export default {
     computed: {
         ...mapState(monthly_income_setup_store, {
             all_users: "all_data",
+            income_search: "income_search",
         }),
+        incomeSearchHandler() {
+            this.income_search(event.target, this.user_id)
+        }
     },
     watch: {
         offset: async function (newOffset, oldOffset) {

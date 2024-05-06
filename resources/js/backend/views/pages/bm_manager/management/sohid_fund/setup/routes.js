@@ -1,6 +1,7 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
+import BalanceForm from "../BalanceForm.vue";
 
 const routes = {
     path: 'sohid-fund',
@@ -15,6 +16,11 @@ const routes = {
             path: 'create',
             name: "CreateSohidFund",
             component: Form
+        },
+        {
+            path: 'balance',
+            name: "BalanceForm",
+            component: BalanceForm
         },
     ]
 }

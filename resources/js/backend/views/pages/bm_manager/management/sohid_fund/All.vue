@@ -182,7 +182,7 @@
                                                     <span>
                                                         <router-link
                                                             :to="{
-                                                                name: 'CreateBranchIncome',
+                                                                name: 'BalanceForm',
                                                                 query: {
                                                                     id: item.id,
                                                                 },
@@ -192,12 +192,12 @@
                                                             <i
                                                                 class="fa text-warning fa-pencil"
                                                             ></i>
-                                                            Edit
+                                                            Balance
                                                         </router-link>
                                                         <!---->
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <a
                                                             @click.prevent="
@@ -214,7 +214,7 @@
                                                             Delete
                                                         </a>
                                                     </span>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>

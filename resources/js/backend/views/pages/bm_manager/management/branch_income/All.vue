@@ -46,41 +46,6 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="d-flex gap-2">
-                            <div class="search">
-                                <form action="#">
-                                    <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                        class="form-control border border-info" />
-                                </form>
-                            </div>
-                            <div class="btns d-flex gap-2 align-items-center">
-                                <div class="table_actions">
-                                    <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                            class="fa fa-list"></i></a>
-                                    <ul>
-                                        <li>
-                                            <a href="">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Export All
-                                            </a>
-                                        </li>
-                                        <!---->
-                                        <li>
-                                            <a href="#/user/import" class="">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Import
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="display data that has been deactivated" class="d-flex">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Deactivated data
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                     <div class="table-responsive card-body text-nowrap">

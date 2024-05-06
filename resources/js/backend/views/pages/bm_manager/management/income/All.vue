@@ -34,7 +34,7 @@
                                     <div v-if="loaded">
                                         <label for="" class="my-1">Depertment</label>
                                         <select v-model="user_id" name="central_division_id" class="form-control" id="">
-                                            <option value="">Selecet depertment</option>
+                                            <option value="">Select depertment</option>
                                             <template v-for="user in all_central_division" :key="user.id">
                                                 <option :value="user.id">{{ user.full_name }}</option>
                                             </template>
@@ -43,7 +43,7 @@
                                     <div v-if="loaded">
                                         <label for="" class="my-1">Branch</label>
                                         <select v-model="user_id" name="branch_id" class="form-control" id="">
-                                            <option value="">Selecet branch</option>
+                                            <option value="">Select branch</option>
                                             <template v-for="user in all_branch" :key="user.id">
                                                 <option :value="user.id">{{ user.full_name }}</option>
                                             </template>
@@ -57,12 +57,12 @@
                         </div>
                         <div class="d-flex gap-2 my-3">
                             <div class="search">
-                                <form action="#">
+                                <!-- <form action="#">
                                     <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                         class="form-control border border-info" />
-                                </form>
+                                </form> -->
                             </div>
-                            <div class="btns d-flex gap-2 align-items-center">
+                            <!-- <div class="btns d-flex gap-2 align-items-center">
                                 <div class="table_actions">
                                     <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                             class="fa fa-list"></i></a>
@@ -73,7 +73,7 @@
                                                 Export All
                                             </a>
                                         </li>
-                                        <!---->
+
                                         <li>
                                             <a href="#/user/import" class="">
                                                 <i class="fa-regular fa-hand-point-right"></i>
@@ -88,7 +88,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>
