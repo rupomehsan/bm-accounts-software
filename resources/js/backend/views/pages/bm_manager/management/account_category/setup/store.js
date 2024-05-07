@@ -5,6 +5,7 @@ export const account_category_setup_store = defineStore("account_category_setup_
         all_data: {},
         single_data: {},
         role_data: {},
+        api_url: new URL(location.origin + '/api/v1/account-categories')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -16,7 +17,7 @@ export const account_category_setup_store = defineStore("account_category_setup_
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-categories");
+                response = await axios.get(url);
             }
             this.all_data = response.data.data;
         },
@@ -26,7 +27,7 @@ export const account_category_setup_store = defineStore("account_category_setup_
             // console.log("data", response);
             this.single_data = response;
         },
-       
+
         store: async function (form) {
             let formData = new FormData(form);
             let response = await axios.post("account-categories", formData);

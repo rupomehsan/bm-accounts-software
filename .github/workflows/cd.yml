@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the latest code
+        uses: actions/checkout@v2.4.0
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
+        with:
+          ## report ftp
+          server: ${{ secrets.REPORT_SERVER }}
+          username: ${{ secrets.REPORT_USERNAME }}
+          password: ${{ secrets.REPORT_PASSWORD }}
+          server-dir: ./
+
+          local-dir: ./
+          protocol: ftp
+          port: 21
+          # timeout: 600000

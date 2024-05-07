@@ -219,6 +219,7 @@ export default {
         this.loaded = true
     },
     methods: {
+        
         ...mapActions(report_setup_store, {
             main_ledger: "main_ledger",
         }),

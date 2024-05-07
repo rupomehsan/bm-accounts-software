@@ -295,8 +295,10 @@ export default {
         offset: async function (newOffset, oldOffset) {
             await this.get_all_accounts("users");
         },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
+        search_data:async function (newSearchData, oldSearchData) {
+            
+            console.log("sd",newSearchData);
+            // await this.get_all_accounts();
         },
     },
 };
