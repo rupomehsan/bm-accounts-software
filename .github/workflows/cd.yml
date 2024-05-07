@@ -21,7 +21,7 @@ jobs:
           server: ${{ secrets.REPORT_SERVER }}
           username: ${{ secrets.REPORT_USERNAME }}
           password: ${{ secrets.REPORT_PASSWORD }}
-          server-dir: ./
+          server-dir: ../
 
           local-dir: ./
           protocol: ftp
