@@ -32,6 +32,7 @@ class Seeder extends SeedersSeeder
             'auditor',
             'division_employee',
             'well_wisher',
+            'loan_recipient',
         ];
 
         foreach ($roles as $key => $role) {

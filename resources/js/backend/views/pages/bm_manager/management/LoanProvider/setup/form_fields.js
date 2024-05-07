@@ -1,14 +1,14 @@
 import moment from "moment";
 
 export default [
-    // {
-    //     name: "user_id",
-    //     label: "Select provider user",
-    //     type: "select",
-    //     value: "",
-    //     multiple: false,
-    //     data_list: []
-    // },
+    {
+        name: "user_id",
+        label: "Select provider user",
+        type: "select",
+        value: "",
+        multiple: false,
+        data_list: []
+    },
     {
         name: "amount",
         label: "Enter your amount",
