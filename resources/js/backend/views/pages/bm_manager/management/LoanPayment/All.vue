@@ -8,7 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `Create${route_prefix}` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `Create${route_prefix}` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,13 +20,13 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <div class="search">
+                        <!-- <div class="search">
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
                             </form>
-                        </div>
-                        <div class="btns d-flex gap-2 align-items-center">
+                        </div> -->
+                        <!-- <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -36,7 +37,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -51,7 +52,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -62,21 +63,27 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         User
-                                        <!---->
+
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Loan purpose
                                     </th>
 
+
+                                    <th class="cursor_n_resize">
+                                        Loan Amount
+
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Paid Amount
+
+                                    </th>
                                     <th class="cursor_n_resize">
                                         Given date
-                                        <!---->
-                                    </th>
-
-                                    <th class="cursor_n_resize">
-                                        Amount
-                                        <!---->
                                     </th>
 
                                     <th aria-label="actions">Actions</th>
@@ -93,11 +100,16 @@
                                         {{ item.user?.full_name }}
                                     </td>
 
+                                    <td>{{ item.loan_provide?.purpose }}</td>
+
                                     <td>
-                                        {{ item.given_date }}
+                                        {{ item.loan_provide?.amount }}
                                     </td>
                                     <td>
                                         {{ item.amount }}
+                                    </td>
+                                    <td>
+                                        {{ item.given_date }}
                                     </td>
 
                                     <td>
@@ -113,41 +125,41 @@
                                                         Quick View
                                                     </a>
                                                 </li> -->
-                                                <!-- <li>
-                                                    <span>
-                                                        <a
-                                                            href="#/user/details/43"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-secondary fa-eye"
-                                                            ></i>
-                                                            Details
-                                                        </a>
-
-                                                    </span>
-                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'CreateLoanPayment',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                            name: 'DetailsLoan',
+                            query: {
+                                id: item.loan_provide_id,
+                            },
+                        }" class="">
+                                                            <i class="fa text-info fa-eye"></i>
+                                                            Details
+                                                        </router-link>
+
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span>
+                                                        <router-link :to="{
+                            name: 'CreateLoanPayment',
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            delete_data(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                            delete_data(
+                                item.id
+                            )
+                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>

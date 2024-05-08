@@ -37,7 +37,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -61,23 +61,23 @@
 
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Photo
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Name
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         User Role
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Email
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Mobile NO
@@ -85,7 +85,7 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -113,7 +113,7 @@
                                     <td>{{ item.phone ?? "N/A" }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
-                                        <!---->
+
                                     </td>
                                     <td>
                                         <a @click.prevent="unblockUser(item.id)"
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

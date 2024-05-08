@@ -56,6 +56,7 @@ if (!function_exists('uploader')) {
             return $path;
         }
 
+
         $image = Image::make($source);
 
         if (!$path) {
@@ -211,4 +212,4 @@ function logEntry($data)
 }
 
 // dd(__DIR__);
-include_once(__DIR__.'\Account.php');
+include_once(__DIR__ . '\Account.php');

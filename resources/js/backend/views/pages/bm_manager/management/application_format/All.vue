@@ -31,7 +31,7 @@
                     <div class="card-header align-items-center">
                         <h6>
                             All Application format
-                            <!---->
+
                         </h6>
                         <div class="search">
                             <form action="#">
@@ -60,7 +60,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -94,16 +94,16 @@
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Application Category
-                                        <!---->
+
                                     </th>
 
                                     <th class="cursor_n_resize">
                                         Status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -140,7 +140,7 @@
                                                     : "N/A"
                                             }}</span
                                         >
-                                        <!---->
+
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -192,7 +192,7 @@
                                                             ></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>
@@ -246,7 +246,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

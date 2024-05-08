@@ -246,15 +246,9 @@ methods: {
 
     async amountHandleKeyup(event) {
         const inputValue = event.target.value;
-        try {
-            const result = await axios.get(`get-amount-to-number/${inputValue}`);
-            if (result.data) {
-                let toText = document.getElementById('amount_in_text');
-                toText.value = result.data.toString(); // Use toString() method
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
+            let amountInBangla = window.convertAmount(inputValue)
+            let toText = document.getElementById('amount_in_text')
+            toText.value = amountInBangla
     },
 
 

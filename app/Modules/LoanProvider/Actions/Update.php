@@ -26,6 +26,8 @@ class Update
                 $requestdata['attachment'] = $imageName;
             }
 
+            $requestdata['due_amount'] = $requestdata['amount'];
+
             if ($data->update($requestdata)) {
                 $accLog = self::$accountLogModel::find($data->account_log_id);
                 $user = self::$userModel::find($request->user_id);

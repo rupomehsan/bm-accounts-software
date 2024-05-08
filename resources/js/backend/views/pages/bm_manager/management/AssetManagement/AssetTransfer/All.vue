@@ -53,7 +53,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -79,7 +79,7 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class='cursor_n_resize'> asset </th>
                                     <th class='cursor_n_resize'> sender </th>
@@ -144,7 +144,7 @@
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>

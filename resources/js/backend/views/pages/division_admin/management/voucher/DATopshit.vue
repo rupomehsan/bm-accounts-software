@@ -59,7 +59,7 @@
                                                         <i class="fa text-warning fa-pencil"></i>
                                                         Edit
                                                     </router-link>
-                                                    <!---->
+
                                                 </span>
                                                 <span class="mx-2" v-if="!sVoucher.approved_by_upperadmin">
                                                     <a @click.prevent="

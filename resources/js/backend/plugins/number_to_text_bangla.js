@@ -31,7 +31,7 @@ function convertAmount(numericValue = 1200) {
     // document.getElementById('container').value = convert(taka) + " Rupees and" + convert(paisa) + " paisa only";
 
     var en = convert(taka) + " Rupees and" + convert(paisa) + " paisa only";
-    console.log(en);
+    // console.log(en);
     return wwords(en)
 }
 
@@ -692,6 +692,6 @@ function wwords(finalWords = "") {
 
     return result;
 }
-
+window.convertAmount = convertAmount;
 export default convertAmount;
 

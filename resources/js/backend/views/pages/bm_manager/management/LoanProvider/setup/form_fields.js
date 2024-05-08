@@ -11,7 +11,7 @@ export default [
     },
     {
         name: "amount",
-        label: "Enter your amount",
+        label: " amount",
         type: "number",
         value: "",
     },
@@ -34,7 +34,7 @@ export default [
     },
     {
         name: "amount_in_text",
-        label: "Enter your amount in text",
+        label: " amount in text",
         type: "text",
         value: "",
     },
@@ -55,7 +55,7 @@ export default [
 
     {
         name: "purpose",
-        label: "Enter your purpose",
+        label: " purpose",
         type: "text",
         value: "",
     },
@@ -67,7 +67,7 @@ export default [
     },
     {
         name: "description",
-        label: "Enter your desciption",
+        label: " desciption",
         type: "textarea",
         value: "",
     },

@@ -21,16 +21,34 @@ class Store
                 $data['pdf_submission_file'] = $fileName;
             }
             // dd($extraField);
+            $extraFieldImages = $_FILES['extrafields']['name'];
+            $fileList = [];
+            foreach ($extraFieldImages as $key => $value) {
+                $fileList[] = array_keys($value)[0];
+            }
+            // dd($fileList);
             if ($applicationData = self::$model::query()->create($data)) {
                 $applicationValue = [];
                 $applicationValue['cp_application_id'] = $applicationData->id;
-                foreach ($request->extrafields as  $value) {
-                    $field = array_keys($value);
-                    $val = array_values($value);
-                    $applicationValue["title"] = count($field) ? $field[0] : '';
-                    $applicationValue["value"] = count($val) ? $val[0] : '';
-                    self::$applicationModelValue::query()->create($applicationValue);
+                // dd($request->extrafields);
+                foreach ($request->extrafields as $key =>  $value) {
+                        if (array_search(array_keys($value)[0], $fileList) >= 0) {
+                            $image = array_values($value)[0];
+                            $imageName = uploader($image, 'uploads/application');
+                            $applicationValue["title"] = array_keys($value)[0];
+                            $applicationValue["value"] = $imageName;
+                            self::$applicationModelValue::query()->create($applicationValue);
+                        } else {
+                            $field = array_keys($value);
+                            $val = array_values($value);
+                            $applicationValue["title"] = count($field) ? $field[0] : '';
+                            $applicationValue["value"] = count($val) ? $val[0] : '';
+                            self::$applicationModelValue::query()->create($applicationValue);
+                        }
+
                 }
+
+
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

@@ -91,7 +91,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -125,13 +125,13 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">title</th>
                                     <th class="cursor_n_resize">description</th>
                                     <th class="cursor_n_resize">
                                         status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -202,7 +202,7 @@
                                                             ></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>

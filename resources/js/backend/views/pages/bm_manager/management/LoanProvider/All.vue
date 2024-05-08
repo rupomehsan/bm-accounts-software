@@ -21,12 +21,12 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <div class="search">
-                            <form action="#">
+                            <!-- <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
-                            </form>
+                            </form> -->
                         </div>
-                        <div class="btns d-flex gap-2 align-items-center">
+                        <!-- <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -37,7 +37,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -52,7 +52,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -63,31 +63,35 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         User
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Taken date
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Given date
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Amount
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Paid
-                                        <!---->
+                                        Due
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Purpose
-                                        <!---->
+
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        appropriator
+
                                     </th>
 
                                     <th aria-label="actions">Actions</th>
@@ -109,9 +113,10 @@
                                     <td>
                                         {{ item.given_date }}
                                     </td>
-                                    <td>{{ item.amount }}</td>
-                                    <td>{{ item.due_amount }}</td>
+                                    <td>{{ item.amount }} ৳</td>
+                                    <td>{{ item.due_amount }} ৳</td>
                                     <td>{{ item.purpose }}</td>
+                                    <td>{{ item.appropriator }}</td>
 
                                     <td>
                                         <div class="table_actions">
@@ -126,20 +131,20 @@
                                                         Quick View
                                                     </a>
                                                 </li> -->
-                                                <!-- <li>
+                                                <li>
                                                     <span>
-                                                        <a
-                                                            href="#/user/details/43"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-secondary fa-eye"
-                                                            ></i>
+                                                        <router-link :to="{
+                            name: 'DetailsLoan',
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
+                                                            <i class="fa text-info fa-eye"></i>
                                                             Details
-                                                        </a>
+                                                        </router-link>
 
                                                     </span>
-                                                </li> -->
+                                                </li>
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
@@ -151,7 +156,7 @@
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>

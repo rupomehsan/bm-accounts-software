@@ -52,7 +52,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -86,23 +86,23 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Asset quotation
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Date
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Request form
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Request type
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Approval

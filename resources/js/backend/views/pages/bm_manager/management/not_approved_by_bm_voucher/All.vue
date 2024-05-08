@@ -38,7 +38,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -72,19 +72,19 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Date
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Category
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Amount
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Approval
@@ -96,7 +96,7 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -130,7 +130,7 @@
                                             class="badge bg-label-success me-1"
                                             >{{ item.status }}</span
                                         >
-                                        <!---->
+
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -179,7 +179,7 @@
                                                             ></i>
                                                             Details
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <!-- <li>
@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

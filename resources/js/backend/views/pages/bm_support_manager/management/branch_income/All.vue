@@ -64,7 +64,7 @@
                                                 Export All
                                             </a>
                                         </li>
-                                        <!---->
+
                                         <li>
                                             <a href="#/user/import" class="">
                                                 <i class="fa-regular fa-hand-point-right"></i>
@@ -92,20 +92,20 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
 
                                     <th class="cursor_n_resize">
                                         Date
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Account receipt book No
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Account category
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Account receipt no
@@ -113,7 +113,7 @@
                                     <th class="cursor_n_resize">Amount</th>
                                     <th class="cursor_n_resize">
                                         Status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -135,7 +135,7 @@
                                     <td>{{ item.amount }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
-                                        <!---->
+
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -175,7 +175,7 @@
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>
@@ -219,7 +219,7 @@
 
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

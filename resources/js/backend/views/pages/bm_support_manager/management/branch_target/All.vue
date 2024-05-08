@@ -59,7 +59,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a @click.prevent class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -85,27 +85,27 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Account Category
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Payment interval
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Branch Name
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Target Amount
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Session
-                                        <!---->
+
                                     </th>
 
                                     <th aria-label="actions">Actions</th>
@@ -148,7 +148,7 @@
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>

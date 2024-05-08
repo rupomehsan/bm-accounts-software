@@ -53,16 +53,12 @@
                                                     class="form-check-label" for="flexSwitchCheckDefault">For moukuf
                                                     ?</label></div>
                                         </div>
+
                                         <div class="form-group" v-if="is_moukuf">
-                                            <label for="" class="my-2">Moukuf amount</label>
-                                            <input v-model="moukuf_amount" type="number" id="moukuf_amount"
-                                                class="form-control" name="moukuf_amount" />
-                                        </div>
-                                        <div class="form-group">
                                             <label for="" class="my-2">Select BM Income
                                                 category</label>
-                                            <select name="income_category_id" id="income_category_id" class="form-control"
-                                                v-model="income_category_id">
+                                            <select name="income_category_id" id="income_category_id"
+                                                class="form-control" v-model="income_category_id">
                                                 <option value="">
                                                     Select bm income category
                                                 </option>
@@ -72,6 +68,11 @@
                                                     </option>
                                                 </template>
                                             </select>
+                                        </div>
+                                        <div class="form-group" v-if="is_moukuf">
+                                            <label for="" class="my-2">Moukuf amount</label>
+                                            <input v-model="moukuf_amount" type="number" id="moukuf_amount"
+                                                class="form-control" name="moukuf_amount" />
                                         </div>
                                         <div class="form-group">
                                             <label for="" class="my-2">Select application
@@ -94,20 +95,16 @@
                                             <input type="file" class="form-control" name="pdf_submission_file" id="" />
                                         </div>
 
-                                        <template v-for="item in extrafield" :key="item.id">
+                                        <template v-for="(item,index) in extrafield" :key="item.id">
                                             <div class="form-group my-2">
-                                                <label class="my-2">{{
-                                                    item.name
-                                                }}</label>
-                                                <template v-if="item.type !==
-                                                        'textarea'
-                                                        ">
-                                                    <input :type="item.type" :name="`extrafields[][${item.name}]`"
+                                                <label class="my-2">{{ item.name }}</label>
+                                                <template v-if="item.type !== 'textarea'">
+                                                    <input :type="item.type" :name="`extrafields[${index}][${item.name}]`"
                                                         class="form-control" :value="item.value" />
                                                 </template>
 
                                                 <template v-else>
-                                                    <textarea :name="`extrafields[][${item.name}]`" :value="item.value"
+                                                    <textarea :name="`extrafields[${index}][${item.name}]`" :value="item.value"
                                                         class="form-control" rows="5"></textarea>
                                                 </template>
                                             </div>
@@ -123,6 +120,7 @@
                             </button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -173,12 +171,18 @@ export default {
                     if (value[0] == "income_category_id") {
                         this.income_category_id = value[1];
                     }
+                    if (value[0] == "moukuf_amount") {
+                        this.moukuf_amount = value[1];
+                    }
 
                     if (value[0] == "subject") {
                         this.subject = value[1];
                     }
                     if (value[0] == "application_values") {
                         this.editData = value[1];
+                    }
+                    if (value[0] == "is_moukuf" && value[1] == 1) {
+                        this.is_moukuf = true
                     }
                 });
 

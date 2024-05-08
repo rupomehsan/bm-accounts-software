@@ -24,7 +24,7 @@
                     <div class="card-header align-items-center">
                         <h6>
                             All Messages
-                            <!---->
+
                         </h6>
                         <div class="search">
                             <form action="#">
@@ -53,7 +53,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -90,19 +90,19 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Photo
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Name
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Email
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Mobile NO
@@ -114,12 +114,12 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Topic
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
 
-                                        <!---->
+
                                     </th>
                                 </tr>
                             </thead>
@@ -159,7 +159,7 @@
                                             class="badge bg-label-success me-1"
                                             >{{ item.status }}</span
                                         >
-                                        <!---->
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -191,7 +191,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

@@ -13,7 +13,7 @@
                     <div class="card-header align-items-center">
                         <h6>
                             All Applications
-                            <!---->
+
                         </h6>
                         <div class="search">
                             <form action="#">
@@ -42,7 +42,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

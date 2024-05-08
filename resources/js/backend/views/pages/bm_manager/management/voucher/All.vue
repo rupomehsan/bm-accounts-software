@@ -40,7 +40,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -66,19 +66,19 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Date
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Category
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Amount
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Approval
@@ -86,7 +86,7 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -108,7 +108,7 @@
                                     <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
-                                        <!---->
+
                                     </td>
                                     <td>
                                         <div class="table_actions">

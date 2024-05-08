@@ -24,9 +24,9 @@
                     <div class="card-header align-items-center">
                         <h6>
                             All application category
-                            <!---->
+
                         </h6>
-                        <div class="search">
+                        <!-- <div class="search">
                             <form action="#">
                                 <input
                                     v-model.debounce:1000ms="search_data"
@@ -53,7 +53,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i
@@ -76,27 +76,27 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
-                                        <!-- <input type="checkbox" class="form-check-input" /> -->
-                                    </th>
+                                    <!-- <th>
+                                        <input type="checkbox" class="form-check-input" />
+                                    </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         Name
-                                        <!---->
+
                                     </th>
 
                                     <th class="cursor_n_resize">
                                         Status
-                                        <!---->
+
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -107,9 +107,9 @@
                                     v-for="(item, index) in all_users.data"
                                     :key="item.id"
                                 >
-                                    <td style="width: 10px">
-                                        <!-- <input type="checkbox" class="form-check-input" /> -->
-                                    </td>
+                                    <!-- <td style="width: 10px">
+                                        <input type="checkbox" class="form-check-input" />
+                                    </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
                                         {{ item.title }}
@@ -120,7 +120,7 @@
                                             class="badge bg-label-success me-1"
                                             >{{ item.status }}</span
                                         >
-                                        <!---->
+
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -169,7 +169,7 @@
                                                             ></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>
@@ -220,7 +220,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

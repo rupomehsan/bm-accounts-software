@@ -43,7 +43,7 @@
                                                     Export All
                                                 </a>
                                             </li>
-                                            <!---->
+
 
                                         </ul>
                                     </div>
@@ -56,19 +56,19 @@
 
                                             <th aria-label="id" class="cursor_n_resize">
                                                 মাস ও তারিখ
-                                                <!---->
+
                                             </th>
                                             <th class="cursor_n_resize">
                                                 রশিদ নাম্বার
-                                                <!---->
+
                                             </th>
                                             <th class="cursor_n_resize">
                                                 বিবরণ
-                                                <!---->
+
                                             </th>
                                             <th class="cursor_n_resize">
                                                 ফোলিও
-                                                <!---->
+
                                             </th>
                                             <th class="cursor_n_resize">
                                                 পরিমান
@@ -76,7 +76,7 @@
                                             </th>
                                             <th class="cursor_n_resize">
                                                 মোট
-                                                <!---->
+
                                             </th>
 
                                         </tr>
@@ -123,7 +123,7 @@
                                                     Export All
                                                 </a>
                                             </li>
-                                            <!---->
+
 
                                         </ul>
                                     </div>
@@ -136,18 +136,18 @@
 
                                             <th aria-label="id" class="cursor_n_resize">
                                                 মাস ও তারিখ
-                                                <!---->
+
                                             </th>
                                             <!-- <th class="cursor_n_resize">
                                                 রশিদ নাম্বার
                                             </th> -->
                                             <th class="cursor_n_resize">
                                                 বিবরণ
-                                                <!---->
+
                                             </th>
                                             <th class="cursor_n_resize">
                                                 ফোলিও
-                                                <!---->
+
                                             </th>
                                             <th class="cursor_n_resize">
                                                 পরিমান
@@ -155,7 +155,7 @@
                                             </th>
                                             <th class="cursor_n_resize">
                                                 মোট
-                                                <!---->
+
                                             </th>
 
                                         </tr>

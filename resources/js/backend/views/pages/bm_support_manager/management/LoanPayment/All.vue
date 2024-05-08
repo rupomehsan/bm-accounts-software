@@ -36,7 +36,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -62,21 +62,21 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-                                        <!---->
+
                                     </th>
                                     <th class="cursor_n_resize">
                                         User
-                                        <!---->
+
                                     </th>
 
                                     <th class="cursor_n_resize">
                                         Given date
-                                        <!---->
+
                                     </th>
 
                                     <th class="cursor_n_resize">
                                         Amount
-                                        <!---->
+
                                     </th>
 
                                     <th aria-label="actions">Actions</th>
@@ -138,7 +138,7 @@
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>

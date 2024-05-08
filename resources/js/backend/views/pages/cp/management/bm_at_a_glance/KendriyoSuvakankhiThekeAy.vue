@@ -31,7 +31,7 @@
                     <div class="card-header align-items-center">
                         <h6>
                             কেন্দ্রীয় শুভাকাঙ্খী থেকে আয়
-                            <!---->
+
                         </h6>
                         <div class="search">
                             <form action="#">
@@ -50,7 +50,7 @@
                                             Export All
                                         </a>
                                     </li>
-                                    <!---->
+
                                     <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
@@ -141,7 +141,7 @@
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
-                                                        <!---->
+
                                                     </span>
                                                 </li>
                                                 <li>
@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-                    <!---->
+
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">

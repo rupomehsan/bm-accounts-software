@@ -12,7 +12,7 @@ class Show
     {
         try {
 
-            $with = ['account_log'];
+            $with = ['user:id,full_name', 'account_log','loan_payments'];
 
             if (request()->input('multiple') == 'true') {
                 if (!$data = self::$model::query()->with($with)->where('user_id', $id)->get()) {
@@ -21,7 +21,11 @@ class Show
                 return entityResponse($data);
             }
 
-            if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
+            if (!$data = self::$model::query()
+
+                ->with($with)
+                ->where('id', $id)
+                ->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
 

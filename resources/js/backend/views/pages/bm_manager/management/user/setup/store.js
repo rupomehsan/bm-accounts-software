@@ -16,7 +16,7 @@ export const user_setup_store = defineStore("user_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("users?is_blocked=1");
+                response = await axios.get("users");
             }
             this.all_data = response.data.data;
         },

@@ -1,6 +1,7 @@
 import setup from ".";
 import All from "../All.vue";
 import Form from "../Form.vue";
+import Details from "../Details.vue";
 import Layout from "./Layout.vue";
 
 let route_prefix = setup.route_prefix;
@@ -19,6 +20,11 @@ const routes =
             path: "create",
             name: "Create" + route_prefix,
             component: Form,
+        },
+        {
+            path: "details",
+            name: "Details" + route_prefix,
+            component: Details,
         },
 
     ]

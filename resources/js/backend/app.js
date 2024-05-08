@@ -4,6 +4,7 @@ import "./plugins/axios_setup.js";
 import "./plugins/sweet_alert.js";
 import "./plugins/moment_setup";
 import "./plugins/number_format.js";
+import "./plugins/number_to_text_bangla.js";
 import "./store/role.js";
 
 import { createApp } from "vue";
