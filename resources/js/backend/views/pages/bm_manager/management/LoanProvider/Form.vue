@@ -140,7 +140,7 @@ export default {
             }
         } else {
             this.form_fields.forEach((item) => {
-                item.value = "";
+                if (item.name != "taken_date" || item.name != "given_date")item.value = "";
             });
             console.log(this.form_fields);
         }

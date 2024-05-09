@@ -32,23 +32,24 @@ class Store
                 $applicationValue['cp_application_id'] = $applicationData->id;
                 // dd($request->extrafields);
                 foreach ($request->extrafields as $key =>  $value) {
-                        if (array_search(array_keys($value)[0], $fileList) >= 0) {
-                            $image = array_values($value)[0];
+
+                    if (array_search(array_keys($value)[0], $fileList) >= 0) {
+                        // dd(array_keys($value)[0]);
+                        $image = array_values($value)[0];
+                        if ($image) {
                             $imageName = uploader($image, 'uploads/application');
                             $applicationValue["title"] = array_keys($value)[0];
                             $applicationValue["value"] = $imageName;
                             self::$applicationModelValue::query()->create($applicationValue);
-                        } else {
-                            $field = array_keys($value);
-                            $val = array_values($value);
-                            $applicationValue["title"] = count($field) ? $field[0] : '';
-                            $applicationValue["value"] = count($val) ? $val[0] : '';
-                            self::$applicationModelValue::query()->create($applicationValue);
                         }
-
+                    } else {
+                        $field = array_keys($value);
+                        $val = array_values($value);
+                        $applicationValue["title"] = count($field) ? $field[0] : '';
+                        $applicationValue["value"] = count($val) ? $val[0] : '';
+                        self::$applicationModelValue::query()->create($applicationValue);
+                    }
                 }
-
-
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {
