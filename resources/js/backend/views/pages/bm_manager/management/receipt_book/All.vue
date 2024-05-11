@@ -10,18 +10,18 @@
                         <button class="btn btn-info" @click="get_all_receipt_books()">
                             All
                             <span v-if="all_receipt_books" class="fw-bold">{{
-                                `(${all_receipt_books?.totalApproved + all_receipt_books?.totalNotApproved})`
-                            }}</span>
+                            `(${all_receipt_books?.totalApproved + all_receipt_books?.totalNotApproved})`
+                        }}</span>
                         </button>
                         <button class="btn btn-primary mx-3" @click="getReceiptBookByStatus('approved')">
                             Approved <span v-if="all_receipt_books" class="fw-bold">{{
-                                `(${all_receipt_books?.totalApproved})`
-                            }}</span>
+                            `(${all_receipt_books?.totalApproved})`
+                        }}</span>
                         </button>
                         <button class="btn btn-danger" @click="getReceiptBookByStatus('not-approved')">
                             Not approved <span v-if="all_receipt_books" class="fw-bold">{{
-                                `(${all_receipt_books?.totalNotApproved})`
-                            }}</span>
+                            `(${all_receipt_books?.totalNotApproved})`
+                        }}</span>
                         </button>
                     </div>
                     <div class="col-lg-3 text-end">
@@ -47,34 +47,22 @@
                                     class="form-control border border-info" />
                             </form> -->
                         </div>
-                        <!-- <div class="btns d-flex gap-2 align-items-center">
-                            <button v-if="child_item.length" class="btn btn-primary" @click="bulkActions">Delete</button>
+                        <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="receiptBookExport(all_receipt_books.data?.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -100,7 +88,7 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
-                                        is approved
+                                        is approved ?
 
                                     </th>
                                     <th class="cursor_n_resize">
@@ -125,7 +113,7 @@
                                         {{ item.receipt_start_serial_no }}
                                     </td>
                                     <td>{{ item.receipt_end_serial_no }}</td>
-                                    <td>{{ item.is_approvel ?? 0 }}</td>
+                                    <td>{{ item.is_approvel == 1 ? 'yes' : 'no' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
@@ -160,11 +148,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'ReceiptBookCreate',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                            name: 'ReceiptBookCreate',
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -174,10 +162,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                            user_delete(
+                                item.id
+                            )
+                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -241,6 +229,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { receipt_book_store } from "./setup/store";
+import { CsvBuilder } from 'filefy';
 
 export default {
     data: () => ({
@@ -285,6 +274,24 @@ export default {
         },
         getReceiptBookByStatus(status) {
             this.get_receipt_book_by_status(status);
+        },
+        receiptBookExport(data = [], prefix_name = 'receipt_book') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.receipt_book_no = item.receipt_book_no
+                temp.receipt_start_serial_no = item.receipt_start_serial_no
+                temp.receipt_end_serial_no = item.receipt_end_serial_no
+                temp.is_approvel = item.is_approvel
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

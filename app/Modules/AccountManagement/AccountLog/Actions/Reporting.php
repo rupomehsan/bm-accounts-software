@@ -79,7 +79,7 @@ class Reporting
     {
         $from = Carbon::parse(request()->start_date);
         $to = Carbon::parse(request()->end_date);
-        $with = ['account_incomes:account_log_id,folio'];
+        $with = ['account_incomes:account_log_id,folio','account_category:id,title'];
         $logs = self::$model::with($with)->whereBetween('date', [$from, $to])->get();
 
         $prev_income = self::$model::where('date', '<', $from)->where('is_income', 1)->sum('amount');
@@ -107,7 +107,7 @@ class Reporting
             $temp = [
                 "date" => Carbon::parse($log->date)->format('d M, y'),
                 "receipt" => $log->receipt_no,
-                "description" => $log->description,
+                "description" => $log->account_category->title,
                 "folio" => $log->account_incomes->folio ?? '',
                 "income" => $log->is_income == 1 ? $log->amount : '',
                 "expense" => $log->is_expense == 1 ? $log->amount : '',

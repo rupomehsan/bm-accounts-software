@@ -62,33 +62,20 @@
                                         class="form-control border border-info" />
                                 </form> -->
                             </div>
-                            <!-- <div class="btns d-flex gap-2 align-items-center">
+                            <div class="btns d-flex gap-2 align-items-center">
                                 <div class="table_actions">
                                     <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                             class="fa fa-list"></i></a>
                                     <ul>
                                         <li>
-                                            <a href="">
+                                            <a href="" @click.prevent="exportData(all_income.data)">
                                                 <i class="fa-regular fa-hand-point-right"></i>
                                                 Export All
                                             </a>
                                         </li>
-
-                                        <li>
-                                            <a href="#/user/import" class="">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Import
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="display data that has been deactivated" class="d-flex">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Deactivated data
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                     </div>
@@ -177,11 +164,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'BalanceForm',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                                name: 'BalanceForm',
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Balance
                                                         </router-link>
@@ -259,6 +246,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { income_setup_store } from "./setup/store";
+import { CsvBuilder } from 'filefy';
 
 export default {
     data: () => ({
@@ -285,7 +273,32 @@ export default {
 
         incomeSearchHandler() {
             this.income_search(event.target, this.user_id)
-        }
+        },
+        exportData(data = [], prefix_name = 'income') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_receipt_book_id = item.account_receipt_book_id
+                temp.account_category = item.account_category?.title
+                temp.account_receipt_no = item.account_receipt_no
+                temp.amount = item.amount
+                dataArray.push(temp)
+            })
+            let col = [
+                'Date',
+                'Account receipt book No',
+                'Account category',
+                'Account receipt no',
+                'Amount',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
     },
     computed: {
         ...mapState(income_setup_store, {

@@ -29,7 +29,8 @@
                             </div>
                             <div>
                                 <label for="">End date</label>
-                                <date-field :label="`End Date`" :name="`end_date`" :value="endDate" :onchange="getDate" />
+                                <date-field :label="`End Date`" :name="`end_date`" :value="endDate"
+                                    :onchange="getDate" />
                                 <!-- <input type="date" v-model="endDate" class="form-control " @change="getendDate" /> -->
                             </div>
                         </div>
@@ -47,7 +48,20 @@
                             </select>
                         </div>
 
+                        <div class="table_actions">
+                            <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                    class="fa fa-list"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="" @click.prevent="branchTarget(all_branch_target_data.data?.data)">
+                                        <i class="fa-regular fa-hand-point-right"></i>
+                                        Export All
+                                    </a>
+                                </li>
 
+
+                            </ul>
+                        </div>
 
                     </div>
                     <div class="table-responsive card-body text-nowrap">
@@ -114,11 +128,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'BranchTargetCreate',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                                name: 'BranchTargetCreate',
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -128,10 +142,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                                user_delete(
+                                    item.id
+                                )
+                                " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -172,7 +186,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { banch_target_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -208,6 +222,30 @@ export default {
             }
 
             this.get_date_wise_data(this.startDate, this.endDate);
+        },
+
+        branchTarget(data = [], prefix_name = 'branch_target') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.account_category = item.account_category?.title
+                temp.payment_interval = item.payment_interval
+                temp.user = item.user?.full_name
+                temp.target_amount = item.target_amount
+                dataArray.push(temp)
+            })
+            let col = [
+                'Account Category',
+                'Payment interval',
+                'Branch Name',
+                'Target Amount',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
 
     },

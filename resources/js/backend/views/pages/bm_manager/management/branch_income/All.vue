@@ -46,7 +46,20 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="table_actions">
+                                    <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                            class="fa fa-list"></i></a>
+                                    <ul>
+                                        <li>
+                                            <a href="" @click.prevent="exportData(all_income.data)">
+                                                <i class="fa-regular fa-hand-point-right"></i>
+                                                Export All
+                                            </a>
+                                        </li>
 
+
+                                    </ul>
+                                </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -214,7 +227,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { branch_income_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -239,7 +252,32 @@ export default {
         }),
         incomeSearchHandler() {
             this.income_search(event.target, this.user_id)
-        }
+        },
+        exportData(data = [], prefix_name = 'income') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_receipt_book_id = item.account_receipt_book_id
+                temp.account_category = item.account_category?.title
+                temp.account_receipt_no = item.account_receipt_no
+                temp.amount = item.amount
+                dataArray.push(temp)
+            })
+            let col = [
+                'Date',
+                'Account receipt book No',
+                'Account category',
+                'Account receipt no',
+                'Amount',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
     },
     computed: {
         ...mapState(branch_income_setup_store, {

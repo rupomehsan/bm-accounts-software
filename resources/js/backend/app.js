@@ -11,6 +11,7 @@ import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { createPinia } from "pinia";
 
+
 import CommonInput from "./views/components/CommonInput.vue";
 import ImageComponent from "../backend/views/components/ImageComponent.vue";
 import Pagination from "../backend/views/components/Pagination.vue";

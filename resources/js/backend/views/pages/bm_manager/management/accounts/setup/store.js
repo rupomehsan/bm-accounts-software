@@ -6,6 +6,7 @@ export const account_setup_store = defineStore("account_setup_store", {
         single_data: {},
         account_info_data: {},
         selected_account_numbers: {},
+        api_url: new URL(location.origin + '/api/v1/accounts')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,

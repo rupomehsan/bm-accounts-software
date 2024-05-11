@@ -35,7 +35,20 @@
                         </h6>
                         <div class="search">
                         </div>
+                        <div class="table_actions">
+                            <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                    class="fa fa-list"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="" @click.prevent="receiptBookAssingExport(all_receipt_books.data)">
+                                        <i class="fa-regular fa-hand-point-right"></i>
+                                        Export All
+                                    </a>
+                                </li>
 
+
+                            </ul>
+                        </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -120,11 +133,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'AssingReceiptBookCreate',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                            name: 'AssingReceiptBookCreate',
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -134,10 +147,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                            user_delete(
+                                item.id
+                            )
+                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -201,7 +214,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { receipt_book_assign_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -248,6 +261,28 @@ export default {
         },
         getReceiptBookByStatus(status) {
             this.get_receipt_book_by_status(status);
+        },
+        receiptBookAssingExport(data = [], prefix_name = 'receipt_book_assing') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.user = item.user?.full_name
+                temp.receipt_book_no = item.account_receipt_book?.receipt_book_no
+                temp.receipt_start_serial_no = item.account_receipt_book?.receipt_start_serial_no
+                temp.receipt_end_serial_no = item.account_receipt_book?.receipt_end_serial_no
+                dataArray.push(temp)
+            })
+            let col = [
+                'Assign to',
+                'Receipt Book No',
+                'Receipt Start Serial No',
+                'Receipt End Serial No',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {
