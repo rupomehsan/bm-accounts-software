@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllBranchTarget` }"
+                                <router-link :to="{ name: `${role}AllBranchTarget` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -65,9 +65,11 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { banch_target_store } from "./setup/store";
-export default {
+import roleSetup from '../../partials/role_setup';
 
+export default {
     data: () => ({
+        role: roleSetup.role,
         form_fields,
         param_id: null,
         loded: false,
@@ -139,12 +141,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
-                this.$router.push({ name: `AllBranchTarget` });
+                this.$router.push({ name: `${role}AllBranchTarget` });
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllBranchTarget` });
+                    this.$router.push({ name: `${role}AllBranchTarget` });
                 }
             }
         },

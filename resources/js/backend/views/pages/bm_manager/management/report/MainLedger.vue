@@ -85,7 +85,7 @@
                                     <tbody class="table-border-bottom-0">
                                         <tr v-for="(item, index) in main_ledger_data['income']" :key="item.id">
 
-                                            <td>{{ formatDate(item.date) }}</td>
+                                            <td>{{ new Date().toDateString(item.date) }}</td>
                                             <td>
                                                 {{ item.receipt_no ?? 'N/A' }}
                                             </td>
@@ -199,10 +199,11 @@ import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
 import moment from 'moment';
 import { CsvBuilder } from 'filefy';
-
+import roleSetup from '../../partials/role_setup';
 
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         from_date: "",
         to_date: '',

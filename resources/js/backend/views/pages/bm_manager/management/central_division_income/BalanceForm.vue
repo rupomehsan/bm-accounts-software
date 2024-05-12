@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `${role}AllBranchIncome` }"
+                                <router-link :to="{ name: `${role}AllCentralDivisionIncome` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -67,7 +67,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 
-import { branch_income_setup_store } from "./setup/store";
+import { central_division_income_setup_store } from "./setup/store";
 import roleSetup from '../../partials/role_setup';
 
 export default {
@@ -94,7 +94,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(branch_income_setup_store, {
+        ...mapActions(central_division_income_setup_store, {
             get_single_branch_income: "get",
             income_update: "update",
         }),
@@ -102,12 +102,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
-                this.$router.push({ name: `${role}AllBranchIncome` });
+                this.$router.push({ name: `${role}AllCentralDivisionIncome` });
             } else {
                 let response = await this.store($event.target, this.application_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `${role}AllBranchIncome` });
+                    this.$router.push({ name: `${role}AllCentralDivisionIncome` });
                 }
             }
         },
@@ -116,7 +116,7 @@ export default {
     },
 
     computed: {
-        ...mapState(branch_income_setup_store, {
+        ...mapState(central_division_income_setup_store, {
             single_data: "single_data",
         }),
     },

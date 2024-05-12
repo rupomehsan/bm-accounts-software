@@ -107,5 +107,18 @@ export const sohid_fund_setup_store = defineStore("sohid_fund_setup_store", {
             // console.log("data", response);
             this.account_number_data = response;
         },
+        get_all_central_division: async function () {
+            let response = await axios.get("users?get_all=1&division=division");
+            response = response.data.data;
+            // console.log("data", response);
+            this.all_central_division = response;
+        },
+
+        get_all_branch: async function () {
+            let response = await axios.get("users?get_all=1&branch_user=branch_user");
+            response = response.data.data;
+            // console.log("data", response);
+            this.all_branch = response;
+        },
     },
 });

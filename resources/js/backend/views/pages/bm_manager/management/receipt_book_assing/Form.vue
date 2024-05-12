@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllAssignReceiptBook` }"
+                                <router-link :to="{ name: `${role}AllAssignReceiptBook` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -50,8 +50,11 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { receipt_book_assign_store } from "./setup/store";
+import roleSetup from '../../partials/role_setup';
+
 export default {
     data: () => ({
+        role: roleSetup.role,
         form_fields,
         param_id: null,
     }),
@@ -124,13 +127,13 @@ export default {
                 let response = await this.receipt_book_assign_update($event.target, this.param_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllAssignReceiptBook` });
+                    this.$router.push({ name: `${role}AllAssignReceiptBook` });
                 }
             } else {
                 let response = await this.receipt_book_assign_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllAssignReceiptBook` });
+                    this.$router.push({ name: `${role}AllAssignReceiptBook` });
                 }
             }
         },

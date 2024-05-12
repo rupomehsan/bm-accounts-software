@@ -8,7 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateDailyIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${window.role.bm}CreateMonthlyIncome` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -31,16 +32,16 @@
                                         <label for="">End date</label>
                                         <date-field :label="`End Date`" :name="`end_date`" />
                                     </div>
+
                                     <div v-if="loaded">
-                                        <label for="" class="my-1">Depertment</label>
-                                        <select v-model="user_id" name="central_division_id" class="form-control" id="">
-                                            <option value="">Selecet depertment</option>
-                                            <template v-for="user in all_central_division" :key="user.id">
+                                        <label for="" class="my-1">Branch</label>
+                                        <select v-model="user_id" name="branch_id" class="form-control" id="">
+                                            <option value="">Select branch</option>
+                                            <template v-for="user in all_branch" :key="user.id">
                                                 <option :value="user.id">{{ user.full_name }}</option>
                                             </template>
                                         </select>
                                     </div>
-
                                     <div class="pt-2">
                                         <button class="btn btn-primary mt-4">Search</button>
                                     </div>
@@ -239,16 +240,24 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded: false,
+        user_id: '',
     }),
     created: async function () {
         await this.get_all_branch_income();
+        await this.get_all_central_division();
+        await this.get_all_branch();
+        this.loaded = true
     },
     methods: {
         ...mapActions(monthly_income_setup_store, {
             get_all_branch_income: "all",
             delete_branch_income: "delete",
+            get_all_central_division: "get_all_central_division",
+            get_all_branch: "get_all_branch",
+            income_search: "income_search",
         }),
-        exportData(data = [], prefix_name = 'income') {
+        exportData(data = [], prefix_name = 'monthly_income') {
             let dataArray = []
             data.forEach((item) => {
                 let temp = {}
@@ -280,10 +289,10 @@ export default {
     computed: {
         ...mapState(monthly_income_setup_store, {
             all_users: "all_data",
-            income_search: "income_search",
+
+            all_central_division: "all_central_division",
+            all_branch: "all_branch",
         }),
-
-
     },
     watch: {
         offset: async function (newOffset, oldOffset) {

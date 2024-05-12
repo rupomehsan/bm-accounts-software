@@ -9,6 +9,7 @@ class SearchIncome
     public static function execute()
     {
         try {
+
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $orderByCol = 'id';
@@ -21,8 +22,12 @@ class SearchIncome
             if (request()->has('central_division_id')) {
                 $data->where('central_division_id', request()->central_division_id);
             }
+            if (request()->has('account_category_id')) {
+                $data->where('account_category_id', request()->account_category_id);
+
+            }
             if (request()->has('branch_id')) {
-                $data->where('branch_id', request()->central_division_id);
+                $data->where('branch_id', request()->branch_id);
             }
             $data = $data->with($with)
                 ->where($condition)

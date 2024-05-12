@@ -26,14 +26,33 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Sohid Fund
 
-                        </h6>
                         <div class="search">
-                            <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                            <!-- <h6>All Branch Income</h6> -->
+                            <form @submit.prevent="incomeSearchHandler">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" />
+                                    </div>
+
+                                    <div v-if="loaded">
+                                        <label for="" class="my-1">Branch</label>
+                                        <select v-model="user_id" name="branch_id" class="form-control" id="">
+                                            <option value="">Select branch</option>
+                                            <template v-for="user in all_branch" :key="user.id">
+                                                <option :value="user.id">{{ user.full_name }}</option>
+                                            </template>
+                                        </select>
+                                    </div>
+                                    <div class="pt-2">
+                                        <button class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
@@ -229,16 +248,25 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded:false,
+        user_id: '',
     }),
     created: async function () {
         await this.get_all_branch_income();
+        await this.get_all_central_division();
+        await this.get_all_branch();
+        this.loaded=true
     },
     methods: {
         ...mapActions(sohid_fund_setup_store, {
             get_all_branch_income: "all",
             delete_branch_income: "delete",
+            get_all_central_division: "get_all_central_division",
+            get_all_branch: "get_all_branch",
+            income_search: "income_search",
         }),
-        exportData(data = [], prefix_name = 'income') {
+        exportData(data = [], prefix_name = 'sohid_fund_income') {
+
             let dataArray = []
             data.forEach((item) => {
                 let temp = {}
@@ -267,6 +295,9 @@ export default {
     computed: {
         ...mapState(sohid_fund_setup_store, {
             all_users: "all_data",
+
+            all_central_division: "all_central_division",
+            all_branch: "all_branch",
         }),
     },
     watch: {

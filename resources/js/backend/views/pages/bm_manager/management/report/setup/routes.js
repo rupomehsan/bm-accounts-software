@@ -2,7 +2,6 @@ import Layout from "./Layout.vue";
 import MainLedger from "../MainLedger.vue";
 import IncomeExpenseStatement from "../IncomeExpenseStatement.vue";
 import setup from ".";
-
 let prefix = setup.prefix
 
 import LoanRegister from "../LoanRegister.vue";
@@ -23,7 +22,7 @@ const routes = {
     children: [
         {
             path: 'main-ledger',
-            name: prefix + "MainLedger",
+            name:  prefix + "MainLedger",
             component: MainLedger
         },
         {

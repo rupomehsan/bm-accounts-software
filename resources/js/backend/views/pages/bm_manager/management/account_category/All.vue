@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateAccountCategory` }"
+                            <router-link :to="{ name: `${role}CreateAccountCategory` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -127,7 +127,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: 'CreateAccountCategory',
+                                name: `${role}CreateAccountCategory`,
                                 query: {
                                     id: item.id,
                                 },
@@ -208,12 +208,13 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { account_category_setup_store } from "./setup/store";
-
+import roleSetup from '../../partials/role_setup';
 export default {
     data: () => ({
         offset: "5",
         search_data: "",
         loaded: false,
+        role: roleSetup.role
     }),
     created: async function () {
         await this.get_all_categories(this.api_url.href);

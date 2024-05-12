@@ -13,11 +13,11 @@
                 <router-link :to="{ name: `bmManagerDashboard` }">ড্যাশবোর্ড</router-link>
             </li>
             <li class="my-2">
-                <router-link :to="{ name: `bmMainLedger` }" href="general-widget.html">
+                <router-link :to="{ name: `${rolePrefix}MainLedger` }" href="general-widget.html">
                     <i class="icon-desktop"></i> মুল লেজার</router-link>
             </li>
             <li class="my-2">
-                <router-link :to="{ name: `bmIncomeExpenseStatement` }" href="general-widget.html">
+                <router-link :to="{ name: `${rolePrefix}IncomeExpenseStatement` }" href="general-widget.html">
                     <i class="icon-desktop"></i> আয় ব্যয় খতিয়ান</router-link>
             </li>
             <li @click="toggleMenu">
@@ -25,58 +25,54 @@
                     <i class="icon-blackboard"></i><span class="text-capitalize">রিসিপ্ট বুক ম্যনেজমেন্ট</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
-
                 <ul :class="submenu ? 'menu-open' : ''" class="sidebar-submenu" style="margin-left: 20px">
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllReceiptBook` }" class="d-flex align-items-center" href="">রিসিপ্ট
+                        <router-link :to="{ name: `${rolePrefix}AllReceiptBook` }" class="d-flex align-items-center" href="">রিসিপ্ট
                             বুক</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllAssignReceiptBook` }" class="d-flex align-items-center"
+                        <router-link :to="{ name: `${rolePrefix}AllAssignReceiptBook` }" class="d-flex align-items-center"
                             href="">রিসিপ্ট বুক প্রদান
                         </router-link>
                     </li>
                 </ul>
             </li>
-
             <li @click="toggleMenu">
                 <a href="javascript:void(0)" class="sidebar-header">
                     <i class="icon-blackboard"></i><span class="text-capitalize">একাউন্ট ম্যনেজমেন্ট</span>
                     <i class="fa fa-angle-right pull-right"></i>
                 </a>
-
                 <ul :class="submenu ? 'menu-open' : ''" class="sidebar-submenu" style="margin-left: 20px">
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllBranchTarget` }" class="d-flex align-items-center" href="">ব্রাঞ্চ
+                        <router-link :to="{ name: `${rolePrefix}AllBranchTarget` }" class="d-flex align-items-center" href="">ব্রাঞ্চ
                             টার্গেট</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllIncome` }" class="d-flex align-items-center" href="">সকল আয়
+                        <router-link :to="{ name: `${rolePrefix}AllIncome` }" class="d-flex align-items-center" href="">সকল আয়
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllBranchIncome` }" class="d-flex align-items-center" href="">ব্রাঞ্চ
+                        <router-link :to="{ name: `${rolePrefix}AllBranchIncome` }" class="d-flex align-items-center" href="">ব্রাঞ্চ
                             আয়
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllCentralDivisionIncome` }" class="d-flex align-items-center"
+                        <router-link :to="{ name: `${rolePrefix}AllCentralDivisionIncome` }" class="d-flex align-items-center"
                             href="">
                             বিভাগ আয়
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllDailyIncome` }" class="d-flex align-items-center" href="">মাসিক
+                        <router-link :to="{ name: `${rolePrefix}AllMonthlyIncome` }" class="d-flex align-items-center" href="">মাসিক
                             আয়</router-link>
                     </li>
-
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
                         <router-link :to="{ name: `AllSohidFund` }" class="d-flex align-items-center" href="">শহীদ
@@ -87,10 +83,9 @@
                         <router-link :to="{ name: `AllPaymentMethod` }" class="d-flex align-items-center"
                             href="">একাউন্ট মেথড</router-link>
                     </li>
-
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllAccountCategory` }" class="d-flex align-items-center"
+                        <router-link :to="{ name: `${rolePrefix}AllAccountCategory` }" class="d-flex align-items-center"
                             href="">একাউন্ট ক্যাটাগরি</router-link>
                     </li>
                 </ul>
@@ -361,13 +356,19 @@
         </div>
     </div>
 </template>
-
 <script>
+import roleSetup from './role_setup';
+
+
 export default {
     data: () => ({
         submenu: false,
         subSubMenu: false,
+        rolePrefix: roleSetup.role
     }),
+    created: function () {
+        console.log(this.rolePrefix);
+    },
     methods: {
         toggleMenu() {
             event.target.closest("li").classList.toggle("active");

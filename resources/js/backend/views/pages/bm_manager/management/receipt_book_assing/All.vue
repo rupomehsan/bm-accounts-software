@@ -17,7 +17,7 @@
 
                     <div class="col-lg-3 text-end">
                         <span>
-                            <router-link :to="{ name: `AssingReceiptBookCreate` }"
+                            <router-link :to="{ name: `${role}AssingReceiptBookCreate` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -133,7 +133,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: 'AssingReceiptBookCreate',
+                            name: `${role}AssingReceiptBookCreate`,
                             query: {
                                 id: item.id,
                             },
@@ -215,8 +215,11 @@
 import { mapActions, mapState } from "pinia";
 import { receipt_book_assign_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
+import roleSetup from '../../partials/role_setup';
+
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         search_data: "",
         loaded: false,

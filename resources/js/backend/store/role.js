@@ -1,4 +1,4 @@
 window.role = {
-    bm: "BM",
+    bm: "bm",
     bmSupport: "bmSupport",
 };

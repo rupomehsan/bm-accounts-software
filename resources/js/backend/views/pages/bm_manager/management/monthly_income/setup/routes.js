@@ -2,24 +2,24 @@ import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
 import BalanceForm from "../BalanceForm.vue";
-
+const role = window.role.bm
 const routes = {
     path: 'monthly-income',
     component: Layout,
     children: [
         {
             path: '',
-            name: "AllDailyIncome",
+            name: role + "AllMonthlyIncome",
             component: All
         },
         {
             path: 'create',
-            name: "CreateDailyIncome",
+            name: role + "CreateMonthlyIncome",
             component: Form
         },
         {
             path: 'balance',
-            name: "BalanceForm",
+            name: role + "BalanceForm",
             component: BalanceForm
         },
     ]

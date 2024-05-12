@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateCentralDivisionIncome` }"
+                            <router-link :to="{ name: `${role}CreateCentralDivisionIncome` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -150,7 +150,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: 'BalanceForm',
+                                name: `${role}DepartmentBalanceForm`,
                                 query: {
                                     id: item.id,
                                 },
@@ -232,8 +232,11 @@
 import { mapActions, mapState } from "pinia";
 import { central_division_income_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
+import roleSetup from '../../partials/role_setup';
+
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         search_data: "",
         loaded: false,
@@ -257,7 +260,7 @@ export default {
         incomeSearchHandler() {
             this.income_search(event.target, this.user_id)
         },
-        exportData(data = [], prefix_name = 'income') {
+        exportData(data = [], prefix_name = 'department_income') {
             let dataArray = []
             data.forEach((item) => {
                 let temp = {}

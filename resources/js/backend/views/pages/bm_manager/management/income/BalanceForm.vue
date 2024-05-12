@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllIncome` }"
+                                <router-link :to="{ name: `${role}AllIncome` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -69,9 +69,11 @@ import { mapActions, mapState } from "pinia";
 
 import { income_setup_store } from "./setup/store";
 import axios from 'axios';
-export default {
+import roleSetup from '../../partials/role_setup';
 
+export default {
     data: () => ({
+        role: roleSetup.role,
         amount: '',
         amount_in_text: '',
         description: '',
@@ -101,12 +103,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
-                this.$router.push({ name: `AllIncome` });
+                this.$router.push({ name: `${role}AllIncome` });
             } else {
                 let response = await this.store($event.target, this.application_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllIncome` });
+                    this.$router.push({ name: `${role}AllIncome` });
                 }
             }
         },

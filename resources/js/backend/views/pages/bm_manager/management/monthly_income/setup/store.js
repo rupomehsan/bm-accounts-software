@@ -83,6 +83,7 @@ export const monthly_income_setup_store = defineStore("monthly_income_setup_stor
         income_search: async function (form, user_id) {
             let formData = new FormData(form);
             formData.append('user_id', user_id)
+            formData.append('account_category_id', 1)
             let response = await axios.post("account-incomes-search", formData);
             this.all_data = response.data.data;
         },
@@ -107,6 +108,20 @@ export const monthly_income_setup_store = defineStore("monthly_income_setup_stor
             response = response.data.data;
             // console.log("data", response);
             this.account_number_data = response;
+        },
+
+        get_all_central_division: async function () {
+            let response = await axios.get("users?get_all=1&division=division");
+            response = response.data.data;
+            // console.log("data", response);
+            this.all_central_division = response;
+        },
+
+        get_all_branch: async function () {
+            let response = await axios.get("users?get_all=1&branch_user=branch_user");
+            response = response.data.data;
+            // console.log("data", response);
+            this.all_branch = response;
         },
     },
 });
