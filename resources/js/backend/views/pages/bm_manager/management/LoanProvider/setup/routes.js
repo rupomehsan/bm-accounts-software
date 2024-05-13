@@ -6,6 +6,7 @@ import Layout from "./Layout.vue";
 
 let route_prefix = setup.route_prefix;
 
+const role = window.role.bm
 const routes =
 {
     path: 'loan',
@@ -13,17 +14,17 @@ const routes =
     children: [
         {
             path: '',
-            name: "All" + route_prefix,
+            name: role + "All" + route_prefix,
             component: All,
         },
         {
             path: "create",
-            name: "Create" + route_prefix,
+            name: role + "Create" + route_prefix,
             component: Form,
         },
         {
             path: "details",
-            name: "Details" + route_prefix,
+            name: role + "Details" + route_prefix,
             component: Details,
         },
 

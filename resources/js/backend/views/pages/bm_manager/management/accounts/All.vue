@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreatePaymentMethod` }"
+                            <router-link :to="{ name: `${role}CreatePaymentMethod` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -19,7 +19,7 @@
             </div>
             <div class="conatiner">
                 <div class="card list_card">
-                    <div class="card-header align-items-center">
+                    <!-- <div class="card-header align-items-center">
                         <h6>
                             All Accounts
 
@@ -46,7 +46,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
@@ -128,7 +128,7 @@
                                                 <li v-if="item.name !== 'cash'">
                                                     <span>
                                                         <router-link :to="{
-                                name: 'CreatePaymentMethod',
+                                name: `${role}CreatePaymentMethod`,
                                 query: {
                                     id: item.id,
                                 },
@@ -214,6 +214,7 @@ import { account_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         offset: "5",
         search_data: "",
     }),

@@ -21,7 +21,7 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <h6>
-                            All application category
+                            All account category
 
                         </h6>
                         <div class="search">
@@ -36,13 +36,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_users.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Import
@@ -53,7 +53,7 @@
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Deactivated data
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -209,6 +209,7 @@
 import { mapActions, mapState } from "pinia";
 import { account_category_setup_store } from "./setup/store";
 import roleSetup from '../../partials/role_setup';
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -225,12 +226,31 @@ export default {
             get_all_categories: "all",
             user_delete: "delete",
         }),
+        ExportData(data = [], prefix_name = 'account_category') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.name = item.title
+                temp.status = item.status
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+
+        },
     },
     computed: {
         ...mapState(account_category_setup_store, {
             all_users: "all_data",
             api_url: "api_url",
         }),
+
     },
     watch: {
         offset: async function (newOffset, oldOffset) {

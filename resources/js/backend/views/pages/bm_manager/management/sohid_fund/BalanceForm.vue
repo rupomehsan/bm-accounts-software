@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllIncome` }"
+                                <router-link :to="{ name: `${role}AllSohidFund` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -72,6 +72,7 @@ import axios from 'axios';
 export default {
 
     data: () => ({
+        role: window.role.bm,
         amount: '',
         amount_in_text: '',
         description: '',
@@ -101,12 +102,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
-                this.$router.push({ name: `AllSohidFund` });
+                this.$router.push({ name: `${this.role}AllSohidFund` });
             } else {
                 let response = await this.store($event.target, this.application_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllSohidFund` });
+                    this.$router.push({ name: `${this.role}AllSohidFund` });
                 }
             }
         },

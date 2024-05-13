@@ -20,6 +20,11 @@ class Controller extends ControllersController
         $data = All::execute();
         return $data;
     }
+    public function seachByDateWise()
+    {
+        $data = All::seachByDateWise();
+        return $data;
+    }
 
     public function store(Validation $request)
     {
@@ -49,5 +54,4 @@ class Controller extends ControllersController
         $data = BulkActions::execute();
         return $data;
     }
-
 }

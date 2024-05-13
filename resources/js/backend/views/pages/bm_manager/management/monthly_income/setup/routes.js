@@ -2,8 +2,11 @@ import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
 import BalanceForm from "../BalanceForm.vue";
+
 const role = window.role.bm
+
 const routes = {
+
     path: 'monthly-income',
     component: Layout,
     children: [
@@ -19,10 +22,11 @@ const routes = {
         },
         {
             path: 'balance',
-            name: role + "BalanceForm",
+            name: role + "MonthlyIncomeBalanceForm",
             component: BalanceForm
         },
     ]
+
 }
 
 

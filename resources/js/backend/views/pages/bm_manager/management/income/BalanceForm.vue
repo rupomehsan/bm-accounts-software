@@ -103,12 +103,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.income_update($event.target, this.param_id);
-                this.$router.push({ name: `${role}AllIncome` });
+                this.$router.push({ name: `${this.role}AllIncome` });
             } else {
                 let response = await this.store($event.target, this.application_id);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `${role}AllIncome` });
+                    this.$router.push({ name: `${this.role}AllIncome` });
                 }
             }
         },

@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `Create${route_prefix}` }"
+                            <router-link :to="{ name: `${role}Create${route_prefix}` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -21,38 +21,39 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <div class="search">
-                            <!-- <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
-                            </form> -->
+                            <div class="col-md-6" v-if="this.loaded">
+                                <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                    <div class="d-flex gap-2">
+                                        <div>
+                                            <label for="">Start date</label>
+                                            <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                        </div>
+                                        <div>
+                                            <label for="">End date</label>
+                                            <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                        </div>
+
+                                        <div class="pt-2">
+                                            <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <!-- <div class="btns d-flex gap-2 align-items-center">
+                        <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary">
+                                    <i class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_data.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -134,7 +135,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: 'DetailsLoan',
+                            name: `${role}DetailsLoan`,
                             query: {
                                 id: item.id,
                             },
@@ -148,7 +149,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: 'CreateLoan',
+                            name: `${role}CreateLoan`,
                             query: {
                                 id: item.id,
                             },
@@ -208,32 +209,40 @@ import { mapActions, mapState } from 'pinia'
 import { loan_setup_store } from './setup/store';
 import setup from "./setup";
 import axios from 'axios';
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         route_prefix: '',
         search_data: '',
         loaded: false,
         offset: 5,
         page_title: '',
         parent_item: false,
-        child_items: []
+        child_items: [],
+        from_date: "",
+        end_date: '',
     }),
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
         await this.get_all_data()
         // console.log(this.all_data.data);
+        // await axios.get('accounts-info')
+        this.from_date = moment().subtract(90, 'd').format('YYYY-MM-DD')
+        this.end_date = moment().format('YYYY-MM-DD')
+        let that = this
+        setTimeout(function () {
+            that.SearchHandler()
+        }, 2000)
         this.loaded = true
-
-        let response = await axios.get('accounts-info')
-
-        console.log(response);
     },
     methods: {
         ...mapActions(loan_setup_store, {
             get_all_data: 'all',
             delete_data: 'delete',
             bulk_action: 'bulk_action',
+            get_data_by_search: 'get_data_by_search',
         }),
         toggleParentCheckbox() {
             this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []
@@ -250,6 +259,34 @@ export default {
             this.bulk_action(action, this.child_items)
             this.parent_item = false
             this.child_items = []
+        },
+
+        ExportData(data = [], prefix_name = 'loan_register') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.Id = item.id
+                temp.User = item.user?.full_name
+                temp.Taken_Date = item.taken_date
+                temp.Given_Date = item.given_date
+                temp.Amount = item.amount
+                temp.given = item.amount - item.due_amount
+                temp.Due = item.due_amount
+                temp.Purpose = item.purpose
+                temp.appropriator = item.appropriator
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
         }
 
     },

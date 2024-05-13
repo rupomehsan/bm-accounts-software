@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllApplicationCategory` }"
+                                <router-link :to="{ name: `${role}AllApplicationCategory` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -57,6 +57,8 @@ import form_fields from "./setup/form_fields.js";
 import { application_category_setup_store } from "./setup/store";
 export default {
     data: () => ({
+        role : window.role.bm,
+
         form_fields,
         param_id: null,
     }),

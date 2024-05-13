@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `ApplicationFormatAll` }"
+                                <router-link :to="{ name: `${role}ApplicationFormatAll` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -31,7 +31,7 @@
                                         <common-input :label="form_field.label" :type="form_field.type"
                                             :name="form_field.name" :multiple="form_field.multiple"
                                             :value="form_field.value" :data_list="form_field.data_list
-                                                " />
+                                    " />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -61,7 +61,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-2">
-                                                <i class="fa fa-minus" role="button" @click="deleteExtraField(index)"></i>
+                                                <i class="fa fa-minus" role="button"
+                                                    @click="deleteExtraField(index)"></i>
                                             </div>
                                         </div>
                                     </template>
@@ -88,6 +89,7 @@ import { application_format_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         form_fields,
         param_id: null,
         extra_fields: []
@@ -144,12 +146,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.application_format_update($event.target, this.param_id, this.extra_fields);
-                this.$router.push({ name: `ApplicationFormatAll` });
+                this.$router.push({ name: `${this.role}ApplicationFormatAll` });
             } else {
                 let response = await this.application_format_store($event.target, this.extra_fields);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
-                    this.$router.push({ name: `ApplicationFormatAll` });
+                    this.$router.push({ name: `${this.role}ApplicationFormatAll` });
                 }
             }
         },

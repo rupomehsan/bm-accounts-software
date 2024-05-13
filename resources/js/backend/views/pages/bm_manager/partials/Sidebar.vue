@@ -28,13 +28,14 @@
                 <ul :class="submenu ? 'menu-open' : ''" class="sidebar-submenu" style="margin-left: 20px">
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllReceiptBook` }" class="d-flex align-items-center" href="">রিসিপ্ট
+                        <router-link :to="{ name: `${rolePrefix}AllReceiptBook` }" class="d-flex align-items-center"
+                            href="">রিসিপ্ট
                             বুক</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllAssignReceiptBook` }" class="d-flex align-items-center"
-                            href="">রিসিপ্ট বুক প্রদান
+                        <router-link :to="{ name: `${rolePrefix}AllAssignReceiptBook` }"
+                            class="d-flex align-items-center" href="">রিসিপ্ট বুক প্রদান
                         </router-link>
                     </li>
                 </ul>
@@ -47,40 +48,45 @@
                 <ul :class="submenu ? 'menu-open' : ''" class="sidebar-submenu" style="margin-left: 20px">
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllBranchTarget` }" class="d-flex align-items-center" href="">ব্রাঞ্চ
+                        <router-link :to="{ name: `${rolePrefix}AllBranchTarget` }" class="d-flex align-items-center"
+                            href="">ব্রাঞ্চ
                             টার্গেট</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllIncome` }" class="d-flex align-items-center" href="">সকল আয়
+                        <router-link :to="{ name: `${rolePrefix}AllIncome` }" class="d-flex align-items-center"
+                            href="">সকল আয়
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllBranchIncome` }" class="d-flex align-items-center" href="">ব্রাঞ্চ
+                        <router-link :to="{ name: `${rolePrefix}AllBranchIncome` }" class="d-flex align-items-center"
+                            href="">ব্রাঞ্চ
                             আয়
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllCentralDivisionIncome` }" class="d-flex align-items-center"
-                            href="">
+                        <router-link :to="{ name: `${rolePrefix}AllCentralDivisionIncome` }"
+                            class="d-flex align-items-center" href="">
                             বিভাগ আয়
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllMonthlyIncome` }" class="d-flex align-items-center" href="">মাসিক
+                        <router-link :to="{ name: `${rolePrefix}AllMonthlyIncome` }" class="d-flex align-items-center"
+                            href="">মাসিক
                             আয়</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllSohidFund` }" class="d-flex align-items-center" href="">শহীদ
+                        <router-link :to="{ name: `${rolePrefix}AllSohidFund` }" class="d-flex align-items-center"
+                            href="">শহীদ
                             ফান্ড</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllPaymentMethod` }" class="d-flex align-items-center"
+                        <router-link :to="{ name: `${rolePrefix}AllPaymentMethod` }" class="d-flex align-items-center"
                             href="">একাউন্ট মেথড</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
@@ -99,12 +105,14 @@
                 <ul :class="submenu ? 'menu-open' : ''" class="sidebar-submenu" style="margin-left: 20px">
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllLoan` }" class="d-flex align-items-center" href="">ঋণ তালিকা
+                        <router-link :to="{ name: `${rolePrefix}AllLoan` }" class="d-flex align-items-center" href="">ঋণ
+                            তালিকা
                         </router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllLoanPayment` }" class="d-flex align-items-center" href="">ঋণ
+                        <router-link :to="{ name: `${rolePrefix}AllLoanPayment` }" class="d-flex align-items-center"
+                            href="">ঋণ
                             পেমেন্ট
                         </router-link>
                     </li>
@@ -119,18 +127,19 @@
                 <ul :class="submenu ? 'menu-open' : ''" class="sidebar-submenu" style="margin-left: 20px">
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `AllApplicationCategory` }" class="d-flex align-items-center"
-                            href="">আবেদন ক্যাটাগরি</router-link>
+                        <router-link :to="{ name: `${rolePrefix}AllApplicationCategory` }"
+                            class="d-flex align-items-center" href="">আবেদন ক্যাটাগরি</router-link>
                     </li>
 
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `ApplicationFormatAll` }" class="d-flex align-items-center"
-                            href="">আবেদন ফরম্যাট</router-link>
+                        <router-link :to="{ name: `${rolePrefix}ApplicationFormatAll` }"
+                            class="d-flex align-items-center" href="">আবেদন ফরম্যাট</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `ApplicationAll` }" class="d-flex align-items-center" href="">আবেদন
+                        <router-link :to="{ name: `${rolePrefix}ApplicationAll` }" class="d-flex align-items-center"
+                            href="">আবেদন
                             তালিকা
                         </router-link>
                     </li>

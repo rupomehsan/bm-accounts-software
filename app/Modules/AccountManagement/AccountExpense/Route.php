@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::apiResource('account-expenses', Controller::class);
     Route::post('account-expenses/bulk-action', [Controller::class, 'bulkAction']);
+    Route::post('account-expenses/search', [Controller::class, 'seachByDateWise']);
     Route::delete('delete-support-account-expense/{id}', [Controller::class, 'deleteSupportVoucher']);
     Route::get('approval-voucher', [Controller::class, 'approvalVoucher']);
     Route::get('bm-not-approval-voucher', [Controller::class, 'bmNotApprovalVoucher']);
@@ -16,4 +17,5 @@ Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('get-single-voucher-with-top-shit/{id}', [Controller::class, 'getSingleVoucherWithTopShit']);
     Route::post('set-month-for-voucher', [Controller::class, 'SetMonth']);
     Route::get('get-active-month-for-voucher', [Controller::class, 'getActiveMonth']);
+
 });

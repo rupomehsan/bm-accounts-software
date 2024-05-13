@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllPaymentMethod` }"
+                                <router-link :to="{ name: `${role}AllPaymentMethod` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -32,9 +32,19 @@
                                         <common-input :label="form_field.label" :type="form_field.type"
                                             :name="form_field.name" :multiple="form_field.multiple"
                                             :value="form_field.value" :data_list="form_field.data_list
-                                                " />
+                                    " />
+
+
 
                                     </div>
+                                </div>
+                                <div v-if="similor_accounts.length >1">
+                                    <p class="border w-25 text-center py-1">Similar account numbers </p>
+                                    <ul>
+                                        <li v-for="(account, index) in similor_accounts" :key="index">
+                                            {{ account.value }}
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -57,8 +67,10 @@ import form_fields from "./setup/form_fields.js";
 import { account_setup_store } from "./setup/store";
 export default {
     data: () => ({
+        role: window.role.bm,
         form_fields,
         param_id: null,
+        similor_accounts: []
     }),
 
     created: async function () {
@@ -74,7 +86,8 @@ export default {
                         }
                         if (field.name == 'value') {
                             if (item[0] == 'account_number') {
-                                this.form_fields[index].value = item[1]?.value
+                                this.form_fields[index].value = item[1][item[1].length - 1]?.value
+                                this.similor_accounts = item[1]
                             }
                         }
                     });
@@ -97,13 +110,13 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
-                this.$router.push({ name: `AllPaymentMethod` });
+                this.$router.push({ name: `${this.role}AllPaymentMethod` });
 
             } else {
                 let response = await this.account_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllPaymentMethod` });
+                    this.$router.push({ name: `${this.role}AllPaymentMethod` });
                 }
             }
         },

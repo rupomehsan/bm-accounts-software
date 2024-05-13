@@ -15,7 +15,7 @@
                                 </div>
                                 <div>
                                     <label for="">End date</label>
-                                    <date-field :label="`End Date`" :name="`end_date`" :value="to_date" />
+                                    <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
                                 </div>
 
                                 <div class="pt-2">
@@ -206,13 +206,12 @@ export default {
         role: roleSetup.role,
         offset: "5",
         from_date: "",
-        to_date: '',
         end_date: '',
         loaded: false,
     }),
     created: async function () {
         this.from_date = moment().subtract(90, 'd').format('YYYY-MM-DD')
-        this.to_date = moment().format('YYYY-MM-DD')
+        this.end_date = moment().format('YYYY-MM-DD')
         let that = this
         setTimeout(function () {
             that.SubmitHandler()
@@ -220,26 +219,20 @@ export default {
         this.loaded = true
     },
     methods: {
-
         ...mapActions(report_setup_store, {
             main_ledger: "main_ledger",
         }),
-
         SubmitHandler() {
             this.main_ledger(this.$refs.myForm)
         },
-
         formatDate(date) {
             let target = new Date(date).toLocaleDateString()
             const dateParts = target.split('/'); // Split the date string by '/'
             const formattedDate = `${dateParts[1].padStart(2, '0')}-${dateParts[0].padStart(2, '0')}-${dateParts[2]}`;
             return formattedDate
         },
-
         expenseExport(data = [], prefix_name = 'expense_ledger') {
-
             let dataArray = []
-
             data.forEach((item) => {
                 let temp = {}
                 temp.date = item.date
@@ -259,7 +252,6 @@ export default {
         },
         incomeExport(data = [], prefix_name = 'income_ledger') {
             let dataArray = []
-
             data.forEach((item) => {
                 let temp = {}
                 temp.date = item.date

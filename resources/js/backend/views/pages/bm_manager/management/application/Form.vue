@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `ApplicationAll` }"
+                                <router-link :to="{ name: `${role}ApplicationAll` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -95,17 +95,18 @@
                                             <input type="file" class="form-control" name="pdf_submission_file" id="" />
                                         </div>
 
-                                        <template v-for="(item,index) in extrafield" :key="item.id">
+                                        <template v-for="(item, index) in extrafield" :key="item.id">
                                             <div class="form-group my-2">
                                                 <label class="my-2">{{ item.name }}</label>
                                                 <template v-if="item.type !== 'textarea'">
-                                                    <input :type="item.type" :name="`extrafields[${index}][${item.name}]`"
+                                                    <input :type="item.type"
+                                                        :name="`extrafields[${index}][${item.name}]`"
                                                         class="form-control" :value="item.value" />
                                                 </template>
 
                                                 <template v-else>
-                                                    <textarea :name="`extrafields[${index}][${item.name}]`" :value="item.value"
-                                                        class="form-control" rows="5"></textarea>
+                                                    <textarea :name="`extrafields[${index}][${item.name}]`"
+                                                        :value="item.value" class="form-control" rows="5"></textarea>
                                                 </template>
                                             </div>
                                         </template>
@@ -133,8 +134,8 @@ import { application_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         param_id: null,
-
         applicant_id: "",
         subject: "",
         is_moukuf: false,
@@ -205,12 +206,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.application_format_update($event.target, this.param_id);
-                this.$router.push({ name: `ApplicationAll` });
+                this.$router.push({ name: `${this.role}ApplicationAll` });
             } else {
                 let response = await this.application_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
-                    this.$router.push({ name: `ApplicationAll` });
+                    this.$router.push({ name: `${this.role}ApplicationAll` });
                 }
             }
         },

@@ -1,6 +1,7 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
+const role = window.role.bm
 
 const routes = {
     path: 'application-category',
@@ -8,12 +9,12 @@ const routes = {
     children: [
         {
             path: '',
-            name: "AllApplicationCategory",
+            name: role + "AllApplicationCategory",
             component: All
         },
         {
             path: 'create',
-            name: "CreateApplicationCategory",
+            name: role + "CreateApplicationCategory",
             component: Form
         },
     ]

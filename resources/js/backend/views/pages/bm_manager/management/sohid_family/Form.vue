@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AllSohidFamily` }"
+                                <router-link :to="{ name: `${role}AllSohidFamily` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -32,7 +32,7 @@
                                             <common-input :label="form_field.label" :type="form_field.type"
                                                 :name="form_field.name" :multiple="form_field.multiple"
                                                 :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
+                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -57,6 +57,7 @@ import form_fields from "./setup/form_fields.js";
 import { sohid_family_setup_store } from "./setup/store";
 export default {
     data: () => ({
+        role: window.role.bm,
         form_fields,
         param_id: null,
     }),
@@ -97,12 +98,12 @@ export default {
         submitHandler: async function ($event) {
             if (this.param_id) {
                 this.user_update($event.target, this.param_id);
-                this.$router.push({ name: `AllSohidFamily` });
+                this.$router.push({ name: `${this.role}AllSohidFamily` });
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
-                    this.$router.push({ name: `AllSohidFamily` });
+                    this.$router.push({ name: `${this.role}AllSohidFamily` });
                 }
             }
         },

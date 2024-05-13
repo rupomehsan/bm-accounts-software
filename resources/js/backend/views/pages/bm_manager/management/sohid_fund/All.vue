@@ -8,14 +8,14 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `AllSohidFamily` }"
+                            <router-link :to="{ name: `${role}AllSohidFamily` }"
                                 class="btn rounded-pill btn-outline-info mx-2">
                                 <i class="fa fa-book me-5px"></i>
                                 All Sohid Family
                             </router-link>
                         </span>
                         <span>
-                            <router-link :to="{ name: `CreateSohidFund` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}CreateSohidFund` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -156,7 +156,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: 'BalanceForm',
+                                name: `${role}SohidFundBalanceForm`,
                                 query: {
                                     id: item.id,
                                 },
@@ -246,6 +246,7 @@ import { sohid_fund_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         offset: "5",
         search_data: "",
         loaded:false,

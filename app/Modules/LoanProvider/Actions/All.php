@@ -32,4 +32,21 @@ class All
             return messageResponse($e->getMessage(), 500, 'server_error');
         }
     }
+    public static function seachByDateWise()
+    {
+        try {
+            $offset = request()->input('offset') ?? 10;
+            $condition = [];
+            $with = ['user'];
+            $data = self::$model::with($with)
+                ->whereDate('taken_date', '>=', request()->input('start_date'))
+                ->whereDate('taken_date', '<=', request()->input('end_date'))
+                ->where($condition)
+                ->latest()
+                ->paginate($offset);
+            return entityResponse($data);
+        } catch (\Exception $e) {
+            return messageResponse($e->getMessage(), 500, 'server_error');
+        }
+    }
 }

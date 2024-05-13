@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `All${route_prefix}` }"
+                                <router-link :to="{ name: `${role}All${route_prefix}` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -53,7 +53,8 @@
                                     <tr>
                                         <td style="width: 20px;">Image </td>
                                         <td style="width:2px;text-align: center;"> :</td>
-                                        <td width="200"><img :src="single_data.attachment" alt="" height="40" width="50"></td>
+                                        <td width="200"><img :src="single_data.attachment" alt="" height="40"
+                                                width="50"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -74,13 +75,13 @@
                                     </thead>
                                     <tbody>
 
-                                            <tr v-for="(item, index) in single_data.loan_payments" :key="index">
-                                                <td>{{ item.amount }}</td>
-                                                <td>{{ item.amount_in_text }}</td>
-                                                <td>{{ item.given_date }}</td>
-                                                <td>{{ item.description }}</td>
+                                        <tr v-for="(item, index) in single_data.loan_payments" :key="index">
+                                            <td>{{ item.amount }}</td>
+                                            <td>{{ item.amount_in_text }}</td>
+                                            <td>{{ item.given_date }}</td>
+                                            <td>{{ item.description }}</td>
 
-                                            </tr>
+                                        </tr>
 
 
                                     </tbody>
@@ -106,6 +107,7 @@ import form_fields from "./setup/form_fields";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         route_prefix: '',
         form_fields,
         param_id: null,
@@ -211,13 +213,13 @@ export default {
                 let response = await this.update_data($event.target, this.param_id);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({ name: `All${this.route_prefix}` });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             } else {
                 let response = await this.store_data($event.target);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({ name: `All${this.route_prefix}` });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             }
         },

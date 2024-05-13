@@ -8,10 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link
-                                :to="{ name: `CreateApplicationCategory` }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
+                            <router-link :to="{ name: `${role}CreateApplicationCategory` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -103,10 +101,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr
-                                    v-for="(item, index) in all_users.data"
-                                    :key="item.id"
-                                >
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
                                     <!-- <td style="width: 10px">
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -116,20 +111,13 @@
                                     </td>
 
                                     <td>
-                                        <span
-                                            class="badge bg-label-success me-1"
-                                            >{{ item.status }}</span
-                                        >
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a
-                                                @click.prevent=""
-                                                href="#"
-                                                class="btn btn-sm btn-outline-secondary"
-                                                ><i class="fa fa-gears"></i
-                                            ></a>
+                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
+                                                    class="fa fa-gears"></i></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -155,18 +143,13 @@
                                                 </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link
-                                                            :to="{
-                                                                name: 'CreateApplicationCategory',
-                                                                query: {
-                                                                    id: item.id,
-                                                                },
-                                                            }"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-warning fa-pencil"
-                                                            ></i>
+                                                        <router-link :to="{
+                                name: `${role}CreateApplicationCategory`,
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
+                                                            <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
 
@@ -174,18 +157,12 @@
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a
-                                                            @click.prevent="
-                                                                user_delete(
-                                                                    item.id
-                                                                )
-                                                            "
-                                                            href="#"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-danger fa-trash"
-                                                            ></i>
+                                                        <a @click.prevent="
+                                user_delete(
+                                    item.id
+                                )
+                                " href="#" class="">
+                                                            <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -197,9 +174,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
-                    >
+                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_users" :method="user_get_all" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
@@ -253,6 +228,7 @@ import { application_category_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         offset: "5",
         search_data: "",
         loaded: false,

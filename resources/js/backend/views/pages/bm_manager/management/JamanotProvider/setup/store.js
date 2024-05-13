@@ -72,6 +72,12 @@ export const jamanot_setup_store = defineStore("jamanot_setup_store", {
             response = response.data.data;
             this.all_account_categories_data = response;
         },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`${this.api}/search`, form);
+            response = response.data.data;
+            this.all_data = response;
 
+        },
     },
 });

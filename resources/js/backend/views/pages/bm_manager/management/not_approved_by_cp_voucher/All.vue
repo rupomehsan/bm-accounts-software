@@ -4,11 +4,12 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Not Approved By Cp Voucher</h5>
+                        <h5 class="m-0">Voucher Management</h5>
                     </div>
+
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateVoucher` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `BmCreateVoucher` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,11 +20,29 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
+                        <div class="col-md-6" v-if="this.loaded">
+                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="search">
-                            <form action="#">
+                            <!-- <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
-                            </form>
+                            </form> -->
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
@@ -31,22 +50,9 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_users.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
                                         </a>
                                     </li>
                                 </ul>
@@ -84,12 +90,12 @@
                                         Status
 
                                     </th>
-                                    <!-- <th aria-label="actions">Actions</th> -->
+                                    <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr v-for="(item) in all_users.data" :key="item.id">
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -101,20 +107,33 @@
                                         {{ item.account_category?.title }}
                                     </td>
                                     <td>{{ item.amount }}</td>
-                                    <td>{{ item.approved_by_cp == 0 ? 'Not approved' : 'Approved' }}</td>
+                                    <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
-
+                                    <td>
+                                        <div class="table_actions">
+                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
+                                                    class="fa fa-gears"></i></a>
+                                            <ul>
+                                                <li>
+                                                    <router-link :to="{ name: 'BmTopShit', params: { id: item.id } }">
+                                                        <i class="fa text-info fa-book"></i>
+                                                        Topshit
+                                                    </router-link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="user_get_all" />
+                        <pagination :data="all_users" :method="get_all_voucher" />
                         <div class="float-right">
-                            <div class="show-limit d-inline-block">
+                            <!-- <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
                                     <option value="5">5</option>
@@ -127,12 +146,11 @@
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">
@@ -162,36 +180,60 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { not_approved_by_cp_voucher_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded: false
     }),
     created: async function () {
-        await this.user_get_all();
-
+        await this.get_all_voucher(this.api_url.href);
+        this.loaded = true
     },
     methods: {
         ...mapActions(not_approved_by_cp_voucher_setup_store, {
-            user_get_all: "all",
+            get_all_voucher: "all",
             user_delete: "delete",
+            get_data_by_search: "get_data_by_search",
 
         }),
-
-
+        ExportData(data = [], prefix_name = 'voucher') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_category = item.account_category?.title
+                temp.amount = item.amount
+                temp.approval = item.approval == 0 ? 'Approved' : 'Not approved'
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
+        },
     },
     computed: {
         ...mapState(not_approved_by_cp_voucher_setup_store, {
             all_users: "all_data",
+            api_url: 'api_url',
         }),
     },
+
     watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.user_get_all("users");
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.get_all_data(this.api_url.href);
+            }, 500);
         },
     },
 };

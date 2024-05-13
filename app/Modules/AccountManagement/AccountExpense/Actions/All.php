@@ -5,6 +5,7 @@ namespace App\Modules\AccountManagement\AccountExpense\Actions;
 class All
 {
     static $model = \App\Modules\AccountManagement\AccountExpense\Model::class;
+    static $supportVoucermodel = \App\Modules\AccountManagement\AccountExpense\SupportModel::class;
 
     public static function execute()
     {
@@ -37,6 +38,34 @@ class All
             } else {
                 $data = $data->with($with)->where($condition)->latest()->paginate($offset);
             }
+            return entityResponse($data);
+        } catch (\Exception $e) {
+            return messageResponse($e->getMessage(), 500, 'server_error');
+        }
+    }
+    public static function seachByDateWise()
+    {
+        try {
+            $offset = request()->input('offset') ?? 10;
+            $condition = [];
+            $with = ['account_category'];
+            $data = self::$supportVoucermodel::query();
+
+
+            if (request()->has('not_approved_cp') && request()->input('not_approved_cp')) {
+                $condition['approved_by_cp'] =  0;
+            }
+            if (request()->has('not_approved_bm') && request()->input('not_approved_bm')) {
+                $condition['approved_by_bm'] =  0;
+            }
+
+
+            $data = $data->with($with)
+                ->whereDate('created_at', '>=', request()->input('start_date'))
+                ->whereDate('created_at', '<=', request()->input('end_date'))
+                ->where($condition)
+                ->latest()
+                ->paginate($offset);
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

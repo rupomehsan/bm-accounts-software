@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `${window.role.bm}CreateMonthlyIncome` }"
+                            <router-link :to="{ name: `${role}CreateMonthlyIncome` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -148,7 +148,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: 'BalanceForm',
+                                name: `${role}MonthlyIncomeBalanceForm`,
                                 query: {
                                     id: item.id,
                                 },
@@ -238,6 +238,7 @@ import { monthly_income_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         offset: "5",
         search_data: "",
         loaded: false,

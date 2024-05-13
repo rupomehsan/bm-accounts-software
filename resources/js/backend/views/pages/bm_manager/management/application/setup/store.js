@@ -9,6 +9,8 @@ export const application_setup_store = defineStore("application_setup_store", {
         application_format_by_category_data: {},
         applications_data: {},
         income_categories: {},
+        api_url: new URL(location.origin + '/api/v1/cp-applications')
+
     }),
 
     getters: {
@@ -22,7 +24,7 @@ export const application_setup_store = defineStore("application_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("cp-applications");
+                response = await axios.get(url);
             }
             this.all_data = response.data.data;
         },
