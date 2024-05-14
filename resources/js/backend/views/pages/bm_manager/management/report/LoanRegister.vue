@@ -31,24 +31,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(loan_register_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -74,9 +63,9 @@
                                     <th class="cursor_n_resize">
                                         চুক্তির তারিখ
                                     </th>
-                                    <th class="cursor_n_resize">
+                                    <!-- <th class="cursor_n_resize">
                                         চুক্তির মেয়াদ
-                                    </th>
+                                    </th> -->
                                     <th class="cursor_n_resize">
                                         চুক্তি সত্ত্বায়নকারী
                                     </th>
@@ -109,9 +98,7 @@
                                         {{ item.taken_date }}
                                     </td>
 
-                                    <td>
-                                        {{ 4 }}
-                                    </td>
+
 
                                     <td>
                                         {{ item.appropriator }}
@@ -145,7 +132,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -174,6 +161,30 @@ export default {
         async SubmitHandler() {
             await this.get_all_loan_register(this.$refs.myForm);
         },
+
+        ExportData(data = [], prefix_name = 'loan_register_report') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.purpose = item.purpose
+                temp.amount = item.amount
+                temp.taken_date = item.taken_date
+                temp.appropriator = item.appropriator
+                temp.taken_date = item.taken_date
+                temp.given_date = item.given_date
+                temp.amount = item.loan_payment?.amount
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+
 
     },
     computed: {

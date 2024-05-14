@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('parent')->nullable();
-            $table->enum('type',['expense','income'])->nullable();
+            $table->enum('type', ['expense', 'income'])->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
+            $table->tinyInteger('is_default')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

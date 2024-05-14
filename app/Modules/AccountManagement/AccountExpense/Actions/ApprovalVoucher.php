@@ -91,6 +91,7 @@ class ApprovalVoucher
 
                 if (auth()->user()->roles[0]->serial == 3) {
                     $data->approved_by_cp = 1;
+                    $data->update();
                     $voucher = self::$model::query()->where('id', $data->expense_id)->first();
                     $supportVoucher = self::$supportVoucermodel::where('expense_id', $data->expense_id)->get();
                     $count = 0;
@@ -100,6 +101,7 @@ class ApprovalVoucher
                             $count++;
                         }
                     }
+                    // dd($count, $countTotalSubVoucher);
                     if ($countTotalSubVoucher == $count) {
                         $voucher->approved = 1;
                         $voucher->update();

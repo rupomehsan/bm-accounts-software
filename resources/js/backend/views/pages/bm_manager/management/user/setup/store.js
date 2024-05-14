@@ -5,6 +5,7 @@ export const user_setup_store = defineStore("user_setup_store", {
         all_data: {},
         single_data: {},
         role_data: {},
+        api_url: new URL(location.origin + '/api/v1/users')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -57,9 +58,19 @@ export const user_setup_store = defineStore("user_setup_store", {
             if (data) {
                 let response = await axios.post("user-unblock/" + id);
                 window.s_alert("Successfully unblock user");
-                this.all();
+                this.block_list_user_get_all();
                 console.log(response.data);
             }
+        },
+        block_list_user_get_all: async function (url) {
+            let response;
+
+            if (url) {
+                response = await axios.get(url);
+            } else {
+                response = await axios.get(url);
+            }
+            this.all_data = response.data.data;
         },
     },
 });

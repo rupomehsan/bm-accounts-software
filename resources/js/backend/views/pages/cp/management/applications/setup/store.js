@@ -80,5 +80,12 @@ export const application_setup_store = defineStore("application_setup_store", {
             console.log(response.data.message);
             window.s_alert(response.data.message);
         },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`cp-application-categories/search`, form);
+            response = response.data.data;
+            this.all_data = response;
+
+        },
     },
 });

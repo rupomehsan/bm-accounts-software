@@ -5,7 +5,8 @@ export const quotation_setup_store = defineStore("quotation_setup_store", {
         all_data: {},
         single_data: {},
         role_data: {},
-        api: "quotations"
+        api: "quotations",
+        api_url: new URL(location.origin + '/api/v1/quotations')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,

@@ -59,7 +59,7 @@ class Store
                     $requestData = $request->validated();
                     $requestData['department_id'] = auth()->id();
                     $requestData['expense_id'] = $voucher->id;
-                    $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 ? 1 : 0;
+                    $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 || auth()->user()->roles[0]->serial == 5 ? 1 : 0;
                     $requestData['approved_by_bm'] = auth()->user()->roles[0]->serial == 5 ? 1 : 0;
                     if ($request->has('image')) {
                         $image = $request->file('image');

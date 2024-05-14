@@ -34,6 +34,7 @@ class Validation extends FormRequest
     {
         $rules = [
             'division_id' => 'required',
+            'account_receipt_book_id' => 'sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
 

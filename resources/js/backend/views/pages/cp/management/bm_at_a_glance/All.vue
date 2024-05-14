@@ -14,7 +14,8 @@
                         <select name="" id="" class="form-select" v-model="account_category_id"
                             @change="getAllIncomeByCategoryID">
                             <option value="">Select category</option>
-                            <option v-for="category in all_account_income_categories" :key="category.id" :value="category.id">
+                            <option v-for="category in all_account_income_categories" :key="category.id"
+                                :value="category.id">
                                 {{ category.title }}
                             </option>
                         </select>
@@ -30,10 +31,10 @@
 
                         </h6>
                         <div class="search">
-                            <form action="#">
+                            <!-- <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
-                            </form>
+                            </form> -->
                         </div>
                         <div>
                             <form @submit.prevent="submitHandler">
@@ -60,13 +61,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_incomes.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Import
@@ -77,7 +78,7 @@
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Deactivated data
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -106,10 +107,10 @@
                                     <td>
                                         <span class="text-warning cursor_pointer">
                                             {{
-                                                new Date(
-                                                    item.created_at
-                                                ).toDateString()
-                                            }}
+                                new Date(
+                                    item.created_at
+                                ).toDateString()
+                            }}
                                         </span>
                                     </td>
                                     <td>
@@ -124,9 +125,9 @@
 
                                     <td>
                                         {{
-                                            item.account_incomes
-                                                ?.account_receipt_no
-                                        }}
+                                item.account_incomes
+                                    ?.account_receipt_no
+                            }}
                                     </td>
                                     <td>
                                         {{ item.amount }}
@@ -138,10 +139,10 @@
                                     <td colspan="5" class="text-end">Total</td>
                                     <th class="text-center">
                                         {{
-                                            all_incomes.data?.reduce(
-                                                (t, i) => (t += i.amount),
-                                                0
-                                            )
+                                all_incomes.data?.reduce(
+                                    (t, i) => (t += i.amount),
+                                    0
+                                )
                                         }}
                                     </th>
                                 </tr>
@@ -200,7 +201,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { income_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -237,6 +238,25 @@ export default {
 
         submitHandler: async function ($event) {
             this.get_data_by_datewise($event.target);
+        },
+        ExportData(data = [], prefix_name = 'bm_at_a_glance') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.মাস_ও_তারিখ = new Date(item.created_at).toDateString()
+                temp.রশিদ_নাম্বার = item.receipt_no
+                temp.বিবরণ = item.account_category?.title
+                temp.ফোলিও	 =  item.account_incomes?.account_receipt_no
+                temp.পরিমান = item.amount
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

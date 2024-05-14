@@ -7,16 +7,10 @@
                         <h5 class="m-0">Voucher Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <button
-                            class="btn btn-primary"
-                            @click="allApprovedVucherByCp"
-                        >
+                        <button class="btn btn-primary" @click="allApprovedVucherByCp">
                             All approved vouchers
                         </button>
-                        <button
-                            class="btn btn-primary mx-2"
-                            @click="allNotApprovedVucherByCp"
-                        >
+                        <button class="btn btn-primary mx-2" @click="allNotApprovedVucherByCp">
                             All not approved vouchers
                         </button>
                     </div>
@@ -27,53 +21,47 @@
                     <div class="card-header align-items-center">
                         <h6>All not approved vouchers</h6>
                         <div class="search">
-                            <form action="#">
-                                <input
-                                    v-model.debounce:1000ms="search_data"
-                                    placeholder="search..."
-                                    type="search"
-                                    class="form-control border border-info"
-                                />
+                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a
-                                    @click.prevent=""
-                                    href="#"
-                                    class="btn px-3 btn-outline-secondary"
-                                    ><i class="fa fa-list"></i
-                                ></a>
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                        class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                        <a href="" @click.prevent="ExportData(all_users.data)">
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
                                         <a href="#/user/import" class="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
-                                            title="display data that has been deactivated"
-                                            class="d-flex"
-                                        >
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                        <a href="#" title="display data that has been deactivated" class="d-flex">
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Deactivated data
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -103,11 +91,7 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Approval
-                                        <span
-                                            ><i
-                                                class="fa-solid fa-arrow-up-z-a text-warning"
-                                            ></i
-                                        ></span>
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         Status
@@ -118,10 +102,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr
-                                    v-for="(item, index) in all_users.data"
-                                    :key="item.id"
-                                >
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -135,39 +116,28 @@
                                     <td>{{ item.amount }}</td>
                                     <td>
                                         {{
-                                            item.approved == 0
-                                                ? "Not approved"
-                                                : "Approved"
-                                        }}
+                            item.approved == 0
+                                ? "Not approved"
+                                : "Approved"
+                        }}
                                     </td>
                                     <td>
-                                        <span
-                                            class="badge bg-label-success me-1"
-                                            >{{ item.status }}</span
-                                        >
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a
-                                                @click.prevent=""
-                                                href="#"
-                                                class="btn btn-sm btn-outline-secondary"
-                                                ><i class="fa fa-gears"></i
-                                            ></a>
+                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
+                                                    class="fa fa-gears"></i></a>
                                             <ul>
                                                 <li>
-                                                    <router-link
-                                                        :to="{
-                                                            name: 'CpTopShit',
-                                                            params: {
-                                                                id: item.id,
-                                                            },
-                                                        }"
-                                                    >
-                                                        <i
-                                                            class="fa text-info fa-book"
-                                                        ></i>
+                                                    <router-link :to="{
+                            name: 'CpTopShit',
+                            params: {
+                                id: item.id,
+                            },
+                        }">
+                                                        <i class="fa text-info fa-book"></i>
                                                         Topshit
                                                     </router-link>
                                                 </li>
@@ -178,15 +148,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
-                    >
-                        <pagination
-                            :data="all_users"
-                            :method="get_all_approved_voucher"
-                        />
+                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
+                        <pagination :data="all_users" :method="get_all_approved_voucher" />
                         <div class="float-right">
-                            <div class="show-limit d-inline-block">
+                            <!-- <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
                                     <option value="5">5</option>
@@ -199,7 +164,7 @@
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -232,7 +197,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { voucher_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -247,6 +212,7 @@ export default {
             user_delete: "delete",
             all_approved_vucher_by_cp: "all_approved_vucher_by_cp",
             all_not_approved_vucher_by_cp: "all_not_approved_vucher_by_cp",
+            get_data_by_search: "get_data_by_search",
         }),
 
         allApprovedVucherByCp() {
@@ -254,6 +220,27 @@ export default {
         },
         allNotApprovedVucherByCp() {
             this.all_not_approved_vucher_by_cp();
+        },
+        ExportData(data = [], prefix_name = 'vouchers') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_category = item.account_category?.title
+                temp.amount = item.amount
+                temp.approval = item.approved == 0 ? "Not approved" : "Approved"
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
         },
     },
     computed: {

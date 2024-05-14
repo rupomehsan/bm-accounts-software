@@ -78,7 +78,7 @@
                     >বিজ্ঞপ্তি সমুহ</router-link
                 >
             </li>
-            <li class="my-2 d-flex align-items-center gap-2">
+            <!-- <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link
                     :to="{ name: `Messages` }"
@@ -86,7 +86,7 @@
                     href=""
                     >বার্তা সমুহ</router-link
                 >
-            </li>
+            </li> -->
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link

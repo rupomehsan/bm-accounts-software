@@ -19,7 +19,11 @@ class All
             }
 
             if (request()->has('search') && request()->input('search')) {
-                $data = $data->where('title', 'like', '%' . request()->input('search') . '%');
+                $data = $data
+                    ->where('lost_from_user', 'like', '%' . request()->input('search') . '%')
+                    ->orWhere('lost_from_user_contact', 'like', '%' . request()->input('search') . '%')
+                    ->where('lost_reason', 'like', '%' . request()->input('search') . '%')
+                    ->where('lost_date', 'like', '%' . request()->input('search') . '%');
             }
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {

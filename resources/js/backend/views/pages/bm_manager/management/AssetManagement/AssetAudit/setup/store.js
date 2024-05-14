@@ -7,7 +7,8 @@ export const asset_audit_setup_store = defineStore("asset_audit_setup_store", {
         role_data: {},
         all_asset_data: {},
         single_audit_data: {},
-        api: "asset-audits"
+        api: "asset-audits",
+        api_url: new URL(location.origin + '/api/v1/asset-audits')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,

@@ -12,7 +12,7 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = ['application_category:id,title'];
+            $with = ['application_category:id,title', 'user:id,full_name'];
             $data = self::$model::query();
 
             if (request()->has('is_approve') && request()->input('is_approve')) {

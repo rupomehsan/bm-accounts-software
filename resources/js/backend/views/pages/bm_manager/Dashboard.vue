@@ -178,8 +178,7 @@
                                         <span class="mt-0">Loan Due</span>
                                         <h4 class="counter">
                                             {{
-                                                result.loanProvide -
-                                                result.loanPayment ?? 0
+                                                result.due
                                             }}
                                         </h4>
                                     </div>
@@ -209,11 +208,14 @@ export default {
             let response = await axios.get("get-dashboard-analytics");
             response = response.data;
             if (response.status == "success") {
+
                 this.result = response.data;
                 this.result.totalIncome = window.number_format(this.result.totalIncome)
                 this.result.totalExpense = window.number_format(this.result.totalExpense || 0)
                 this.result.monthlyDue = window.number_format(this.result.monthlyDue || 0)
                 this.result.monthlyIncome = window.number_format(this.result.monthlyIncome || 0)
+                this.result.due = window.number_format(Number(this.result.loanProvide) -Number(this.result.loanPayment)|| 0)
+                this.result.loanProvide = window.number_format(this.result.loanProvide || 0)
             }
         },
 

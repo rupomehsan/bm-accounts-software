@@ -32,13 +32,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_house_rent_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Import
@@ -49,7 +49,7 @@
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Deactivated data
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -125,6 +125,16 @@ export default {
         }),
         SubmitHandler() {
             this.get_all_house_rent(this.$refs.myForm)
+        },
+        ExportData(data = [], prefix_name = 'house_rent_report') {
+            let col = ['House Name']
+            col.push(data.month)
+            let values = data.data.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

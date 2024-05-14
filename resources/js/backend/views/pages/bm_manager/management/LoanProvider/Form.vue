@@ -24,7 +24,7 @@
                     <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12" >
                                     <div class="admin_form form_1">
                                         <template v-for="(
                                                 form_field, index
@@ -65,6 +65,7 @@ export default {
         route_prefix: '',
         form_fields,
         param_id: null,
+        loaded: false
     }),
     created: async function () {
         let id = this.$route.query.id;
@@ -141,10 +142,14 @@ export default {
             }
         } else {
             this.form_fields.forEach((item) => {
-                if (item.name != "taken_date" || item.name != "given_date")item.value = "";
+                if (item.name !== "taken_date" && item.name !== "given_date") {
+                    item.value = "";
+                }
             });
-            console.log(this.form_fields);
+
         }
+
+        this.loaded = true
     },
     methods: {
         ...mapActions(loan_setup_store, {

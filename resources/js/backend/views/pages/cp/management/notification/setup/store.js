@@ -8,6 +8,7 @@ export const notification_setup_store = defineStore(
             single_data: {},
             users: {},
             departmentUsers: {},
+            api_url: new URL(location.origin + '/api/v1/user-notifications')
         }),
         getters: {
             doubleCount: (state) => state.count * 2,

@@ -53,7 +53,7 @@
                             </form> -->
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
-                            <div class="table_actions">
+                            <!-- <div class="table_actions">
                                 <a
                                     @click.prevent=""
                                     href="#"
@@ -91,7 +91,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">

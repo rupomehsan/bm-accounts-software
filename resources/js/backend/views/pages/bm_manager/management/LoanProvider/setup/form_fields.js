@@ -43,7 +43,7 @@ export default [
         name: "taken_date",
         label: "Enter loan taken date",
         type: "date",
-        value: moment().format('YYYY-MM-DD'),
+        value:moment().format('YYYY-MM-DD'),
     },
 
     {

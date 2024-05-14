@@ -31,24 +31,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_niyomito_prodan_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -126,7 +115,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -152,6 +141,27 @@ export default {
         SubmitHandler() {
             this.get_all_niyomito_prodan(this.$refs.myForm)
         },
+        ExportData(data = [], prefix_name = 'niyomito_prodan_report') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.ক্রম = item.id
+                temp.শাখার_নাম = item.user?.full_name
+                temp.বিবরণ = item.account_category?.title
+                temp.পরিমান = item.amount
+                temp.তারিখ = item.date
+                temp.মন্তব্য = item.description
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+
     },
     computed: {
         ...mapState(report_setup_store, {

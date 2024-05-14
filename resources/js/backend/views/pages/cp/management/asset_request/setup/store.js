@@ -60,6 +60,13 @@ export const asset_request_setup_store = defineStore(
                     console.log(response.data);
                 }
             },
+            get_data_by_search: async function (formData) {
+                let form = new FormData(formData);
+                let response = await axios.post(`asset-request-to-cps/search`, form);
+                response = response.data.data;
+                this.all_data = response;
+
+            },
         },
     }
 );

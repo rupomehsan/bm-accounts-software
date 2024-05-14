@@ -12,14 +12,14 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = ['asset:id,title','receiver:id,full_name','sender:id,full_name'];
+            $with = ['asset:id,title', 'receiver:id,full_name', 'sender:id,full_name'];
             $data = self::$model::query();
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
             }
 
             if (request()->has('search') && request()->input('search')) {
-                $data = $data->where('title', 'like', '%' . request()->input('search') . '%');
+                $data = $data->where('desctiption', 'like', '%' . request()->input('search') . '%');
             }
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {

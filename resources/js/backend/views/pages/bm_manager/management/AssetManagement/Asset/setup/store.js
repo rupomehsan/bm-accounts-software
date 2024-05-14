@@ -7,13 +7,13 @@ export const asset_setup_store = defineStore("asset_setup_store", {
         role_data: {},
         asset_quotation_data: {},
         all_asset_categories_data: {},
-        api: "assets"
+        api: "assets",
+        api_url: new URL(location.origin + '/api/v1/assets')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
     },
     actions: {
-
         all: async function (url) {
             let response;
             if (url) {
@@ -63,7 +63,6 @@ export const asset_setup_store = defineStore("asset_setup_store", {
                 this.all();
             }
         },
-
         // additional function
         // additional function
         get_all_asset_quotation: async function () {

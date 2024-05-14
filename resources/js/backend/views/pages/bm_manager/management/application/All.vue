@@ -88,6 +88,10 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
+                                        Applicant
+
+                                    </th>
+                                    <th class="cursor_n_resize">
                                         Application Category
 
                                     </th>
@@ -116,6 +120,7 @@
                                         />
                                     </td> -->
                                     <td>{{ item.id }}</td>
+                                    <td>{{ item.user?.full_name }}</td>
                                     <td>
                                         {{
                             item.application_category?.title ??

@@ -10,7 +10,7 @@
             </div>
             <div class="conatiner">
                 <div class="card list_card">
-                    <div class="card-header align-items-center">
+                    <!-- <div class="card-header align-items-center">
                         <h6>
                             All Applications
 
@@ -25,48 +25,8 @@
                                 />
                             </form>
                         </div>
-                        <div class="btns d-flex gap-2 align-items-center">
-                            <div class="table_actions">
-                                <a
-                                    @click.prevent=""
-                                    href="#"
-                                    class="btn px-3 btn-outline-secondary"
-                                    ><i class="fa fa-list"></i
-                                ></a>
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Export All
-                                        </a>
-                                    </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            title="display data that has been deactivated"
-                                            class="d-flex"
-                                        >
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
@@ -176,7 +136,7 @@
                             :method="get_all_applications"
                         />
                         <div class="float-right">
-                            <div class="show-limit d-inline-block">
+                            <!-- <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
                                     <option value="5">5</option>
@@ -189,7 +149,7 @@
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -224,7 +184,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { application_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",

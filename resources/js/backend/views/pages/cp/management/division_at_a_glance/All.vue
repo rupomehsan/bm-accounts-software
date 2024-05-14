@@ -29,13 +29,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_income_expense.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
+                                    <!-- <li>
                                         <a href="#/user/import" class="">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Import
@@ -46,7 +46,7 @@
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Deactivated data
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { division_at_a_glance_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         loaded: false
@@ -117,7 +117,25 @@ export default {
     methods: {
         ...mapActions(division_at_a_glance_setup_store, {
             division_at_a_glance: "all",
-        })
+        }),
+        ExportData(data = [], prefix_name = 'department_at_a_glance') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.Department_Name = item.full_name
+                temp.income = item.income
+                temp.expense = item.expense
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+
     },
     computed: {
         ...mapState(division_at_a_glance_setup_store, {

@@ -21,8 +21,8 @@ class All
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
             }
-            if (request()->has('is_blocked') && request()->input('is_blocked')) {
-                $condition['is_blocked'] = request()->input('is_blocked');
+            if (request()->has('is_blocked')) {
+                $condition['is_blocked'] = request()->is_blocked;
             }
 
             if (request()->has('branch_user') && request()->input('branch_user')) {

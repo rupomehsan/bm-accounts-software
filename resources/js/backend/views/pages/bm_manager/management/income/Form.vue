@@ -131,10 +131,7 @@ export default {
         await this.get_all_branch()
         await this.get_all_accounts()
 
-
-
         this.form_fields.forEach((field) => {
-
             if (field.name == 'account_receipt_book_id') {
                 field.data_list = []
                 this.all_account_receipt_book_data?.data.forEach((item) => {

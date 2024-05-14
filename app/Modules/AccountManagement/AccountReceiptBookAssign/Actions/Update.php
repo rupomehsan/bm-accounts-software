@@ -15,7 +15,6 @@ class Update
             if (!$data = self::$model::query()->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
-
             $data->update($request->validated());
             return messageResponse('Item updated successfully');
         } catch (\Exception $e) {

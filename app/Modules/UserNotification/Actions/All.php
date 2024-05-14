@@ -12,18 +12,19 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = ['user'];
+            $with = ['user:id,full_name,email,phone,image'];
             $data = self::$model::query();
             if (request()->has('status') && request()->input('status')) {
                 $condition['status'] = request()->input('status');
             }
 
-            if (auth()->id()) {
+            if (auth()->id() && !auth()->user()->roles()->first()->id == 3) {
                 $condition['user_id'] = auth()->id();
             }
+           
 
             if (request()->has('search') && request()->input('search')) {
-                $data = $data->where('title', 'like', '%' . request()->input('search') . '%');
+                $data = $data->where('topic', 'like', '%' . request()->input('search') . '%');
             }
 
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {

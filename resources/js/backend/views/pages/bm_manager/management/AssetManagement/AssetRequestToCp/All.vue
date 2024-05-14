@@ -48,30 +48,19 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_data.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
-                        <table class="table table-hover table-bordered">
+                        <table class="table table-hover table-bordered text-center">
                             <thead class="table-light">
                                 <tr class="t-head">
                                     <!-- <th>
@@ -82,8 +71,8 @@
 
                                     </th>
 
-                                    <th class='cursor_n_resize'> asset quotation </th>
                                     <th class='cursor_n_resize'> title </th>
+                                    <th class='cursor_n_resize'> asset quotation </th>
 
                                     <th class='cursor_n_resize'> Approval </th>
 
@@ -102,8 +91,8 @@
                                     </td> -->
                                     <td>{{ item.id }}</td>
 
-                                    <th class='cursor_n_resize'> {{ item.asset_quotation?.title }} </th>
                                     <th class='cursor_n_resize'> {{ item.title }} </th>
+                                    <th class='cursor_n_resize'> {{ item.asset_quotation?.title }} </th>
 
                                     <th class='cursor_n_resize'> {{ item.is_approved == '1' ? 'Yes' : 'No' }} </th>
 
@@ -173,7 +162,7 @@
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
                         <div class="float-right">
-                            <div class="show-limit d-inline-block">
+                            <!-- <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
                                     <option value="5">5</option>
@@ -186,7 +175,7 @@
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -201,6 +190,7 @@
 import { mapActions, mapState } from 'pinia'
 import { asset_request_to_cp_setup_store } from './setup/store';
 import setup from "./setup";
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         route_prefix: '',
@@ -214,7 +204,7 @@ export default {
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
-        await this.get_all_data()
+        await this.get_all_data(this.api_url.href)
         this.loaded = true
     },
     methods: {
@@ -240,14 +230,45 @@ export default {
             this.bulk_action(action, this.child_items)
             this.parent_item = false
             this.child_items = []
-        }
+        },
+        ExportData(data = [], prefix_name = 'asset_request_to_cp') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.name = item.title
+                temp.asset_quotation = item.asset_quotation?.title
+                temp.approval = item.is_approved ? 'Approved' : 'Pending'
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
 
     },
     computed: {
         ...mapState(asset_request_to_cp_setup_store, {
             all_data: 'all_data',
+            api_url: 'api_url',
         })
-    }
+    },
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            await this.get_all_categories("users");
+        },
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.get_all_data(this.api_url.href);
+            }, 500);
+        },
+    },
 }
 </script>
 

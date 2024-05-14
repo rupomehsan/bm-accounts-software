@@ -47,25 +47,10 @@
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
                                 <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Export All
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+                                    <a href="" @click.prevent="ExportData(all_data.data)">
+                                        <i class="fa-regular fa-hand-point-right"></i>
+                                        Export All
+                                    </a>
                                 </ul>
                             </div>
                         </div>
@@ -79,6 +64,9 @@
                                         </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Lost date
                                     </th>
                                     <th class="cursor_n_resize">
                                         Lost reason
@@ -102,6 +90,9 @@
                                             <input type="checkbox" class="form-check-input" />
                                         </td> -->
                                     <td>{{ item.id }}</td>
+                                    <td>
+                                        {{ item.lost_date }}
+                                    </td>
                                     <td>
                                         {{ item.lost_reason }}
                                     </td>
@@ -206,6 +197,7 @@
 import { mapActions, mapState } from 'pinia'
 import { asset_lost_setup_store } from './setup/store';
 import setup from "./setup";
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         route_prefix: '',
@@ -219,7 +211,7 @@ export default {
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
-        await this.get_all_data()
+        await this.get_all_data(this.api_url.href)
         this.loaded = true
     },
     methods: {
@@ -245,14 +237,47 @@ export default {
             this.bulk_action(action, this.child_items)
             this.parent_item = false
             this.child_items = []
-        }
+        },
+        ExportData(data = [], prefix_name = 'asset_lost') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.lost_date = item.lost_date
+                temp.lost_reason = item.lost_reason
+                temp.lost_reason = item.lost_reason
+                temp.lost_from_user_contact = item.lost_from_user_contact
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+
+        },
 
     },
     computed: {
         ...mapState(asset_lost_setup_store, {
             all_data: 'all_data',
+            api_url: 'api_url',
         })
-    }
+    },
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            await this.get_all_categories("users");
+        },
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.get_all_data(this.api_url.href);
+            }, 500);
+        },
+    },
 }
 </script>
 

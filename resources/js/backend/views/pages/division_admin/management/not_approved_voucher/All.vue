@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Not Approved Voucher </h5>
+                        <h5 class="m-0">Not approved Voucher Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateVoucher` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `AdminCreateVoucher` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,15 +19,29 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Vouchers
+                        <div class="col-md-6" v-if="this.loaded">
+                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
 
-                        </h6>
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <div class="search">
-                            <form action="#">
+                            <!-- <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
-                            </form>
+                            </form> -->
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
@@ -35,22 +49,9 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_users.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
                                         </a>
                                     </li>
                                 </ul>
@@ -121,6 +122,16 @@
                                                         Topshit
                                                     </router-link>
                                                 </li>
+                                                <li>
+                                                    <span>
+                                                        <router-link
+                                                            :to="{ name: 'DATopshit', params: { id: item.id } }">
+                                                            <i class="fa text-warning fa-eye"></i>
+                                                            Details
+                                                        </router-link>
+
+                                                    </span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -149,7 +160,6 @@
                     </div>
                 </div>
                 <div class="canvas_backdrop">
-
                 </div>
                 <div class="canvas_backdrop">
                     <div class="content right">
@@ -179,23 +189,45 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { not_approved_voucher_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        loaded: false
     }),
     created: async function () {
         await this.user_get_all();
-
+        this.loaded = true;
     },
     methods: {
         ...mapActions(not_approved_voucher_setup_store, {
             user_get_all: "all",
             user_delete: "delete",
+            get_data_by_search: "get_data_by_search",
 
         }),
-
+        ExportData(data = [], prefix_name = 'voucher') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_category = item.account_category?.title
+                temp.amount = item.amount
+                temp.approval = item.approval == 0 ? 'Approved' : 'Not approved'
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
+        },
 
     },
     computed: {
@@ -204,11 +236,12 @@ export default {
         }),
     },
     watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.user_get_all("users");
-        },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.user_get_all(this.api_url.href);
+            }, 500);
         },
     },
 };

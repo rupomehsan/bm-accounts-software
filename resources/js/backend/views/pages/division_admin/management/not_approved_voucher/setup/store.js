@@ -59,5 +59,12 @@ export const not_approved_voucher_setup_store = defineStore("not_approved_vouche
                 window.location.reload()
             }
         },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`account-expenses/search`, form);
+            response = response.data.data;
+            this.all_data = response;
+
+        },
     },
 });

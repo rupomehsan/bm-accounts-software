@@ -4,7 +4,7 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Block list Users</h5>
+                        <h5 class="m-0">Block User Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
@@ -19,7 +19,10 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
+                        <h6>
+                            All Blocked Users
 
+                        </h6>
                         <div class="search">
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
@@ -32,24 +35,12 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_users.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -58,7 +49,9 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-
+                                    <!-- <th>
+                                        <input type="checkbox" class="form-check-input" />
+                                    </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
 
@@ -93,7 +86,9 @@
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
                                 <tr v-for="(item, index) in all_users.data" :key="item.id">
-
+                                    <!-- <td>
+                                        <input type="checkbox" class="form-check-input" />
+                                    </td> -->
                                     <td>{{ index + 1 }}</td>
                                     <td>
                                         <img :src="item.image" alt="Avatar" class="rounded-circle"
@@ -124,8 +119,23 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="user_get_all" />
-
+                        <pagination :data="all_users" :method="block_list_user_get_all" />
+                        <div class="float-right">
+                            <div class="show-limit d-inline-block">
+                                <span>Limit:</span>
+                                <select class="" v-model="offset">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div class="show-limit d-inline-block">
+                                <span>Total:</span>
+                                <span>{{ all_users.total }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="canvas_backdrop">
@@ -159,33 +169,69 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { user_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
-        offset: "5",
+        offset: "10",
         search_data: "",
         loaded: false,
     }),
     created: async function () {
-        await this.block_list_user_get_all();
+        this.api_url.searchParams.set('is_blocked', 1);
+        await this.block_list_user_get_all(this.api_url.href);
         this.loaded = true;
     },
     methods: {
         ...mapActions(user_setup_store, {
-            block_list_user_get_all: "all",
+            block_list_user_get_all: "block_list_user_get_all",
             user_delete: "delete",
             unblock_user: "unblock_user",
+
         }),
-        unblockUser(userId){
-          this.unblock_user(userId)
+        ExportData(data = [], prefix_name = 'block_user') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.name = item.full_name
+                temp.phone = item.phone
+                temp.role = item.roles[0]?.name
+                temp.email = item.email
+                temp.status = item.is_blocked ? "Blocked" : "Active"
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+        unblockUser(userId) {
+            this.unblock_user(userId)
         }
+
     },
     computed: {
         ...mapState(user_setup_store, {
             all_users: "all_data",
+            api_url: "api_url",
         }),
     },
-
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            this.api_url.searchParams.set('offset', newOffset);
+            await this.block_list_user_get_all(this.api_url.href);
+        },
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.block_list_user_get_all(this.api_url.href);
+            }, 500);
+        },
+    },
 };
 </script>
 

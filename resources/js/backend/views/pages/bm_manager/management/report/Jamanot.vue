@@ -31,24 +31,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_jamanot_register_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -151,7 +140,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
 
     data: () => ({
@@ -181,6 +170,30 @@ export default {
         async SubmitHandler() {
             await this.get_all_jamanot_register(this.$refs.myForm);
         },
+        ExportData(data = [], prefix_name = 'jamonot_register') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.subject = item.subject
+                temp.medium = item.medium
+                temp.medium_identity = item.medium_identity
+                temp.amount = item.amount
+                temp.given_date = item.given_date
+                temp.payout_date = item.jamanot_payment?.given_date
+                temp.due = item.jamanot_payment?.due
+                temp.opinion = item.description
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+
 
     },
     computed: {

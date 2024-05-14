@@ -7,20 +7,14 @@
                         <h5 class="m-0">Notification Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <span class="mx-2">
-                            <router-link
-                                :to="{ name: `MyNotification` }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
+                        <!-- <span class="mx-2">
+                            <router-link :to="{ name: `MyNotification` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 My Notification
                             </router-link>
-                        </span>
+                        </span> -->
                         <span>
-                            <router-link
-                                :to="{ name: `NotificationCreate` }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
+                            <router-link :to="{ name: `NotificationCreate` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -37,59 +31,36 @@
                         </h6>
                         <div class="search">
                             <form action="#">
-                                <input
-                                    v-model.debounce:1000ms="search_data"
-                                    placeholder="search..."
-                                    type="search"
-                                    class="form-control border border-info"
-                                />
+                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
+                                    class="form-control border border-info" />
                             </form>
                         </div>
-                        <button
-                            v-show="child_item.length"
-                            class="btn btn-primary texte"
-                            @click="deleteItems"
-                        >
+                        <button v-show="child_item.length" class="btn btn-primary texte" @click="deleteItems">
                             Delete
                         </button>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a
-                                    @click.prevent=""
-                                    href="#"
-                                    class="btn px-3 btn-outline-secondary"
-                                    ><i class="fa fa-list"></i
-                                ></a>
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                        class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                        <a href="" @click.prevent="ExportData(all_notifications.data)">
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
-
-                                    <li>
+                                    <!-- <li>
                                         <a href="#/user/import" class="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a
-                                            href="#"
-                                            title="display data that has been deactivated"
-                                            class="d-flex"
-                                        >
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                        <a href="#" title="display data that has been deactivated" class="d-flex">
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Deactivated data
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -115,6 +86,10 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
+                                        Topic
+
+                                    </th>
+                                    <th class="cursor_n_resize">
                                         Name
 
                                     </th>
@@ -124,16 +99,9 @@
                                     </th>
                                     <th class="cursor_n_resize">
                                         Mobile NO
-                                        <span
-                                            ><i
-                                                class="fa-solid fa-arrow-up-z-a text-warning"
-                                            ></i
-                                        ></span>
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Topic
 
-                                    </th>
                                     <th class="cursor_n_resize">
                                         Status
 
@@ -143,10 +111,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr
-                                    v-for="item in all_notifications.data"
-                                    :key="item.id"
-                                >
+                                <tr v-for="item in all_notifications.data" :key="item.id">
                                     <!-- <td>
                                         <input
                                             type="checkbox"
@@ -161,38 +126,25 @@
                                     </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
-                                        <img
-                                            :src="item.user?.image"
-                                            alt="Avatar"
-                                            class="rounded-circle"
-                                            style="height: 30px"
-                                        />
+                                        <img :src="item.user?.image" alt="Avatar" class="rounded-circle"
+                                            style="height: 30px" />
                                     </td>
+                                    <td>{{ item.topic ?? "N/A" }}</td>
                                     <td>
-                                        <span
-                                            class="text-warning cursor_pointer"
-                                        >
+                                        <span class="text-warning cursor_pointer">
                                             {{ item.user?.full_name }}
                                         </span>
                                     </td>
                                     <td>{{ item.user?.email }}</td>
                                     <td>{{ item.user?.phone ?? "N/A" }}</td>
-                                    <td>{{ item.topic ?? "N/A" }}</td>
                                     <td>
-                                        <span
-                                            class="badge bg-label-success me-1"
-                                            >{{ item.status }}</span
-                                        >
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a
-                                                @click.prevent=""
-                                                href="#"
-                                                class="btn btn-sm btn-outline-secondary"
-                                                ><i class="fa fa-gears"></i
-                                            ></a>
+                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
+                                                    class="fa fa-gears"></i></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -219,18 +171,12 @@
 
                                                 <li>
                                                     <span>
-                                                        <a
-                                                            @click.prevent="
-                                                                nitificatin_delete(
-                                                                    item.id
-                                                                )
-                                                            "
-                                                            href="#"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-danger fa-trash"
-                                                            ></i>
+                                                        <a @click.prevent="
+                                nitificatin_delete(
+                                    item.id
+                                )
+                                " href="#" class="">
+                                                            <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -242,13 +188,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
-                    >
-                        <pagination
-                            :data="all_notifications"
-                            :method="notification_get_all"
-                        />
+                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
+                        <pagination :data="all_notifications" :method="notification_get_all" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -298,7 +239,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { notification_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -308,7 +249,7 @@ export default {
         child_item: [],
     }),
     created: async function () {
-        await this.notification_get_all();
+        await this.notification_get_all(this.api_url.href);
         this.loaded = true;
     },
     methods: {
@@ -342,18 +283,41 @@ export default {
                 this.child_item = [];
             }
         },
+        ExportData(data = [], prefix_name = 'notification') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.topic = item.topic
+                temp.name = item.user?.full_name
+                temp.phone = item.phone?.phone
+                temp.email = item.user?.email
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
     },
     computed: {
         ...mapState(notification_setup_store, {
             all_notifications: "all_data",
+            api_url: "api_url",
         }),
     },
     watch: {
         offset: async function (newOffset, oldOffset) {
             await this.notification_get_all();
         },
-        search_data: function (newSearchData, oldSearchData) {
-            console.log(newSearchData);
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.notification_get_all(this.api_url.href);
+            }, 500);
         },
     },
 };

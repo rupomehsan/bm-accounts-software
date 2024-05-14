@@ -142,7 +142,7 @@ class DashboardAnalytics
     public static function getCurrentMonthIncome()
     {
 
-        $income = self::$accountLogModel::whereMonth('date', Carbon::now()->month)->sum('amount');
+        $income = self::$accountLogModel::where('is_income', 1)->whereMonth('date', Carbon::now()->month)->sum('amount');
         return $income;
     }
 }

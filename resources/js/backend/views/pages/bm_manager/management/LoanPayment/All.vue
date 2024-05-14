@@ -138,7 +138,7 @@
 
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <router-link :to="{
                             name: `${role}CreateLoanPayment`,
@@ -151,7 +151,7 @@
                                                         </router-link>
 
                                                     </span>
-                                                </li>
+                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="

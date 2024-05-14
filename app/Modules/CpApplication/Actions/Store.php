@@ -21,7 +21,7 @@ class Store
                 $data['pdf_submission_file'] = $fileName;
             }
             // dd($extraField);
-            $extraFieldImages = $_FILES['extrafields']['name'];
+            $extraFieldImages = $_FILES['extrafields']['name'] ?? [];
             $fileList = [];
             foreach ($extraFieldImages as $key => $value) {
                 $fileList[] = array_keys($value)[0];
@@ -35,14 +35,14 @@ class Store
 
                     if (array_search(array_keys($value)[0], $fileList) >= 0) {
                         // dd(array_keys($value)[0]);
-                        $image = array_values($value)[0];
-                        if ($image) {
-                            $imageName = uploader($image, 'uploads/application');
-                            $applicationValue["title"] = array_keys($value)[0];
-                            $applicationValue["value"] = $imageName;
-                            self::$applicationModelValue::query()->create($applicationValue);
-                        }
-                    } else {
+                        //     $image = array_values($value)[0];
+                        //     if ($image) {
+                        //         $imageName = uploader($image, 'uploads/application');
+                        //         $applicationValue["title"] = array_keys($value)[0];
+                        //         $applicationValue["value"] = $imageName;
+                        //         self::$applicationModelValue::query()->create($applicationValue);
+                        //     }
+                        // } else {
                         $field = array_keys($value);
                         $val = array_values($value);
                         $applicationValue["title"] = count($field) ? $field[0] : '';

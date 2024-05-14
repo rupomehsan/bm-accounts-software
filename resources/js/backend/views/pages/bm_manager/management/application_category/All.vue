@@ -20,10 +20,10 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
+                        <!-- <h6>
                             All application category
 
-                        </h6>
+                        </h6> -->
                         <!-- <div class="search">
                             <form action="#">
                                 <input

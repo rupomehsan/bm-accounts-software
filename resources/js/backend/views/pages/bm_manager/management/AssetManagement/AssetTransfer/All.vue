@@ -48,24 +48,12 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_data.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -79,7 +67,6 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
                                     <th class='cursor_n_resize'> asset </th>
                                     <th class='cursor_n_resize'> sender </th>
@@ -100,12 +87,10 @@
                                     <th class='cursor_n_resize'> {{ item.asset?.title }} </th>
                                     <th class='cursor_n_resize'> {{ item.sender?.full_name }} </th>
                                     <th class='cursor_n_resize'> {{ item.receiver?.full_name }} </th>
+                                    <th class='cursor_n_resize'> {{ item.request_date }} </th>
                                     <th class='cursor_n_resize'> {{ item.is_accepted_by_receiver == '1' ? 'yes' : 'no'
                                         }} </th>
-                                    <th class='cursor_n_resize'> {{ item.request_date }} </th>
                                     <th class='cursor_n_resize'> {{ item.accepted_date }} </th>
-
-
                                     <td>
                                         <div class="table_actions">
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
@@ -197,6 +182,7 @@
 import { mapActions, mapState } from 'pinia'
 import { asset_transfer_setup_store } from './setup/store';
 import setup from "./setup";
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         route_prefix: '',
@@ -210,7 +196,7 @@ export default {
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
-        await this.get_all_data()
+        await this.get_all_data(this.api_url.href)
         this.loaded = true
     },
     methods: {
@@ -236,14 +222,50 @@ export default {
             this.bulk_action(action, this.child_items)
             this.parent_item = false
             this.child_items = []
-        }
+        },
+
+        ExportData(data = [], prefix_name = 'asset_transfer') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.asset = item.asset?.title
+                temp.asset_quotation = item.asset_quotation?.title
+                temp.sender = item.sender?.full_name
+                temp.receiver = item.receiver?.full_name
+                temp.request_date = item.request_date
+                temp.is_accepted_by_receiver = item.is_accepted_by_receiver ? 'yes' : 'no'
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
 
     },
     computed: {
         ...mapState(asset_transfer_setup_store, {
             all_data: 'all_data',
+            api_url: 'api_url',
         })
-    }
+    },
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            await this.get_all_categories("users");
+        },
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.get_all_data(this.api_url.href);
+            }, 500);
+        },
+    },
+
 }
 </script>
 
