@@ -83,6 +83,12 @@ export const asset_audit_setup_store = defineStore("asset_audit_setup_store", {
             let response = await axios.post(`asset-audits-status-update`, formData);
             return response
         },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`${this.api}/search`, form);
+            response = response.data.data;
+            this.all_data = response;
 
+        },
     },
 });

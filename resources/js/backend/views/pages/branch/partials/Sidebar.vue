@@ -13,7 +13,8 @@
             </li>
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
-                <router-link :to="{ name: `AllUser` }" class="d-flex align-items-center" href="">User</router-link>
+                <router-link :to="{ name: `${role}AllAssetList` }" class="d-flex align-items-center" href="">Asset
+                    List</router-link>
             </li>
         </div>
     </div>
@@ -21,7 +22,11 @@
 
 <script>
 export default {
-
+    data: () => {
+        return {
+            role: window.role.branch
+        }
+    }
 }
 </script>
 

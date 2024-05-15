@@ -66,6 +66,12 @@ export const asset_lost_setup_store = defineStore("asset_lost_setup_store", {
             response = response.data.data;
             this.all_asset_data = response;
         },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`asset-losts/search`, form);
+            response = response.data.data;
+            this.all_data = response;
 
+        },
     },
 });

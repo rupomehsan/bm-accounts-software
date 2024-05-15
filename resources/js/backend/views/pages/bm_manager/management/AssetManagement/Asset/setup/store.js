@@ -66,7 +66,7 @@ export const asset_setup_store = defineStore("asset_setup_store", {
         // additional function
         // additional function
         get_all_asset_quotation: async function () {
-            let response = await axios.get(`quotations?get_all=1`);
+            let response = await axios.get(`quotations?get_all=1&is_approved=1`);
             response = response.data.data;
             this.asset_quotation_data = response;
         },

@@ -39,6 +39,7 @@ class Store
                     $requestData['image_id'] = $supportImage->id;
                 }
                 unset($requestData['image']);
+                $requestData['creator'] = auth()->id();
                 self::$supportVoucermodel::create($requestData);
 
                 $isExistVoucher->amount = $isExistVoucher->support_voucher()->sum('amount');
@@ -70,6 +71,7 @@ class Store
                         $requestData['image_id'] = $supportImage->id;
                     }
                     unset($requestData['image']);
+                    $requestData['creator'] = auth()->id();
                     self::$supportVoucermodel::create($requestData);
                 }
 

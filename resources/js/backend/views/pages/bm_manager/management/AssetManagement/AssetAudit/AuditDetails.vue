@@ -218,7 +218,9 @@ export default {
             let response = await this.asset_audit_update_status($event.target)
             if (response.data.status === "success") {
                 window.s_alert(response.data.message);
-                this.$router.push({ name: `All${this.route_prefix}` });
+                this.modalShow = false
+                await this.get_all_assets(this.asset_audit_id)
+                // this.$router.push({ name: `All${this.route_prefix}` });
             }
         },
 

@@ -18,10 +18,10 @@ class All
                 $condition['status'] = request()->input('status');
             }
 
-            if (auth()->id() && !auth()->user()->roles()->first()->id == 3) {
+            if (auth()->id() && auth()->user()->roles()->first()->id != 3) {
                 $condition['user_id'] = auth()->id();
             }
-           
+
 
             if (request()->has('search') && request()->input('search')) {
                 $data = $data->where('topic', 'like', '%' . request()->input('search') . '%');

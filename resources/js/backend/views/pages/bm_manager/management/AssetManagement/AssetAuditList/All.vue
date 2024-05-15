@@ -36,12 +36,7 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <div class="search">
-                            <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
-                            </form>
-                        </div>
+
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
@@ -176,7 +171,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -191,7 +186,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

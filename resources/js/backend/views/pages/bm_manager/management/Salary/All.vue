@@ -165,7 +165,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -180,7 +180,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

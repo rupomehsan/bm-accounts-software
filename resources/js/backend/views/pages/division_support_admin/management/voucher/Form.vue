@@ -36,8 +36,6 @@
                                     " />
                                         </template>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -49,21 +47,25 @@
                         </div>
                     </form>
                     <div class="image-container d-none" id="imageContainer">
-                        <button class=" btn-sm btn-info" @click="removeImage">X</button>
-                        <img id="zoomImage" src="" alt="" class="relative rounded" @click="zoomIn()">
+                        <button class="btn-sm btn-info" @click="removeImage">
+                            X
+                        </button>
+                        <img id="zoomImage" src="" alt="" class="relative rounded" @click="zoomIn()" />
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal -->
-        <div :class="modalShow ? 'show d-block' : ''" class="modal fade ">
+        <div :class="modalShow ? 'show d-block' : ''" class="modal fade">
             <div class="modal-dialog">
                 <form @submit.prevent="cancelCommentForm">
-                    <input type="hidden" id="voucher_id" name="voucher_id">
+                    <input type="hidden" id="voucher_id" name="voucher_id" />
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Cancel voucher</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Cancel voucher
+                            </h5>
                             <button @click="modalShow = !modalShow" type="button" class="btn-close"
                                 data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -76,8 +78,12 @@
                         </div>
                         <div class="modal-footer">
                             <button @click="modalShow = !modalShow" type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                                data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -90,44 +96,36 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { voucher_setup_store } from "./setup/store";
-import axios from 'axios';
 import convertAmount from "../../../../../plugins/number_to_text_bangla.js";
-
 export default {
     data: () => ({
         form_fields,
         param_id: null,
         loded: false,
-        support_voucher: [
-            {
-                amount: '',
-                image: '',
-                approved_by_bm: 0,
-                is_canceled: 0,
-            }
-        ],
-        modalShow: false
-
+        voucher_status: "approved",
+        cancel_comment: "",
     }),
 
     created: async function () {
-        await this.getAllAccountExpenseCategories()
+        await this.getAllAccountExpenseCategories();
         let id = this.$route.query.id;
 
-        if (this.AllAccountExpenseCategories && this.AllAccountExpenseCategories.length) {
+        if (
+            this.AllAccountExpenseCategories &&
+            this.AllAccountExpenseCategories.length
+        ) {
             form_fields.forEach((item) => {
-                if (item.name == 'account_expense_category_id') {
+                if (item.name == "account_expense_category_id") {
                     this.AllAccountExpenseCategories.forEach((data) => {
                         // console.log(data);
-                        let dataList = {}
-                        dataList.label = data.title
-                        dataList.value = data.id
-                        item.data_list.push(dataList)
-                    })
+                        let dataList = {};
+                        dataList.label = data.title;
+                        dataList.value = data.id;
+                        item.data_list.push(dataList);
+                    });
                 }
-            })
+            });
         }
-
 
         if (id) {
             this.param_id = id;
@@ -139,29 +137,26 @@ export default {
                             this.form_fields[index].value = value[1];
                         }
 
-                        if (field.name == 'image' && value[0] == 'image_url') {
-                            field.value = value[1].url
+                        if (field.name == "image" && value[0] == "image_url") {
+                            field.value = value[1].url;
                         }
-
                     });
                 });
-
-
+                if (this.single_user.is_canceled) {
+                    this.voucher_status = "canceled";
+                    this.cancel_comment = this.single_user.cancel_comment;
+                }
             }
         } else {
             form_fields.forEach((item) => {
-                if (item.name !== 'date') item.value = "";
+                if (item.name !== "date") item.value = "";
             });
-
         }
 
-        this.loded = true
-
-
+        this.loded = true;
     },
 
     methods: {
-        convertAmount,
         ...mapActions(voucher_setup_store, {
             user_update: "update",
             user_get: "get",
@@ -172,186 +167,44 @@ export default {
             VoucherCancelComment: "VoucherCancelComment",
         }),
 
-        amountInText(v) {
-
-            document.querySelector('[name="amount_in_text"]').value = this.convertAmount(v.target.value)
-
-        },
-
         submitHandler: async function ($event) {
             if (this.param_id) {
-                let response = await this.user_update($event.target, this.param_id);
+                let response = await this.user_update(
+                    $event.target,
+                    this.param_id
+                );
                 console.log(response);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully Updated");
-                } else if (response.data.status === "support_voucher_error") {
-                    let index = response.data.index
-                    let targetAmount = document.querySelector(`[data-amount="${index}"]`);
-                    let targetImage = document.querySelector(`[data-image="${index}"]`);
-
-                    targetAmount.classList.add('border-danger')
-                    targetImage.classList.add('border-danger')
-
-                    let existingError = targetAmount.nextElementSibling;
-
-                    if (existingError && existingError.tagName === 'P') {
-                        existingError.innerText = "This field is required";
-                    } else {
-                        let error_section = document.createElement('p');
-                        error_section.innerText = "This field is required";
-                        error_section.setAttribute('class', 'my-2 text-danger');
-                        targetAmount.insertAdjacentElement('afterend', error_section);
-                    }
-
-                    let existingErrorImage = targetImage.nextElementSibling;
-                    if (existingErrorImage && existingErrorImage.tagName === 'P') {
-                        existingErrorImage.innerText = "This field is required";
-                    } else {
-                        let error_section = document.createElement('p');
-                        error_section.innerText = "This field is required";
-                        error_section.setAttribute('class', 'my-2 text-danger');
-                        targetImage.insertAdjacentElement('afterend', error_section);
-                    }
-
-
+                    // this.$router.push({ name: `AllBmAllVouchers` });
                 }
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-
-                } else if (response.data.status === "support_voucher_error") {
-                    let index = response.data.index
-                    let targetAmount = document.querySelector(`[data-amount="${index}"]`);
-                    let targetImage = document.querySelector(`[data-image="${index}"]`);
-
-                    targetAmount.classList.add('border-danger')
-                    targetImage.classList.add('border-danger')
-
-                    let existingError = targetAmount.nextElementSibling;
-
-                    if (existingError && existingError.tagName === 'P') {
-                        existingError.innerText = "This field is required";
-                    } else {
-                        let error_section = document.createElement('p');
-                        error_section.innerText = "This field is required";
-                        error_section.setAttribute('class', 'my-2 text-danger');
-                        targetAmount.insertAdjacentElement('afterend', error_section);
-                    }
-
-                    let existingErrorImage = targetImage.nextElementSibling;
-                    if (existingErrorImage && existingErrorImage.tagName === 'P') {
-                        existingErrorImage.innerText = "This field is required";
-                    } else {
-                        let error_section = document.createElement('p');
-                        error_section.innerText = "This field is required";
-                        error_section.setAttribute('class', 'my-2 text-danger');
-                        targetImage.insertAdjacentElement('afterend', error_section);
-                    }
-
+                    // this.$router.push({ name: `AllBmAllVouchers` });
                 }
             }
         },
 
-        addSupportVoucher() {
-            if (this.support_voucher.length < 10) {
-                let data = {}
-                data.amount = '',
-                    data.image = '',
-                    this.support_voucher.push(data)
-            } else {
-                window.s_alert('Sorry, you are not allowed to add more than 10.')
+        convertAmount,
+        amountInText(v) {
+            if (v.target.name == "amount") {
+                document.querySelector('[name="amount_in_text"]').value =
+                    this.convertAmount(v.target.value);
             }
-        },
-
-        async deleteSupportVoucher(data) {
-            if (data.is_id) {
-                await this.SupportVoucherDeleted(data.id)
-
-            } else {
-                this.support_voucher = this.support_voucher.filter((item, i) => i !== data.index);
-            }
-        },
-
-        deleteSupportVoucherIndex(index) {
-            this.support_voucher = this.support_voucher.filter((item, i) => i !== index);
-        },
-
-        resetError() {
-            let target = event.target
-            if (target) {
-                target.classList.remove('border-danger')
-                target.nextElementSibling?.remove()
-            }
-        },
-
-        setValue(index) {
-            let value = event.target.value
-            this.support_voucher[index].amount = value
-        },
-
-        viewImage(url) {
-            let target = document.getElementById('imageContainer');
-            target.classList.remove('d-none');
-            let imageElement = target.querySelector('img');
-            imageElement.setAttribute('src', url);
-        },
-
-        zoomIn() {
-            const image = document.getElementById('zoomImage');
-            image.classList.toggle('zoomed');
-        },
-
-        removeImage() {
-            let target = document.getElementById('imageContainer');
-            target.classList.add('d-none');
         },
 
         ApprovedByAdmin(id) {
-            this.SupportVoucherApprovedByAdmin(id)
+            this.SupportVoucherApprovedByAdmin(id);
+            this.$router.push({ name: `BmNotApprovedByBmVoucher` });
         },
-
-        async ApprovalCancel(id) {
-            let response = await axios.get(`get-single-supoort-voucher/${id}`)
-            let comment = response.data?.data?.cancel_comment
-            this.modalShow = true
-            $('#voucher_id').val(id)
-            $('#cancel_comment').val(comment)
-        },
-
-        async cancelCommentForm() {
-            let response = await this.VoucherCancelComment(event.target)
-            if (response.data.status === "success") {
-                this.modalShow = false
-                window.s_alert(response.data.message);
-            }
-        },
-        async amountHandleKeyup(event) {
-            const inputValue = event.target.value;
-            try {
-                const result = await axios.get(`get-amount-to-number/${inputValue}`);
-                if (result.data) {
-                    let toText = document.getElementById('amount_in_text');
-                    toText.value = result.data.toString(); // Use toString() method
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        },
-
-
     },
     computed: {
         ...mapState(voucher_setup_store, {
             single_user: "single_data",
-            AllAccountExpenseCategories: "AllAccountExpenseCategories"
+            AllAccountExpenseCategories: "AllAccountExpenseCategories",
         }),
-    },
-    mounted() {
-        const amount = document.getElementById('amount');
-        if (amount) {
-            amount.addEventListener('keyup', this.amountHandleKeyup);
-        }
     },
 };
 </script>

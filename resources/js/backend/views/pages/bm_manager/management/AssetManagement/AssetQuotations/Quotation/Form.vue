@@ -212,7 +212,9 @@ export default {
     watch: {
         prductData: {
             handler: function (value) {
-                localStorage.setItem("prductData", JSON.stringify(value));
+                if (!this.param_id) {
+                    localStorage.setItem("prductData", JSON.stringify(value));
+                }
             },
             deep: true
         }

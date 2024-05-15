@@ -220,22 +220,7 @@
                             :data="all_users"
                             :method="get_all_branch_income"
                         />
-                        <!-- <div class="float-right">
-                            <div class="show-limit d-inline-block">
-                                <span>Limit:</span>
-                                <select class="" v-model="offset">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </div>
-                            <div class="show-limit d-inline-block">
-                                <span>Total:</span>
-                                <span>{{ all_users.total }}</span>
-                            </div>
-                        </div> -->
+
                     </div>
                 </div>
                 <div class="canvas_backdrop">

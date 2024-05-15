@@ -37,11 +37,28 @@
                 <div class="card list_card">
                     <div class="card-header align-items-center">
                         <div class="search">
-                            <form action="#">
+                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
                             </form>
-                        </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
@@ -221,6 +238,7 @@ export default {
             get_all_data: 'all',
             delete_data: 'delete',
             bulk_action: 'bulk_action',
+            get_data_by_search: 'get_data_by_search',
         }),
         toggleParentCheckbox() {
             this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []
@@ -258,6 +276,9 @@ export default {
                 // .addRow(["Eve", "Holt"])
                 .addRows(values)
                 .exportFile();
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
         },
 
     },

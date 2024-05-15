@@ -107,7 +107,7 @@ class Reporting
             $temp = [
                 "date" => Carbon::parse($log->date)->format('d M, y'),
                 "receipt" => $log->receipt_no,
-                "description" => $log->account_category->title,
+                "description" => $log->account_category?->title,
                 "folio" => $log->account_incomes->folio ?? '',
                 "income" => $log->is_income == 1 ? $log->amount : '',
                 "expense" => $log->is_expense == 1 ? $log->amount : '',

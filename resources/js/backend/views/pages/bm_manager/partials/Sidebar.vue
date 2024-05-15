@@ -92,7 +92,7 @@
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
                         <router-link :to="{ name: `${rolePrefix}AllAccountCategory` }" class="d-flex align-items-center"
-                            href="">একাউন্ট ক্যাটাগরি</router-link>
+                            href="">খাতসমূহ</router-link>
                     </li>
                 </ul>
             </li>

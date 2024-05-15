@@ -50,7 +50,7 @@ class ApprovalVoucher
     {
         try {
 
-            // dd(request()->all());
+            dd(request()->all());
             if (!$data = self::$supportVoucermodel::query()->where('id', request()->id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }

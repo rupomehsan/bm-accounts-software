@@ -54,7 +54,6 @@ class Update
                             self::$assetItemModel::query()->create($assetItemData);
                         }
                     }
-                    return messageResponse('Item updated successfully');
                 }
                 return messageResponse('Item updated successfully');
             }

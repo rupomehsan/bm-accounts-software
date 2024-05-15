@@ -48,9 +48,7 @@ class Store
                             $image = $item['item_image'];
                             $assetItemData['item_image'] = uploader($image, 'uploads/asset');
                         }
-                        if (self::$assetItemModel::query()->create($assetItemData)) {
-                            return messageResponse('Item added successfully', 201);
-                        }
+                        self::$assetItemModel::query()->create($assetItemData);
                     }
                 }
                 return messageResponse('Item added successfully', 201);

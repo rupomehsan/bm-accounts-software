@@ -15,13 +15,14 @@ class All
             $condition = [];
             $with = ['account_category'];
             $data = self::$model::query();
-
-            if (request()->has('bm') && request()->input('bm')) {
-                $condition['department_id'] = 5;
+            // dd(auth()->user()->parent);
+            if (auth()->user()->roles[0]->id != 3) {
+                // dd(auth()->user()->roles[0]->id);
+                $condition['creator'] = auth()->id();
             }
 
-            if (request()->has('approved') && request()->input('approved')) {
 
+            if (request()->has('approved') && request()->input('approved')) {
                 $condition['approved'] = request()->input('approved') == 'yes' ? 1 : 0;
             }
 

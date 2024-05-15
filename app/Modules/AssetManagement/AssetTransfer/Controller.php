@@ -38,6 +38,11 @@ class Controller extends ControllersController
         $data = Update::execute($request, $id);
         return $data;
     }
+    public function branchApproval()
+    {
+        $data = Update::branchApproval();
+        return $data;
+    }
 
     public function destroy($id)
     {

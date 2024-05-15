@@ -28,7 +28,9 @@
                             <table class="table text-light">
                                 <thead>
                                     <tr>
-                                        <td colspan="2">ভাউচার</td>
+                                        <td>ভাউচার</td>
+                                        <td class="text-end">অনুমোদন : {{ top_shit_data.voucher.approved == 0 ?
+                                    'Not approved' : 'Approved' }}</td>
                                     </tr>
                                     <tr>
                                         <td>নাম : {{ top_shit_data.voucher.department?.full_name }}</td>
@@ -72,7 +74,10 @@
                                                     </a>
                                                 </span>
                                                 <span class="border-start ps-2">
-                                                    {{ sVoucher.description ?? "asdfasdf" }}
+                                                    {{ sVoucher.description ?? "" }}
+                                                </span>
+                                                <span class="border-start ps-2 mx-2 text-info">
+                                                    {{ sVoucher.approved_by_cp ? "approved" : "not approved" }}
                                                 </span>
                                             </div>
                                         </td>
@@ -147,5 +152,3 @@ export default {
     },
 };
 </script>
-
-

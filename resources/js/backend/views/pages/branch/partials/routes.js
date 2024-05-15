@@ -1,6 +1,6 @@
 import Layout from "./Layout.vue"
 import Dashboard from "../Dashboard.vue"
-import user_routes from "../management/user/setup/routes"
+import asset_list_routes from "../management/asset_list/setup/routes"
 
 const routes =
 {
@@ -12,7 +12,7 @@ const routes =
             name: 'BranchAdminDashboard',
             component: Dashboard,
         },
-        user_routes,
+        asset_list_routes,
     ]
 };
 

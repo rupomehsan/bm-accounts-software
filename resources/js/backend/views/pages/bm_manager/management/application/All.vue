@@ -190,7 +190,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_applications.data" :method="get_all_applications" v-if="loaded" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
 
                                 <span>Limit:</span>
@@ -206,7 +206,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_applications.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="canvas_backdrop">

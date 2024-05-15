@@ -36,6 +36,22 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
+                        <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
+                            </form>
                         <div class="search">
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
@@ -168,7 +184,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -183,7 +199,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -219,6 +235,7 @@ export default {
             get_all_data: 'all',
             delete_data: 'delete',
             bulk_action: 'bulk_action',
+            get_data_by_search: 'get_data_by_search',
         }),
         toggleParentCheckbox() {
             this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []
@@ -257,6 +274,9 @@ export default {
                 .addRows(values)
                 .exportFile();
 
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
         },
 
     },
