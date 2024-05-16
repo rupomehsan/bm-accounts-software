@@ -3,29 +3,29 @@ import All from "../All.vue";
 import Form from "../Form.vue";
 import BmTopShit from "../TopShit.vue";
 import BmSetMonthForVouchers from "../SetVoucherMonth.vue";
-
+const role = window.role.bm
 const routes = {
     path: 'vouchers',
     component: Layout,
     children: [
         {
             path: '',
-            name: "BmAllVouchers",
+            name: role+"AllVouchers",
             component: All
         },
         {
             path: 'set-month',
-            name: "BmSetMonthForVouchers",
+            name: role+"SetMonthForVouchers",
             component: BmSetMonthForVouchers
         },
         {
             path: 'create',
-            name: "BmCreateVoucher",
+            name: role+"CreateVoucher",
             component: Form
         },
         {
             path: 'topshit/:id',
-            name: "BmTopShit",
+            name: role+"TopShit",
             component: BmTopShit
         },
     ]

@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `CreateUser` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}CreateUser` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -172,6 +172,7 @@ import { user_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         offset: "10",
         search_data: "",
         loaded: false,

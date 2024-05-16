@@ -9,7 +9,8 @@
 
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `BmCreateVoucher` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}CreateVoucher` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -118,7 +119,8 @@
                                                     class="fa fa-gears"></i></a>
                                             <ul>
                                                 <li>
-                                                    <router-link :to="{ name: 'BmTopShit', params: { id: item.id } }">
+                                                    <router-link
+                                                        :to="{ name: `${role}TopShit`, params: { id: item.id } }">
                                                         <i class="fa text-info fa-book"></i>
                                                         Topshit
                                                     </router-link>
@@ -183,6 +185,7 @@ import { not_approved_by_cp_voucher_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         offset: "5",
         search_data: "",
         loaded: false

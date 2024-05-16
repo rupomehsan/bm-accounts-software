@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-4 text-end">
                         <span>
-                            <router-link :to="{ name: `Create${route_prefix}` }"
+                            <router-link :to="{ name: `${role}Create${route_prefix}` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -132,7 +132,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: `Create${route_prefix}`,
+                            name: `${role}Create${route_prefix}`,
                             query: {
                                 id: item.id,
                             },
@@ -196,6 +196,7 @@ import setup from "./setup";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bm,
         route_prefix: '',
         page_title: '',
         parent_item: false,

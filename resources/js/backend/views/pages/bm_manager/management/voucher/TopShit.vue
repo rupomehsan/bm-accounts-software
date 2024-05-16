@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `BmAllVouchers` }"
+                                <router-link :to="{ name: `${role}AllVouchers` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -53,7 +53,7 @@
                                             <div>
                                                 <span v-if="!sVoucher.approved_by_upperadmin">
                                                     <router-link :to="{
-                                    name: 'BmCreateVoucher',
+                                    name: `${role}CreateVoucher`,
                                     query: {
                                         id: sVoucher.id,
                                     },
@@ -118,6 +118,7 @@ import { voucher_setup_store } from "./setup/store";
 import convertAmount from "../../../../../plugins/number_to_text_bangla.js";
 export default {
     data: () => ({
+        role: window.role.bm,
         form_fields,
         param_id: null,
         loded: false,

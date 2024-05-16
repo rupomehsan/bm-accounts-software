@@ -5,7 +5,7 @@ import AuditDetails from "../AuditDetails.vue";
 import Layout from "./Layout.vue";
 
 let route_prefix = setup.route_prefix;
-
+const role = window.role.bm
 const routes =
 {
     path: 'asset-audit',
@@ -13,17 +13,17 @@ const routes =
     children: [
         {
             path: '',
-            name: "All" + route_prefix,
+            name: role+"All" + route_prefix,
             component: All,
         },
         {
             path: "create",
-            name: "Create" + route_prefix,
+            name: role+"Create" + route_prefix,
             component: Form,
         },
          {
             path: "audit-details",
-            name: "AuditDetails",
+            name: role+"AuditDetails",
             component: AuditDetails,
         },
 

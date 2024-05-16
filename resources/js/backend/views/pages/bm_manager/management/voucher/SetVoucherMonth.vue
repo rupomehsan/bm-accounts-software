@@ -10,7 +10,7 @@
                         <div class="col-lg-6 text-end">
                             <div class="btns">
                                 <router-link
-                                    :to="{ name: `BmAllVouchers` }"
+                                    :to="{ name: `${role}AllVouchers` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"
                                     ><i class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -68,6 +68,7 @@ import { voucher_setup_store } from "./setup/store";
 import { Logger } from "sass";
 export default {
     data: () => ({
+        role: window.role.bm,
         month: "",
         act_month: "",
     }),

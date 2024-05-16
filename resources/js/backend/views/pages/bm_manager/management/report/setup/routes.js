@@ -3,7 +3,7 @@ import MainLedger from "../MainLedger.vue";
 import IncomeExpenseStatement from "../IncomeExpenseStatement.vue";
 import setup from ".";
 let prefix = setup.prefix
-
+const role = window.role.bm
 import LoanRegister from "../LoanRegister.vue";
 import Jamanot from "../Jamanot.vue";
 import Salary from "../Salary.vue";

@@ -15,7 +15,7 @@
                         <div class="col-lg-6 text-end">
                             <div class="btns">
                                 <router-link
-                                    :to="{ name: `All${route_prefix}` }"
+                                    :to="{ name: `${role}All${route_prefix}` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"
                                     ><i class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -257,6 +257,7 @@ import moment from "moment";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         route_prefix: "",
         form_fields,
         param_id: null,

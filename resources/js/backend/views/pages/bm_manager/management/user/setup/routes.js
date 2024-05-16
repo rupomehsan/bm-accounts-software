@@ -2,24 +2,24 @@ import Layout from "./Layout.vue";
 import All from "../All.vue";
 import AllblockListUser from "../AllblockListUser.vue";
 import Form from "../Form.vue";
-
+const role = window.role.bm
 const routes = {
     path: 'users',
     component: Layout,
     children: [
         {
             path: '',
-            name: "AllUser",
+            name: role+"AllUser",
             component: All
         },
         {
             path: 'block-list',
-            name: "AllblockListUser",
+            name: role+"AllblockListUser",
             component: AllblockListUser
         },
         {
             path: 'create',
-            name: "CreateUser",
+            name: role+"CreateUser",
             component: Form
         },
     ]

@@ -16,7 +16,7 @@
                                     <div class="btns">
                                         <router-link
                                             :to="{
-                                                name: `BmNotApprovedByBmVoucher`,
+                                                name: `${role}NotApprovedByBmVoucher`,
                                             }"
                                             class="btn rounded-pill btn-outline-warning router-link-active"
                                             ><i
@@ -262,13 +262,13 @@ export default {
                 );
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully Updated");
-                    this.$router.push({ name: `BmNotApprovedByBmVoucher` });
+                    this.$router.push({ name: `${this.role}NotApprovedByBmVoucher` });
                 }
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `BmNotApprovedByBmVoucher` });
+                    this.$router.push({ name: `${this.role}NotApprovedByBmVoucher` });
                 }
             }
         },
@@ -279,7 +279,7 @@ export default {
             );
             if (response.data.status === "success") {
                 window.s_alert("Data successcully Updated");
-                this.$router.push({ name: `BmNotApprovedByBmVoucher` });
+                this.$router.push({ name: `${this.role}NotApprovedByBmVoucher` });
             }
         },
     },

@@ -10,7 +10,7 @@
                         <div class="col-lg-6 text-end">
                             <div class="btns">
                                 <router-link
-                                    :to="{ name: `All${route_prefix}` }"
+                                    :to="{ name: `${role}All${route_prefix}` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"
                                     ><i class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -491,6 +491,7 @@ import form_fields from "./setup/form_fields";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         route_prefix: "",
         form_fields,
         param_id: null,
@@ -556,13 +557,13 @@ export default {
                 );
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({ name: `All${this.route_prefix}` });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             } else {
                 let response = await this.store_data($event.target);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({ name: `All${this.route_prefix}` });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             }
         },
