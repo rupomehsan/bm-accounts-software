@@ -11,10 +11,9 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{ name: `bmSupportAllUser` }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `${role}AllUser` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -22,30 +21,18 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
+                                        <template v-for="(
                                                 form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :type="form_field.type"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-                                            />
+                                            ) in form_fields" :key="index">
+                                            <common-input :label="form_field.label" :type="form_field.type"
+                                                :name="form_field.name" :multiple="form_field.multiple"
+                                                :value="form_field.value" :data_list="form_field.data_list
+                                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -70,43 +57,45 @@ import form_fields from "./setup/form_fields.js";
 import { user_setup_store } from "./setup/store";
 export default {
     data: () => ({
+        role: window.role.bmSupport,
         form_fields,
         param_id: null,
     }),
 
     created: async function () {
+
         console.log(this.form_fields);
 
-        await this.get_all_roles();
+        await this.get_all_roles()
+
 
         this.form_fields.forEach((field) => {
-            if (field.name == "user_role_id") {
+            if (field.name == 'user_role_id') {
                 this.role_data.forEach((item) => {
-                    let fielData = {};
-                    fielData.label = item.name;
-                    fielData.value = item.id;
-                    field.data_list.push(fielData);
-                });
+                    let fielData = {}
+                    fielData.label = item.name
+                    fielData.value = item.id
+                    field.data_list.push(fielData)
+                })
             }
-        });
+        })
 
         let id = this.$route.query.id;
         if (id) {
-            this.form_fields = this.form_fields.filter(
-                (i) => i.name !== "password"
-            );
+            this.form_fields = this.form_fields.filter(i => i.name !== 'password')
             this.param_id = id;
             await this.user_get(id);
             if (this.single_user) {
                 this.form_fields.forEach((field, index) => {
                     Object.entries(this.single_user).forEach((value) => {
+
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
 
-                        if (field.name == "user_role_id") {
-                            if (value[0] == "roles") {
-                                console.log("value", value[1]);
+                        if (field.name == 'user_role_id') {
+                            if (value[0] == 'roles') {
+                                console.log("value", value[1])
                                 this.form_fields[index].value = value[1][0].id;
                             }
                         }
@@ -135,7 +124,7 @@ export default {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successfully created");
-                    this.$router.push({ name: `bmSupportAllUser` });
+                    this.$router.push({ name: `${this.role}AllUser` });
                 }
             }
         },

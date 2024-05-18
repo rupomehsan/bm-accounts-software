@@ -32,24 +32,12 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_office_rent_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -107,7 +95,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -134,6 +122,17 @@ export default {
         }),
         SubmitHandler() {
             this.get_all_office_rent(this.$refs.myForm)
+        },
+
+        ExportData(data = [], prefix_name = 'office_rent_report') {
+            let col = ['Office Name']
+            col.push(data.month)
+            let values = data.data.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

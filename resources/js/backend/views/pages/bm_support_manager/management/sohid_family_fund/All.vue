@@ -9,7 +9,7 @@
                     <div class="col-lg-6 text-end">
                         <span>
                             <router-link
-                                :to="{ name: `bmSupportCreateSohidFamilyFund` }"
+                                :to="{ name: `CreateSohidFamilyFund` }"
                                 class="btn rounded-pill btn-outline-info"
                             >
                                 <i class="fa fa-pencil me-5px"></i>
@@ -173,7 +173,7 @@
                                                     <span>
                                                         <router-link
                                                             :to="{
-                                                                name: 'bmSupportCreateBranchIncome',
+                                                                name: 'CreateBranchIncome',
                                                                 query: {
                                                                     id: item.id,
                                                                 },

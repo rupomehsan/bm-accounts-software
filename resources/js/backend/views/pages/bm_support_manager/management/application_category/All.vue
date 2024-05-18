@@ -8,12 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link
-                                :to="{
-                                    name: `bmSupportCreateApplicationCategory`,
-                                }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
+                            <router-link :to="{ name: `${role}CreateApplicationCategory` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -24,11 +20,11 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
+                        <!-- <h6>
                             All application category
 
-                        </h6>
-                        <div class="search">
+                        </h6> -->
+                        <!-- <div class="search">
                             <form action="#">
                                 <input
                                     v-model.debounce:1000ms="search_data"
@@ -78,15 +74,15 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th>
-                                        <!-- <input type="checkbox" class="form-check-input" /> -->
-                                    </th>
+                                    <!-- <th>
+                                        <input type="checkbox" class="form-check-input" />
+                                    </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
 
@@ -105,33 +101,23 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr
-                                    v-for="(item, index) in all_users.data"
-                                    :key="item.id"
-                                >
-                                    <td style="width: 10px">
-                                        <!-- <input type="checkbox" class="form-check-input" /> -->
-                                    </td>
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                    <!-- <td style="width: 10px">
+                                        <input type="checkbox" class="form-check-input" />
+                                    </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
                                         {{ item.title }}
                                     </td>
 
                                     <td>
-                                        <span
-                                            class="badge bg-label-success me-1"
-                                            >{{ item.status }}</span
-                                        >
+                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a
-                                                @click.prevent=""
-                                                href="#"
-                                                class="btn btn-sm btn-outline-secondary"
-                                                ><i class="fa fa-gears"></i
-                                            ></a>
+                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
+                                                    class="fa fa-gears"></i></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -157,18 +143,13 @@
                                                 </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link
-                                                            :to="{
-                                                                name: 'bmSupportCreateApplicationCategory',
-                                                                query: {
-                                                                    id: item.id,
-                                                                },
-                                                            }"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-warning fa-pencil"
-                                                            ></i>
+                                                        <router-link :to="{
+                                name: `${role}CreateApplicationCategory`,
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
+                                                            <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
 
@@ -176,18 +157,12 @@
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a
-                                                            @click.prevent="
-                                                                user_delete(
-                                                                    item.id
-                                                                )
-                                                            "
-                                                            href="#"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-danger fa-trash"
-                                                            ></i>
+                                                        <a @click.prevent="
+                                user_delete(
+                                    item.id
+                                )
+                                " href="#" class="">
+                                                            <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -199,11 +174,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
-                    >
+                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_users" :method="user_get_all" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -218,7 +191,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="canvas_backdrop">
@@ -255,6 +228,7 @@ import { application_category_setup_store } from "./setup/store";
 
 export default {
     data: () => ({
+        role: window.role.bmSupport,
         offset: "5",
         search_data: "",
         loaded: false,

@@ -6,20 +6,15 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create" }} new
-                                <span class="text-lowercase">{{
-                                    route_prefix
+                                {{ param_id ? 'Update' : 'Create' }} new <span class="text-lowercase">{{ route_prefix
                                 }}</span>
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{
-                                        name: `bmSupportAll${route_prefix}`,
-                                    }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `${role}All${route_prefix}` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -27,31 +22,18 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
-                                                form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :onchange="getRespose"
-                                                :type="form_field.type"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-                                            />
+                                        <template v-for="(
+                                            form_field, index
+                                        ) in form_fields" :key="index">
+                                            <common-input :label="form_field.label" :onchange="getRespose"
+                                                :type="form_field.type" :name="form_field.name"
+                                                :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
+                                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -63,7 +45,9 @@
                                 Submit
                             </button>
                         </div>
+
                     </form>
+
                 </div>
             </div>
         </div>
@@ -71,36 +55,40 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
-import { office_rent_setup_store } from "./setup/store";
+import { mapActions, mapState } from 'pinia'
+import { office_rent_setup_store } from './setup/store';
 import setup from "./setup";
 import form_fields from "./setup/form_fields";
 
 export default {
     data: () => ({
-        route_prefix: "",
+        role: window.role.bmSupport,
+        route_prefix: '',
         form_fields,
         param_id: null,
+
     }),
     created: async function () {
         let id = this.$route.query.id;
         this.route_prefix = setup.route_prefix;
-        await this.get_all_data();
-        await this.get_all_users();
+        await this.get_all_data()
+        await this.get_all_users()
 
         if (this.all_users_data.length) {
             this.form_fields.forEach((field) => {
-                if (field.name == "user_id") {
-                    field.data_list = [];
+                if (field.name == 'user_id') {
+                    field.data_list = []
                     this.all_users_data.forEach((item) => {
-                        let dataList = {};
-                        dataList.label = item.full_name;
-                        dataList.value = item.id;
-                        field.data_list.push(dataList);
-                    });
+                        let dataList = {}
+                        dataList.label = item.full_name
+                        dataList.value = item.id
+                        field.data_list.push(dataList)
+                    })
                 }
-            });
+
+            })
         }
+
 
         if (id) {
             this.param_id = id;
@@ -111,12 +99,14 @@ export default {
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
+
+
                     });
                 });
             }
         } else {
             this.form_fields.forEach((item) => {
-                if (item.name !== "month") {
+                if (item.name !== 'month') {
                     item.value = "";
                 }
             });
@@ -124,43 +114,41 @@ export default {
     },
     methods: {
         ...mapActions(office_rent_setup_store, {
-            get_all_data: "all",
-            get_single_data: "get",
-            store_data: "store",
-            update_data: "update",
-            get_all_users: "get_all_users",
+            get_all_data: 'all',
+            get_single_data: 'get',
+            store_data: 'store',
+            update_data: 'update',
+            get_all_users: 'get_all_users',
         }),
 
         submitHandler: async function ($event) {
             if (this.param_id) {
-                let response = await this.update_data(
-                    $event.target,
-                    this.param_id
-                );
+                let response = await this.update_data($event.target, this.param_id);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({
-                        name: `bmSupportAll${this.route_prefix}`,
-                    });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             } else {
                 let response = await this.store_data($event.target);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({
-                        name: `bmSupportAll${this.route_prefix}`,
-                    });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             }
         },
+
+
     },
 
     computed: {
         ...mapState(office_rent_setup_store, {
             single_data: "single_data",
-            all_data: "all_data",
-            all_users_data: "all_users_data",
+            all_data: 'all_data',
+            all_users_data: 'all_users_data',
+
         }),
     },
-};
+
+
+}
 </script>

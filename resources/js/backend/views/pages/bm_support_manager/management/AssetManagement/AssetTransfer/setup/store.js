@@ -7,7 +7,8 @@ export const asset_transfer_setup_store = defineStore("asset_transfer_setup_stor
         role_data: {},
         all_asset_data: {},
         all_branch_user_data: {},
-        api: "asset-transfers"
+        api: "asset-transfers",
+        api_url: new URL(location.origin + '/api/v1/asset-transfers')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,

@@ -31,24 +31,13 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_kendriosuvakanghi_income_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -122,7 +111,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -146,6 +135,27 @@ export default {
         SubmitHandler() {
             this.get_all_kendriosuvakanghi_income(this.$refs.myForm)
         },
+        ExportData(data = [], prefix_name = 'loan_register_report') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.আবেদনের_তারিখ = new Date(item.created_at).toDateString()
+                temp.বিবরণ = item.account_category?.title
+                temp.টাকার_পরিমান = item.amount
+                temp.টাকা_প্রাপ্তির_তারিখ = new Date(item.date).toDateString()
+                temp.মন্তব্য = item.description
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+
     },
     computed: {
         ...mapState(report_setup_store, {

@@ -1,22 +1,23 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
-
+const role = window.role.bmSupport
 const routes = {
-    path: "sohid-family",
+    path: 'sohid-family',
     component: Layout,
     children: [
         {
-            path: "",
-            name: window.role.bmSupport + "AllSohidFamily",
-            component: All,
+            path: '',
+            name: role+"AllSohidFamily",
+            component: All
         },
         {
-            path: "create",
-            name: window.role.bmSupport + "CreateSohidFamily",
-            component: Form,
+            path: 'create',
+            name: role+"CreateSohidFamily",
+            component: Form
         },
-    ],
-};
+    ]
+}
+
 
 export default routes;

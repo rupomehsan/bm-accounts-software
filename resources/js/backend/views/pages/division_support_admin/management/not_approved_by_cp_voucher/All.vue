@@ -19,13 +19,13 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <div class="search">
+                        <!-- <div class="search">
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
                             </form>
-                        </div>
-                        <div class="btns d-flex gap-2 align-items-center">
+                        </div> -->
+                        <!-- <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -51,7 +51,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -77,7 +77,29 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Approval
+                                        Total voucher
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Sompadok approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm SP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        CP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+
+
+                                    <th class="cursor_n_resize">
+                                        Overall Approval
                                         <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
                                     <th class="cursor_n_resize">
@@ -89,7 +111,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users" :key="item.id">
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -101,6 +123,11 @@
                                         {{ item.account_category?.title }}
                                     </td>
                                     <td>{{ item.amount }}</td>
+                                    <td>{{ item.approval?.total_sub_voucher }}</td>
+                                    <td>{{ item.approval?.approved_by_admin_total }}</td>
+                                    <td>{{ item.approval?.approved_by_sp_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_cp_total }}</td>
                                     <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>

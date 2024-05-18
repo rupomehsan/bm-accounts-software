@@ -13,7 +13,7 @@
                         <div class="col-lg-6 text-end">
                             <div class="btns">
                                 <router-link
-                                    :to="{ name: `bmSupportNotifications` }"
+                                    :to="{ name: `Notifications` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"
                                     ><i class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -142,7 +142,7 @@ export default {
                 let response = await this.user_store(form_data);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `bmSupportAll` });
+                    this.$router.push({ name: `All` });
                 }
             }
         },

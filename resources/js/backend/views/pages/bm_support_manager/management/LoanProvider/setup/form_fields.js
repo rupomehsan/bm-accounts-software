@@ -9,18 +9,32 @@ export default [
         multiple: false,
         data_list: []
     },
-
-
-
     {
         name: "amount",
-        label: "Enter your amount",
+        label: " amount",
         type: "number",
         value: "",
     },
     {
+        name: "account_id",
+        label: " account",
+        type: "select",
+        value: "",
+        multiple: false,
+        data_list: [],
+        onchangeAction: 'getSelectedAccount'
+    },
+    {
+        name: "account_number_id",
+        label: "account number",
+        type: "select",
+        value: "",
+        multiple: false,
+        data_list: []
+    },
+    {
         name: "amount_in_text",
-        label: "Enter your amount in text",
+        label: " amount in text",
         type: "text",
         value: "",
     },
@@ -29,7 +43,7 @@ export default [
         name: "taken_date",
         label: "Enter loan taken date",
         type: "date",
-        value: moment().format('YYYY-MM-DD'),
+        value:moment().format('YYYY-MM-DD'),
     },
 
     {
@@ -41,7 +55,7 @@ export default [
 
     {
         name: "purpose",
-        label: "Enter your purpose",
+        label: " purpose",
         type: "text",
         value: "",
     },
@@ -53,7 +67,7 @@ export default [
     },
     {
         name: "description",
-        label: "Enter your desciption",
+        label: " desciption",
         type: "textarea",
         value: "",
     },

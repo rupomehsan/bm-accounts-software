@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-4 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportCreate${route_prefix}` }"
+                            <router-link :to="{ name: `${role}Create${route_prefix}` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -36,12 +36,7 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <div class="search">
-                            <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
-                            </form>
-                        </div>
+
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
@@ -144,7 +139,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: `bmSupportCreate${route_prefix}`,
+                            name: `${role}Create${route_prefix}`,
                             query: {
                                 id: item.id,
                             },
@@ -176,7 +171,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -191,7 +186,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -207,6 +202,7 @@ import { asset_audit_list_setup_store } from './setup/store';
 import setup from "./setup";
 export default {
     data: () => ({
+        role: window.role.bmSupport,
         route_prefix: '',
         page_title: '',
         parent_item: false,

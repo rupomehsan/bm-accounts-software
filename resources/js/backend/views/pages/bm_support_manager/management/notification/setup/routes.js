@@ -9,9 +9,11 @@ const routes = {
     children: [
         {
             path: "",
-            name: window.role.bmSupport + "BmNotifications",
+            name: "BmNotifications",
             component: All,
         },
+
+
     ],
 };
 

@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('reason', 100)->nullable();
             $table->text('description', 100)->nullable();
             $table->tinyInteger('approved_by_admin')->default(0);
+            $table->tinyInteger('approved_by_sp_bm')->default(0);
             $table->tinyInteger('approved_by_bm')->default(0);
             $table->tinyInteger('approved_by_cp')->default(0);
             $table->tinyInteger('is_canceled')->default(0);

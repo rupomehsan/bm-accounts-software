@@ -28,6 +28,20 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="table_actions">
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                        class="fa fa-list"></i></a>
+                                <ul>
+                                    <li>
+                                        <a href="" @click.prevent="incomeExpenseStatementExport(statement_data?.statements)">
+                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            Export All
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
                         </div>
                         <div class="ledger_book card-body text-nowrap">
                             <div class="ledger_row ledger_heading">
@@ -48,7 +62,6 @@
                                 <div class="ledger_col receipt">{{ i.expense }}</div>
                                 <div class="ledger_col receipt">{{ i.balance }}</div>
                             </div>
-
                             <div class="ledger_row ledger_footer">
                                 <div class="ledger_col date"></div>
                                 <div class="ledger_col receipt"></div>
@@ -72,7 +85,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -82,7 +94,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         offset: "5",
@@ -110,6 +122,15 @@ export default {
         SubmitHandler() {
             this.get_statements(this.$refs.myForm)
             this.fetch_income_expense_closing_in_range(this.$refs.myForm)
+        },
+        incomeExpenseStatementExport(data = [], prefix_name = 'statement') {
+            let col = Object.keys(data[0]);
+            let values = data.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

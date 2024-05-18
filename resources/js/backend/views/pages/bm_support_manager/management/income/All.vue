@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportCreateIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}CreateIncome` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -34,7 +34,7 @@
                                     <div v-if="loaded">
                                         <label for="" class="my-1">Depertment</label>
                                         <select v-model="user_id" name="central_division_id" class="form-control" id="">
-                                            <option value="">Selecet depertment</option>
+                                            <option value="">Select depertment</option>
                                             <template v-for="user in all_central_division" :key="user.id">
                                                 <option :value="user.id">{{ user.full_name }}</option>
                                             </template>
@@ -43,7 +43,7 @@
                                     <div v-if="loaded">
                                         <label for="" class="my-1">Branch</label>
                                         <select v-model="user_id" name="branch_id" class="form-control" id="">
-                                            <option value="">Selecet branch</option>
+                                            <option value="">Select branch</option>
                                             <template v-for="user in all_branch" :key="user.id">
                                                 <option :value="user.id">{{ user.full_name }}</option>
                                             </template>
@@ -57,10 +57,10 @@
                         </div>
                         <div class="d-flex gap-2 my-3">
                             <div class="search">
-                                <form action="#">
+                                <!-- <form action="#">
                                     <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                         class="form-control border border-info" />
-                                </form>
+                                </form> -->
                             </div>
                             <div class="btns d-flex gap-2 align-items-center">
                                 <div class="table_actions">
@@ -68,22 +68,9 @@
                                             class="fa fa-list"></i></a>
                                     <ul>
                                         <li>
-                                            <a href="">
+                                            <a href="" @click.prevent="exportData(all_income.data)">
                                                 <i class="fa-regular fa-hand-point-right"></i>
                                                 Export All
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#/user/import" class="">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Import
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="display data that has been deactivated" class="d-flex">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Deactivated data
                                             </a>
                                         </li>
                                     </ul>
@@ -177,18 +164,18 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'bmSupportCreateIncome',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                                name: `${role}BalanceForm`,
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
+                                                            Balance
                                                         </router-link>
 
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <a @click.prevent="
                                                             delete_branch_income(
@@ -199,7 +186,7 @@
                                                             Delete
                                                         </a>
                                                     </span>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>
@@ -259,9 +246,12 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { income_setup_store } from "./setup/store";
+import { CsvBuilder } from 'filefy';
+import roleSetup from '../../partials/role_setup';
 
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         search_data: "",
         loaded: false,
@@ -285,7 +275,32 @@ export default {
 
         incomeSearchHandler() {
             this.income_search(event.target, this.user_id)
-        }
+        },
+        exportData(data = [], prefix_name = 'income') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_receipt_book_id = item.account_receipt_book_id
+                temp.account_category = item.account_category?.title
+                temp.account_receipt_no = item.account_receipt_no
+                temp.amount = item.amount
+                dataArray.push(temp)
+            })
+            let col = [
+                'Date',
+                'Account receipt book No',
+                'Account category',
+                'Account receipt no',
+                'Amount',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
     },
     computed: {
         ...mapState(income_setup_store, {

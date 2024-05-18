@@ -16,7 +16,7 @@ export const not_approved_by_cp_voucher_setup_store = defineStore("not_approved_
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("approval-voucher?cp=true");
+                response = await axios.get("account-expenses?support_admin=true&not_approved_by_cp=true");
             }
             this.all_data = response.data.data;
         },

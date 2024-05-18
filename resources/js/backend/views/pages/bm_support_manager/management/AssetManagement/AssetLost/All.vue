@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-4 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportCreate${route_prefix}` }"
+                            <router-link :to="{ name: `${role}Create${route_prefix}` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -36,6 +36,22 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
+                        <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
+                            </form>
                         <div class="search">
                             <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
@@ -47,25 +63,10 @@
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
                                 <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Export All
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
+                                    <a href="" @click.prevent="ExportData(all_data.data)">
+                                        <i class="fa-regular fa-hand-point-right"></i>
+                                        Export All
+                                    </a>
                                 </ul>
                             </div>
                         </div>
@@ -79,6 +80,9 @@
                                         </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Lost date
                                     </th>
                                     <th class="cursor_n_resize">
                                         Lost reason
@@ -102,6 +106,9 @@
                                             <input type="checkbox" class="form-check-input" />
                                         </td> -->
                                     <td>{{ item.id }}</td>
+                                    <td>
+                                        {{ item.lost_date }}
+                                    </td>
                                     <td>
                                         {{ item.lost_reason }}
                                     </td>
@@ -145,7 +152,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: `bmSupportCreate${route_prefix}`,
+                            name: `${role}Create${route_prefix}`,
                             query: {
                                 id: item.id,
                             },
@@ -177,7 +184,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -192,7 +199,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -206,8 +213,10 @@
 import { mapActions, mapState } from 'pinia'
 import { asset_lost_setup_store } from './setup/store';
 import setup from "./setup";
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
+        role: window.role.bmSupport,
         route_prefix: '',
         page_title: '',
         parent_item: false,
@@ -219,7 +228,7 @@ export default {
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
-        await this.get_all_data()
+        await this.get_all_data(this.api_url.href)
         this.loaded = true
     },
     methods: {
@@ -227,6 +236,7 @@ export default {
             get_all_data: 'all',
             delete_data: 'delete',
             bulk_action: 'bulk_action',
+            get_data_by_search: 'get_data_by_search',
         }),
         toggleParentCheckbox() {
             this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []
@@ -245,14 +255,50 @@ export default {
             this.bulk_action(action, this.child_items)
             this.parent_item = false
             this.child_items = []
-        }
+        },
+        ExportData(data = [], prefix_name = 'asset_lost') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.id = item.id
+                temp.lost_date = item.lost_date
+                temp.lost_reason = item.lost_reason
+                temp.lost_reason = item.lost_reason
+                temp.lost_from_user_contact = item.lost_from_user_contact
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
+        },
 
     },
     computed: {
         ...mapState(asset_lost_setup_store, {
             all_data: 'all_data',
+            api_url: 'api_url',
         })
-    }
+    },
+    watch: {
+        offset: async function (newOffset, oldOffset) {
+            await this.get_all_categories("users");
+        },
+        search_data: async function (newSearchData, oldSearchData) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(async () => {
+                this.api_url.searchParams.set('search', this.search_data);
+                await this.get_all_data(this.api_url.href);
+            }, 500);
+        },
+    },
 }
 </script>
 

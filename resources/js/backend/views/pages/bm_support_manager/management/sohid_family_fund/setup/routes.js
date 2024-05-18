@@ -3,20 +3,21 @@ import All from "../All.vue";
 import Form from "../Form.vue";
 
 const routes = {
-    path: "sohid-family-fund",
+    path: 'sohid-family-fund',
     component: Layout,
     children: [
         {
-            path: "",
-            name: window.role.bmSupport + "AllSohidFamilyFund",
-            component: All,
+            path: '',
+            name: "AllSohidFamilyFund",
+            component: All
         },
         {
-            path: "create",
-            name: window.role.bmSupport + "CreateSohidFamilyFund",
-            component: Form,
+            path: 'create',
+            name: "CreateSohidFamilyFund",
+            component: Form
         },
-    ],
-};
+    ]
+}
+
 
 export default routes;

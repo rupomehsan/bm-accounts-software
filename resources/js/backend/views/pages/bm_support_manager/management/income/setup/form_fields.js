@@ -43,9 +43,11 @@ export default [
 
     {
         name: "account_number_id",
-        label: "Enter account number",
-        type: "number",
+        label: "Select account number",
+        type: "select",
         value: "",
+        multiple: false,
+        data_list: [],
     },
     // {
     //     name: "account_receipt_book_no",

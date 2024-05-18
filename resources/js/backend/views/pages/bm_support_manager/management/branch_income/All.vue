@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportCreateBranchIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}CreateBranchIncome` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -46,42 +46,20 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="d-flex gap-2">
-                            <div class="search">
-                                <form action="#">
-                                    <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                        class="form-control border border-info" />
-                                </form>
-                            </div>
-                            <div class="btns d-flex gap-2 align-items-center">
-                                <div class="table_actions">
+                        <div class="table_actions">
                                     <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                             class="fa fa-list"></i></a>
                                     <ul>
                                         <li>
-                                            <a href="">
+                                            <a href="" @click.prevent="exportData(all_income.data)">
                                                 <i class="fa-regular fa-hand-point-right"></i>
                                                 Export All
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a href="#/user/import" class="">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Import
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="display data that has been deactivated" class="d-flex">
-                                                <i class="fa-regular fa-hand-point-right"></i>
-                                                Deactivated data
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -167,18 +145,18 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'bmSupportCreateBranchIncome',
+                                                            name: `${role}BranchIncomeBalanceForm`,
                                                             query: {
                                                                 id: item.id,
                                                             },
                                                         }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
-                                                            Edit
+                                                            Balance
                                                         </router-link>
 
                                                     </span>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <a @click.prevent="
                                                             delete_branch_income(
@@ -189,7 +167,7 @@
                                                             Delete
                                                         </a>
                                                     </span>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>
@@ -249,9 +227,12 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { branch_income_setup_store } from "./setup/store";
+import { CsvBuilder } from 'filefy';
+import roleSetup from '../../partials/role_setup';
 
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         search_data: "",
         loaded: false,
@@ -274,7 +255,32 @@ export default {
         }),
         incomeSearchHandler() {
             this.income_search(event.target, this.user_id)
-        }
+        },
+        exportData(data = [], prefix_name = 'branch_income') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.date = item.date
+                temp.account_receipt_book_id = item.account_receipt_book_id
+                temp.account_category = item.account_category?.title
+                temp.account_receipt_no = item.account_receipt_no
+                temp.amount = item.amount
+                dataArray.push(temp)
+            })
+            let col = [
+                'Date',
+                'Account receipt book No',
+                'Account category',
+                'Account receipt no',
+                'Amount',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
     },
     computed: {
         ...mapState(branch_income_setup_store, {

@@ -8,6 +8,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         month_for_voucher_data: {},
         top_shit_data: {},
         active_month: {},
+        api_url: new URL(location.origin + '/api/v1/account-expenses')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -39,6 +40,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         },
         store: async function (form, supportVoucher) {
             let formData = new FormData(form);
+            formData.append("bm_support_admin", true);
             let response = await axios.post("account-expenses", formData);
             return response;
         },
@@ -102,6 +104,13 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             let response = await axios.get("get-active-month-for-voucher");
             response = response.data.data;
             this.active_month = response;
+        },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`account-expenses/search`, form);
+            response = response.data.data;
+            this.all_data = response;
+
         },
     },
 });

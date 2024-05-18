@@ -1,22 +1,29 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
-
+import BalanceForm from "../BalanceForm.vue";
+const role = window.role.bmSupport
 const routes = {
-    path: "sohid-fund",
+    path: 'sohid-fund',
     component: Layout,
     children: [
         {
-            path: "",
-            name: window.role.bmSupport + "AllSohidFund",
-            component: All,
+            path: '',
+            name: role+"AllSohidFund",
+            component: All
         },
         {
-            path: "create",
-            name: window.role.bmSupport + "CreateSohidFund",
-            component: Form,
+            path: 'create',
+            name: role+"CreateSohidFund",
+            component: Form
         },
-    ],
-};
+        {
+            path: 'balance',
+            name: role+"SohidFundBalanceForm",
+            component: BalanceForm
+        },
+    ]
+}
+
 
 export default routes;

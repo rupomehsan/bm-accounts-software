@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportBranchTargetCreate` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}BranchTargetCreate` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -29,7 +29,8 @@
                             </div>
                             <div>
                                 <label for="">End date</label>
-                                <date-field :label="`End Date`" :name="`end_date`" :value="endDate" :onchange="getDate" />
+                                <date-field :label="`End Date`" :name="`end_date`" :value="endDate"
+                                    :onchange="getDate" />
                                 <!-- <input type="date" v-model="endDate" class="form-control " @change="getendDate" /> -->
                             </div>
                         </div>
@@ -47,34 +48,21 @@
                             </select>
                         </div>
 
+                        <div class="table_actions">
+                            <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                    class="fa fa-list"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="" @click.prevent="branchTarget(all_branch_target_data.data?.data)">
+                                        <i class="fa-regular fa-hand-point-right"></i>
+                                        Export All
+                                    </a>
+                                </li>
 
-                        <div class="btns d-flex gap-2 align-items-center">
-                            <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Export All
-                                        </a>
-                                    </li>
 
-                                    <li>
-                                        <a @click.prevent class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
+
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -140,11 +128,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'bmSupportBranchTargetCreate',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                                name: `${role}BranchTargetCreate`,
+                                query: {
+                                    id: item.id,
+                                },
+                            }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -154,10 +142,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                                user_delete(
+                                    item.id
+                                )
+                                " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -171,8 +159,8 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_branch_target_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <pagination :data="all_branch_target_data.data" :method="get_all_data" />
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -187,7 +175,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_branch_target_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -198,9 +186,12 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { banch_target_store } from "./setup/store";
+import { CsvBuilder } from 'filefy';
+import roleSetup from '../../partials/role_setup';
 
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         search_data: "",
         session: "",
@@ -234,6 +225,30 @@ export default {
             }
 
             this.get_date_wise_data(this.startDate, this.endDate);
+        },
+
+        branchTarget(data = [], prefix_name = 'branch_target') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.account_category = item.account_category?.title
+                temp.payment_interval = item.payment_interval
+                temp.user = item.user?.full_name
+                temp.target_amount = item.target_amount
+                dataArray.push(temp)
+            })
+            let col = [
+                'Account Category',
+                'Payment interval',
+                'Branch Name',
+                'Target Amount',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
 
     },

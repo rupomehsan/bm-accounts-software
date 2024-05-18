@@ -1,22 +1,23 @@
 import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
-
+const role = window.role.bmSupport
 const routes = {
-    path: "accounts",
+    path: 'accounts',
     component: Layout,
     children: [
         {
-            path: "",
-            name: window.role.bmSupport + "AllPaymentMethod",
-            component: All,
+            path: '',
+            name: role+"AllPaymentMethod",
+            component: All
         },
         {
-            path: "create",
-            name: window.role.bmSupport + "CreatePaymentMethod",
-            component: Form,
+            path: 'create',
+            name: role+"CreatePaymentMethod",
+            component: Form
         },
-    ],
-};
+    ]
+}
+
 
 export default routes;

@@ -1,4 +1,5 @@
 <template>
+
     <div class="page-body">
         <div class="py-2">
             <div class="container-fluid">
@@ -6,23 +7,16 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create" }} new
-                                <span class="text-lowercase">{{
-                                    route_prefix.replace(
-                                        /([a-z])([A-Z])/g,
-                                        "$1 $2"
-                                    )
+                                {{ param_id ? 'Update' : 'Create' }} new <span class="text-lowercase">{{
+                                    route_prefix.replace(/([a-z])([A-Z])/g, '$1 $2')
                                 }}</span>
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{
-                                        name: `bmSupportAll${route_prefix}`,
-                                    }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `${role}All${route_prefix}` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -30,31 +24,18 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
-                                                form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :onchange="getRespose"
-                                                :type="form_field.type"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-                                            />
+                                        <template v-for="(
+                                            form_field, index
+                                        ) in form_fields" :key="index">
+                                            <common-input :label="form_field.label" :onchange="getRespose"
+                                                :type="form_field.type" :name="form_field.name"
+                                                :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
+                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -66,6 +47,7 @@
                                 Submit
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -74,23 +56,24 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
-import { asset_audit_list_setup_store } from "./setup/store";
+import { mapActions, mapState } from 'pinia'
+import { asset_audit_list_setup_store } from './setup/store';
 import setup from "./setup";
 import form_fields from "./setup/form_fields";
 
 export default {
     data: () => ({
-        route_prefix: "",
+        role: window.role.bmSupport,
+        route_prefix: '',
         form_fields,
         param_id: null,
     }),
     created: async function () {
         let id = this.$route.query.id;
         this.route_prefix = setup.route_prefix;
-        await this.get_all_data();
-        await this.get_all_asset();
-        await this.get_all_asset_audit();
+        await this.get_all_data()
+        await this.get_all_asset()
+        await this.get_all_asset_audit()
 
         if (id) {
             this.param_id = id;
@@ -110,76 +93,75 @@ export default {
             });
         }
 
+
         if (this.all_asset_data) {
             this.form_fields.forEach((field, index) => {
-                if (field.name == "asset_id") {
-                    field.data_list = [];
+                if (field.name == 'asset_id') {
+                    field.data_list = []
                     this.all_asset_data.forEach((value) => {
-                        let dataList = {};
-                        dataList.value = value.id;
-                        dataList.label = value.title;
-                        field.data_list.push(dataList);
-                    });
+                        let dataList = {}
+                        dataList.value = value.id
+                        dataList.label = value.title
+                        field.data_list.push(dataList)
+                    })
                 }
             });
         }
 
         if (this.all_asset_audit_data) {
             this.form_fields.forEach((field, index) => {
-                if (field.name == "asset_audit_id") {
-                    field.data_list = [];
+                if (field.name == 'asset_audit_id') {
+                    field.data_list = []
                     this.all_asset_audit_data.forEach((value) => {
-                        let dataList = {};
-                        dataList.value = value.id;
-                        dataList.label = value.title;
-                        field.data_list.push(dataList);
-                    });
+                        let dataList = {}
+                        dataList.value = value.id
+                        dataList.label = value.title
+                        field.data_list.push(dataList)
+                    })
                 }
             });
         }
+        
     },
     methods: {
         ...mapActions(asset_audit_list_setup_store, {
-            get_all_data: "all",
-            get_single_data: "get",
-            store_data: "store",
-            update_data: "update",
+            get_all_data: 'all',
+            get_single_data: 'get',
+            store_data: 'store',
+            update_data: 'update',
 
-            get_all_asset: "get_all_asset",
-            get_all_asset_audit: "get_all_asset_audit",
+
+            get_all_asset: 'get_all_asset',
+            get_all_asset_audit: 'get_all_asset_audit',
         }),
 
         submitHandler: async function ($event) {
             if (this.param_id) {
-                let response = await this.update_data(
-                    $event.target,
-                    this.param_id
-                );
+                let response = await this.update_data($event.target, this.param_id);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({
-                        name: `bmSupportAll${this.route_prefix}`,
-                    });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             } else {
                 let response = await this.store_data($event.target);
                 if (response.data.status === "success") {
                     window.s_alert(response.data.message);
-                    this.$router.push({
-                        name: `bmSupportAll${this.route_prefix}`,
-                    });
+                    this.$router.push({ name: `${this.role}All${this.route_prefix}` });
                 }
             }
         },
+
     },
 
     computed: {
         ...mapState(asset_audit_list_setup_store, {
             single_data: "single_data",
-            all_data: "all_data",
-            all_asset_data: "all_asset_data",
-            all_asset_audit_data: "all_asset_audit_data",
+            all_data: 'all_data',
+            all_asset_data: 'all_asset_data',
+            all_asset_audit_data: 'all_asset_audit_data',
         }),
     },
-};
+
+
+}
 </script>

@@ -8,7 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportCreate${route_prefix}` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}Create${route_prefix}` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,10 +20,22 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <div class="search">
-                            <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                        <div class="col-md-6" v-if="this.loaded">
+                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
@@ -31,22 +44,9 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_data.data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
                                         </a>
                                     </li>
                                 </ul>
@@ -68,15 +68,21 @@
                                         User
 
                                     </th>
-
                                     <th class="cursor_n_resize">
-                                        Given date
-
+                                        Loan purpose
                                     </th>
 
-                                    <th class="cursor_n_resize">
-                                        Amount
 
+                                    <th class="cursor_n_resize">
+                                        Loan Amount
+
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Paid Amount
+
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Given date
                                     </th>
 
                                     <th aria-label="actions">Actions</th>
@@ -93,11 +99,16 @@
                                         {{ item.user?.full_name }}
                                     </td>
 
+                                    <td>{{ item.loan_provide?.purpose }}</td>
+
                                     <td>
-                                        {{ item.given_date }}
+                                        {{ item.loan_provide?.amount }}
                                     </td>
                                     <td>
                                         {{ item.amount }}
+                                    </td>
+                                    <td>
+                                        {{ item.given_date }}
                                     </td>
 
                                     <td>
@@ -113,41 +124,41 @@
                                                         Quick View
                                                     </a>
                                                 </li> -->
-                                                <!-- <li>
-                                                    <span>
-                                                        <a
-                                                            href="#/user/details/43"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-secondary fa-eye"
-                                                            ></i>
-                                                            Details
-                                                        </a>
-
-                                                    </span>
-                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'bmSupportCreateLoanPayment',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                            name: `${role}DetailsLoan`,
+                            query: {
+                                id: item.loan_provide_id,
+                            },
+                        }" class="">
+                                                            <i class="fa text-info fa-eye"></i>
+                                                            Details
+                                                        </router-link>
+
+                                                    </span>
+                                                </li>
+                                                <!-- <li>
+                                                    <span>
+                                                        <router-link :to="{
+                            name: `${role}CreateLoanPayment`,
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
 
                                                     </span>
-                                                </li>
+                                                </li> -->
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            delete_data(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                            delete_data(
+                                item.id
+                            )
+                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -162,7 +173,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -177,7 +188,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -189,21 +200,32 @@
 import { mapActions, mapState } from 'pinia'
 import { loan_payment_setup_store } from './setup/store';
 import setup from "./setup";
+import { CsvBuilder } from 'filefy';
+
 export default {
     data: () => ({
+        role: window.role.bmSupport,
         route_prefix: '',
         search_data: '',
         loaded: false,
         offset: 5,
         page_title: '',
         parent_item: false,
-        child_items: []
+        child_items: [],
+        from_date: "",
+        end_date: '',
     }),
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
         await this.get_all_data()
         // console.log(this.all_data.data);
+        this.from_date = moment().subtract(90, 'd').format('YYYY-MM-DD')
+        this.end_date = moment().format('YYYY-MM-DD')
+        let that = this
+        setTimeout(function () {
+            that.SearchHandler()
+        }, 2000)
         this.loaded = true
     },
     methods: {
@@ -211,6 +233,7 @@ export default {
             get_all_data: 'all',
             delete_data: 'delete',
             bulk_action: 'bulk_action',
+            get_data_by_search: 'get_data_by_search',
         }),
         toggleParentCheckbox() {
             this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []
@@ -227,7 +250,30 @@ export default {
             this.bulk_action(action, this.child_items)
             this.parent_item = false
             this.child_items = []
-        }
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
+        },
+        ExportData(data = [], prefix_name = 'loan_payment') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.user = item.user?.full_name
+                temp.purpose = item.loan_provide?.purpose
+                temp.loanTake = item.loan_provide?.amount
+                temp.paid = item.amount
+                temp.due = item.loan_provide?.amount - item.amount
+                temp.given_date = item.given_date
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
 
     },
     computed: {

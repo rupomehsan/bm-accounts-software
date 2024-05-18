@@ -11,10 +11,9 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{ name: `bmSupportAllReceiptBook` }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `${role}AllReceiptBook` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -22,26 +21,14 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div
-                                    class="col-lg-12"
-                                    v-for="(form_field, index) in form_fields"
-                                    :key="index"
-                                >
+                                <div class="col-lg-12" v-for="(form_field, index) in form_fields" :key="index">
                                     <div class="admin_form form_1">
-                                        <common-input
-                                            :label="form_field.label"
-                                            :type="form_field.type"
-                                            :name="form_field.name"
-                                            :multiple="form_field.multiple"
-                                            :value="form_field.value"
-                                            :data_list="form_field.data_list"
-                                        />
+                                        <common-input :label="form_field.label" :type="form_field.type"
+                                            :name="form_field.name" :multiple="form_field.multiple"
+                                            :value="form_field.value" :data_list="form_field.data_list" />
                                     </div>
                                 </div>
                             </div>
@@ -63,14 +50,19 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { receipt_book_store } from "./setup/store";
+import roleSetup from '../../partials/role_setup';
+
 export default {
     data: () => ({
+        role: roleSetup.role,
         form_fields,
         param_id: null,
     }),
 
     created: async function () {
         let id = this.$route.query.id;
+
+
         if (id) {
             this.param_id = id;
             await this.user_get(id);
@@ -87,7 +79,13 @@ export default {
             form_fields.forEach((item) => {
                 item.value = "";
             });
+
+            await this.latest_account_receipt_book()
+            this.form_fields[0].value = this.latest_account_receipt_book_data.receipt_book_no + 1;
+            this.form_fields[1].value = this.latest_account_receipt_book_data.receipt_end_serial_no + 1;
         }
+
+        console.log(this.latest_account_receipt_book_data);
     },
 
     methods: {
@@ -95,6 +93,7 @@ export default {
             user_update: "update",
             user_get: "get",
             user_store: "store",
+            latest_account_receipt_book: "latest_account_receipt_book",
         }),
 
         submitHandler: async function ($event) {
@@ -113,6 +112,7 @@ export default {
     computed: {
         ...mapState(receipt_book_store, {
             single_user: "single_data",
+            latest_account_receipt_book_data: "latest_account_receipt_book_data",
         }),
     },
 };

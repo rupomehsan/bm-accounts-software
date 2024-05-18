@@ -5,7 +5,9 @@ export const office_rent_setup_store = defineStore("office_rent_setup_store", {
         all_data: {},
         single_data: {},
         role_data: {},
-        api: "office-rents/"
+        api: "office-rents",
+        api_url: new URL(location.origin + '/api/v1/office-rents')
+
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -23,7 +25,7 @@ export const office_rent_setup_store = defineStore("office_rent_setup_store", {
         },
 
         get: async function (id) {
-            let response = await axios.get(this.api + id);
+            let response = await axios.get(`${this.api}/${id}`);
             response = response.data.data;
             this.single_data = response;
         },
@@ -36,21 +38,21 @@ export const office_rent_setup_store = defineStore("office_rent_setup_store", {
 
         update: async function (form, id) {
             let formData = new FormData(form);
-            let response = await axios.post(`${this.api}${id}?_method=PATCH`, formData);
+            let response = await axios.post(`${this.api}/${id}?_method=PATCH`, formData);
             return response;
         },
 
         delete: async function (id) {
             var data = await window.s_confirm();
             if (data) {
-                let response = await axios.delete(this.api + id);
+                let response = await axios.delete(`${this.api}/${id}`);
                 window.s_alert("Data deleted");
                 this.all();
                 console.log(response.data);
             }
         },
         bulk_action: async function (action, data) {
-            let response = await axios.post(`${this.api}bulk-action`, { action, data })
+            let response = await axios.post(`${this.api}/bulk-action`, { action, data })
             if (response.data.status === "success") {
                 window.s_alert(response.data.message);
                 this.all();
@@ -63,6 +65,14 @@ export const office_rent_setup_store = defineStore("office_rent_setup_store", {
             let response = await axios.get('users?get_all=1');
             response = response.data.data;
             this.all_users_data = response;
+        },
+
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`${this.api}/search`, form);
+            response = response.data.data;
+            this.all_data = response;
+
         },
 
     },

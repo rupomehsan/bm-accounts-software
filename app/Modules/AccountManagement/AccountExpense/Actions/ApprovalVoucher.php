@@ -50,7 +50,7 @@ class ApprovalVoucher
     {
         try {
 
-            dd(request()->all());
+            // dd(request()->all());
             if (!$data = self::$supportVoucermodel::query()->where('id', request()->id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
@@ -85,9 +85,14 @@ class ApprovalVoucher
                     $data->approved_by_admin = $data->approved_by_admin == 1 ? 0 : 1;
                 }
 
+                if (auth()->user()->roles[0]->serial == 6) {
+                    $data->approved_by_bm = $data->approved_by_sp_bm == 1 ? 0 : 1;
+                }
+
                 if (auth()->user()->roles[0]->serial == 5) {
                     $data->approved_by_bm = $data->approved_by_bm == 1 ? 0 : 1;
                 }
+
 
                 if (auth()->user()->roles[0]->serial == 3) {
                     $data->approved_by_cp = 1;
@@ -129,6 +134,7 @@ class ApprovalVoucher
                     $data->account_log_id = $logInfor->id;
                     $data->update();
                 }
+                $data->update();
             }
 
             return messageResponse('Item successfully updated', 201);

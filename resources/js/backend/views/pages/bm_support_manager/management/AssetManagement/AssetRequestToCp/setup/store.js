@@ -7,7 +7,8 @@ export const asset_request_to_cp_setup_store = defineStore("asset_request_to_cp_
         role_data: {},
         all_asset_data: {},
         all_asset_quotation_data: {},
-        api: "asset-request-to-cps"
+        api: "asset-request-to-cps",
+        api_url: new URL(location.origin + '/api/v1/asset-request-to-cps')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,

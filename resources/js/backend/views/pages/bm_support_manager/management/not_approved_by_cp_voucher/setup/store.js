@@ -5,6 +5,7 @@ export const not_approved_by_cp_voucher_setup_store = defineStore("not_approved_
         all_data: {},
         single_data: {},
         AllAccountExpenseCategories: {},
+        api_url: new URL(location.origin + '/api/v1/cp-not-approval-voucher')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -58,6 +59,13 @@ export const not_approved_by_cp_voucher_setup_store = defineStore("not_approved_
                 window.s_alert("Data deleted");
                 window.location.reload()
             }
+        },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`account-expenses/search?not_approved_cp=1`, form);
+            response = response.data.data;
+            this.all_data = response;
+
         },
     },
 });

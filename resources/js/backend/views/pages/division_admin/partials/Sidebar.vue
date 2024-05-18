@@ -18,16 +18,16 @@
                     >ড্যাশবোর্ড</router-link
                 >
             </li>
-            <li class="my-2 d-flex align-items-center gap-2">
+            <!-- <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link
                     :to="{ name: `AdminAllVouchers` }"
                     class="d-flex align-items-center"
                     href=""
-                    >ভাউচার</router-link
+                    >ভাউচার সমুহ</router-link
                 >
-            </li>
-            <li class="my-2 d-flex align-items-center gap-2">
+            </li> -->
+            <!-- <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link
                     :to="{ name: `AdminNotApprovedVoucher` }"
@@ -36,7 +36,7 @@
                 >
                     অনুমোদিত নয় ভাউচার সমুহ</router-link
                 >
-            </li>
+            </li> -->
             <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link

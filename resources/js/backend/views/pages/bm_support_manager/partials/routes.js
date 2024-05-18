@@ -1,6 +1,5 @@
 import Layout from "./Layout.vue";
 import Dashboard from "../Dashboard.vue";
-
 import receipt_book_routes from "../management/receipt_book/setup/routes";
 import receipt_book_assign_routes from "../management/receipt_book_assing/setup/routes";
 import branch_target_routes from "../management/branch_target/setup/routes";
@@ -53,7 +52,7 @@ const routes = {
     children: [
         {
             path: "",
-            name: window.role.bmSupport + "Dashboard",
+            name: "bmSupportManagerDashboard",
             component: Dashboard,
         },
         receipt_book_routes,

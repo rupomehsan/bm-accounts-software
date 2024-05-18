@@ -19,17 +19,16 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
+                        <!-- <h6>
                             All Vouchers
-
-                        </h6>
+                        </h6> -->
                         <div class="search">
-                            <form action="#">
+                            <!-- <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
                                     class="form-control border border-info" />
-                            </form>
+                            </form> -->
                         </div>
-                        <div class="btns d-flex gap-2 align-items-center">
+                        <!-- <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
                                 <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
                                         class="fa fa-list"></i></a>
@@ -40,22 +39,9 @@
                                             Export All
                                         </a>
                                     </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -81,7 +67,29 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Approval
+                                        Total voucher
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Sompadok approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm SP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        CP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+
+
+                                    <th class="cursor_n_resize">
+                                        Overall Approval
                                         <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
                                     <th class="cursor_n_resize">
@@ -105,6 +113,11 @@
                                         {{ item.account_category?.title }}
                                     </td>
                                     <td>{{ item.amount }}</td>
+                                    <td>{{ item.approval?.total_sub_voucher }}</td>
+                                    <td>{{ item.approval?.approved_by_admin_total }}</td>
+                                    <td>{{ item.approval?.approved_by_sp_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_cp_total }}</td>
                                     <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
@@ -130,7 +143,7 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_users" :method="user_get_all" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -145,7 +158,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="canvas_backdrop">

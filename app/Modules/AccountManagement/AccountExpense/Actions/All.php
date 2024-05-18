@@ -10,17 +10,15 @@ class All
     public static function execute()
     {
         try {
-            // dd(request()->input('approved'));
+            // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = ['account_category'];
             $data = self::$model::query();
-            // dd(auth()->user()->parent);
-            if (auth()->user()->roles[0]->id != 3) {
-                // dd(auth()->user()->roles[0]->id);
-                $condition['creator'] = auth()->id();
-            }
 
+            if (auth()->user()->roles[0]->id != 3) {
+                $condition['department_id'] = auth()->user()->parent ? auth()->user()->parent : auth()->user()->id;
+            }
 
             if (request()->has('approved') && request()->input('approved')) {
                 $condition['approved'] = request()->input('approved') == 'yes' ? 1 : 0;
@@ -37,8 +35,25 @@ class All
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data->with($with)->where($condition)->latest()->get();
             } else {
+                if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_admin')) {
+                    $data = $data->whereExists(function ($query) {
+                        $query->select("*")
+                            ->from('account_expense_support_table')
+                            ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                            ->where('account_expense_support_table.approved_by_admin', 0);
+                    });
+                }
+                if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_cp')) {
+                    $data = $data->whereExists(function ($query) {
+                        $query->select("*")
+                            ->from('account_expense_support_table')
+                            ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                            ->where('account_expense_support_table.approved_by_cp', 0);
+                    });
+                }
                 $data = $data->with($with)->where($condition)->latest()->paginate($offset);
             }
+
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
@@ -47,20 +62,31 @@ class All
     public static function seachByDateWise()
     {
         try {
+            // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = ['account_category'];
-            $data = self::$supportVoucermodel::query();
+            $data = self::$model::query();
 
-
-            if (request()->has('not_approved_cp') && request()->input('not_approved_cp')) {
-                $condition['approved_by_cp'] =  0;
+              if (auth()->user()->roles[0]->id != 3) {
+                $condition['department_id'] = auth()->user()->parent ? auth()->user()->parent : auth()->user()->id;
             }
-            if (request()->has('not_approved_bm') && request()->input('not_approved_bm')) {
-                $condition['approved_by_bm'] =  0;
-            }
-
-
+            // if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_admin')) {
+            //     $data = $data->whereExists(function ($query) {
+            //         $query->select("*")
+            //             ->from('account_expense_support_table')
+            //             ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+            //             ->where('account_expense_support_table.approved_by_admin', 0);
+            //     });
+            // }
+            // if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_cp')) {
+            //     $data = $data->whereExists(function ($query) {
+            //         $query->select("*")
+            //             ->from('account_expense_support_table')
+            //             ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+            //             ->where('account_expense_support_table.approved_by_cp', 0);
+            //     });
+            // }
             $data = $data->with($with)
                 ->whereDate('created_at', '>=', request()->input('start_date'))
                 ->whereDate('created_at', '<=', request()->input('end_date'))

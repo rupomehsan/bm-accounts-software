@@ -6,14 +6,7 @@
                     <div class="col-lg-6">
                         <h5 class="m-0">Not approved by cp</h5>
                     </div>
-                    <div class="col-lg-6 text-end">
-                        <span>
-                            <router-link :to="{ name: `AdminCreateVoucher` }" class="btn rounded-pill btn-outline-info">
-                                <i class="fa fa-pencil me-5px"></i>
-                                Create
-                            </router-link>
-                        </span>
-                    </div>
+
                 </div>
             </div>
             <div class="conatiner">
@@ -94,7 +87,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users" :key="item.id">
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -122,7 +115,7 @@
                                                         Topshit
                                                     </router-link>
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <span>
                                                         <router-link
                                                             :to="{ name: 'DATopshit', params: { id: item.id } }">
@@ -131,7 +124,7 @@
                                                         </router-link>
 
                                                     </span>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>

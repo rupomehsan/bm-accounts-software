@@ -4,14 +4,12 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">{{ page_title }}</h5>
+                        <h5 class="m-0"> {{ page_title }}</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link
-                                :to="{ name: `bmSupportCreate${route_prefix}` }"
-                                class="btn rounded-pill btn-outline-info"
-                            >
+                            <router-link :to="{ name: `${role}Create${route_prefix}` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -22,52 +20,33 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <div class="search">
-                            <form action="#">
-                                <input
-                                    v-model.debounce:1000ms="search_data"
-                                    placeholder="search..."
-                                    type="search"
-                                    class="form-control border border-info"
-                                />
+                        <div class="col-md-6" v-if="this.loaded">
+                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <label for="">Start date</label>
+                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                    </div>
+                                    <div>
+                                        <label for="">End date</label>
+                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a
-                                    @click.prevent=""
-                                    href="#"
-                                    class="btn px-3 btn-outline-secondary"
-                                    ><i class="fa fa-list"></i
-                                ></a>
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                        class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
+                                        <a href="" @click.prevent="ExportData(all_data.data)">
+                                            <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            title="display data that has been deactivated"
-                                            class="d-flex"
-                                        >
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Deactivated data
                                         </a>
                                     </li>
                                 </ul>
@@ -90,6 +69,10 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
+                                        Amount
+
+                                    </th>
+                                    <th class="cursor_n_resize">
                                         Taken date
 
                                     </th>
@@ -107,16 +90,16 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr
-                                    v-for="(item, index) in all_data.data"
-                                    :key="item.id"
-                                >
+                                <tr v-for="(item, index) in all_data.data" :key="item.id">
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
                                         {{ item.user?.full_name }}
+                                    </td>
+                                    <td>
+                                        {{ item.amount }}
                                     </td>
                                     <td>
                                         {{ item.taken_date }}
@@ -128,12 +111,8 @@
 
                                     <td>
                                         <div class="table_actions">
-                                            <a
-                                                @click.prevent=""
-                                                href="#"
-                                                class="btn btn-sm btn-outline-secondary"
-                                                ><i class="fa fa-gears"></i
-                                            ></a>
+                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
+                                                    class="fa fa-gears"></i></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -159,18 +138,13 @@
                                                 </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link
-                                                            :to="{
-                                                                name: 'bmSupportCreateJamanot',
-                                                                query: {
-                                                                    id: item.id,
-                                                                },
-                                                            }"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-warning fa-pencil"
-                                                            ></i>
+                                                        <router-link :to="{
+                            name: `${role}CreateJamanot`,
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
+                                                            <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
 
@@ -178,18 +152,12 @@
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a
-                                                            @click.prevent="
-                                                                delete_data(
-                                                                    item.id
-                                                                )
-                                                            "
-                                                            href="#"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-danger fa-trash"
-                                                            ></i>
+                                                        <a @click.prevent="
+                            delete_data(
+                                item.id
+                            )
+                            " href="#" class="">
+                                                            <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -201,11 +169,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
-                    >
+                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
@@ -220,7 +186,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -229,59 +195,81 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
-import { jamanot_setup_store } from "./setup/store";
+import { mapActions, mapState } from 'pinia'
+import { jamanot_setup_store } from './setup/store';
 import setup from "./setup";
+import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
-        route_prefix: "",
-        search_data: "",
+        role: window.role.bmSupport,
+        route_prefix: '',
+        search_data: '',
         loaded: false,
         offset: 5,
-        page_title: "",
+        page_title: '',
         parent_item: false,
-        child_items: [],
+        child_items: []
     }),
     created: async function () {
         this.route_prefix = setup.route_prefix;
         this.page_title = setup.page_title;
-        await this.get_all_data();
+        await this.get_all_data()
         // console.log(this.all_data.data);
-        this.loaded = true;
+        this.loaded = true
     },
     methods: {
         ...mapActions(jamanot_setup_store, {
-            get_all_data: "all",
-            delete_data: "delete",
-            bulk_action: "bulk_action",
+            get_all_data: 'all',
+            delete_data: 'delete',
+            bulk_action: 'bulk_action',
+            get_data_by_search: 'get_data_by_search',
         }),
         toggleParentCheckbox() {
-            this.child_items = event.target.checked
-                ? this.all_data.data.map((item) => item.id)
-                : [];
+            this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []
         },
         toggleChildCheckbox(id) {
-            let isChecked = event.target.checked;
+            let isChecked = event.target.checked
             if (isChecked) {
-                this.child_items.push(id);
+                this.child_items.push(id)
             } else {
-                this.child_items = this.child_items.filter(
-                    (item) => item != id
-                );
+                this.child_items = this.child_items.filter(item => item != id)
             }
         },
         bulkActions(action) {
-            this.bulk_action(action, this.child_items);
-            this.parent_item = false;
-            this.child_items = [];
+            this.bulk_action(action, this.child_items)
+            this.parent_item = false
+            this.child_items = []
         },
+        ExportData(data = [], prefix_name = 'jamanot_provide') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.user = item.user?.full_name
+                temp.amount = item.amount
+                temp.taken_date = item.taken_date
+                temp.given_date = item.given_date
+                dataArray.push(temp)
+            })
+            let col = Object.keys(dataArray[0]);
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
+        },
+        SearchHandler() {
+            this.get_data_by_search(this.$refs.myForm)
+        },
+
     },
     computed: {
         ...mapState(jamanot_setup_store, {
-            all_data: "all_data",
-        }),
+            all_data: 'all_data',
+        })
     },
-};
+
+}
 </script>
 
 <style></style>

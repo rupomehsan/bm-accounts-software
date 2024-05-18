@@ -13,10 +13,10 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Container-fluid Ends -->
+            </div>
+            <!-- Container-fluid Ends -->
             <!-- Container-fluid starts -->
             <div class="container-fluid">
-
                 <div class="card border-widgets shadow mb-4">
                     <div class="row m-0">
                         <div class="col-xl-3 col-6 xs-width-100">
@@ -26,9 +26,9 @@
                                         class="icon-id-badge font-secondary align-self-center me-3"
                                     ></i>
                                     <div>
-                                        <span class="mt-0">Total Users</span>
+                                        <span class="mt-0">Total vouchers </span>
                                         <h4 class="counter">
-                                            {{ result.totalUsers ?? 0 }}
+                                            {{ result.totalVouchers ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                                         class="icon-book font-primary align-self-center me-3"
                                     ></i>
                                     <div>
-                                        <span class="mt-0">Total Vouchers</span>
+                                        <span class="mt-0">Total not approved vouchers</span>
                                         <h4 class="counter">
                                             {{ result.totalVouchers ?? 0 }}
                                         </h4>
@@ -56,9 +56,9 @@
                                         class="icon-notepad font-success align-self-center me-3"
                                     ></i>
                                     <div>
-                                        <span class="mt-0">Pending Vouchers</span>
+                                        <span class="mt-0">Total admin not approved vouchers</span>
                                         <h4 class="counter">
-                                            {{ result.totalApplication ?? 0 }}
+                                            {{ result.totalVouchers ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>
@@ -71,9 +71,9 @@
                                         class="icon-bookmark font-info align-self-center me-3"
                                     ></i>
                                     <div>
-                                        <span class="mt-0">Not approved Vouchers</span>
+                                        <span class="mt-0">Total BM not approved vouchers</span>
                                         <h4 class="counter">
-                                            {{ result.totalCategory ?? 0 }}
+                                            {{ result.totalVouchers ?? 0 }}
                                         </h4>
                                     </div>
                                 </div>

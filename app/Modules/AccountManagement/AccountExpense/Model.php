@@ -56,6 +56,9 @@ class Model extends EloquentModel
         $approved_by_admin_total = $this->support_voucher()->where('approved_by_admin', 1)->count();
         $approved_by_admin = $totalSubVoucher == $approved_by_admin_total;
 
+        $approved_by_sp_bm_total = $this->support_voucher()->where('approved_by_sp_bm', 1)->count();
+        $approved_by_sp_bm = $totalSubVoucher == $approved_by_sp_bm_total;
+
         $approved_by_bm_total = $this->support_voucher()->where('approved_by_bm', 1)->count();
         $approved_by_bm = $totalSubVoucher == $approved_by_bm_total;
 
@@ -68,6 +71,8 @@ class Model extends EloquentModel
             "approved_by_admin_total" => $approved_by_admin_total,
             "approved_by_bm" => $approved_by_bm,
             "approved_by_bm_total" => $approved_by_bm_total,
+            "approved_by_sp_bm" => $approved_by_sp_bm,
+            "approved_by_sp_bm_total" => $approved_by_sp_bm_total,
             "approved_by_cp" => $approved_by_cp,
             "approved_by_cp_total" => $approved_by_cp_total,
             "total_sub_voucher" =>  $totalSubVoucher,

@@ -5,7 +5,9 @@ export const asset_category_setup_store = defineStore("asset_category_setup_stor
         all_data: {},
         single_data: {},
         role_data: {},
-        api:"asset-categories"
+        api:"asset-categories",
+        api_url: new URL(location.origin + '/api/v1/asset-categories')
+
     }),
     getters: {
         doubleCount: (state) => state.count * 2,

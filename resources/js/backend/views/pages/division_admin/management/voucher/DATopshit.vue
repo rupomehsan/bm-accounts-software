@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `AdminAllVouchers` }"
+                                <router-link :to="{ name: `AdminAllNotApprovedByAdminVouchers` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -46,10 +46,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <table class="table text-center">
+                                                <tr>
+                                                    <td style="width: 295px;"></td>
+                                                    <td style="width: 100px;">Sompadok</td>
+                                                    <td style="width: 100px;">BM Support</td>
+                                                    <td style="width: 100px;">BM Admin </td>
+                                                    <td style="width: 100px;">CP </td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
                                     <tr v-for="sVoucher in item" :key="sVoucher.id">
                                         <td>
                                             <div>
-                                                <span >
+                                                <span>
                                                     <router-link :to="{
                                     name: 'AdminCreateVoucher',
                                     query: {
@@ -61,7 +75,7 @@
                                                     </router-link>
 
                                                 </span>
-                                                <span class="mx-2" v-if="!sVoucher.approved_by_upperadmin">
+                                                <!-- <span class="mx-2" v-if="!sVoucher.approved_by_upperadmin">
                                                     <a @click.prevent="
                                     support_voucher_delete(
                                         sVoucher.id
@@ -70,14 +84,32 @@
                                                         <i class="fa text-danger fa-trash"></i>
                                                         Delete
                                                     </a>
-                                                </span>
+                                                </span> -->
                                                 <span class="border-start ps-2">
                                                     {{ sVoucher.description ?? "asdfasdf" }}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td class="text-end">
-                                            {{ sVoucher.amount }}
+                                        <td>
+
+                                            <table class="table text-center">
+                                                <tr>
+                                                    <td style="width: 100px;"> <i class="fa"
+                                                            :class="sVoucher.approved_by_admin ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td style="width: 100px;"><i class="fa"
+                                                            :class="sVoucher.approved_by_sp_bm ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td style="width: 100px;"><i class="fa"
+                                                            :class="sVoucher.approved_by_bm ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td style="width: 100px;"><i class="fa"
+                                                            :class="sVoucher.approved_by_cp ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td class="text-end">{{ sVoucher.amount }}</td>
+                                                </tr>
+                                            </table>
+
                                         </td>
                                     </tr>
                                 </tbody>

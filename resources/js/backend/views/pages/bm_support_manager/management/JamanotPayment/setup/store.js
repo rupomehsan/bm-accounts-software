@@ -78,6 +78,13 @@ export const jamanot_payment_setup_store = defineStore("jamanot_payment_setup_st
             response = response.data;
             this.user_loan_register_data = response;
         },
+        get_data_by_search: async function (formData) {
+            let form = new FormData(formData);
+            let response = await axios.post(`${this.api}/search`, form);
+            response = response.data.data;
+            this.all_data = response;
+
+        },
 
     },
 });

@@ -4,22 +4,23 @@ import Form from "../Form.vue";
 import setup from ".";
 
 let route_prefix = setup.route_prefix;
-
+const role = window.role.bmSupport
 const routes = {
-    path: "applications",
+    path: 'applications',
     component: Layout,
     children: [
         {
-            path: "",
-            name: window.role.bmSupport + route_prefix + "All",
-            component: All,
+            path: '',
+            name: role + route_prefix + "All",
+            component: All
         },
         {
-            path: "create",
-            name: window.role.bmSupport + route_prefix + "Create",
-            component: Form,
+            path: 'create',
+            name: role + route_prefix + "Create",
+            component: Form
         },
-    ],
-};
+    ]
+}
+
 
 export default routes;

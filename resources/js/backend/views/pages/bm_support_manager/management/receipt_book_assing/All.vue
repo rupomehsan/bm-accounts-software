@@ -17,7 +17,7 @@
 
                     <div class="col-lg-3 text-end">
                         <span>
-                            <router-link :to="{ name: `bmSupportAssingReceiptBookCreate` }"
+                            <router-link :to="{ name: `${role}AssingReceiptBookCreate` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -35,7 +35,20 @@
                         </h6>
                         <div class="search">
                         </div>
+                        <div class="table_actions">
+                            <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                    class="fa fa-list"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="" @click.prevent="receiptBookAssingExport(all_receipt_books.data)">
+                                        <i class="fa-regular fa-hand-point-right"></i>
+                                        Export All
+                                    </a>
+                                </li>
 
+
+                            </ul>
+                        </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -120,11 +133,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                                            name: 'bmSupportAssingReceiptBookCreate',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
+                            name: `${role}AssingReceiptBookCreate`,
+                            query: {
+                                id: item.id,
+                            },
+                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -134,10 +147,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
+                            user_delete(
+                                item.id
+                            )
+                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -201,9 +214,12 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { receipt_book_assign_store } from "./setup/store";
+import { CsvBuilder } from 'filefy';
+import roleSetup from '../../partials/role_setup';
 
 export default {
     data: () => ({
+        role: roleSetup.role,
         offset: "5",
         search_data: "",
         loaded: false,
@@ -248,6 +264,28 @@ export default {
         },
         getReceiptBookByStatus(status) {
             this.get_receipt_book_by_status(status);
+        },
+        receiptBookAssingExport(data = [], prefix_name = 'receipt_book_assing') {
+            let dataArray = []
+            data.forEach((item) => {
+                let temp = {}
+                temp.user = item.user?.full_name
+                temp.receipt_book_no = item.account_receipt_book?.receipt_book_no
+                temp.receipt_start_serial_no = item.account_receipt_book?.receipt_start_serial_no
+                temp.receipt_end_serial_no = item.account_receipt_book?.receipt_end_serial_no
+                dataArray.push(temp)
+            })
+            let col = [
+                'Assign to',
+                'Receipt Book No',
+                'Receipt Start Serial No',
+                'Receipt End Serial No',
+            ];
+            let values = dataArray.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

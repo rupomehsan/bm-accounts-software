@@ -16,7 +16,7 @@ class Store
     public static function execute(Validation $request)
     {
         try {
-
+            // dd($request->all());
             $defaultMonth = self::$setMonthModel::where('active', 1)->first();
             $departmentId = auth()->user()->parent ? auth()->user()->parent : auth()->id();
             $isExistVoucher = self::$model::where('account_expense_category_id', $request->account_expense_category_id)
@@ -26,10 +26,10 @@ class Store
 
             if ($isExistVoucher) {
                 $requestData = $request->validated();
-                $requestData['department_id'] = auth()->id();
-                $requestData['expense_id'] = $isExistVoucher->id;
-                $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 ? 1 : 0;
-                $requestData['approved_by_bm'] = auth()->user()->roles[0]->serial == 5 ? 1 : 0;
+                // $requestData['department_id'] = auth()->id();
+                // $requestData['expense_id'] = $isExistVoucher->id;
+                // $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 ? 1 : 0;
+                // $requestData['approved_by_bm'] = auth()->user()->roles[0]->serial == 5 ? 1 : 0;
                 if ($request->has('image')) {
                     $image = $request->file('image');
                     $imageUrl = uploader($image, 'uploads/voucher');
@@ -41,7 +41,6 @@ class Store
                 unset($requestData['image']);
                 $requestData['creator'] = auth()->id();
                 self::$supportVoucermodel::create($requestData);
-
                 $isExistVoucher->amount = $isExistVoucher->support_voucher()->sum('amount');
                 $isExistVoucher->date = $request->date;
                 $isExistVoucher->update();
@@ -60,8 +59,17 @@ class Store
                     $requestData = $request->validated();
                     $requestData['department_id'] = auth()->id();
                     $requestData['expense_id'] = $voucher->id;
-                    $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 || auth()->user()->roles[0]->serial == 5 ? 1 : 0;
-                    $requestData['approved_by_bm'] = auth()->user()->roles[0]->serial == 5 ? 1 : 0;
+
+                    if ($request->has('bm_support_admin')) {
+                        $requestData['approved_by_admin'] = 1;
+                        $requestData['approved_by_sp_bm'] = 1;
+                    }
+                    if ($request->has('bm_admin')) {
+                        $requestData['approved_by_admin'] = 1;
+                        $requestData['approved_by_sp_bm'] = 1;
+                        $requestData['approved_by_bm'] = 1;
+                    }
+
                     if ($request->has('image')) {
                         $image = $request->file('image');
                         $imageUrl = uploader($image, 'uploads/voucher');

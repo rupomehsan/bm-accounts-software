@@ -31,24 +31,12 @@
                                         class="fa fa-list"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="">
+                                        <a href="" @click.prevent="ExportData(all_ekkalin_prodan_data)">
                                             <i class="fa-regular fa-hand-point-right"></i>
                                             Export All
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Import
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
-                                            Deactivated data
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -141,7 +129,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { report_setup_store } from "./setup/store";
-
+import { CsvBuilder } from 'filefy';
 export default {
 
     data: () => ({
@@ -170,6 +158,32 @@ export default {
         }),
         SubmitHandler() {
             this.get_all_ekkalin_prodan(this.$refs.myForm)
+        },
+        ExportData(data = [], prefix_name = 'ekkalin_prodan_report') {
+            let col = [
+                "ক্রম",
+                "প্রদানের তারিখ",
+                "টাকার পরিমান",
+                "আবাসন",
+                "যানবাহন",
+                "সম্পদ",
+                "চিকিৎসা",
+                "ছাত্রকল্যান",
+                "শিক্ষা সহায়তা",
+                "প্রো.বাস্তবায়ন",
+                "প্রশিক্ষন",
+                "শহীদ পরিবার",
+                "মামলা",
+                "শিশুকল্যাণ",
+                "দা.কার্যক্রম",
+                "বিশেষ"
+            ]
+            let values = data.map((i) => Object.values(i));
+            new CsvBuilder(`${prefix_name}_list.csv`)
+                .setColumns(col)
+                // .addRow(["Eve", "Holt"])
+                .addRows(values)
+                .exportFile();
         },
     },
     computed: {

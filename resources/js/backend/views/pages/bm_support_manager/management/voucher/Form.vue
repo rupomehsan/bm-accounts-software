@@ -12,7 +12,7 @@
                         <div class="col-lg-6 text-end">
                             <div class="btns">
                                 <router-link
-                                    :to="{ name: `bmSupportBmAllVouchers` }"
+                                    :to="{ name: `${role}AllVouchers` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"
                                     ><i class="fa fa-arrow-left me-5px"></i>
                                     Back
@@ -135,6 +135,7 @@ import { voucher_setup_store } from "./setup/store";
 import convertAmount from "../../../../../plugins/number_to_text_bangla.js";
 export default {
     data: () => ({
+        role: window.role.bmSupport,
         form_fields,
         param_id: null,
         loded: false,
@@ -212,13 +213,13 @@ export default {
                 console.log(response);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully Updated");
-                    this.$router.push({ name: `bmSupportAllBmAllVouchers` });
+                    this.$router.push({ name: `${this.role}AllBmAllVouchers` });
                 }
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `bmSupportAllBmAllVouchers` });
+                    this.$router.push({ name: `AllBmAllVouchers` });
                 }
             }
         },
@@ -233,7 +234,7 @@ export default {
 
         ApprovedByAdmin(id) {
             this.SupportVoucherApprovedByAdmin(id);
-            this.$router.push({ name: `bmSupportBmNotApprovedByBmVoucher` });
+            this.$router.push({ name: `BmNotApprovedByBmVoucher` });
         },
     },
     computed: {

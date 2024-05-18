@@ -6,18 +6,14 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} All
-                                Sohid Family Funds
+                                {{ param_id ? "Update" : "Create new" }} All Sohid Family Funds
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{
-                                        name: `bmSupportAllSohidFamilyFund`,
-                                    }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `AllSohidFamilyFund` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -25,30 +21,18 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
+                                        <template v-for="(
                                                 form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :type="form_field.type"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-                                            />
+                                            ) in form_fields" :key="index">
+                                            <common-input :label="form_field.label" :type="form_field.type"
+                                                :name="form_field.name" :multiple="form_field.multiple"
+                                                :value="form_field.value" :data_list="form_field.data_list
+                                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -71,72 +55,77 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { sohid_family_fund_setup_store } from "./setup/store";
-import axios from "axios";
+import axios from 'axios';
 export default {
     data: () => ({
         form_fields,
         param_id: null,
-        amount: 0,
+        amount: 0
     }),
 
     created: async function () {
-        await this.get_all_account_receipt_book();
-        await this.get_all_account_categories();
-        await this.get_all_central_division();
-        await this.get_all_branch();
-        await this.get_all_accounts();
+
+        await this.get_all_account_receipt_book()
+        await this.get_all_account_categories()
+        await this.get_all_central_division()
+        await this.get_all_branch()
+        await this.get_all_accounts()
+
 
         this.form_fields.forEach((field) => {
-            if (field.name == "account_receipt_book_id") {
-                field.data_list = [];
+
+            if (field.name == 'account_receipt_book_id') {
+                field.data_list = []
                 this.all_account_receipt_book_data?.data.forEach((item) => {
-                    let fielData = {};
-                    fielData.label = item.receipt_book_no;
-                    fielData.value = item.id;
-                    field.data_list.push(fielData);
-                });
+
+                    let fielData = {}
+                    fielData.label = item.receipt_book_no
+                    fielData.value = item.id
+                    field.data_list.push(fielData)
+                })
             }
 
-            if (field.name == "account_category_id") {
-                field.data_list = [];
+            if (field.name == 'account_category_id') {
+                field.data_list = []
                 this.all_account_categories.forEach((item) => {
-                    let formData = {};
-                    formData.label = item.title;
-                    formData.value = item.id;
-                    field.data_list.push(formData);
-                });
+                    let formData = {}
+                    formData.label = item.title
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
             }
 
-            if (field.name == "central_division_id") {
-                field.data_list = [];
+            if (field.name == 'central_division_id') {
+                field.data_list = []
                 this.all_central_division.forEach((item) => {
-                    let formData = {};
-                    formData.label = item.full_name;
-                    formData.value = item.id;
-                    field.data_list.push(formData);
-                });
+                    let formData = {}
+                    formData.label = item.full_name
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
             }
 
-            if (field.name == "branch_id") {
-                field.data_list = [];
+            if (field.name == 'branch_id') {
+                field.data_list = []
                 this.all_branch.forEach((item) => {
-                    let formData = {};
-                    formData.label = item.full_name;
-                    formData.value = item.id;
-                    field.data_list.push(formData);
-                });
+                    let formData = {}
+                    formData.label = item.full_name
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
             }
 
-            if (field.name == "account_id") {
-                field.data_list = [];
+            if (field.name == 'account_id') {
+                field.data_list = []
                 this.all_accounts.forEach((item) => {
-                    let formData = {};
-                    formData.label = item.name;
-                    formData.value = item.id;
-                    field.data_list.push(formData);
-                });
+                    let formData = {}
+                    formData.label = item.name
+                    formData.value = item.id
+                    field.data_list.push(formData)
+                })
             }
-        });
+        })
+
 
         let id = this.$route.query.id;
         if (id) {
@@ -149,18 +138,16 @@ export default {
                             this.form_fields[index].value = value[1];
                         }
 
-                        if (field.name == "account_id") {
-                            if (value[0] == "account_logs") {
+                        if (field.name == 'account_id') {
+                            if (value[0] == 'account_logs') {
                                 // console.log("value", value[1].account.id)
-                                this.form_fields[index].value =
-                                    value[1].account_id;
+                                this.form_fields[index].value = value[1].account_id;
                             }
                         }
-                        if (field.name == "account_number_id") {
-                            if (value[0] == "account_logs") {
+                        if (field.name == 'account_number_id') {
+                            if (value[0] == 'account_logs') {
                                 // console.log("value", value[1].account.id)
-                                this.form_fields[index].value =
-                                    value[1].account_number_id;
+                                this.form_fields[index].value = value[1].account_number_id;
                             }
                         }
                     });
@@ -183,6 +170,7 @@ export default {
             store: "store",
             get_single_branch_income: "get",
             income_update: "update",
+
         }),
 
         submitHandler: async function ($event) {
@@ -192,7 +180,7 @@ export default {
                 let response = await this.store($event.target);
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `bmSupportAllSohidFamilyFund` });
+                    this.$router.push({ name: `All` });
                 }
             }
         },
@@ -200,15 +188,13 @@ export default {
         async amountHandleKeyup(event) {
             const inputValue = event.target.value;
             try {
-                const result = await axios.get(
-                    `get-amount-to-number/${inputValue}`
-                );
+                const result = await axios.get(`get-amount-to-number/${inputValue}`);
                 if (result.data) {
-                    let toText = document.getElementById("amount_in_text");
+                    let toText = document.getElementById('amount_in_text');
                     toText.value = result.data.toString(); // Use toString() method
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error('Error fetching data:', error);
             }
             // Do something with the input value
         },
@@ -217,18 +203,17 @@ export default {
             const inputValue = event.target.value;
 
             try {
-                const result = await axios.get(
-                    `account-numbers/${inputValue}?account_id=true`
-                );
+                const result = await axios.get(`account-numbers/${inputValue}?account_id=true`);
                 if (result.data) {
-                    let toText = document.getElementById("account_number_id");
+                    let toText = document.getElementById('account_number_id');
                     toText.value = result.data?.data?.value; // Use toString() method
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error('Error fetching data:', error);
             }
             // Do something with the input value
         },
+
     },
 
     computed: {
@@ -239,19 +224,22 @@ export default {
             all_central_division: "all_central_division",
             all_branch: "all_branch",
             all_accounts: "all_accounts",
+
         }),
     },
 
     mounted() {
-        const amount = document.getElementById("amount");
-        const accountId = document.getElementById("account_id");
+        const amount = document.getElementById('amount');
+        const accountId = document.getElementById('account_id');
         if (amount) {
-            amount.addEventListener("keyup", this.amountHandleKeyup);
+            amount.addEventListener('keyup', this.amountHandleKeyup);
         }
         if (accountId) {
-            accountId.addEventListener("change", this.accountHandler);
+            accountId.addEventListener('change', this.accountHandler);
         }
     },
+
+
 };
 </script>
 

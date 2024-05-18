@@ -57,6 +57,7 @@ export default [
         label: "Enter session",
         type: "date",
         value: moment().format("YYYY-MM-DD"),
+        dateFormat: 'YYYY'
     },
     {
         name: "comment",

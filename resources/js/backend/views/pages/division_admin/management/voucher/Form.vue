@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="col-lg-6 text-end">
                                     <div class="btns">
-                                        <router-link :to="{ name: `AdminAllVouchers` }"
+                                        <router-link :to="{ name: `AdminAllNotApprovedByAdminVouchers` }"
                                             class="btn rounded-pill btn-outline-warning router-link-active"><i
                                                 class="fa fa-arrow-left me-5px"></i>
                                             Back
@@ -45,10 +45,10 @@
                                     </div>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <button type="submit" class="btn btn-outline-info">
+                                    <!-- <button type="submit" class="btn btn-outline-info">
                                         <i class="fa fa-upload"></i>
                                         Submit
-                                    </button>
+                                    </button> -->
                                 </div>
                             </form>
                             <div class="image-container d-none" id="imageContainer">
@@ -64,10 +64,8 @@
                             <b>
                                 Approval Voucher
                             </b>
-                            <span class="text-info">{{ single_user.approved_by_bm ? 'Approved' : 'Cancel'
+                            <span class="text-info">{{ single_user.approved_by_admin ? 'Approved' : 'Pending'
                                 }}</span>
-
-
                         </div>
                         <div class="card-body m-0 p-2">
                             <form @submit.prevent="ApprovalSubmitHandler">
@@ -75,8 +73,9 @@
                                 <input type="hidden" name="approved_by_admin" value="1">
                                 <div class="mb-3">
                                     <label>Voucher Status</label>
-                                    <select v-model="voucher_status" name="voucher_status" id=""
+                                    <select v-model="voucher_status" required name="voucher_status" id=""
                                         class="form-select mt-2">
+                                        <option value="">Select status</option>
                                         <option value="approved">Approve</option>
                                         <option value="canceled">Cancel</option>
                                     </select>
@@ -115,7 +114,7 @@ export default {
         form_fields,
         param_id: null,
         loded: false,
-        voucher_status: 'approved',
+        voucher_status: '',
         cancel_comment: '',
     }),
 
@@ -142,8 +141,9 @@ export default {
             this.param_id = id;
             await this.user_get(id);
             if (this.single_user) {
-                form_fields.forEach((field, index) => {
+                this.form_fields.forEach((field, index) => {
                     Object.entries(this.single_user).forEach((value) => {
+
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
@@ -152,8 +152,9 @@ export default {
                             field.value = value[1]?.url
                         }
                         if (value[0] == 'approved_by_admin') {
-                            field.value = value[1]?.url
+                            this.voucher_status = value[1] == 1 ? 'approved' : 'canceled'
                         }
+
 
                     });
                 });

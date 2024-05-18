@@ -2,9 +2,8 @@ import Layout from "./Layout.vue";
 import MainLedger from "../MainLedger.vue";
 import IncomeExpenseStatement from "../IncomeExpenseStatement.vue";
 import setup from ".";
-
 let prefix = setup.prefix
-
+const role = window.role.bmSupport
 import LoanRegister from "../LoanRegister.vue";
 import Jamanot from "../Jamanot.vue";
 import Salary from "../Salary.vue";
@@ -23,7 +22,7 @@ const routes = {
     children: [
         {
             path: 'main-ledger',
-            name: prefix + "MainLedger",
+            name:  prefix + "MainLedger",
             component: MainLedger
         },
         {
