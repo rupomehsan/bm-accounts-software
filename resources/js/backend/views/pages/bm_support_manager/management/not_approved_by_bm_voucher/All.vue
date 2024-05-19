@@ -4,7 +4,7 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Voucher Management</h5>
+                        <h5 class="m-0">Support BM Voucher not approved </h5>
                     </div>
 
                     <div class="col-lg-6 text-end">
@@ -84,7 +84,29 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Approval
+                                        Total voucher
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Sompadok approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm SP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        CP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+
+
+                                    <th class="cursor_n_resize">
+                                        Overall Approval
                                         <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
                                     <th class="cursor_n_resize">
@@ -96,7 +118,7 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item) in all_users.data" :key="item.id">
+                                <tr v-for="(item, index) in all_users.data" :key="item.id">
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -108,6 +130,11 @@
                                         {{ item.account_category?.title }}
                                     </td>
                                     <td>{{ item.amount }}</td>
+                                    <td>{{ item.approval?.total_sub_voucher }}</td>
+                                    <td>{{ item.approval?.approved_by_admin_total }}</td>
+                                    <td>{{ item.approval?.approved_by_sp_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_cp_total }}</td>
                                     <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
@@ -119,8 +146,7 @@
                                                     class="fa fa-gears"></i></a>
                                             <ul>
                                                 <li>
-                                                    <router-link
-                                                        :to="{ name: `${role}TopShit`, params: { id: item.id } }">
+                                                    <router-link :to="{ name: `${role}TopshitSPBmNotApprovedVoucher`, params: { id: item.id } }">
                                                         <i class="fa text-info fa-book"></i>
                                                         Topshit
                                                     </router-link>

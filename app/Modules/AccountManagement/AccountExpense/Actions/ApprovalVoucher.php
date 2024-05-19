@@ -66,6 +66,9 @@ class ApprovalVoucher
                 if (auth()->user()->roles[0]->serial == 7) {
                     $data->approved_by_admin =  0;
                 }
+                if (auth()->user()->roles[0]->serial == 6) {
+                    $data->approved_by_sp_bm =  0;
+                }
 
                 if (auth()->user()->roles[0]->serial == 5) {
                     $data->approved_by_bm =  0;
@@ -86,7 +89,7 @@ class ApprovalVoucher
                 }
 
                 if (auth()->user()->roles[0]->serial == 6) {
-                    $data->approved_by_bm = $data->approved_by_sp_bm == 1 ? 0 : 1;
+                    $data->approved_by_sp_bm = $data->approved_by_sp_bm == 1 ? 0 : 1;
                 }
 
                 if (auth()->user()->roles[0]->serial == 5) {
@@ -209,6 +212,27 @@ class ApprovalVoucher
             } else {
                 $data = $data->with($with)->where($condition)->latest()->paginate($offset);
             }
+            return entityResponse($data);
+        } catch (\Exception $e) {
+            return messageResponse($e->getMessage(), 500, 'server_error');
+        }
+    }
+    public static function notApprovedBySupportBmVoucher()
+    {
+        try {
+            $offset = request()->input('offset') ?? 10;
+            $condition = [];
+            $with = ['account_category'];
+            $data = self::$model::query();
+            $data = $data->whereExists(function ($q) {
+                $q->select("*")
+                    ->from('account_expense_support_table')
+                    ->WhereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                    ->where('account_expense_support_table.approved_by_sp_bm', 0);
+            });
+            $data = $data->with($with)->where($condition)->latest()->paginate($offset);
+
+
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

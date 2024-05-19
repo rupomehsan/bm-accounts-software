@@ -85,6 +85,11 @@ class Controller extends ControllersController
         $data = ApprovalVoucher::supportVoucherApprovalByAdmin();
         return $data;
     }
+    public function notApprovedBySupportBmVoucher()
+    {
+        $data = ApprovalVoucher::notApprovedBySupportBmVoucher();
+        return $data;
+    }
     public function voucherCancelComment()
     {
         $data = ApprovalVoucher::voucherCancelComment();

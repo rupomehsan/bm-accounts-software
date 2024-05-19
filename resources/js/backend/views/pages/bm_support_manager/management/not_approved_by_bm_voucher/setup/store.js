@@ -5,7 +5,8 @@ export const not_approved_by_bm_voucher_setup_store = defineStore("not_approved_
         all_data: {},
         single_data: {},
         AllAccountExpenseCategories: {},
-        api_url: new URL(location.origin + '/api/v1/account-expenses?support_admin=true&not_approved_by_admin=true')
+        top_shit_data: {},
+        api_url: new URL(location.origin + '/api/v1/not-approved-by-support-bm-vouchers')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -17,7 +18,7 @@ export const not_approved_by_bm_voucher_setup_store = defineStore("not_approved_
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-expenses?support_admin=true&not_approved_by_admin=true");
+                response = await axios.get("not-approved-by-support-bm-vouchers");
             }
             this.all_data = response.data.data;
         },
@@ -72,6 +73,14 @@ export const not_approved_by_bm_voucher_setup_store = defineStore("not_approved_
             response = response.data.data;
             this.all_data = response;
 
+        },
+        get_single_voucher_with_top_shit: async function (id) {
+            let response = await axios.get(
+                "get-single-voucher-with-top-shit/" + id
+            );
+            response = response.data.data;
+            console.log("data", response);
+            this.top_shit_data = response;
         },
     },
 });

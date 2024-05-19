@@ -11,6 +11,7 @@ Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::get('approval-voucher', [Controller::class, 'approvalVoucher']);
     Route::get('bm-not-approval-voucher', [Controller::class, 'bmNotApprovalVoucher']);
     Route::get('cp-not-approval-voucher', [Controller::class, 'CpNotApprovalVoucher']);
+    Route::get('not-approved-by-support-bm-vouchers', [Controller::class, 'notApprovedBySupportBmVoucher']);
     Route::post('support-voucher-approval-by-admin', [Controller::class, 'supportVoucherApprovalByAdmin']);
     Route::post('voucher-cancel-comment', [Controller::class, 'voucherCancelComment']);
     Route::get('get-single-supoort-voucher/{id}', [Controller::class, 'getSingleSupportVoucher']);

@@ -5,7 +5,7 @@ export const not_approved_by_cp_voucher_setup_store = defineStore("not_approved_
         all_data: {},
         single_data: {},
         AllAccountExpenseCategories: {},
-        api_url: new URL(location.origin + '/api/v1/cp-not-approval-voucher')
+        api_url: new URL(location.origin + '/api/v1/account-expenses?not_approved_by_cp=1')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -17,7 +17,7 @@ export const not_approved_by_cp_voucher_setup_store = defineStore("not_approved_
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("cp-not-approval-voucher");
+                response = await axios.get("account-expenses?not_approved_by_cp=1");
             }
             this.all_data = response.data.data;
         },

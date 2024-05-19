@@ -35,7 +35,7 @@ class All
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data->with($with)->where($condition)->latest()->get();
             } else {
-                if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_admin')) {
+                if (request()->input('not_approved_by_admin')) {
                     $data = $data->whereExists(function ($query) {
                         $query->select("*")
                             ->from('account_expense_support_table')
@@ -43,7 +43,23 @@ class All
                             ->where('account_expense_support_table.approved_by_admin', 0);
                     });
                 }
-                if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_cp')) {
+                if (request()->input('not_approved_by_sp_bm')) {
+                    $data = $data->whereExists(function ($query) {
+                        $query->select("*")
+                            ->from('account_expense_support_table')
+                            ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                            ->where('account_expense_support_table.approved_by_sp_bm', 0);
+                    });
+                }
+                if (request()->input('not_approved_by_bm')) {
+                    $data = $data->whereExists(function ($query) {
+                        $query->select("*")
+                            ->from('account_expense_support_table')
+                            ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                            ->where('account_expense_support_table.approved_by_bm', 0);
+                    });
+                }
+                if (request()->input('not_approved_by_cp')) {
                     $data = $data->whereExists(function ($query) {
                         $query->select("*")
                             ->from('account_expense_support_table')
@@ -68,7 +84,7 @@ class All
             $with = ['account_category'];
             $data = self::$model::query();
 
-              if (auth()->user()->roles[0]->id != 3) {
+            if (auth()->user()->roles[0]->id != 3) {
                 $condition['department_id'] = auth()->user()->parent ? auth()->user()->parent : auth()->user()->id;
             }
             // if (request()->has('support_admin') && request()->input('support_admin') && request()->input('not_approved_by_admin')) {

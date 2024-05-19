@@ -50,7 +50,7 @@
                                         <td colspan="2">
                                             <table class="table text-center">
                                                 <tr>
-                                                    <td style="width: 295px;"></td>
+                                                    <td style="width: 400px;"></td>
                                                     <td style="width: 100px;">Sompadok</td>
                                                     <td style="width: 100px;">BM Support</td>
                                                     <td style="width: 100px;">BM Admin </td>

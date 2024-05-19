@@ -5,7 +5,7 @@
             <div>
                 <img class="img-50 rounded-circle" src="/backend/assets/images/1.jpg" alt="#" />
             </div>
-            <h6 class="mt-3 f-12">Admin</h6>
+            <h6 class="mt-3 f-12">Bm Support Admin</h6>
         </div>
         <div class="sidebar-menu">
 

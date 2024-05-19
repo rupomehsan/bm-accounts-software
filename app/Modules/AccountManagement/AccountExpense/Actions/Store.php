@@ -26,10 +26,11 @@ class Store
 
             if ($isExistVoucher) {
                 $requestData = $request->validated();
-                // $requestData['department_id'] = auth()->id();
-                // $requestData['expense_id'] = $isExistVoucher->id;
-                // $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 ? 1 : 0;
-                // $requestData['approved_by_bm'] = auth()->user()->roles[0]->serial == 5 ? 1 : 0;
+                $requestData['department_id'] = auth()->user()->parent ? auth()->user()->parent : auth()->id();
+                $requestData['expense_id'] = $isExistVoucher->id;
+                $requestData['approved_by_admin'] = auth()->user()->roles[0]->serial == 7 ? 1 : 0;
+                $requestData['approved_by_sp_bm'] = auth()->user()->roles[0]->serial == 6 ? 1 : 0;
+                $requestData['approved_by_bm'] = auth()->user()->roles[0]->serial == 5 ? 1 : 0;
                 if ($request->has('image')) {
                     $image = $request->file('image');
                     $imageUrl = uploader($image, 'uploads/voucher');
@@ -57,7 +58,7 @@ class Store
 
                 if ($voucher = self::$model::create($voucherData)) {
                     $requestData = $request->validated();
-                    $requestData['department_id'] = auth()->id();
+                    $requestData['department_id'] = auth()->user()->parent ? auth()->user()->parent : auth()->id();
                     $requestData['expense_id'] = $voucher->id;
 
                     if ($request->has('bm_support_admin')) {
