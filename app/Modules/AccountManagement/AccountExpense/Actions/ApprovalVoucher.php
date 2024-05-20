@@ -164,26 +164,21 @@ class ApprovalVoucher
     public static function bmNotApprovalVoucher()
     {
         try {
-            // dd(request()->input('approved'));
+            // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = ['account_category'];
-            $data = self::$supportVoucermodel::query()->where('approved_by_bm', 0);
+            $data = self::$model::query();
+            $data = $data->whereExists(function ($query) {
+                $query->select("*")
+                    ->from('account_expense_support_table')
+                    ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                    ->where('account_expense_support_table.approved_by_admin', 1)
+                    ->where('account_expense_support_table.approved_by_sp_bm', 1)
+                    ->where('account_expense_support_table.approved_by_bm', 0);
+            });
+            $data = $data->with($with)->where($condition)->latest()->paginate($offset);
 
-
-            if (request()->has('status') && request()->input('status')) {
-                $condition['status'] = request()->input('status');
-            }
-
-            if (request()->has('search') && request()->input('search')) {
-                $data = $data->where('title', 'like', '%' . request()->input('search') . '%');
-            }
-
-            if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
-                $data = $data->with($with)->where($condition)->latest()->get();
-            } else {
-                $data = $data->with($with)->where($condition)->latest()->paginate($offset);
-            }
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
@@ -196,22 +191,17 @@ class ApprovalVoucher
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = ['account_category'];
-            $data = self::$supportVoucermodel::query()->where('approved_by_cp', 0);
-
-
-            if (request()->has('status') && request()->input('status')) {
-                $condition['status'] = request()->input('status');
-            }
-
-            if (request()->has('search') && request()->input('search')) {
-                $data = $data->where('title', 'like', '%' . request()->input('search') . '%');
-            }
-
-            if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
-                $data = $data->with($with)->where($condition)->latest()->get();
-            } else {
-                $data = $data->with($with)->where($condition)->latest()->paginate($offset);
-            }
+            $data = self::$model::query();
+            $data = $data->whereExists(function ($query) {
+                $query->select("*")
+                    ->from('account_expense_support_table')
+                    ->whereRaw('account_expense_support_table.expense_id = account_expenses.id')
+                    ->where('account_expense_support_table.approved_by_admin', 1)
+                    ->where('account_expense_support_table.approved_by_sp_bm', 1)
+                    ->where('account_expense_support_table.approved_by_bm', 1)
+                    ->where('account_expense_support_table.approved_by_cp', 0);
+            });
+            $data = $data->with($with)->where($condition)->latest()->paginate($offset);
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

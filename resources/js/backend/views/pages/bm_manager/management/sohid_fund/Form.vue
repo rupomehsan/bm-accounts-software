@@ -230,6 +230,17 @@ export default {
                     }
                 })
             }
+        } else {
+            this.form_fields.forEach((field) => {
+                if (field.name == 'account_category_id') {
+                    this.all_account_categories.forEach((item) => {
+                        if (item.id == 4) {
+                            field.value = item.id
+                        }
+                    })
+                }
+
+            })
         }
     },
 

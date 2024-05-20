@@ -86,13 +86,28 @@
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
+                        <router-link :to="{ name: `${rolePrefix}AllKollanTohobilIncome` }" class="d-flex align-items-center"
+                            href="">কল্যান তহবিল</router-link>
+                    </li>
+                    <li class="d-flex align-items-center gap-2">
+                        <i class="fa fa-angle-right"></i>
+                        <router-link :to="{ name: `${rolePrefix}AllTranIncome` }" class="d-flex align-items-center"
+                            href="">ত্রান</router-link>
+                    </li>
+                    <li class="d-flex align-items-center gap-2">
+                        <i class="fa fa-angle-right"></i>
                         <router-link :to="{ name: `${rolePrefix}AllPaymentMethod` }" class="d-flex align-items-center"
                             href="">একাউন্ট মেথড</router-link>
                     </li>
                     <li class="d-flex align-items-center gap-2">
                         <i class="fa fa-angle-right"></i>
-                        <router-link :to="{ name: `${rolePrefix}AllAccountCategory` }" class="d-flex align-items-center"
-                            href="">খাতসমূহ</router-link>
+                        <router-link :to="{ name: `${rolePrefix}AllAccountIncomeCategory` }" class="d-flex align-items-center"
+                            href="">আয়ের খাতসমূহ</router-link>
+                    </li>
+                    <li class="d-flex align-items-center gap-2">
+                        <i class="fa fa-angle-right"></i>
+                        <router-link :to="{ name: `${rolePrefix}AllAccountExpenseCategory` }" class="d-flex align-items-center"
+                            href="">ব্যয় খাতসমূহ</router-link>
                     </li>
                 </ul>
             </li>

@@ -75,7 +75,29 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Approval
+                                        Total voucher
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Sompadok approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm SP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        Bm approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+                                    <th class="cursor_n_resize">
+                                        CP approved
+                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                    </th>
+
+
+                                    <th class="cursor_n_resize">
+                                        Overall Approval
                                         <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
                                     </th>
                                     <th class="cursor_n_resize">
@@ -99,6 +121,11 @@
                                         {{ item.account_category?.title }}
                                     </td>
                                     <td>{{ item.amount }}</td>
+                                    <td>{{ item.approval?.total_sub_voucher }}</td>
+                                    <td>{{ item.approval?.approved_by_admin_total }}</td>
+                                    <td>{{ item.approval?.approved_by_sp_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_bm_total }}</td>
+                                    <td>{{ item.approval?.approved_by_cp_total }}</td>
                                     <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
@@ -115,16 +142,6 @@
                                                         Topshit
                                                     </router-link>
                                                 </li>
-                                                <!-- <li>
-                                                    <span>
-                                                        <router-link
-                                                            :to="{ name: 'DATopshit', params: { id: item.id } }">
-                                                            <i class="fa text-warning fa-eye"></i>
-                                                            Details
-                                                        </router-link>
-
-                                                    </span>
-                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>

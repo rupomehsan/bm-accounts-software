@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `${role}AllAccountCategory` }"
+                                <router-link :to="{ name: `${role}AllAccountIncomeCategory` }"
                                     class="btn rounded-pill btn-outline-warning router-link-active"><i
                                         class="fa fa-arrow-left me-5px"></i>
                                     Back

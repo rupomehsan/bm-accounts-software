@@ -92,6 +92,7 @@ export default {
         submitHandler: async function ($event) {
             let response = await this.set_month_for_voucher($event.target);
             if (response.data.status === "success") {
+                await this.get_active_month_for_voucher();
                 window.s_alert("Data successcully Updated");
             }
         },

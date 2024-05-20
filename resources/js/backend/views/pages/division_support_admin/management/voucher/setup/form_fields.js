@@ -18,12 +18,12 @@ export default [
         type: "text",
         value: "",
     },
-    {
-        name: "folio",
-        label: "folio",
-        type: "number",
-        value: "",
-    },
+    // {
+    //     name: "folio",
+    //     label: "folio",
+    //     type: "number",
+    //     value: "",
+    // },
     {
         name: "creator_name",
         label: "created by",

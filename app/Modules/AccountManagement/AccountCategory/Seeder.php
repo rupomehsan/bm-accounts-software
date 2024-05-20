@@ -33,6 +33,7 @@ class Seeder extends SeedersSeeder
                 "এককালীন",
                 "ঋণ পরিশোধ",
                 "জামানত",
+                "কল্যান তহবিল",
             ],
             "expense" => [
                 "সিলেবাসের বই ক্রয় বাবদ",
@@ -95,6 +96,9 @@ class Seeder extends SeedersSeeder
         $defaultIncome = [
             "মাসিক আয়",
             "বার্ষিক আয়",
+            "শহীদ ফান্ড",
+            "ত্রাণ",
+            "কল্যান তহবিল",
         ];
 
         $defaultExpense = [

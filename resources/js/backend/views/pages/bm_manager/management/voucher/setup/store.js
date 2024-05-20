@@ -40,6 +40,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         },
         store: async function (form, supportVoucher) {
             let formData = new FormData(form);
+            formData.append("bm_admin", 1)
             let response = await axios.post("account-expenses", formData);
             return response;
         },
@@ -76,14 +77,10 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
                 window.location.reload();
             }
         },
-        SupportVoucherApprovedByAdmin: async function (id) {
-            var data = await window.s_approved();
-            if (data) {
-                let response = await axios.get(
-                    `support-voucher-approval-by-admin/${id}`
-                );
-                window.s_alert(response.data.message);
-            }
+        SupportVoucherApprovedByAdmin: async function (form) {
+            let formData = new FormData(form);
+            let response = await axios.post("support-voucher-approval-by-admin", formData);
+            return response;
         },
 
         VoucherCancelComment: async function (form) {

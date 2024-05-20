@@ -33,103 +33,97 @@
                                         <td colspan="2">ভাউচার</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            নাম :
-                                            {{
-                                                top_shit_data.voucher.department
-                                                    ?.full_name
-                                            }}
-                                        </td>
-                                        <td class="text-end">
-                                            প্রস্তুতকারী :
-                                            {{
-                                                top_shit_data.voucher.creator
-                                                    ? top_shit_data.voucher
-                                                          .creator?.full_name
-                                                    : top_shit_data.voucher
-                                                          .department?.full_name
-                                            }}
-                                        </td>
+                                        <td>নাম : {{ top_shit_data.voucher.department?.full_name }}</td>
+                                        <td class="text-end">প্রস্তুতকারী : {{ top_shit_data.voucher.creator ?
+                                    top_shit_data.voucher.creator?.full_name :
+                                    top_shit_data.voucher.department?.full_name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            খাত :
-                                            {{
-                                                top_shit_data.voucher
-                                                    .account_category?.title
-                                            }}
-                                        </td>
-                                        <td class="text-end">
-                                            তারিখ :
-                                            {{ top_shit_data.voucher.date }}
-                                        </td>
+                                        <td>খাত : {{ top_shit_data.voucher.account_category?.title }}</td>
+                                        <td class="text-end">তারিখ : {{ top_shit_data.voucher.date }}</td>
                                     </tr>
                                     <tr>
-                                        <td>বিবরণ</td>
+                                        <td>বিবরণ </td>
                                         <td class="text-end">পরিমান</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        v-for="sVoucher in item"
-                                        :key="sVoucher.id"
-                                    >
+                                    <tr>
+                                        <td colspan="2">
+                                            <table class="table text-center">
+                                                <tr>
+                                                    <td style="width: 295px;"></td>
+                                                    <td style="width: 100px;">Sompadok</td>
+                                                    <td style="width: 100px;">BM Support</td>
+                                                    <td style="width: 100px;">BM Admin </td>
+                                                    <td style="width: 100px;">CP </td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr v-for="sVoucher in item" :key="sVoucher.id">
                                         <td>
                                             <div>
-                                                <span>
-                                                    <router-link
-                                                        :to="{
-                                                            name: 'CpCreateVoucher',
-                                                            query: {
-                                                                id: sVoucher.id,
-                                                            },
-                                                        }"
-                                                        class=""
-                                                    >
-                                                        <i
-                                                            class="fa text-warning fa-pencil"
-                                                        ></i>
+                                                <span v-if="!sVoucher.approved_by_upperadmin">
+                                                    <router-link :to="{
+                                    name: `CpCreateVoucher`,
+                                    query: {
+                                        id: sVoucher.id,
+                                    },
+                                }" class="">
+                                                        <i class="fa text-warning fa-pencil"></i>
                                                         Edit
                                                     </router-link>
 
                                                 </span>
-
+                                                <span class="mx-2" v-if="!sVoucher.approved_by_upperadmin">
+                                                    <a @click.prevent="
+                                    support_voucher_delete(
+                                        sVoucher.id
+                                    )
+                                    " href="#" class="">
+                                                        <i class="fa text-danger fa-trash"></i>
+                                                        Delete
+                                                    </a>
+                                                </span>
                                                 <span class="border-start ps-2">
-                                                    {{
-                                                        sVoucher.description ??
-                                                        "asdfasdf"
-                                                    }}
+                                                    {{ sVoucher.description ?? "" }}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td class="text-end">
-                                            {{ sVoucher.amount }}
+                                        <td>
+
+                                            <table class="table text-center">
+                                                <tr>
+                                                    <td style="width: 100px;"> <i class="fa"
+                                                            :class="sVoucher.approved_by_admin ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td style="width: 100px;"><i class="fa"
+                                                            :class="sVoucher.approved_by_sp_bm ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td style="width: 100px;"><i class="fa"
+                                                            :class="sVoucher.approved_by_bm ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td style="width: 100px;"><i class="fa"
+                                                            :class="sVoucher.approved_by_cp ? 'fa-check-circle-o text-success' : 'fa-times-circle text-danger'"></i>
+                                                    </td>
+                                                    <td class="text-end">{{ sVoucher.amount }}</td>
+                                                </tr>
+                                            </table>
+
                                         </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td>
-                                            কথায় :
-                                            {{
-                                                convertAmount(
-                                                    item?.reduce(
-                                                        (t, i) =>
-                                                            (t += i.amount),
-                                                        0
-                                                    )
-                                                )
-                                            }}
+                                            কথায় : {{ convertAmount(item?.reduce((t, i) => (t += i.amount), 0)) }}
                                         </td>
                                         <td class="text-end">
                                             <div v-if="Array.isArray(item)">
-                                                {{
-                                                    item?.reduce(
-                                                        (t, i) =>
-                                                            (t += i.amount),
-                                                        0
-                                                    )
-                                                }}
+
+                                                {{ item?.reduce((t, i) => (t += i.amount), 0) }}
                                             </div>
                                         </td>
                                     </tr>

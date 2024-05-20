@@ -11,7 +11,17 @@ export const account_category_setup_store = defineStore("account_category_setup_
         doubleCount: (state) => state.count * 2,
     },
     actions: {
-        all: async function (url) {
+        allIncome: async function (url) {
+            let response;
+            // let page = `?page=${pageLimit}`;
+            if (url) {
+                response = await axios.get(url);
+            } else {
+                response = await axios.get(url);
+            }
+            this.all_data = response.data.data;
+        },
+        allExpense: async function (url) {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {

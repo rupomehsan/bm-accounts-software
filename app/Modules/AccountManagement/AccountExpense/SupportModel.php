@@ -44,6 +44,7 @@ class SupportModel extends EloquentModel
         $rolesSerial = [
             "8" =>  'support_admin',
             "7" =>  'approved_by_admin',
+            "6" =>  'approved_by_sp_bm',
             "5" =>  'approved_by_bm',
             "3" => 'approved_by_cp'
         ];
@@ -51,6 +52,7 @@ class SupportModel extends EloquentModel
         $roleSerial2 = [
             "8", //  'support_admin',
             "7", //  'approved_by_admin',
+            "6", //  'approved_by_bm',
             "5", //  'approved_by_bm',
             "3", // 'approved_by_cp'
         ];

@@ -36,7 +36,7 @@ CREATE TABLE `account_branch_targets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,6 @@ CREATE TABLE `account_branch_targets` (
 
 LOCK TABLES `account_branch_targets` WRITE;
 /*!40000 ALTER TABLE `account_branch_targets` DISABLE KEYS */;
-INSERT INTO `account_branch_targets` VALUES (1,'72','2024-05-15','[\"werwqrqwer\"]',10,5000.00,'monthly',NULL,'1501118','active','2024-05-15 03:12:51','2024-05-15 03:12:51');
 /*!40000 ALTER TABLE `account_branch_targets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +68,7 @@ CREATE TABLE `account_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +77,7 @@ CREATE TABLE `account_categories` (
 
 LOCK TABLES `account_categories` WRITE;
 /*!40000 ALTER TABLE `account_categories` DISABLE KEYS */;
-INSERT INTO `account_categories` VALUES (1,'মাসিক আয়',' ',1,'income',NULL,'masik-ay-3771802',1,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(2,'বার্ষিক আয়',' ',1,'income',NULL,'barshik-ay-2622529',1,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(3,'ত্রাণ',' ',1,'income',NULL,'tran-3473609',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(4,'শহীদ ফান্ড',' ',1,'income',NULL,'sheed-fand-4274832',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(5,'কর্যে হাসানা',' ',1,'income',NULL,'krze-hasana-4205414',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(6,'বকেয়া আদায়',' ',1,'income',NULL,'bkeya-aday-2886236',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(7,'নববর্ষ বাবদ',' ',1,'income',NULL,'nbbrsh-babd-7937828',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(8,'ফ্লাট আয়',' ',1,'income',NULL,'flat-ay-9268786',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(9,'মওকুফ',' ',1,'income',NULL,'mookuf-6659500',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(10,'বিশেষ আয়',' ',1,'income',NULL,'bisesh-ay-94010535',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(11,'ঘাটতি',' ',1,'income',NULL,'ghatti-96511875',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(12,'ভুর্তুকি',' ',1,'income',NULL,'vurtuki-22012178',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(13,'ব্যাঙ্ক জমার মাধ্যমে আয়',' ',1,'income',NULL,'bzank-jmar-madhzme-ay-45813856',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(14,'অগ্রিম আয়',' ',1,'income',NULL,'ogrim-ay-30014156',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(15,'এককালীন',' ',1,'income',NULL,'ekkaleen-36715275',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(16,'ঋণ পরিশোধ',' ',1,'income',NULL,'rrin-prisodh-33416401',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(17,'জামানত',' ',1,'income',NULL,'jamant-20717192',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(18,'সিলেবাসের বই ক্রয় বাবদ',' ',1,'expense',NULL,'silebaser-bi-kry-babd-92018181',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(19,'যাতায়াত',' ',1,'expense',NULL,'zatayat-44319732',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(20,'আপ্যায়ন',' ',1,'expense',NULL,'apzayn-27020559',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(21,'মোবাইল রিচার্জ',' ',1,'expense',NULL,'mobail-ricarj-83421354',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(22,'পরিবহন খরচ',' ',1,'expense',NULL,'pribhn-khrc-16122406',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(23,'অফিস স্টেশনারী',' ',1,'expense',NULL,'ofis-stesnaree-58323557',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(24,'মাসিক বেতন',' ',1,'expense',NULL,'masik-betn-57024421',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(25,'সৈজন্য প্রদান',' ',1,'expense',NULL,'soijnz-prdan-36625657',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(26,'অফিস ভাড়া',' ',1,'expense',NULL,'ofis-vara-31426361',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(27,'বাসা ভাড়া',' ',1,'expense',NULL,'basa-vara-77727373',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(28,'গোডাউন ভাড়া',' ',1,'expense',NULL,'godaun-vara-99728457',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(29,'ইন্টারনেট বিল (সংযোগসহ)',' ',1,'expense',NULL,'intarnet-bil-sngzogsh-88229245',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(30,'জামানত',' ',1,'expense',NULL,'jamant-44730926',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(31,'ট্রেড লাইসেন্স',' ',1,'expense',NULL,'tred-laisens-57231571',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(32,'সৈজন্য',' ',1,'expense',NULL,'soijnz-66532836',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(33,'মওকুফ',' ',1,'expense',NULL,'mookuf-98433623',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(34,'বস্তা ক্রয় / কাটুন বিল',' ',1,'expense',NULL,'bsta-kry-katun-bil-87634192',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(35,'পত্রিকা বিল',' ',1,'expense',NULL,'ptrika-bil-75135329',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(36,'সম্পদ ক্রয়',' ',1,'expense',NULL,'smpd-kry-77136986',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(37,'মোবাইল ক্রয়',' ',1,'expense',NULL,'mobail-kry-13537875',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(38,'পানি বিল',' ',1,'expense',NULL,'pani-bil-75038612',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(39,'বিবিদ',' ',1,'expense',NULL,'bibid-27739715',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(40,'এককালিন',' ',1,'expense',NULL,'ekkalin-67140238',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(41,'ঈদ সামগ্রি',' ',1,'expense',NULL,'eed-samgri-24041249',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(42,'মাল ফেরত',' ',1,'expense',NULL,'mal-fert-10742110',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(43,'ব্যাংক কর্তন',' ',1,'expense',NULL,'bzangk-krtn-12943899',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(44,'চিকিৎসা বাবদ',' ',1,'expense',NULL,'cikittsa-babd-72644906',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(45,'ফ্ল্যাট বাবদ খরচ',' ',1,'expense',NULL,'flzat-babd-khrc-39945947',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(46,'নসিহত',' ',1,'expense',NULL,'nsiht-19146127',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(47,'আহবান',' ',1,'expense',NULL,'ahban-70547550',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(48,'নববর্ষ উদ্ভোদন',' ',1,'expense',NULL,'nbbrsh-udvodn-92948965',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(49,'নববর্ষ অনুষ্ঠান',' ',1,'expense',NULL,'nbbrsh-onushthan-57249638',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(50,'ব্যংক নগদ জমার মাধ্যমে',' ',1,'expense',NULL,'bzngk-ngd-jmar-madhzme-74950548',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(51,'ঘাটতি',' ',1,'expense',NULL,'ghatti-95951599',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(52,'মেরামত',' ',1,'expense',NULL,'meramt-68252267',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(53,'নববর্ষ',' ',1,'expense',NULL,'nbbrsh-57553602',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(54,'সম্পদ ক্রয়',' ',1,'expense',NULL,'smpd-kry-11454312',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(55,'ডেকরেশন',' ',1,'expense',NULL,'dekresn-85555270',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(56,'ঋণ প্রদান',' ',1,'expense',NULL,'rrin-prdan-26156558',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(57,'ভি আই পি ব্যাগ',' ',1,'expense',NULL,'vi-ai-pi-bzag-11257413',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(58,'আবাসন',' ',1,'expense',NULL,'abasn-94558867',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(59,'পরিমান',' ',1,'expense',NULL,'priman-31259653',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(60,'যানবাহন',' ',1,'expense',NULL,'zanbahn-93960991',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(61,'সম্পদ',' ',1,'expense',NULL,'smpd-42861813',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(62,'চিকিৎসা',' ',1,'expense',NULL,'cikittsa-17362686',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(63,'ছাত্রকল্যান',' ',1,'expense',NULL,'chatrklzan-58563204',0,'active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(64,'শিক্ষা সহায়তা',' ',1,'expense',NULL,'siksha-shayta-83264569',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(65,'প্রো.বাস্তবায়ন',' ',1,'expense',NULL,'probastbayn-66165975',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(66,'প্রশিক্ষন',' ',1,'expense',NULL,'prsikshn-74466832',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(67,'শহীদ পরিবার',' ',1,'expense',NULL,'sheed-pribar-73967683',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(68,'মামলা',' ',1,'expense',NULL,'mamla-10968516',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(69,'শিশুকল্যাণ',' ',1,'expense',NULL,'sisuklzan-61569689',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(70,'দা.কার্যক্রম',' ',1,'expense',NULL,'dakarzkrm-95570504',0,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(71,'ঋণ ডিলিট',' ',1,'expense',NULL,'rrin-dilit-21471447',1,'active','2024-05-15 03:08:10','2024-05-15 03:08:10'),(72,'আয় সমন্নয়',' ',1,'expense',NULL,'ay-smnny-60272575',1,'active','2024-05-15 03:08:10','2024-05-15 03:08:10');
+INSERT INTO `account_categories` VALUES (1,'মাসিক আয়',' ',1,'income',NULL,'masik-ay-7551622',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(2,'বার্ষিক আয়',' ',1,'income',NULL,'barshik-ay-2002460',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(3,'ত্রাণ',' ',1,'income',NULL,'tran-3243961',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(4,'শহীদ ফান্ড',' ',1,'income',NULL,'sheed-fand-3134109',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(5,'কর্যে হাসানা',' ',1,'income',NULL,'krze-hasana-1435453',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(6,'বকেয়া আদায়',' ',1,'income',NULL,'bkeya-aday-4096566',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(7,'নববর্ষ বাবদ',' ',1,'income',NULL,'nbbrsh-babd-4487377',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(8,'ফ্লাট আয়',' ',1,'income',NULL,'flat-ay-8208138',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(9,'মওকুফ',' ',1,'income',NULL,'mookuf-1899315',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(10,'বিশেষ আয়',' ',1,'income',NULL,'bisesh-ay-25810356',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(11,'ঘাটতি',' ',1,'income',NULL,'ghatti-87911223',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(12,'ভুর্তুকি',' ',1,'income',NULL,'vurtuki-99912403',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(13,'ব্যাঙ্ক জমার মাধ্যমে আয়',' ',1,'income',NULL,'bzank-jmar-madhzme-ay-45913564',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(14,'অগ্রিম আয়',' ',1,'income',NULL,'ogrim-ay-45714715',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(15,'এককালীন',' ',1,'income',NULL,'ekkaleen-49715701',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(16,'ঋণ পরিশোধ',' ',1,'income',NULL,'rrin-prisodh-92516629',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(17,'জামানত',' ',1,'income',NULL,'jamant-98317601',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(18,'কল্যান তহবিল',' ',1,'income',NULL,'klzan-thbil-52918777',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(19,'সিলেবাসের বই ক্রয় বাবদ',' ',1,'expense',NULL,'silebaser-bi-kry-babd-37219370',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(20,'যাতায়াত',' ',1,'expense',NULL,'zatayat-29120964',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(21,'আপ্যায়ন',' ',1,'expense',NULL,'apzayn-46121245',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(22,'মোবাইল রিচার্জ',' ',1,'expense',NULL,'mobail-ricarj-52322852',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(23,'পরিবহন খরচ',' ',1,'expense',NULL,'pribhn-khrc-96423199',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(24,'অফিস স্টেশনারী',' ',1,'expense',NULL,'ofis-stesnaree-91524616',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(25,'মাসিক বেতন',' ',1,'expense',NULL,'masik-betn-93725978',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(26,'সৈজন্য প্রদান',' ',1,'expense',NULL,'soijnz-prdan-27426417',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(27,'অফিস ভাড়া',' ',1,'expense',NULL,'ofis-vara-49627416',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(28,'বাসা ভাড়া',' ',1,'expense',NULL,'basa-vara-45428458',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(29,'গোডাউন ভাড়া',' ',1,'expense',NULL,'godaun-vara-46829566',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(30,'ইন্টারনেট বিল (সংযোগসহ)',' ',1,'expense',NULL,'intarnet-bil-sngzogsh-38530102',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(31,'জামানত',' ',1,'expense',NULL,'jamant-36531712',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(32,'ট্রেড লাইসেন্স',' ',1,'expense',NULL,'tred-laisens-39432362',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(33,'সৈজন্য',' ',1,'expense',NULL,'soijnz-44233143',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(34,'মওকুফ',' ',1,'expense',NULL,'mookuf-96634488',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(35,'বস্তা ক্রয় / কাটুন বিল',' ',1,'expense',NULL,'bsta-kry-katun-bil-52135539',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(36,'পত্রিকা বিল',' ',1,'expense',NULL,'ptrika-bil-90236647',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(37,'সম্পদ ক্রয়',' ',1,'expense',NULL,'smpd-kry-33737272',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(38,'মোবাইল ক্রয়',' ',1,'expense',NULL,'mobail-kry-17438152',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(39,'পানি বিল',' ',1,'expense',NULL,'pani-bil-76939587',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(40,'বিবিদ',' ',1,'expense',NULL,'bibid-13540413',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(41,'এককালিন',' ',1,'expense',NULL,'ekkalin-41941740',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(42,'ঈদ সামগ্রি',' ',1,'expense',NULL,'eed-samgri-91342744',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(43,'মাল ফেরত',' ',1,'expense',NULL,'mal-fert-77643756',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(44,'ব্যাংক কর্তন',' ',1,'expense',NULL,'bzangk-krtn-69344566',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(45,'চিকিৎসা বাবদ',' ',1,'expense',NULL,'cikittsa-babd-77445895',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(46,'ফ্ল্যাট বাবদ খরচ',' ',1,'expense',NULL,'flzat-babd-khrc-49546138',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(47,'নসিহত',' ',1,'expense',NULL,'nsiht-35947567',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(48,'আহবান',' ',1,'expense',NULL,'ahban-29348613',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(49,'নববর্ষ উদ্ভোদন',' ',1,'expense',NULL,'nbbrsh-udvodn-68949887',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(50,'নববর্ষ অনুষ্ঠান',' ',1,'expense',NULL,'nbbrsh-onushthan-10350649',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(51,'ব্যংক নগদ জমার মাধ্যমে',' ',1,'expense',NULL,'bzngk-ngd-jmar-madhzme-18151960',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(52,'ঘাটতি',' ',1,'expense',NULL,'ghatti-90152142',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(53,'মেরামত',' ',1,'expense',NULL,'meramt-85653787',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(54,'নববর্ষ',' ',1,'expense',NULL,'nbbrsh-55654485',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(55,'সম্পদ ক্রয়',' ',1,'expense',NULL,'smpd-kry-81555899',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(56,'ডেকরেশন',' ',1,'expense',NULL,'dekresn-86256296',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(57,'ঋণ প্রদান',' ',1,'expense',NULL,'rrin-prdan-57257460',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(58,'ভি আই পি ব্যাগ',' ',1,'expense',NULL,'vi-ai-pi-bzag-92258195',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(59,'আবাসন',' ',1,'expense',NULL,'abasn-30159987',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(60,'পরিমান',' ',1,'expense',NULL,'priman-27560896',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(61,'যানবাহন',' ',1,'expense',NULL,'zanbahn-31861866',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(62,'সম্পদ',' ',1,'expense',NULL,'smpd-47062973',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(63,'চিকিৎসা',' ',1,'expense',NULL,'cikittsa-66363355',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(64,'ছাত্রকল্যান',' ',1,'expense',NULL,'chatrklzan-45564344',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(65,'শিক্ষা সহায়তা',' ',1,'expense',NULL,'siksha-shayta-71765468',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(66,'প্রো.বাস্তবায়ন',' ',1,'expense',NULL,'probastbayn-88766452',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(67,'প্রশিক্ষন',' ',1,'expense',NULL,'prsikshn-41267875',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(68,'শহীদ পরিবার',' ',1,'expense',NULL,'sheed-pribar-64468413',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(69,'মামলা',' ',1,'expense',NULL,'mamla-57469772',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(70,'শিশুকল্যাণ',' ',1,'expense',NULL,'sisuklzan-66970244',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(71,'দা.কার্যক্রম',' ',1,'expense',NULL,'dakarzkrm-78671659',0,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(72,'ঋণ ডিলিট',' ',1,'expense',NULL,'rrin-dilit-83472878',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29'),(73,'আয় সমন্নয়',' ',1,'expense',NULL,'ay-smnny-43473619',1,'active','2024-05-20 03:05:29','2024-05-20 03:05:29');
 /*!40000 ALTER TABLE `account_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +128,7 @@ CREATE TABLE `account_expense_months` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +137,6 @@ CREATE TABLE `account_expense_months` (
 
 LOCK TABLES `account_expense_months` WRITE;
 /*!40000 ALTER TABLE `account_expense_months` DISABLE KEYS */;
-INSERT INTO `account_expense_months` VALUES (1,'2024-06',1,NULL,'6301389','active','2024-05-15 03:29:04','2024-05-15 03:29:04');
 /*!40000 ALTER TABLE `account_expense_months` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +156,7 @@ CREATE TABLE `account_expense_support_image_table` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +165,6 @@ CREATE TABLE `account_expense_support_image_table` (
 
 LOCK TABLES `account_expense_support_image_table` WRITE;
 /*!40000 ALTER TABLE `account_expense_support_image_table` DISABLE KEYS */;
-INSERT INTO `account_expense_support_image_table` VALUES (1,'uploads/voucher/2024-05-15-09331122829.png',NULL,'7471451','active','2024-05-15 03:33:11','2024-05-15 03:33:11'),(2,'uploads/voucher/2024-05-15-09344116114.png',NULL,'5222420','active','2024-05-15 03:34:41','2024-05-15 03:34:41'),(3,'uploads/voucher/2024-05-15-10013754622.png',NULL,'1813192','active','2024-05-15 04:01:37','2024-05-15 04:01:37'),(4,'uploads/voucher/2024-05-15-1025558721.JPG',NULL,'7014145','active','2024-05-15 04:25:55','2024-05-15 04:25:55'),(5,'uploads/voucher/2024-05-15-1227504915.png',NULL,'6205529','active','2024-05-15 06:27:50','2024-05-15 06:27:50'),(6,'uploads/voucher/2024-05-15-12355758164.png',NULL,'8396199','active','2024-05-15 06:35:57','2024-05-15 06:35:57');
 /*!40000 ALTER TABLE `account_expense_support_image_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,6 +186,7 @@ CREATE TABLE `account_expense_support_table` (
   `reason` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `approved_by_admin` tinyint NOT NULL DEFAULT '0',
+  `approved_by_sp_bm` tinyint NOT NULL DEFAULT '0',
   `approved_by_bm` tinyint NOT NULL DEFAULT '0',
   `approved_by_cp` tinyint NOT NULL DEFAULT '0',
   `is_canceled` tinyint NOT NULL DEFAULT '0',
@@ -205,7 +203,7 @@ CREATE TABLE `account_expense_support_table` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +212,6 @@ CREATE TABLE `account_expense_support_table` (
 
 LOCK TABLES `account_expense_support_table` WRITE;
 /*!40000 ALTER TABLE `account_expense_support_table` DISABLE KEYS */;
-INSERT INTO `account_expense_support_table` VALUES (1,1,NULL,67,5,'Mcashupdate','asdf','aaaa','this is package one',1,1,0,0,NULL,100,'এক শত',1,NULL,'2024-05-15',NULL,5,'8001310','active','2024-05-15 03:33:11','2024-05-15 03:33:11'),(2,2,9,69,5,'Mcashupdate','asdf','aaaa','Testing',1,1,1,0,NULL,100,'এক শত',2,NULL,'2024-05-15',NULL,5,'4082815','active','2024-05-15 03:34:41','2024-05-15 04:01:59'),(3,2,10,69,5,'Mcashupdate','asdf','sdf','asdfasdf',0,1,1,0,NULL,500,'পাঁচ শত',3,NULL,'2024-05-15',NULL,5,'7483327','active','2024-05-15 04:01:37','2024-05-15 04:02:29'),(4,3,NULL,68,7,'Md Ehsan','asdfffff','asdf','asdfasdf',1,0,0,0,NULL,1000,'এক হাজার',4,NULL,'2024-05-15',NULL,7,'1764734','active','2024-05-15 04:25:55','2024-05-15 04:25:55'),(5,4,NULL,31,8,'shefat masum','asdf','asdf','asdf',0,0,0,0,NULL,200,'দুই শত',5,NULL,'2024-05-15',20,8,'9975487','active','2024-05-15 06:27:50','2024-05-15 06:27:50'),(6,5,NULL,32,8,'shefat masum','asdf','asdf','asdf',0,0,0,0,NULL,2090,'দুই হাজারনব্বই',6,NULL,'2024-05-15',74,8,'7716229','active','2024-05-15 06:35:57','2024-05-15 06:35:57');
 /*!40000 ALTER TABLE `account_expense_support_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +237,7 @@ CREATE TABLE `account_expenses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +246,6 @@ CREATE TABLE `account_expenses` (
 
 LOCK TABLES `account_expenses` WRITE;
 /*!40000 ALTER TABLE `account_expenses` DISABLE KEYS */;
-INSERT INTO `account_expenses` VALUES (1,0,5,67,100,'2024-05-15','2024-06',NULL,5,'6821214','active','2024-05-15 03:33:11','2024-05-15 03:33:11'),(2,1,5,69,600,'2024-05-15','2024-06',NULL,5,'9362927','active','2024-05-15 03:34:41','2024-05-15 04:02:29'),(3,0,7,68,1000,'2024-05-15','2024-06',NULL,7,'9703516','active','2024-05-15 04:25:55','2024-05-15 04:25:55'),(4,0,7,31,200,'2024-05-15','2024-06',20,8,'3684723','active','2024-05-15 06:27:50','2024-05-15 06:27:50'),(5,0,7,32,2090,'2024-05-15','2024-06',74,8,'8745931','active','2024-05-15 06:35:57','2024-05-15 06:35:57');
 /*!40000 ALTER TABLE `account_expenses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +307,7 @@ CREATE TABLE `account_incomes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +316,6 @@ CREATE TABLE `account_incomes` (
 
 LOCK TABLES `account_incomes` WRITE;
 /*!40000 ALTER TABLE `account_incomes` DISABLE KEYS */;
-INSERT INTO `account_incomes` VALUES (1,1,1,NULL,66,NULL,10,'20','2024-05-15','hkjhk',10000.00,'দশ হাজার',NULL,NULL,NULL,'9991514','active','2024-05-15 03:14:07','2024-05-15 03:14:07'),(2,2,1,NULL,70,NULL,NULL,'1','2024-05-20','koo',1000.00,'এক হাজার',NULL,NULL,NULL,'7362422','active','2024-05-15 03:16:04','2024-05-15 03:16:04');
 /*!40000 ALTER TABLE `account_incomes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +348,7 @@ CREATE TABLE `account_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -362,7 +357,6 @@ CREATE TABLE `account_logs` (
 
 LOCK TABLES `account_logs` WRITE;
 /*!40000 ALTER TABLE `account_logs` DISABLE KEYS */;
-INSERT INTO `account_logs` VALUES (1,10,'branch',NULL,'2024-05-14 18:00:00','Mr branch',10000.00,66,2,2,'','20',0,1,'hkjhk',NULL,'9881365',1,'2024-05-15 03:14:07','2024-05-15 03:14:07'),(2,NULL,'',NULL,'2024-05-19 18:00:00','',1000.00,70,2,1,'','1',0,1,'koo',NULL,'2112700',1,'2024-05-15 03:16:04','2024-05-15 03:16:04'),(3,15,'division_admin',NULL,'2024-05-14 18:00:00',NULL,5000.00,71,1,NULL,NULL,NULL,1,0,'Account balance for loan  added, related log id: ',NULL,'4173830',1,'2024-05-15 03:21:22','2024-05-15 03:21:22'),(4,15,'division_admin',NULL,NULL,NULL,5000.00,16,1,NULL,NULL,NULL,0,1,'Account balance for loan  added, related log id: ',NULL,'6704561',1,'2024-05-15 03:21:57','2024-05-15 03:21:57'),(5,16,'division_admin',NULL,'2024-05-15 03:27:18','সাহিত্য',5000.00,NULL,NULL,NULL,NULL,NULL,1,0,NULL,NULL,'8605281',1,'2024-05-15 03:27:18','2024-05-15 03:27:18'),(6,16,'division_admin',NULL,'2024-05-15 03:27:42','সাহিত্য',5000.00,17,NULL,NULL,NULL,NULL,0,1,NULL,NULL,'5456323',1,'2024-05-15 03:27:42','2024-05-15 03:27:42'),(7,17,'division_admin',NULL,'2024-05-15 03:28:05','গবেষণা',5000.00,26,NULL,NULL,NULL,NULL,1,0,NULL,NULL,'4037343',1,'2024-05-15 03:28:05','2024-05-15 03:28:05'),(8,17,'division_admin',NULL,'2024-05-15 03:28:20','গবেষণা',1000.00,26,NULL,NULL,NULL,NULL,1,0,NULL,NULL,'4098495',1,'2024-05-15 03:28:20','2024-05-15 03:28:20'),(9,3,'cp','','2024-05-14 18:00:00','Mr cp',100.00,69,NULL,NULL,NULL,NULL,1,0,'',NULL,'2609689',1,'2024-05-15 04:01:59','2024-05-15 04:01:59'),(10,3,'cp','','2024-05-14 18:00:00','Mr cp',500.00,69,NULL,NULL,NULL,NULL,1,0,'',NULL,'63610222',1,'2024-05-15 04:02:29','2024-05-15 04:02:29');
 /*!40000 ALTER TABLE `account_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +386,7 @@ CREATE TABLE `account_numbers` (
 
 LOCK TABLES `account_numbers` WRITE;
 /*!40000 ALTER TABLE `account_numbers` DISABLE KEYS */;
-INSERT INTO `account_numbers` VALUES (1,2,'2812',NULL,'4081778',1,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(2,2,'2813',NULL,'7142279',1,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(3,2,'2814',NULL,'5343975',1,'2024-05-15 03:08:10','2024-05-15 03:08:10');
+INSERT INTO `account_numbers` VALUES (1,2,'2812',NULL,'2721245',1,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(2,2,'2813',NULL,'7962228',1,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(3,2,'2814',NULL,'4123608',1,'2024-05-20 03:05:29','2024-05-20 03:05:29');
 /*!40000 ALTER TABLE `account_numbers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,7 +407,7 @@ CREATE TABLE `account_receipt_book_assigns` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,7 +416,6 @@ CREATE TABLE `account_receipt_book_assigns` (
 
 LOCK TABLES `account_receipt_book_assigns` WRITE;
 /*!40000 ALTER TABLE `account_receipt_book_assigns` DISABLE KEYS */;
-INSERT INTO `account_receipt_book_assigns` VALUES (1,5,1,NULL,'4391238','active','2024-05-15 03:11:51','2024-05-15 03:11:51'),(2,16,2,NULL,'4032281','active','2024-05-15 03:12:10','2024-05-15 03:12:10');
 /*!40000 ALTER TABLE `account_receipt_book_assigns` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,7 +438,7 @@ CREATE TABLE `account_receipt_books` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,7 +447,6 @@ CREATE TABLE `account_receipt_books` (
 
 LOCK TABLES `account_receipt_books` WRITE;
 /*!40000 ALTER TABLE `account_receipt_books` DISABLE KEYS */;
-INSERT INTO `account_receipt_books` VALUES (1,1,1,50,1,NULL,'8871840','active','2024-05-15 03:10:00','2024-05-15 03:11:38'),(2,2,51,100,1,NULL,'9312344','active','2024-05-15 03:10:16','2024-05-15 03:11:11');
 /*!40000 ALTER TABLE `account_receipt_books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -484,7 +476,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'cash',NULL,NULL,'3561754',1,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(2,'bank_account',NULL,NULL,'2162304',1,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(3,'bkash',NULL,NULL,'6733910',1,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(4,'nagad',NULL,NULL,'5334863',1,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(5,'rocket',NULL,NULL,'6655744',1,'2024-05-15 03:08:10','2024-05-15 03:08:10');
+INSERT INTO `accounts` VALUES (1,'cash',NULL,NULL,'3561791',1,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(2,'bank_account',NULL,NULL,'3242413',1,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(3,'bkash',NULL,NULL,'1143137',1,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(4,'nagad',NULL,NULL,'8444201',1,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(5,'rocket',NULL,NULL,'2835804',1,'2024-05-20 03:05:29','2024-05-20 03:05:29');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -958,7 +950,7 @@ CREATE TABLE `cp_application_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -967,7 +959,6 @@ CREATE TABLE `cp_application_categories` (
 
 LOCK TABLES `cp_application_categories` WRITE;
 /*!40000 ALTER TABLE `cp_application_categories` DISABLE KEYS */;
-INSERT INTO `cp_application_categories` VALUES (1,'Moukuf','asdf',NULL,'moukuf-4441622','active','2024-05-15 03:22:29','2024-05-15 03:22:29');
 /*!40000 ALTER TABLE `cp_application_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -990,7 +981,7 @@ CREATE TABLE `cp_application_formats` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -999,7 +990,6 @@ CREATE TABLE `cp_application_formats` (
 
 LOCK TABLES `cp_application_formats` WRITE;
 /*!40000 ALTER TABLE `cp_application_formats` DISABLE KEYS */;
-INSERT INTO `cp_application_formats` VALUES (5,1,'name','text',NULL,NULL,'2625340','active','2024-05-15 03:23:45','2024-05-15 03:23:45'),(6,1,'phone','text',NULL,NULL,'8546430','active','2024-05-15 03:23:45','2024-05-15 03:23:45'),(7,1,'address','text',NULL,NULL,'7647759','active','2024-05-15 03:23:45','2024-05-15 03:23:45'),(8,1,'description','textarea',NULL,NULL,'7698539','active','2024-05-15 03:23:45','2024-05-15 03:23:45');
 /*!40000 ALTER TABLE `cp_application_formats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1022,7 +1012,7 @@ CREATE TABLE `cp_application_values` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1031,7 +1021,6 @@ CREATE TABLE `cp_application_values` (
 
 LOCK TABLES `cp_application_values` WRITE;
 /*!40000 ALTER TABLE `cp_application_values` DISABLE KEYS */;
-INSERT INTO `cp_application_values` VALUES (5,1,NULL,'name','asdfas',NULL,'name-1935995','active','2024-05-15 03:24:41','2024-05-15 03:24:41'),(6,1,NULL,'phone','234234',NULL,'phone-8816122','active','2024-05-15 03:24:41','2024-05-15 03:24:41'),(7,1,NULL,'address','dfasdf',NULL,'address-8477598','active','2024-05-15 03:24:41','2024-05-15 03:24:41'),(8,1,NULL,'description','qwerqwerqwerfasdfasdfasdf',NULL,'description-5558704','active','2024-05-15 03:24:41','2024-05-15 03:24:41'),(9,2,NULL,'name','aasdfasd',NULL,'name-8279712','active','2024-05-15 03:26:46','2024-05-15 03:26:46'),(10,2,NULL,'phone','asdf',NULL,'phone-30510954','active','2024-05-15 03:26:46','2024-05-15 03:26:46'),(11,2,NULL,'address','asdf',NULL,'address-87711121','active','2024-05-15 03:26:46','2024-05-15 03:26:46'),(12,2,NULL,'description','asdf',NULL,'description-94212187','active','2024-05-15 03:26:46','2024-05-15 03:26:46');
 /*!40000 ALTER TABLE `cp_application_values` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1059,7 +1048,7 @@ CREATE TABLE `cp_applications` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1068,7 +1057,6 @@ CREATE TABLE `cp_applications` (
 
 LOCK TABLES `cp_applications` WRITE;
 /*!40000 ALTER TABLE `cp_applications` DISABLE KEYS */;
-INSERT INTO `cp_applications` VALUES (1,1,16,NULL,NULL,1,'adsfadsf','domain kaj korce na',0,NULL,NULL,'6971586','active','2024-05-15 03:24:03','2024-05-15 03:26:03'),(2,1,17,NULL,NULL,0,NULL,'test subject',0,NULL,NULL,'3832875','active','2024-05-15 03:26:46','2024-05-15 03:26:46');
 /*!40000 ALTER TABLE `cp_applications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1151,7 +1139,7 @@ CREATE TABLE `house_rents` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1160,7 +1148,6 @@ CREATE TABLE `house_rents` (
 
 LOCK TABLES `house_rents` WRITE;
 /*!40000 ALTER TABLE `house_rents` DISABLE KEYS */;
-INSERT INTO `house_rents` VALUES (1,17,8,'dfasdf','sdfasdf',1000,'2024-05-15',NULL,'8401175','active','2024-05-15 03:28:20','2024-05-15 03:28:20');
 /*!40000 ALTER TABLE `house_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1190,7 +1177,7 @@ CREATE TABLE `jamanot_payments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1199,7 +1186,6 @@ CREATE TABLE `jamanot_payments` (
 
 LOCK TABLES `jamanot_payments` WRITE;
 /*!40000 ALTER TABLE `jamanot_payments` DISABLE KEYS */;
-INSERT INTO `jamanot_payments` VALUES (1,16,1,6,17,5000,'পাঁচ হাজার','2024-05-15',NULL,'sdsdf','0','paid',NULL,'5541562','active','2024-05-15 03:27:42','2024-05-15 03:27:42');
 /*!40000 ALTER TABLE `jamanot_payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1232,7 +1218,7 @@ CREATE TABLE `jamanot_providers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1241,7 +1227,6 @@ CREATE TABLE `jamanot_providers` (
 
 LOCK TABLES `jamanot_providers` WRITE;
 /*!40000 ALTER TABLE `jamanot_providers` DISABLE KEYS */;
-INSERT INTO `jamanot_providers` VALUES (1,16,5,17,'test subject','asdf','asd',5000,'পাঁচ হাজার',5,'2024-05-15','2024-05-15','uploads/jamanot/2024-05-15-09271887944.jpeg','asdfasd','paid',NULL,'5601363','active','2024-05-15 03:27:18','2024-05-15 03:27:42');
 /*!40000 ALTER TABLE `jamanot_providers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1271,7 +1256,7 @@ CREATE TABLE `loan_payments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1280,7 +1265,6 @@ CREATE TABLE `loan_payments` (
 
 LOCK TABLES `loan_payments` WRITE;
 /*!40000 ALTER TABLE `loan_payments` DISABLE KEYS */;
-INSERT INTO `loan_payments` VALUES (1,15,1,4,56,5000,'পাঁচ হাজার','2024-05-15',NULL,'fewwer','0',NULL,NULL,'6501315','active','2024-05-15 03:21:57','2024-05-15 03:21:57');
 /*!40000 ALTER TABLE `loan_payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1314,7 +1298,7 @@ CREATE TABLE `loan_providers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1323,7 +1307,6 @@ CREATE TABLE `loan_providers` (
 
 LOCK TABLES `loan_providers` WRITE;
 /*!40000 ALTER TABLE `loan_providers` DISABLE KEYS */;
-INSERT INTO `loan_providers` VALUES (1,15,3,56,5000,'পাঁচ হাজার',5,'2024-05-15','2024-05-15','buy car','sadf','uploads/loan/2024-05-15-09212272324.JPG','kjhohuih','Due',5000,0,NULL,'2291159','active','2024-05-15 03:21:22','2024-05-15 03:21:57');
 /*!40000 ALTER TABLE `loan_providers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1410,7 +1393,6 @@ CREATE TABLE `oauth_access_tokens` (
 
 LOCK TABLES `oauth_access_tokens` WRITE;
 /*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
-INSERT INTO `oauth_access_tokens` VALUES ('0d9f06a1b48b80d2a2706edb3ae228a725e13a59ab3b212ab97bd6ea478c625ff506c37c85f4dfec',7,1,'accessToken','[]',0,'2024-05-15 04:53:48','2024-05-15 04:53:48','2025-05-15 10:53:48'),('64a79152b29f709d240e2ff8cc42adae50f811ccf3907933d626089675d284095cc040267dde64d0',8,1,'accessToken','[]',0,'2024-05-15 06:35:31','2024-05-15 06:35:31','2025-05-15 12:35:31'),('665ab35038123b62fc0f4122a5afb3a30984b232ad2086a1fd9969afcdb330cf754b933e0141f3cc',8,1,'accessToken','[]',1,'2024-05-15 05:14:32','2024-05-15 05:14:32','2025-05-15 11:14:32'),('679894b6d35d7ba5e1fd2336e923b73db7b22fed77c976788db61db40944f86744f41b3e0f61b5c2',7,1,'accessToken','[]',1,'2024-05-15 04:21:32','2024-05-15 04:21:33','2025-05-15 10:21:32'),('6f4d15011055e8cfcebf930f007e5cdec94913a1b33a689572fb74b7afdc56fd1cdc2b7bf9ec8ab7',5,1,'accessToken','[]',0,'2024-05-15 03:08:45','2024-05-15 03:08:45','2025-05-15 09:08:45'),('7d68ce043d1253f439817252eb547da6c1b4a3ff9e01c240a248ec2fb5cc4af759f9bfebcbcdfafd',7,1,'accessToken','[]',1,'2024-05-15 04:25:25','2024-05-15 04:25:25','2025-05-15 10:25:25'),('8630f66f4291222f3b500b5aa2705e42b885e1ee8ef27dcbd8738bf901531ed69a626c4029de3242',3,1,'accessToken','[]',1,'2024-05-15 04:25:09','2024-05-15 04:25:09','2025-05-15 10:25:09'),('919e6e0852df3ee6a9f6a8787a4ddbacdca11c5992611d26387cb8a92d36859406de03dc3a5efcc5',3,1,'accessToken','[]',0,'2024-05-15 04:26:43','2024-05-15 04:26:43','2025-05-15 10:26:43'),('d5d7bceaa7dc797e0458feace04a2dff60d168fd28a32c2a37c79cf3ee141b3b7d46d219e2b90b89',3,1,'accessToken','[]',1,'2024-05-15 03:10:56','2024-05-15 03:10:56','2025-05-15 09:10:56');
 /*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1472,7 +1454,7 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','MAF7T8TFAPQGqvUljaHLF1N3n5VlrZdndPWmlYJQ',NULL,'http://localhost',1,0,0,'2024-05-15 03:08:10','2024-05-15 03:08:10'),(2,NULL,'Laravel Password Grant Client','XVAKqlt36r2XcmC0m945vnReWCxz2yli70kSDabB','users','http://localhost',0,1,0,'2024-05-15 03:08:10','2024-05-15 03:08:10');
+INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','cQmz9t3OtRFrkVaSURvk0ZdoYd7DlKH83VOe40ll',NULL,'http://localhost',1,0,0,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(2,NULL,'Laravel Password Grant Client','4nJzLK0xm3fAxtCQNke008XgAUkdhrwc3zT98e3B','users','http://localhost',0,1,0,'2024-05-20 03:05:29','2024-05-20 03:05:29');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1498,7 +1480,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2024-05-15 03:08:10','2024-05-15 03:08:10');
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2024-05-20 03:05:29','2024-05-20 03:05:29');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1549,7 +1531,7 @@ CREATE TABLE `office_rents` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1558,7 +1540,6 @@ CREATE TABLE `office_rents` (
 
 LOCK TABLES `office_rents` WRITE;
 /*!40000 ALTER TABLE `office_rents` DISABLE KEYS */;
-INSERT INTO `office_rents` VALUES (1,17,7,'asdfasdf','Bangladesh',5000,'2024-05-15',NULL,'2591265','active','2024-05-15 03:28:05','2024-05-15 03:28:05');
 /*!40000 ALTER TABLE `office_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1917,7 +1898,7 @@ CREATE TABLE `user_notifications` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1926,7 +1907,6 @@ CREATE TABLE `user_notifications` (
 
 LOCK TABLES `user_notifications` WRITE;
 /*!40000 ALTER TABLE `user_notifications` DISABLE KEYS */;
-INSERT INTO `user_notifications` VALUES (1,5,'asdfasdf','asdfasdf',0,NULL,0,NULL,'9181380','active','2024-05-15 04:38:36','2024-05-15 04:38:36'),(2,18,'asdfasdf','asdfasdf',0,NULL,0,NULL,'4222351','active','2024-05-15 04:38:38','2024-05-15 04:38:38');
 /*!40000 ALTER TABLE `user_notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1985,7 +1965,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (1,'super_admin',1,NULL,'super-admin-7311133','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(2,'admin',2,NULL,'admin-9232553','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(3,'cp',3,NULL,'cp-6593519','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(4,'sg',4,NULL,'sg-4804287','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(5,'bm_manager',5,NULL,'bm-manager-9945817','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(6,'bm_support_manager',6,NULL,'bm-support-manager-2356371','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(7,'division_admin',7,NULL,'division-admin-6237678','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(8,'division_support_admin',8,NULL,'division-support-admin-9958347','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(9,'division_without_audit',9,NULL,'division-without-audit-6799929','active','2024-05-15 03:08:08','2024-05-15 03:08:08'),(10,'branch',10,NULL,'branch-89310267','active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(11,'auditor',11,NULL,'auditor-41111822','active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(12,'division_employee',12,NULL,'division-employee-18312466','active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(13,'well_wisher',13,NULL,'well-wisher-48513722','active','2024-05-15 03:08:09','2024-05-15 03:08:09'),(14,'loan_recipient',14,NULL,'loan-recipient-42214721','active','2024-05-15 03:08:09','2024-05-15 03:08:09');
+INSERT INTO `user_roles` VALUES (1,'super_admin',1,NULL,'super-admin-9641274','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(2,'admin',2,NULL,'admin-3892845','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(3,'cp',3,NULL,'cp-5063337','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(4,'sg',4,NULL,'sg-6194734','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(5,'bm_manager',5,NULL,'bm-manager-6035416','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(6,'bm_support_manager',6,NULL,'bm-support-manager-9526501','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(7,'division_admin',7,NULL,'division-admin-9457996','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(8,'division_support_admin',8,NULL,'division-support-admin-8458875','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(9,'division_without_audit',9,NULL,'division-without-audit-6539473','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(10,'branch',10,NULL,'branch-98910743','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(11,'auditor',11,NULL,'auditor-21011344','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(12,'division_employee',12,NULL,'division-employee-21712634','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(13,'well_wisher',13,NULL,'well-wisher-44413513','active','2024-05-20 03:05:28','2024-05-20 03:05:28'),(14,'loan_recipient',14,NULL,'loan-recipient-32314757','active','2024-05-20 03:05:28','2024-05-20 03:05:28');
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2079,7 +2059,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,NULL,'Mr super_admin','super_admin@gmail.com','$2y$10$DkAEEW4i7I6CwyOpMBhlk.fnxDfnAw7mlOfSTP1Gn7./FERLenTNq','290233785592','super_admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-super-admin-3411176','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(2,NULL,'Mr admin','admin@gmail.com','$2y$10$rnN1v1jHD/NjND8/G0yZKOmzWH8G3Yp/UsxaE1GEhfO9i5hvRca8q','391538332878','admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-admin-8672198','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(3,NULL,'Mr cp','cp@gmail.com','$2y$10$1mBOVLB6VGL3RQYz8WpH9O0vN.EI/pK8efldbNdIxch4mxaYU42ru','204077151248','cp','Shadhin Jonota','812239513','avatar.png',NULL,'mr-cp-6063217','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(4,NULL,'Mr sg','sg@gmail.com','$2y$10$WhbfwVr4G9JJVD5wJSDZnuOVmR2FBq7FzxCYE4G73T3h6wTnyXf8G','531525143545','sg','Shadhin Jonota','812239513','avatar.png',NULL,'mr-sg-7534345','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(5,NULL,'Mr bm_manager','bm_manager@gmail.com','$2y$10$kNF3NsQpZey44KcwT7qIn.rg7WaZuOcS60pmXiHnmVYEVxc31aWVC','555994229950','bm_manager','Shadhin Jonota','812239513','avatar.png',NULL,'mr-bm-manager-1415704','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(6,5,'Mr bm_support_manager','bm_support_manager@gmail.com','$2y$10$OH5ayx.4NfLMqPJuUd23nOgtglGzNgi6XLXr3oAtQB7OIcz3sQPbW','131729386420','bm_support_manager','Shadhin Jonota','812239513','avatar.png',NULL,'mr-bm-support-manager-6176490','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(7,NULL,'Mr division_admin','division_admin@gmail.com','$2y$10$QZ.GyhifR87JlpS.q1m/re/Cxn831aS8Sq1a.kToHg/sPRRCphbsG','240716422108','division_admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-admin-2377401','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(8,7,'Mr division_support_admin','division_support_admin@gmail.com','$2y$10$uakDBcFL4HkTxPkr7W4XQ.IaBS1VIR0k9IMpKsBqxsl8vfs6SJMO6','220746099099','division_support_admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-support-admin-5978797','active',0,0,NULL,NULL,'2024-05-15 03:08:08','2024-05-15 03:08:08'),(9,NULL,'Mr division_without_audit','division_without_audit@gmail.com','$2y$10$IQbxFy1UpeLKIUrWye555OkKfIJOII5.y8fisfYs6MKD6LqsKq4He','646095171695','division_without_audit','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-without-audit-6509156','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(10,NULL,'Mr branch','branch@gmail.com','$2y$10$lJK8dpnIeacgH6MTzBnJMuKSp2lhK4ymziwMPOae3q74DCMACDm4m','796642543507','branch','Shadhin Jonota','812239513','avatar.png',NULL,'mr-branch-76110644','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(11,NULL,'Mr auditor','auditor@gmail.com','$2y$10$xBYZSnUryKmXoyUal3p4x.mCRy.K6nX.9SmvMfQB9kTeENw2XDdFK','883982792843','auditor','Shadhin Jonota','812239513','avatar.png',NULL,'mr-auditor-66411499','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(12,NULL,'Mr division_employee','division_employee@gmail.com','$2y$10$qQViPbMk6EDsz0VdjZkm1.rRN0.mj2LQRfKgd/tg0Mfpm0VNH8DW2','555698577805','division_employee','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-employee-14712601','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(13,NULL,'Mr well_wisher','well_wisher@gmail.com','$2y$10$3zzKK5xRcA.KPQq2SDeQfuxi7s.iwOYBaeza.dqD/8aYZrR7eWyR6','892633701124','well_wisher','Shadhin Jonota','812239513','avatar.png',NULL,'mr-well-wisher-99413497','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(14,NULL,'Mr loan_recipient','loan_recipient@gmail.com','$2y$10$3LhFFFmtkfHu/jrRgwzy2elE2OY/rqH2vz4nmwATim5rn8pbbZZ6K','222441583535','loan_recipient','Shadhin Jonota','812239513','avatar.png',NULL,'mr-loan-recipient-81814790','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(15,NULL,'দপ্তর','দপ্তর@gmail.com','$2y$10$XRyBHQGhHe7A9e/78eaXDukCUFo3rAwLw/T9scF9xcH/0PkLebaP.','334741615238','1001','Shadhin Jonota','812239513','avatar.png',NULL,'dptr-90015354','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(16,NULL,'সাহিত্য','সাহিত্য@gmail.com','$2y$10$6B0RUYxyONEAIDHAlN3P2.oU0fdB2Wi8Kn8MoKW8CAlUJROdjBlBO','894327193028','1002','Shadhin Jonota','812239513','avatar.png',NULL,'sahitz-93716242','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(17,NULL,'গবেষণা','গবেষণা@gmail.com','$2y$10$j78SBPwjOCbWj2mUORjk2up5OpqxpQVdDXwhl/8ZrgJv5hSfiUm8O','302417490480','1003','Shadhin Jonota','812239513','avatar.png',NULL,'gbeshna-39917102','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(18,NULL,'প্রচার','প্রচার@gmail.com','$2y$10$nOYQIbExjTDdfc8wEf74veNx.i3D2Ls2.yf8tADNVM9v3oXA5ReDy','427969912544','1004','Shadhin Jonota','812239513','avatar.png',NULL,'prcar-47018139','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(19,NULL,'তথ্য','তথ্য@gmail.com','$2y$10$rF8ygHP6p5XpNjBX6bmODOTbalipi53D1PPUsT9YhI2knI/wNXX7e','593069873468','1005','Shadhin Jonota','812239513','avatar.png',NULL,'tthz-64519576','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09'),(20,NULL,'প্রকাশনা','প্রকাশনা@gmail.com','$2y$10$I/YYsrLjwW.DkxPvwjeeHu5PZh0ygKO7XPHiqKnMomN0nq47OiJZO','370436936323','1006','Shadhin Jonota','812239513','avatar.png',NULL,'prkasna-96320767','active',0,0,NULL,NULL,'2024-05-15 03:08:09','2024-05-15 03:08:09');
+INSERT INTO `users` VALUES (1,NULL,'Mr super_admin','super_admin@gmail.com','$2y$10$SCEyyJ7UuI6VDK84nJLN9O2DLchR.D6blGW1Y7AVw.zPbhhtVRDXG','343902075196','super_admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-super-admin-3701555','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(2,NULL,'Mr admin','admin@gmail.com','$2y$10$FWd/TsV1LxCkTy9J9NCCD.JZTVcjKmgHuxG6fHTHUY7rY9U5dzmC.','676110386508','admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-admin-4002558','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(3,NULL,'Mr cp','cp@gmail.com','$2y$10$9XjGB.koSOaPaF82UGV8Ke.yKo/HzbNij6GC.3V1BC4sAkInAcnj.','145790802522','cp','Shadhin Jonota','812239513','avatar.png',NULL,'mr-cp-4263831','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(4,NULL,'Mr sg','sg@gmail.com','$2y$10$3XgTkjGyp6kQkkLBpTGXHOyDeiZIMLkW0/N9ZonNLi11aboPsKHQe','895031145554','sg','Shadhin Jonota','812239513','avatar.png',NULL,'mr-sg-6834583','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(5,NULL,'Mr bm_manager','bm_manager@gmail.com','$2y$10$bRVbpHBFJi0nGk.D2.jPVesxDk0gLp7WIZVIULJJFhIIhEGhu5YJ6','305920617922','bm_manager','Shadhin Jonota','812239513','avatar.png',NULL,'mr-bm-manager-6505793','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(6,5,'Mr bm_support_manager','bm_support_manager@gmail.com','$2y$10$uuVWKBvR9peJkQFbZX5RTeeg7W9LUSUNU1LVH.s4zRigOrhJRquFO','459292768186','bm_support_manager','Shadhin Jonota','812239513','avatar.png',NULL,'mr-bm-support-manager-8526880','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(7,NULL,'Mr division_admin','division_admin@gmail.com','$2y$10$iKQo4tJpMrx5JfT3FQF5vu81AVwllVyiQq7kc9hvHA1KQT1b8YaoC','777277949345','division_admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-admin-7417698','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(8,7,'Mr division_support_admin','division_support_admin@gmail.com','$2y$10$vbIVK1HMG5DDHwueGKfWA.XtmJQIb8WrOxWUDGgr52GUTbjwrZu4i','844091691904','division_support_admin','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-support-admin-7068416','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(9,NULL,'Mr division_without_audit','division_without_audit@gmail.com','$2y$10$pN08NQTQ4zKFq4EgoQ.jROt17ZGy/rMzUwA2lPMGHI8fPgsxlalbS','142252808845','division_without_audit','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-without-audit-3679151','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(10,NULL,'Mr branch','branch@gmail.com','$2y$10$zQWXvCSVoczIbxrHCSXfS.beuFemjB.6Fenm2eKCpY9KBhfbpJR42','394695335526','branch','Shadhin Jonota','812239513','avatar.png',NULL,'mr-branch-35110434','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(11,NULL,'Mr auditor','auditor@gmail.com','$2y$10$3FwnR1lGEbrccv2feTNEG.QtpfEWyYjyMMw7cajS8XXV182SP/Mp2','914122397590','auditor','Shadhin Jonota','812239513','avatar.png',NULL,'mr-auditor-92511678','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(12,NULL,'Mr division_employee','division_employee@gmail.com','$2y$10$DNKKAbde.GPrBun3CABTteyCslzBsG.XAxxirNtE5Pxr9uw35PFLG','473502870783','division_employee','Shadhin Jonota','812239513','avatar.png',NULL,'mr-division-employee-26812913','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(13,NULL,'Mr well_wisher','well_wisher@gmail.com','$2y$10$qanfP4Dfx5/mQ4jWh/PM9uzrUXo6OiUycD8kl2BzbjFpUtuFvhELG','722103727354','well_wisher','Shadhin Jonota','812239513','avatar.png',NULL,'mr-well-wisher-37213697','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(14,NULL,'Mr loan_recipient','loan_recipient@gmail.com','$2y$10$OKSh5V77JcDhLMHOjXdJ7eP8wO7mFmsYt9fZYMl2RqzhGILZ39e32','227287316792','loan_recipient','Shadhin Jonota','812239513','avatar.png',NULL,'mr-loan-recipient-58614811','active',0,0,NULL,NULL,'2024-05-20 03:05:28','2024-05-20 03:05:28'),(15,NULL,'দপ্তর','দপ্তর@gmail.com','$2y$10$VgGArhvvhdXcz2ya7SjZseBIzJZ4FuJV7hmrUdFl1ptEaPaqaR422','404685360557','1001','Shadhin Jonota','812239513','avatar.png',NULL,'dptr-34415398','active',0,0,NULL,NULL,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(16,NULL,'সাহিত্য','সাহিত্য@gmail.com','$2y$10$5Altxi1TH.qGWWX5fjvVu.8KyDjMG8tPyrg1Nf2i/QUIShXmiH5KK','952856871972','1002','Shadhin Jonota','812239513','avatar.png',NULL,'sahitz-26316999','active',0,0,NULL,NULL,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(17,NULL,'গবেষণা','গবেষণা@gmail.com','$2y$10$TYhm41P3VdPxX8FCpsZLWODr1VTNDx8zRTTX4iptVUG3CQI8nptTi','614149290882','1003','Shadhin Jonota','812239513','avatar.png',NULL,'gbeshna-18317317','active',0,0,NULL,NULL,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(18,NULL,'প্রচার','প্রচার@gmail.com','$2y$10$Z7bN7Zfs8WlVfrYtc/fcPeF9gr56QgtSUDD5f7sPPqAcVGdKXTRu6','268613828914','1004','Shadhin Jonota','812239513','avatar.png',NULL,'prcar-54118558','active',0,0,NULL,NULL,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(19,NULL,'তথ্য','তথ্য@gmail.com','$2y$10$5iqovJi9QuA9qlc92tbd4uOVXtLO6MhDuZTpd51AzrcrsBPW5GiWG','656104292238','1005','Shadhin Jonota','812239513','avatar.png',NULL,'tthz-61019492','active',0,0,NULL,NULL,'2024-05-20 03:05:29','2024-05-20 03:05:29'),(20,NULL,'প্রকাশনা','প্রকাশনা@gmail.com','$2y$10$HAFMHurghgL7YGR5ShFvmOofd9HsHD7MZIVel9hhcT/q0MIhVSMZW','631613053568','1006','Shadhin Jonota','812239513','avatar.png',NULL,'prkasna-38420473','active',0,0,NULL,NULL,'2024-05-20 03:05:29','2024-05-20 03:05:29');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2120,4 +2100,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-15 19:43:27
+-- Dump completed on 2024-05-20 15:06:15

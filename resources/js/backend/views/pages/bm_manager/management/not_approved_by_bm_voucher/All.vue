@@ -113,7 +113,7 @@
                                         Status
 
                                     </th>
-                                    <!-- <th aria-label="actions">Actions</th> -->
+                                    <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
@@ -140,20 +140,21 @@
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
-                                    <!-- <td>
+                                    <td>
                                         <div class="table_actions">
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
                                                     class="fa fa-gears"></i></a>
                                             <ul>
                                                 <li>
-                                                    <router-link :to="{ name: `${role}TopShit`, params: { id: item.id } }">
+                                                    <router-link
+                                                        :to="{ name: `${role}TopShit`, params: { id: item.id } }">
                                                         <i class="fa text-info fa-book"></i>
                                                         Topshit
                                                     </router-link>
                                                 </li>
                                             </ul>
                                         </div>
-                                    </td> -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

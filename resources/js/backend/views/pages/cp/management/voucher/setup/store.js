@@ -18,7 +18,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-expenses?cp=true");
+                response = await axios.get("cp-not-approval-voucher");
             }
             this.all_data = response.data.data;
         },
