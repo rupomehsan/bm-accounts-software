@@ -39,7 +39,6 @@ export const report_setup_store = defineStore("report_setup_store", {
             let response = await axios.post("statements", formData);
             response = response.data;
             this.statement_data = response;
-
         },
         fetch_income_expense_closing_in_range: async function (form) {
             let formData = new FormData(form)

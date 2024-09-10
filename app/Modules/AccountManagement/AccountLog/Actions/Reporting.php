@@ -77,10 +77,17 @@ class Reporting
 
     static public function statements()
     {
+        $type = request()->type;
         $from = Carbon::parse(request()->start_date);
         $to = Carbon::parse(request()->end_date);
-        $with = ['account_incomes:account_log_id,folio','account_category:id,title'];
-        $logs = self::$model::with($with)->whereBetween('date', [$from, $to])->get();
+        $with = ['account_incomes:account_log_id,folio', 'account_category:id,title'];
+        $logs = '';
+        if ($type == 'income') {
+            $logs = self::$model::with($with)->whereBetween('date', [$from, $to])->where('is_income', 1)->get();
+        } elseif ($type == 'expense') {
+            $logs = self::$model::with($with)->whereBetween('date', [$from, $to])->where('is_expense', 1)->get();
+        }
+
 
         $prev_income = self::$model::where('date', '<', $from)->where('is_income', 1)->sum('amount');
         $prev_expense = self::$model::where('date', '<', $from)->where('is_expense', 1)->sum('amount');

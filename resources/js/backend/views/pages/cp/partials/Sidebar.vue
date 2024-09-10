@@ -39,7 +39,7 @@
                     :to="{ name: `ReceiptBookAll` }"
                     class="d-flex align-items-center"
                     href=""
-                    >রিসিপ্ট বই
+                    >রশিদ বই
                 </router-link>
             </li>
             <li class="my-2 d-flex align-items-center gap-2">

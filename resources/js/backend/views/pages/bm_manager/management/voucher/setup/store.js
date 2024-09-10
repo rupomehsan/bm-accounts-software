@@ -8,7 +8,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         month_for_voucher_data: {},
         top_shit_data: {},
         active_month: {},
-        api_url: new URL(location.origin + '/api/v1/account-expenses')
+        api_url: new URL(location.origin + '/api/v1/account-expenses?bm=true&status=approved')
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -20,7 +20,17 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("account-expenses?bm=true");
+                response = await axios.get("account-expenses?bm=true&status=approved");
+            }
+            this.all_data = response.data.data;
+        },
+        get_all_pending_vouchers: async function (url = null) {
+            let response;
+            // let page = `?page=${pageLimit}`;
+            if (url) {
+                response = await axios.get(url);
+            } else {
+                response = await axios.get("account-expenses?bm=true&status=pending");
             }
             this.all_data = response.data.data;
         },

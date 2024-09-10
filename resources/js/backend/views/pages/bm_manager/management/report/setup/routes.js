@@ -1,6 +1,8 @@
 import Layout from "./Layout.vue";
 import MainLedger from "../MainLedger.vue";
 import IncomeExpenseStatement from "../IncomeExpenseStatement.vue";
+import ExpenseStatement from "../ExpenseStatement.vue";
+import IncomeStatement from "../IncomeStatement.vue";
 import setup from ".";
 let prefix = setup.prefix
 const role = window.role.bm
@@ -21,14 +23,29 @@ const routes = {
     component: Layout,
     children: [
         {
+            path: '',
+            name: prefix + "MainLedger",
+            component: MainLedger
+        },
+        {
             path: 'main-ledger',
-            name:  prefix + "MainLedger",
+            name: prefix + "MainLedger",
             component: MainLedger
         },
         {
             path: 'statements',
             name: prefix + "IncomeExpenseStatement",
             component: IncomeExpenseStatement
+        },
+        {
+            path: 'income-statements',
+            name: prefix + "IncomeStatement",
+            component: IncomeStatement
+        },
+        {
+            path: 'expense-statements',
+            name: prefix + "ExpenseStatement",
+            component: ExpenseStatement
         },
 
         {

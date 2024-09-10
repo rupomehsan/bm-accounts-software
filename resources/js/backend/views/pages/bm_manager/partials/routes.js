@@ -31,6 +31,9 @@ import office_rent_routes from "../management/OfficeRent/setup/routes";
 import house_rent_routes from "../management/HouseRent/setup/routes";
 import notification_routes from "../management/notification/setup/routes";
 import profile_routes from "../management/profile/setup/routes";
+import budget_routes from "../management/Budget/setup/routes";
+import audit_routes from "../management/Audit/setup/routes";
+import analysis_routes from "../management/Analysis/setup/routes";
 // asset_management_routes
 import asset_category_routes from "../management/AssetManagement/AssetCategory/setup/routes";
 import asset_lost_routes from "../management/AssetManagement/AssetLost/setup/routes";
@@ -88,6 +91,9 @@ const routes = {
         house_rent_routes,
         notification_routes,
         profile_routes,
+        budget_routes,
+        audit_routes,
+        analysis_routes,
         // asset_management_routes
         asset_category_routes,
         asset_lost_routes,

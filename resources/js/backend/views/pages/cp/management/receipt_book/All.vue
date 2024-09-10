@@ -7,27 +7,18 @@
                         <h5 class="m-0">Receipt Book Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <button
-                            class="btn btn-info"
-                            @click="get_all_receipt_books()"
-                        >
+                        <button class="btn btn-info" @click="get_all_receipt_books()">
                             All
                             <span v-if="all_receipt_books" class="fw-bold">{{
                                 `(${all_receipt_books?.totalApproved + all_receipt_books?.totalNotApproved})`
                             }}</span>
                         </button>
-                        <button
-                            class="btn btn-primary mx-3"
-                            @click="getReceiptBookByStatus('approved')"
-                        >
+                        <button class="btn btn-primary mx-3" @click="getReceiptBookByStatus('approved')">
                             Approved <span v-if="all_receipt_books" class="fw-bold">{{
                                 `(${all_receipt_books?.totalApproved})`
                             }}</span>
                         </button>
-                        <button
-                            class="btn btn-danger"
-                            @click="getReceiptBookByStatus('not-approved')"
-                        >
+                        <button class="btn btn-danger" @click="getReceiptBookByStatus('not-approved')">
                             Not approved <span v-if="all_receipt_books" class="fw-bold">{{
                                 `(${all_receipt_books?.totalNotApproved})`
                             }}</span>
@@ -116,16 +107,11 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr
-                                    v-for="item in all_receipt_books.data?.data"
-                                    :key="item.id"
-                                >
+                                <tr v-for="item in all_receipt_books.data?.data" :key="item.id">
                                     <td>{{ item.id }}</td>
 
                                     <td>
-                                        <span
-                                            class="text-warning cursor_pointer"
-                                        >
+                                        <span class="text-warning cursor_pointer">
                                             {{ item.receipt_book_no }}
                                         </span>
                                     </td>
@@ -143,31 +129,19 @@
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input
-                                                class="form-check-input"
-                                                type="checkbox"
-                                                :id="
-                                                    'flexSwitchCheck_' + item.id
-                                                "
-                                                :checked="
-                                                    item.is_approvel === 1
-                                                "
-                                                @change="
-                                                    updateStatus(
-                                                        item.is_approvel,
-                                                        item.id
-                                                    )
-                                                "
-                                            />
-                                            <label
-                                                class="form-check-label"
-                                                for="flexSwitchCheckDefault"
-                                                >{{
-                                                    item.is_approvel == 1
-                                                        ? "Approved"
-                                                        : "Not approved"
-                                                }}</label
-                                            >
+                                            <input class="form-check-input" type="checkbox" :id="'flexSwitchCheck_' + item.id
+                                                " :checked="item.is_approvel == 1
+                                                    " @change="
+                                                        updateStatus(
+                                                            item.is_approvel,
+                                                            item.id
+                                                        )
+                                                        " />
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">{{
+                                                item.is_approvel == 1
+                                                    ? "Approved"
+                                                    : "Not approved"
+                                            }}</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -175,12 +149,8 @@
                         </table>
                     </div>
                     <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1"
-                    >
-                        <pagination
-                            :data="all_receipt_books"
-                            :method="get_all_receipt_books"
-                        />
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
+                        <pagination :data="all_receipt_books" :method="get_all_receipt_books" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -249,10 +219,16 @@ export default {
         },
 
         async updateStatus(status, id) {
-            var data = await window.s_approved();
+            var data = await window.s_approved('Are yoy sure want to ' + (status == 1 ? 'disapprove' : 'approve'));
             if (data) {
                 let approval = status ? 0 : 1;
-                this.update_receipt_book_by_status(approval, id);
+                await this.update_receipt_book_by_status(approval, id);
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500)
+
+
             } else {
                 const checkboxRef = document.getElementById(
                     `flexSwitchCheck_${id}`
@@ -260,7 +236,9 @@ export default {
                 if (checkboxRef) {
                     checkboxRef.checked = !checkboxRef.checked;
                 }
+
             }
+
         },
     },
     computed: {
@@ -277,6 +255,7 @@ export default {
         search_data: function (newSearchData, oldSearchData) {
             console.log(newSearchData);
         },
+
     },
 };
 </script>

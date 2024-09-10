@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('receipt_start_serial_no')->unsigned()->nullable();
             $table->bigInteger('receipt_end_serial_no')->unsigned()->nullable();
             $table->tinyInteger('is_approvel')->nullable();
+            $table->tinyInteger('is_rejected')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -58,8 +58,16 @@ export const receipt_book_setup_store = defineStore(
                     `accept-receipt-book/${id}`,
                     formData
                 );
-                window.s_alert("Data successcully updated");
-                this.all();
+                if (response.data.status == "error") {
+                    window.s_warning(response.data.message);
+
+                }
+                if (response.data.status == "success") {
+                    window.s_alert("Data successcully updated");
+
+                }
+
+
             },
             delete: async function (id) {
                 var data = await window.s_confirm();

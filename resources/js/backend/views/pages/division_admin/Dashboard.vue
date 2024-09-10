@@ -6,7 +6,8 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5>Division Support Admin  Dashboard </h5>
+                            <h5>Division Admin  Dashboard </h5>
+
                         </div>
                         <div class="col-lg-6">
 
@@ -88,6 +89,7 @@
 </template>
 
 <script>
+
 export default {
     data: () => ({
         result: {},
@@ -105,6 +107,7 @@ export default {
             }
         },
     },
+
 }
 </script>
 

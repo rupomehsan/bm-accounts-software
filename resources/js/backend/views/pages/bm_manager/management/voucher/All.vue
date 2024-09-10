@@ -4,7 +4,7 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Voucher Management</h5>
+                        <h5 class="m-0">Approved Voucher </h5>
                     </div>
 
                     <div class="col-lg-6 text-end">
@@ -146,7 +146,8 @@
                                                     class="fa fa-gears"></i></a>
                                             <ul>
                                                 <li>
-                                                    <router-link :to="{ name: `${role}TopShit`, params: { id: item.id } }">
+                                                    <router-link
+                                                        :to="{ name: `${role}TopShit`, params: { id: item.id } }">
                                                         <i class="fa text-info fa-book"></i>
                                                         Topshit
                                                     </router-link>

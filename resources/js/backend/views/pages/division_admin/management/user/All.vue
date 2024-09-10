@@ -7,13 +7,13 @@
                         <h5 class="m-0">User Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <span>
+                        <!-- <span>
                             <router-link :to="{ name: `CreateAdminSupportUser` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
-                        </span>
+                        </span> -->
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                                         Status
 
                                     </th>
-                                    <th aria-label="actions">Actions</th>
+                                    <!-- <th aria-label="actions">Actions</th> -->
                                 </tr>
                             </thead>
 
@@ -123,41 +123,34 @@
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>
 
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <div class="table_actions">
                                             <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
                                                     class="fa fa-gears"></i></a>
                                             <ul>
-                                                <!-- <li>
+                                                <li>
                                                     <a href="">
-                                                        <i
-                                                            class="fa text-info fa-eye"
-                                                        ></i>
+                                                        <i class="fa text-info fa-eye"></i>
                                                         Quick View
                                                     </a>
-                                                </li> -->
-                                                <!-- <li>
+                                                </li>
+                                                <li>
                                                     <span>
-                                                        <a
-                                                            href="#/user/details/43"
-                                                            class=""
-                                                        >
-                                                            <i
-                                                                class="fa text-secondary fa-eye"
-                                                            ></i>
+                                                        <a href="#/user/details/43" class="">
+                                                            <i class="fa text-secondary fa-eye"></i>
                                                             Details
                                                         </a>
 
                                                     </span>
-                                                </li> -->
+                                                </li>
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: 'CreateAdminSupportUser',
-                                query: {
-                                    id: item.id,
-                                },
-                            }" class="">
+                                    name: 'CreateAdminSupportUser',
+                                    query: {
+                                        id: item.id,
+                                    },
+                                }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -167,10 +160,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                                user_delete(
-                                    item.id
-                                )
-                                " href="#" class="">
+                                    user_delete(
+                                        item.id
+                                    )
+                                    " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -178,7 +171,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
