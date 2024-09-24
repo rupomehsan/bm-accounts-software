@@ -8,11 +8,18 @@ use Illuminate\Support\Facades\Hash;
 class Store
 {
     static $model = \App\Modules\AccountManagement\AccountReceiptBookAssign\Model::class;
-    static $receiptBookModel = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
+
 
     public static function execute(Validation $request)
     {
         try {
+            $isExist = self::$model::query()
+                ->where('division_id', $request->input('division_id'))
+                ->where('account_receipt_book_id', $request->input('account_receipt_book_id'))
+                ->first();
+            if ($isExist) {
+                return messageResponse('This receipt book already assign', 404, 'error');
+            }
             if (self::$model::query()->create($request->validated())) {
                 return messageResponse('Item added successfully', 201);
             }

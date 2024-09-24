@@ -57,7 +57,7 @@ export default [
     // },
     {
         name: "account_receipt_no",
-        label: "Enter account receipt no",
+        label: "Enter  receipt page  no",
         type: "number",
         value: "",
     },

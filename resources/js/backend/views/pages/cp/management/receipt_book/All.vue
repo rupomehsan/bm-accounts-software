@@ -33,62 +33,41 @@
                             All Receipt Books
 
                         </h6>
-                        <div class="search">
-                            <!-- <form action="#">
-                                <input
-                                    v-model.debounce:1000ms="search_data"
-                                    placeholder="search..."
-                                    type="search"
-                                    class="form-control border border-info"
-                                />
-                            </form> -->
-                        </div>
-                        <div class="btns d-flex gap-2 align-items-center">
-                            <!-- <div class="table_actions">
-                                <a
-                                    @click.prevent=""
-                                    href="#"
-                                    class="btn px-3 btn-outline-secondary"
-                                    ><i class="fa fa-list"></i
-                                ></a>
-                                <ul>
-                                    <li>
-                                        <a href="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Export All
-                                        </a>
-                                    </li>
 
-                                    <li>
-                                        <a href="#/user/import" class="">
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Import
+                        <div class="btns d-flex gap-2 align-items-center" v-if="selected_ids.length">
+                            <div class="table_actions">
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                        class="fa fa-list"></i></a>
+                                <ul>
+                                    <li class="c-pointer">
+                                        <a @click="receiptBookBulkActions('approved')" class="">
+                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            Approved
                                         </a>
                                     </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            title="display data that has been deactivated"
-                                            class="d-flex"
-                                        >
-                                            <i
-                                                class="fa-regular fa-hand-point-right"
-                                            ></i>
-                                            Deactivated data
+                                    <li class="c-pointer">
+                                        <a @click="receiptBookBulkActions('not-approved')">
+                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            Not Approved
                                         </a>
                                     </li>
+                                    <!-- <li>
+                                        <a @click="receiptBookBulkActions('delete')">
+                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            Delete
+                                        </a>
+                                    </li> -->
                                 </ul>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
+                                    <th aria-label="id" class="cursor_n_resize">
+                                        <input type="checkbox" name="" id="parent_checkbox" @click="checkAll()">
+                                    </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                     </th>
@@ -108,6 +87,8 @@
 
                             <tbody class="table-border-bottom-0">
                                 <tr v-for="item in all_receipt_books.data?.data" :key="item.id">
+                                    <td><input type="checkbox" @click="checkSingle(item.id)"
+                                            :checked="selected_ids.includes(item.id)"></td>
                                     <td>{{ item.id }}</td>
 
                                     <td>
@@ -205,6 +186,7 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
+        selected_ids: [],
     }),
     created: async function () {
         await this.get_all_receipt_books();
@@ -224,9 +206,7 @@ export default {
                 let approval = status ? 0 : 1;
                 await this.update_receipt_book_by_status(approval, id);
 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500)
+                await this.get_all_receipt_books();
 
 
             } else {
@@ -240,12 +220,33 @@ export default {
             }
 
         },
+        checkSingle(id) {
+            if (!this.selected_ids.includes(id)) {
+                this.selected_ids.push(id);
+            } else {
+                this.selected_ids = this.selected_ids.filter((item) => item != id);
+            }
+        },
+        checkAll() {
+            if (this.selected_ids.length == this.all_receipt_books.data?.data.length) {
+                this.selected_ids = [];
+            } else {
+                this.selected_ids = this.all_receipt_books.data?.data.map((item) => item.id);
+            }
+        },
+        receiptBookBulkActions: async function (status) {
+            await this.receipt_book_bulk_actions(status, this.selected_ids);
+            this.selected_ids = [];
+            document.getElementById("parent_checkbox").checked = false;
+            this.get_all_receipt_books()
+        }
     },
     computed: {
         ...mapState(receipt_book_setup_store, {
             all_receipt_books: "all_data",
             get_receipt_book_by_status: "get_receipt_book_by_status",
             update_receipt_book_by_status: "update_receipt_book_by_status",
+            receipt_book_bulk_actions: "receipt_book_bulk_actions",
         }),
     },
     watch: {

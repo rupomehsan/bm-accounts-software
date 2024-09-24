@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h6>
-                                {{ param_id ? "Update" : "Create new" }} user
+                                {{ param_id ? "Update" : "Create new" }} receipt book
                             </h6>
                         </div>
                         <div class="col-lg-6 text-end">
@@ -81,11 +81,20 @@ export default {
             });
 
             await this.latest_account_receipt_book()
-            this.form_fields[0].value = this.latest_account_receipt_book_data.receipt_book_no + 1;
-            this.form_fields[1].value = this.latest_account_receipt_book_data.receipt_end_serial_no + 1;
+            if (this.latest_account_receipt_book_data) {
+                this.form_fields[0].value = this.latest_account_receipt_book_data.receipt_book_no + 1;
+                this.form_fields[1].value = this.latest_account_receipt_book_data.receipt_end_serial_no + 1;
+                this.form_fields[2].value = this.latest_account_receipt_book_data.receipt_end_serial_no + 40;
+            }else{
+                this.form_fields[0].value = 1;
+                this.form_fields[1].value = 1;
+                this.form_fields[2].value = 40;
+            }
+
+
         }
 
-        console.log(this.latest_account_receipt_book_data);
+
     },
 
     methods: {

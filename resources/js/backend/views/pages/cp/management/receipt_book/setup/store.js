@@ -63,6 +63,25 @@ export const receipt_book_setup_store = defineStore(
 
                 }
                 if (response.data.status == "success") {
+
+                    window.s_alert("Data successcully updated");
+
+                }
+
+
+            },
+            receipt_book_bulk_actions: async function (status, ids) {
+                let formData = new FormData();
+                formData.append("ids", JSON.stringify(ids));
+                formData.append("action", status);
+                let response = await axios.post(
+                    `receipt-book-bulk-actions`,
+                    formData
+                );
+                if (response.data.status == "error") {
+                    window.s_warning(response.data.message);
+                }
+                if (response.data.status == "success") {
                     window.s_alert("Data successcully updated");
 
                 }

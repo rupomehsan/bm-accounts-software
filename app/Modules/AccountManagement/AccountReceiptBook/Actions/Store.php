@@ -29,11 +29,11 @@ class Store
                 ->count();
 
             if ($check_serial_no) {
-                $data= self::$model::orderBy('receipt_end_serial_no', 'desc')->first();
+                $data = self::$model::orderBy('receipt_end_serial_no', 'desc')->first();
                 return response()->json([
                     'errors' => [
                         'receipt_start_serial_no' => [
-                            'receipt start serial no is exist, input > '.($data->receipt_end_serial_no +1)
+                            'receipt start serial no is exist, input > ' . ($data->receipt_end_serial_no + 1)
                         ],
                         'receipt_end_serial_no' => [
                             'receipt end serial no is exist'
@@ -42,7 +42,15 @@ class Store
                 ], 422);
             }
 
-            if (self::$model::query()->create($request->validated())) {
+            $pageDifferent = ($request->input('receipt_end_serial_no') - $request->input('receipt_start_serial_no'));
+            if ($pageDifferent !== 39) {
+                return messageResponse('Page difference should be equal 40', 422, 'error');
+            }
+
+            $requestData = $request->validated();
+            $requestData['remaining_page'] = 40;
+
+            if (self::$model::query()->create($requestData)) {
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

@@ -12,6 +12,10 @@ body[main-theme-layout="main-theme-layout-4"] .page-wrapper .page-body-wrapper .
     cursor: pointer;
 }
 
+.c-pointer {
+    cursor: pointer;
+}
+
 .bn {
     font-family: 'bangla' !important;
     font-size: 17px !important;

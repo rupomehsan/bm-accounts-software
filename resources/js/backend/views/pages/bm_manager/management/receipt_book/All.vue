@@ -88,6 +88,9 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
+                                       Remaining page
+                                    </th>
+                                    <th class="cursor_n_resize">
                                         is approved ?
 
                                     </th>
@@ -113,6 +116,7 @@
                                         {{ item.receipt_start_serial_no }}
                                     </td>
                                     <td>{{ item.receipt_end_serial_no }}</td>
+                                    <td>{{ item.remaining_page }}</td>
                                     <td>{{ item.is_approvel == 1 ? 'yes' : 'no' }}</td>
                                     <td>
                                         <span class="badge bg-label-success me-1">{{ item.status }}</span>

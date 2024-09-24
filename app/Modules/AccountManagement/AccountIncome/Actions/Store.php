@@ -13,11 +13,28 @@ class Store
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
     static $userModel = \App\Modules\User\Model::class;
     static $applicationModel = \App\Modules\CpApplication\Model::class;
-
+    static $receiptBookModel = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
     public static function execute(Validation $request)
     {
         try {
+
             // dd($request->all());
+
+            if (self::$model::query()->where('account_receipt_book_id', $request->input('account_receipt_book_id'))->where('account_receipt_no', $request->input('account_receipt_no'))->exists()) {
+                return messageResponse('This receipt page no already used -> ' . $request->input('account_receipt_no'), 404, 'error');
+            }
+
+            $receiptBook = self::$receiptBookModel::find($request->input('account_receipt_book_id'));
+
+            if (!$receiptBook) {
+                return messageResponse('Receipt book not found', 404, 'error');
+            }
+
+            $receiptNo = $request->input('account_receipt_no');
+            if ($receiptNo < $receiptBook->receipt_start_serial_no || $receiptNo > $receiptBook->receipt_end_serial_no) {
+                return messageResponse('This receipt page no does not exist in this receipt book', 404, 'error');
+            }
+
 
             if ($income = self::$model::query()->create($request->validated())) {
                 $userName = null;

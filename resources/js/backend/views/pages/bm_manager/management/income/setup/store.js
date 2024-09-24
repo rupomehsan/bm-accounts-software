@@ -108,6 +108,11 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
             // console.log("data", response);
             this.account_number_data = response;
         },
+        get_receipt_book_remaining_pages: async function (id) {
+            let response = await axios.get("get-receipt-book-remaining-pages/" + id);
+            response = response.data.data;
+            return response
+        },
 
     },
 });

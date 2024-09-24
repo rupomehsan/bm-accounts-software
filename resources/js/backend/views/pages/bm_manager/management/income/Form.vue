@@ -32,7 +32,7 @@
                                             <common-input :label="form_field.label" :type="form_field.type"
                                                 :onchange="getRespose" :name="form_field.name"
                                                 :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
-                                    " />
+                                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -244,7 +244,8 @@ export default {
             get_single_branch_income: "get",
             income_update: "update",
             get_branch_target_by_brach_id: 'get_branch_target_by_brach_id',
-            get_account_numbers_by_account_id: 'get_account_numbers_by_account_id'
+            get_account_numbers_by_account_id: 'get_account_numbers_by_account_id',
+            get_receipt_book_remaining_pages: 'get_receipt_book_remaining_pages'
         }),
 
         submitHandler: async function ($event) {
@@ -297,6 +298,7 @@ export default {
         },
 
         getRespose: async function () {
+
             if (event.target.name == 'account_id') {
                 await this.get_account_numbers_by_account_id(event.target.value)
                 let account_number = this.account_number_data?.account_number
@@ -313,6 +315,14 @@ export default {
                     }
                 })
             }
+
+            if (event.target.name == 'account_receipt_book_id') {
+                let receipt_book_id = event.target.value
+                if (receipt_book_id) {
+                    let response = await this.get_receipt_book_remaining_pages(event.target.value)
+                }
+            }
+
         }
 
     },

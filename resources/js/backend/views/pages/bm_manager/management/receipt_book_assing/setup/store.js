@@ -6,6 +6,7 @@ export const receipt_book_assign_store = defineStore("receipt_book_assign_store"
         single_data: {},
         all_users: {},
         all_receipt_books: {},
+        limit: 10,
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -15,9 +16,9 @@ export const receipt_book_assign_store = defineStore("receipt_book_assign_store"
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url+"&limit="+this.limit);
             } else {
-                response = await axios.get("account-receipt-book-assigns");
+                response = await axios.get(`account-receipt-book-assigns?limit=${this.limit}`);
             }
             this.all_data = response.data.data;
         },
@@ -64,6 +65,11 @@ export const receipt_book_assign_store = defineStore("receipt_book_assign_store"
         get_all_select_user_assign_receipt_book: async function (id) {
             let response = await axios.get(`account-receipt-book-assigns?user_id=${id}`);
             this.all_data = response.data.data;
+        },
+
+
+        set_limit: async function (limit) {
+            this.limit = limit;
         },
     },
 });

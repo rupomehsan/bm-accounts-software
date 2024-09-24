@@ -164,11 +164,11 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_receipt_books.data" :method="get_all_receipt_books" v-if="loaded" />
-                        <!-- <div class="float-right">
+                        <pagination :data="all_receipt_books" :method="get_all_receipt_books"  />
+                        <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="" v-model="offset">
+                                <select class="" v-model="limit" @change="set_limit($event.target.value)">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -180,7 +180,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_receipt_books.total }}</span>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="canvas_backdrop">
@@ -238,6 +238,7 @@ export default {
             user_delete: "delete",
             get_all_user: "get_all_user",
             get_all_select_user_assign_receipt_book: "get_all_select_user_assign_receipt_book",
+            set_limit: "set_limit",
         }),
 
         toggleParentItem() {
@@ -293,6 +294,7 @@ export default {
             all_receipt_books: "all_data",
             get_receipt_book_by_status: "get_receipt_book_by_status",
             all_users_data: "all_users",
+            limit: "limit",
         }),
     },
 

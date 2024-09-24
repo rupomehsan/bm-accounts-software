@@ -13,6 +13,10 @@ class Delete
                 if (!$data = self::$model::find($id)) {
                     return messageResponse('Data not found...', 404, 'error');
                 }
+                if ($data->is_approvel == 1) {
+                    return messageResponse('Sorry you can not deleted this item', 404, 'error');
+                }
+
                 $data->delete();
                 return messageResponse('Item Successfully deleted', 200, 'success');
             } else {
