@@ -24,6 +24,10 @@ class All
             }
 
             if (request()->has('central_division_id') && request()->input('central_division_id')) {
+                $condition['central_division_id'] = auth()->id();
+
+            }
+            if (request()->has('central_division_id') && request()->input('central_division_id')) {
                 $data = $data->whereNotNull('central_division_id');
             }
 

@@ -12,6 +12,10 @@
                 <i class="icon-desktop"></i>
                 <router-link :to="{ name: `DivisionAdminDashboard` }">ড্যাশবোর্ড</router-link>
             </li>
+            <li class="my-2 d-flex align-items-center gap-2">
+                <i class="icon-desktop"></i>
+                <router-link :to="{ name: `DivisionAdminAllIncome` }">আয় সমুহ</router-link>
+            </li>
             <!-- <li class="my-2 d-flex align-items-center gap-2">
                 <i class="icon-desktop"></i>
                 <router-link
