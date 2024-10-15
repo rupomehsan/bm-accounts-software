@@ -4,6 +4,9 @@ window.axios = axios;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 // window.axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage?.token}`;
+let origin = location.origin;
+console.log(origin);
+
 axios.defaults.baseURL = location.origin + "/api/v1/";
 
 async function setToken(config = {}) {

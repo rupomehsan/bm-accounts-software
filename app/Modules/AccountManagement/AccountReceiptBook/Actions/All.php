@@ -13,7 +13,9 @@ class All
     public static function execute()
     {
         try {
+
             // dd(request()->all());
+
             $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = [];

@@ -4,6 +4,7 @@ export const receipt_book_store = defineStore("receipt_book_store", {
     state: () => ({
         all_data: {},
         single_data: {},
+        page_limit: 10,
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -13,9 +14,9 @@ export const receipt_book_store = defineStore("receipt_book_store", {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + "&offset=" + this.page_limit);
             } else {
-                response = await axios.get("account-receipt-books");
+                response = await axios.get("account-receipt-books" + "?offset=" + this.page_limit);
             }
             this.all_data = response.data.data;
         },
@@ -36,6 +37,7 @@ export const receipt_book_store = defineStore("receipt_book_store", {
             window.s_alert("Data successcully updated");
             console.log("res", response.data);
         },
+
         delete: async function (id) {
             var data = await window.s_confirm();
             if (data) {
@@ -45,6 +47,7 @@ export const receipt_book_store = defineStore("receipt_book_store", {
                 console.log(response.data);
             }
         },
+
         get_receipt_book_by_status: async function (status) {
             let response = await axios.get(
                 "account-receipt-books" + "?is_approvel=" + status
@@ -58,6 +61,11 @@ export const receipt_book_store = defineStore("receipt_book_store", {
             );
             // console.log("data", response);
             this.latest_account_receipt_book_data = response.data.data;
+        },
+
+        set_limit: async function (limit) {
+            this.page_limit = limit;
+            this.all();
         },
     },
 });
