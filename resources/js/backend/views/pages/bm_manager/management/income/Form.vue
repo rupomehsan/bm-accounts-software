@@ -11,9 +11,10 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link :to="{ name: `${role}AllIncome` }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
-                                        class="fa fa-arrow-left me-5px"></i>
+                                <router-link
+                                    :to="{ name: `${role}AllIncome` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"
+                                    ><i class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -21,18 +22,31 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form @submit.prevent="submitHandler" class="user_create_form card">
+                    <form
+                        @submit.prevent="submitHandler"
+                        class="user_create_form card"
+                    >
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template v-for="(
+                                        <template
+                                            v-for="(
                                                 form_field, index
-                                            ) in form_fields" :key="index">
-                                            <common-input :label="form_field.label" :type="form_field.type"
-                                                :onchange="getRespose" :name="form_field.name"
-                                                :multiple="form_field.multiple" :value="form_field.value" :data_list="form_field.data_list
-                                                    " />
+                                            ) in form_fields"
+                                            :key="index"
+                                        >
+                                            <common-input
+                                                :label="form_field.label"
+                                                :type="form_field.type"
+                                                :onchange="getRespose"
+                                                :name="form_field.name"
+                                                :multiple="form_field.multiple"
+                                                :value="form_field.value"
+                                                :data_list="
+                                                    form_field.data_list
+                                                "
+                                            />
                                         </template>
                                     </div>
                                 </div>
@@ -44,7 +58,11 @@
                                 <i class="fa fa-upload"></i>
                                 Submit
                             </button>
-                            <button type="button" class="btn  btn-outline-info mx-2 " @click="showDetails">
+                            <button
+                                type="button"
+                                class="btn btn-outline-info mx-2"
+                                @click="showDetails"
+                            >
                                 Show history
                             </button>
                         </div>
@@ -62,18 +80,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in branch_target_data.data" :key="item" class="text-white text-center">
+                            <tr
+                                v-for="item in branch_target_data.data"
+                                :key="item"
+                                class="text-white text-center"
+                            >
                                 <td>{{ item.session }}</td>
                                 <td>{{ item.target_amount ?? 0 }}</td>
                                 <td>{{ item.total_payable ?? 0 }}</td>
                                 <td>{{ item.total_paid ?? 0 }}</td>
                             </tr>
                             <tr class="text-white text-center">
-                                <td class="fw-bold text-primary">Summery : -> </td>
-                                <td class="fw-bold text-primary">Total paid : {{ branch_target_data.totalPaid }}</td>
-                                <td class="fw-bold text-primary">Total payable : {{ branch_target_data.totalPayable }}
+                                <td class="fw-bold text-primary">
+                                    Summery : ->
                                 </td>
-                                <td class="fw-bold text-primary">Total due : {{ branch_target_data.due }}</td>
+                                <td class="fw-bold text-primary">
+                                    Total paid :
+                                    {{ branch_target_data.totalPaid }}
+                                </td>
+                                <td class="fw-bold text-primary">
+                                    Total payable :
+                                    {{ branch_target_data.totalPayable }}
+                                </td>
+                                <td class="fw-bold text-primary">
+                                    Total due : {{ branch_target_data.due }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -90,14 +121,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in branch_target_data.application" :key="item"
-                                class="text-white text-center">
-                                <td v-if="!item.applied"><input name="application_id" :value="item.id"
-                                        v-model="application_id" type="radio">
+                            <tr
+                                v-for="item in branch_target_data.application"
+                                :key="item"
+                                class="text-white text-center"
+                            >
+                                <td v-if="!item.applied">
+                                    <input
+                                        name="application_id"
+                                        :value="item.id"
+                                        v-model="application_id"
+                                        type="radio"
+                                    />
                                 </td>
-                                <td v-if="!item.applied">{{ new Date(item.created_at).toLocaleDateString() }}</td>
+                                <td v-if="!item.applied">
+                                    {{
+                                        new Date(
+                                            item.created_at
+                                        ).toLocaleDateString()
+                                    }}
+                                </td>
                                 <td v-if="!item.applied">{{ item.subject }}</td>
-                                <td v-if="!item.applied">{{ item.moukuf_amount }}</td>
+                                <td v-if="!item.applied">
+                                    {{ item.moukuf_amount }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -111,7 +158,7 @@
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { income_setup_store } from "./setup/store";
-import roleSetup from '../../partials/role_setup';
+import roleSetup from "../../partials/role_setup";
 
 export default {
     data: () => ({
@@ -120,71 +167,67 @@ export default {
         param_id: null,
         amount: 0,
         branch_target_data: [],
-        application_id: null
+        application_id: null,
     }),
 
     created: async function () {
-
-        await this.get_all_account_receipt_book()
-        await this.get_all_account_categories()
-        await this.get_all_central_division()
-        await this.get_all_branch()
-        await this.get_all_accounts()
+        await this.get_all_account_receipt_book();
+        await this.get_all_account_categories();
+        await this.get_all_central_division();
+        await this.get_all_branch();
+        await this.get_all_accounts();
 
         this.form_fields.forEach((field) => {
-            if (field.name == 'account_receipt_book_id') {
-                field.data_list = []
+            if (field.name == "account_receipt_book_id") {
+                field.data_list = [];
                 this.all_account_receipt_book_data?.data.forEach((item) => {
-                    let fielData = {}
-                    fielData.label = item.receipt_book_no
-                    fielData.value = item.id
-                    field.data_list.push(fielData)
-                })
+                    let fielData = {};
+                    fielData.label = item.receipt_book_no;
+                    fielData.value = item.id;
+                    field.data_list.push(fielData);
+                });
             }
 
-            if (field.name == 'account_category_id') {
-                field.data_list = []
+            if (field.name == "account_category_id") {
+                field.data_list = [];
                 this.all_account_categories.forEach((item) => {
-                    let formData = {}
-                    formData.label = item.title
-                    formData.value = item.id
-                    field.data_list.push(formData)
-                })
+                    let formData = {};
+                    formData.label = item.title;
+                    formData.value = item.id;
+                    field.data_list.push(formData);
+                });
             }
 
-            if (field.name == 'central_division_id') {
-                field.data_list = []
+            if (field.name == "central_division_id") {
+                field.data_list = [];
                 this.all_central_division.forEach((item) => {
-                    let formData = {}
-                    formData.label = item.full_name
-                    formData.value = item.id
-                    field.data_list.push(formData)
-                })
+                    let formData = {};
+                    formData.label = item.full_name;
+                    formData.value = item.id;
+                    field.data_list.push(formData);
+                });
             }
 
-            if (field.name == 'branch_id') {
-                field.data_list = []
+            if (field.name == "branch_id") {
+                field.data_list = [];
                 this.all_branch.forEach((item) => {
-                    let formData = {}
-                    formData.label = item.full_name
-                    formData.value = item.id
-                    field.data_list.push(formData)
-                })
+                    let formData = {};
+                    formData.label = item.full_name;
+                    formData.value = item.id;
+                    field.data_list.push(formData);
+                });
             }
 
-            if (field.name == 'account_id') {
-                field.data_list = []
+            if (field.name == "account_id") {
+                field.data_list = [];
                 this.all_accounts.forEach((item) => {
-                    let formData = {}
-                    formData.label = item.name
-                    formData.value = item.id
-                    field.data_list.push(formData)
-                })
+                    let formData = {};
+                    formData.label = item.name;
+                    formData.value = item.id;
+                    field.data_list.push(formData);
+                });
             }
-
-
-        })
-
+        });
 
         let id = this.$route.query.id;
         if (id) {
@@ -197,38 +240,40 @@ export default {
                             this.form_fields[index].value = value[1];
                         }
 
-                        if (field.name == 'account_id') {
-
-                            if (value[0] == 'account_logs') {
+                        if (field.name == "account_id") {
+                            if (value[0] == "account_logs") {
                                 // console.log("value", value[1].account.id)
-                                this.form_fields[index].value = value[1].account_id;
-                                this.getRespose()
+                                this.form_fields[index].value =
+                                    value[1].account_id;
+                                this.getRespose();
                             }
                         }
-                        if (field.name == 'account_number_id') {
-                            if (value[0] == 'account_logs') {
+                        if (field.name == "account_number_id") {
+                            if (value[0] == "account_logs") {
                                 // console.log("value", value[1].account.id)
                                 // this.get_account_numbers_by_account_id(value[1].account_number_id)
-                                this.form_fields[index].value = value[1].account_number_id;
+                                this.form_fields[index].value =
+                                    value[1].account_number_id;
                             }
                         }
                     });
                 });
 
-                await this.get_account_numbers_by_account_id(this.single_data.account_logs?.account_id)
-                let account_number = this.account_number_data?.account_number
+                await this.get_account_numbers_by_account_id(
+                    this.single_data.account_logs?.account_id
+                );
+                let account_number = this.account_number_data?.account_number;
                 this.form_fields.forEach((item) => {
-                    if (item.name == 'account_number_id') {
-                        item.data_list = []
+                    if (item.name == "account_number_id") {
+                        item.data_list = [];
                         account_number.forEach((number) => {
-                            let dataList = {}
-                            dataList.label = number.value
-                            dataList.value = number.id
-                            item.data_list.push(dataList)
-                        })
-
+                            let dataList = {};
+                            dataList.label = number.value;
+                            dataList.value = number.id;
+                            item.data_list.push(dataList);
+                        });
                     }
-                })
+                });
             }
         }
     },
@@ -243,9 +288,11 @@ export default {
             store: "store",
             get_single_branch_income: "get",
             income_update: "update",
-            get_branch_target_by_brach_id: 'get_branch_target_by_brach_id',
-            get_account_numbers_by_account_id: 'get_account_numbers_by_account_id',
-            get_receipt_book_remaining_pages: 'get_receipt_book_remaining_pages'
+            get_branch_target_by_brach_id: "get_branch_target_by_brach_id",
+            get_account_numbers_by_account_id:
+                "get_account_numbers_by_account_id",
+            get_receipt_book_remaining_pages:
+                "get_receipt_book_remaining_pages",
         }),
 
         submitHandler: async function ($event) {
@@ -256,8 +303,10 @@ export default {
                     this.$router.push({ name: `${role}AllIncome` });
                 }
             } else {
-
-                let response = await this.store($event.target, this.application_id);
+                let response = await this.store(
+                    $event.target,
+                    this.application_id
+                );
                 if (response.data.status === "success") {
                     window.s_alert("Data successcully created");
                     this.$router.push({ name: `${role}AllIncome` });
@@ -267,9 +316,9 @@ export default {
 
         async amountHandleKeyup(event) {
             const inputValue = event.target.value;
-            let amountInBangla = window.convertAmount(inputValue)
-            let toText = document.getElementById('amount_in_text')
-            toText.value = amountInBangla
+            let amountInBangla = window.convertAmount(inputValue);
+            let toText = document.getElementById("amount_in_text");
+            toText.value = amountInBangla;
         },
 
         // async accountHandler(event) {
@@ -289,41 +338,52 @@ export default {
         // },
 
         async showDetails() {
-            let account_category_id = document.getElementById('account_category_id').value;
-            let branch_id = document.getElementById('branch_id').value;
+            let account_category_id = document.getElementById(
+                "account_category_id"
+            ).value;
+            let branch_id = document.getElementById("branch_id").value;
             if (account_category_id && branch_id) {
-                let response = await this.get_branch_target_by_brach_id(account_category_id, branch_id)
-                this.branch_target_data = response
+                let response = await this.get_branch_target_by_brach_id(
+                    account_category_id,
+                    branch_id
+                );
+                this.branch_target_data = response;
             }
         },
 
         getRespose: async function () {
+            console.log("event", event);
 
-            if (event.target.name == 'account_id') {
-                await this.get_account_numbers_by_account_id(event.target.value)
-                let account_number = this.account_number_data?.account_number
+            if (event.target.name == "account_id") {
+                await this.get_account_numbers_by_account_id(
+                    event.target.value
+                );
+                let account_number = this.account_number_data?.account_number;
                 this.form_fields.forEach((item) => {
-                    if (item.name == 'account_number_id') {
-                        item.data_list = []
+                    if (item.name == "account_number_id") {
+                        item.data_list = [];
                         account_number.forEach((number) => {
-                            let dataList = {}
-                            dataList.label = number.value
-                            dataList.value = number.id
-                            item.data_list.push(dataList)
-                        })
+                            let dataList = {};
+                            dataList.label = number.value;
+                            dataList.value = number.id;
+                            item.data_list.push(dataList);
+                        });
                     }
-                })
+                });
             }
 
-            if (event.target.name == 'account_receipt_book_id') {
-                let receipt_book_id = event.target.value
+            if (event.target.name == "account_receipt_book_id") {
+                let receipt_book_id = event.target.value;
                 if (receipt_book_id) {
-                    let response = await this.get_receipt_book_remaining_pages(event.target.value)
+                    await this.get_receipt_book_remaining_pages(
+                        event.target.value
+                    );
                 }
             }
-
-        }
-
+            if (event.target.name == "amount") {
+                this.amountHandleKeyup(event);
+            }
+        },
     },
 
     computed: {
@@ -339,17 +399,15 @@ export default {
     },
 
     mounted() {
-        const amount = document.getElementById('amount');
+        const amount = document.getElementById("amount");
         if (amount) {
-            amount.addEventListener('keyup', this.amountHandleKeyup);
+            amount.addEventListener("keyup", this.amountHandleKeyup);
         }
         // const accountId = document.getElementById('account_id');
         // if (accountId) {
         //     accountId.addEventListener('change', this.accountHandler);
         // }
     },
-
-
 };
 </script>
 

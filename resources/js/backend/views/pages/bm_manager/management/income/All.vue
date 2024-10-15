@@ -93,18 +93,18 @@
                                     </th>
 
                                     <th class="cursor_n_resize">
-                                        Date
+                                        তারিখ
                                     </th>
                                     <th class="cursor_n_resize">
-                                        receipt book No
+                                        রশিদ বই নং
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Category
+                                        আয়ের মাধ্যম
                                     </th>
                                     <th class="cursor_n_resize">
-                                        receipt no
+                                        রশিদ নং
                                     </th>
-                                    <th class="cursor_n_resize">Amount</th>
+                                    <th class="cursor_n_resize">আয়ের পরিমাণ</th>
                                     <th class="cursor_n_resize">
                                         Status
                                     </th>

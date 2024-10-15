@@ -35,17 +35,20 @@ class All
                             ->whereRaw('account_receipt_book_assigns.account_receipt_book_id = account_receipt_books.id');
                     })->get();
                 } elseif (request()->input('uniq_receipt')) {
+
                     if (auth()->user()->parent) {
-                        $data = $data->where('remaining_page', '>', 0)->whereHas('receipt_book_assing', function ($q) {
+                        $data = $data->where('remaining_page', '>', 0)->where('is_approvel', 1)->whereHas('receipt_book_assing', function ($q) {
                             $q->where('division_id', auth()->user()->parent);
                         })->get();
+
                     } else {
 
-                        $data = $data->where('remaining_page', '>', 0)->whereHas('receipt_book_assing', function ($q) {
+                        $data = $data->where('remaining_page', '>', 0)->where('is_approvel', 1)->whereHas('receipt_book_assing', function ($q) {
                             $q->where('division_id', auth()->id());
                         })->get();
-                        // dd($data);
+
                         $newData = [];
+
                         foreach ($data as $item) {
                             $differenceNumber = $item->receipt_end_serial_no - $item->receipt_start_serial_no;
                             $accounLogCount = self::$accountIncomeModel::where('account_receipt_book_id', $item->id)->count();

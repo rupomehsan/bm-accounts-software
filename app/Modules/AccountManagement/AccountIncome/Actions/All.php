@@ -44,6 +44,7 @@ class All
             }
 
             if (request()->has('orderByCol') && request()->input('orderByCol')) {
+                
                 $orderByCol = request()->input('orderByCol');
             }
             if (request()->has('orderByType') && request()->input('orderByType')) {

@@ -55,7 +55,6 @@
                                 <i class="fa fa-upload"></i>
                                 Submit
                             </button>
-
                         </div>
                     </form>
                 </div>
@@ -95,6 +94,7 @@ export default {
     },
 
     methods: {
+
         ...mapActions(income_setup_store, {
             get_single_branch_income: "get",
             income_update: "update",
@@ -112,17 +112,13 @@ export default {
                 }
             }
         },
+
+
         async amountHandleKeyup(event) {
             const inputValue = event.target.value;
-            try {
-                const result = await axios.get(`get-amount-to-number/${inputValue}`);
-                if (result.data) {
-                    let toText = document.getElementById('amount_in_text');
-                    toText.value = result.data.toString(); // Use toString() method
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+            let amountInBangla = window.convertAmount(inputValue)
+            let toText = document.getElementById('amount_in_text')
+            toText.value = amountInBangla
         },
 
     },
@@ -144,4 +140,4 @@ export default {
 };
 </script>
 
-<style></style>
+
