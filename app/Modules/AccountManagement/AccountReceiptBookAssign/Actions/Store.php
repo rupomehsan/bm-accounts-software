@@ -14,7 +14,6 @@ class Store
     {
         try {
             $isExist = self::$model::query()
-                ->where('division_id', $request->input('division_id'))
                 ->where('account_receipt_book_id', $request->input('account_receipt_book_id'))
                 ->first();
             if ($isExist) {

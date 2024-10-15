@@ -311,7 +311,6 @@ export default {
                             dataList.value = number.id
                             item.data_list.push(dataList)
                         })
-
                     }
                 })
             }

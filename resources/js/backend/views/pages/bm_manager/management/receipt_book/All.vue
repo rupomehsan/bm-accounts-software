@@ -10,23 +10,24 @@
                         <button class="btn btn-info" @click="get_all_receipt_books()">
                             All
                             <span v-if="all_receipt_books" class="fw-bold">{{
-                            `(${all_receipt_books?.totalApproved + all_receipt_books?.totalNotApproved})`
-                        }}</span>
+                                `(${all_receipt_books.data?.data.length ?? 0})`
+                            }}</span>
                         </button>
                         <button class="btn btn-primary mx-3" @click="getReceiptBookByStatus('approved')">
                             Approved <span v-if="all_receipt_books" class="fw-bold">{{
-                            `(${all_receipt_books?.totalApproved})`
-                        }}</span>
+                                `(${all_receipt_books?.totalApproved})`
+                            }}</span>
                         </button>
                         <button class="btn btn-danger" @click="getReceiptBookByStatus('not-approved')">
                             Not approved <span v-if="all_receipt_books" class="fw-bold">{{
-                            `(${all_receipt_books?.totalNotApproved})`
-                        }}</span>
+                                `(${all_receipt_books?.totalNotApproved})`
+                            }}</span>
                         </button>
                     </div>
                     <div class="col-lg-3 text-end">
                         <span>
-                            <router-link :to="{ name: `${role}ReceiptBookCreate` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}ReceiptBookCreate` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -88,7 +89,7 @@
 
                                     </th>
                                     <th class="cursor_n_resize">
-                                       Remaining page
+                                        Remaining page
                                     </th>
                                     <th class="cursor_n_resize">
                                         is approved ?
@@ -108,7 +109,7 @@
                                         <input type="checkbox" class="form-check-input"
                                             :checked="child_item.includes(item.id)" @click="toggleChildItem(item.id)" />
                                     </td> -->
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>
                                         {{ item.receipt_book_no }}
                                     </td>
@@ -152,11 +153,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                            name: `${role}ReceiptBookCreate`,
-                            query: {
-                                id: item.id,
-                            },
-                        }" class="">
+                                                            name: `${role}ReceiptBookCreate`,
+                                                            query: {
+                                                                id: item.id,
+                                                            },
+                                                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Edit
                                                         </router-link>
@@ -166,10 +167,10 @@
                                                 <li>
                                                     <span>
                                                         <a @click.prevent="
-                            user_delete(
-                                item.id
-                            )
-                            " href="#" class="">
+                                                            user_delete(
+                                                                item.id
+                                                            )
+                                                            " href="#" class="">
                                                             <i class="fa text-danger fa-trash"></i>
                                                             Delete
                                                         </a>
@@ -183,7 +184,7 @@
                         </table>
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_receipt_books.data" :method="get_all_receipt_books" v-if="loaded" />
+                        <pagination :data="all_receipt_books?.data" :method="get_all_receipt_books" v-if="loaded" />
                         <!-- <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>

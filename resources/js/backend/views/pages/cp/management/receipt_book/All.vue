@@ -10,7 +10,7 @@
                         <button class="btn btn-info" @click="get_all_receipt_books()">
                             All
                             <span v-if="all_receipt_books" class="fw-bold">{{
-                                `(${all_receipt_books?.totalApproved + all_receipt_books?.totalNotApproved})`
+                                `(${all_receipt_books.data?.data?.length ?? 0})`
                             }}</span>
                         </button>
                         <button class="btn btn-primary mx-3" @click="getReceiptBookByStatus('approved')">
@@ -131,9 +131,9 @@
                     </div>
                     <div
                         class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_receipt_books" :method="get_all_receipt_books" />
+                        <pagination :data="all_receipt_books.data" :method="get_all_receipt_books" />
                         <div class="float-right">
-                            <div class="show-limit d-inline-block">
+                            <!-- <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
                                 <select class="" v-model="offset">
                                     <option value="5">5</option>
@@ -142,10 +142,10 @@
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_receipt_books.total }}</span>
+                                <span>{{ all_receipt_books.data?.total }}</span>
                             </div>
                         </div>
                     </div>

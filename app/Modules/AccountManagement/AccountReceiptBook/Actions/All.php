@@ -35,15 +35,13 @@ class All
                             ->whereRaw('account_receipt_book_assigns.account_receipt_book_id = account_receipt_books.id');
                     })->get();
                 } elseif (request()->input('uniq_receipt')) {
-
                     if (auth()->user()->parent) {
-
-                        $data = $data->whereHas('receipt_book_assing', function ($q) {
+                        $data = $data->where('remaining_page', '>', 0)->whereHas('receipt_book_assing', function ($q) {
                             $q->where('division_id', auth()->user()->parent);
                         })->get();
                     } else {
 
-                        $data = $data->whereHas('receipt_book_assing', function ($q) {
+                        $data = $data->where('remaining_page', '>', 0)->whereHas('receipt_book_assing', function ($q) {
                             $q->where('division_id', auth()->id());
                         })->get();
                         // dd($data);
@@ -57,6 +55,7 @@ class All
                         }
 
                         $data = $newData;
+
                     }
                 } else {
                     $data = $data->with($with)->where($condition)->latest()->get();

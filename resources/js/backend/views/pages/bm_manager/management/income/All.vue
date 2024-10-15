@@ -8,7 +8,8 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `${role}CreateIncome` }" class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}CreateIncome` }"
+                                class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -89,28 +90,23 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
 
                                     <th class="cursor_n_resize">
                                         Date
-
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Account receipt book No
-
+                                        receipt book No
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Account category
-
+                                        Category
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Account receipt no
+                                        receipt no
                                     </th>
                                     <th class="cursor_n_resize">Amount</th>
                                     <th class="cursor_n_resize">
                                         Status
-
                                     </th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
@@ -126,7 +122,7 @@
                                     <td>
                                         {{ item.date }}
                                     </td>
-                                    <td>{{ item.account_receipt_book_id }}</td>
+                                    <td>{{ item.receipt_book?.receipt_book_no }}</td>
                                     <td>{{ item.account_category.title }}</td>
                                     <td>{{ item.account_receipt_no }}</td>
                                     <td>{{ item.amount }}</td>
@@ -164,11 +160,11 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: `${role}BalanceForm`,
-                                query: {
-                                    id: item.id,
-                                },
-                            }" class="">
+                                                            name: `${role}BalanceForm`,
+                                                            query: {
+                                                                id: item.id,
+                                                            },
+                                                        }" class="">
                                                             <i class="fa text-warning fa-pencil"></i>
                                                             Balance
                                                         </router-link>

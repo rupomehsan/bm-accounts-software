@@ -10,6 +10,7 @@ class Model extends EloquentModel
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
     static $userRoleModel = \App\Modules\UserRole\Model::class;
     static $accountCategoryModel = \App\Modules\AccountManagement\AccountCategory\Model::class;
+    static $accountReceiptBookModel = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
 
     protected $table = "account_incomes";
     protected $guarded = [];
@@ -40,6 +41,10 @@ class Model extends EloquentModel
     public function account_category()
     {
         return $this->belongsTo(self::$accountCategoryModel, 'account_category_id');
+    }
+    public function receipt_book()
+    {
+        return $this->belongsTo(self::$accountReceiptBookModel, 'account_receipt_book_id');
     }
 
 

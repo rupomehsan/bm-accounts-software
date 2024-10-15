@@ -18,13 +18,14 @@ class Store
     {
         try {
 
-            // dd($request->all());
+
 
             if (self::$model::query()->where('account_receipt_book_id', $request->input('account_receipt_book_id'))->where('account_receipt_no', $request->input('account_receipt_no'))->exists()) {
-                return messageResponse('This receipt page no already used -> ' . $request->input('account_receipt_no'), 404, 'error');
+                return messageResponse('This receipt page no already used : ' . $request->input('account_receipt_no'), 404, 'error');
             }
 
             $receiptBook = self::$receiptBookModel::find($request->input('account_receipt_book_id'));
+
 
             if (!$receiptBook) {
                 return messageResponse('Receipt book not found', 404, 'error');
@@ -76,6 +77,9 @@ class Store
                     $targetMoukuf->account_log_id = $accountLogModel->id;
                     $targetMoukuf->save();
                 }
+
+                $receiptBook->remaining_page = $receiptBook->remaining_page - 1;
+                $receiptBook->update();
                 return messageResponse('Item added successfully', 201);
             }
         } catch (\Exception $e) {

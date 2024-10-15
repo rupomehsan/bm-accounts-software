@@ -16,7 +16,7 @@ class All
             $condition = [];
             $orderByCol = 'id';
             $orderByType = 'desc';
-            $with = ['user_roles:id,name', 'account_category:id,title'];
+            $with = ['user_roles:id,name', 'account_category:id,title','receipt_book'];
             $data = self::$model::query();
 
             if (request()->has('branch_id') && request()->input('branch_id')) {
