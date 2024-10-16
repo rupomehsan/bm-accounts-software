@@ -7,6 +7,7 @@ export const loan_setup_store = defineStore("loan_setup_store", {
         all_account_categories_data: {},
         single_data: {},
         role_data: {},
+        offset: 10,
         api: "loan-providers"
     }),
     getters: {
@@ -17,9 +18,9 @@ export const loan_setup_store = defineStore("loan_setup_store", {
         all: async function (url) {
             let response;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + `&offset=${this.offset}`);
             } else {
-                response = await axios.get(this.api);
+                response = await axios.get(this.api + `?offset=${this.offset}`);
             }
             this.all_data = response.data.data;
 
@@ -78,6 +79,10 @@ export const loan_setup_store = defineStore("loan_setup_store", {
             response = response.data.data;
             this.all_data = response;
 
+        },
+        set_limit: async function (limit) {
+            this.offset = limit;
+            this.all();
         },
 
     },

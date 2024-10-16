@@ -10,7 +10,7 @@ class All
     {
         try {
 
-            $offset = request()->input('limit') ?? 10;
+            $offset = request()->input('offset') ?? 10;
             $condition = [];
             $with = ['account_receipt_book', 'user'];
             $data = self::$model::query();

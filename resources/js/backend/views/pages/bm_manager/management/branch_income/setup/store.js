@@ -1,3 +1,4 @@
+import { offset } from "@popperjs/core";
 import { defineStore } from "pinia";
 
 export const branch_income_setup_store = defineStore("branch_income_setup_store", {
@@ -10,6 +11,7 @@ export const branch_income_setup_store = defineStore("branch_income_setup_store"
         all_branch: {},
         all_accounts: {},
         account_number_data: {},
+        offset  : 10
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -19,9 +21,9 @@ export const branch_income_setup_store = defineStore("branch_income_setup_store"
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + `&offset=${this.offset}`);
             } else {
-                response = await axios.get("account-incomes?branch_id=true");
+                response = await axios.get("account-incomes?branch_id=true" + `&offset=${this.offset}`);
             }
             this.all_data = response.data.data;
         },
@@ -107,5 +109,10 @@ export const branch_income_setup_store = defineStore("branch_income_setup_store"
             // console.log("data", response);
             this.account_number_data = response;
         },
+
+        set_limit: async function (limit) {
+            this.offset = limit;
+            this.all();
+        }
     },
 });

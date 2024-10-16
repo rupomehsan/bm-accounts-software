@@ -8,7 +8,8 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         month_for_voucher_data: {},
         top_shit_data: {},
         active_month: {},
-        api_url: new URL(location.origin + '/api/v1/account-expenses?bm=true&status=approved')
+        api_url: new URL(location.origin + '/api/v1/account-expenses?bm=true&status=approved'),
+        limit: 10,
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -18,9 +19,9 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + "&offset=" + this.limit);
             } else {
-                response = await axios.get("account-expenses?bm=true&status=approved");
+                response = await axios.get("account-expenses?bm=true&status=approved" + "&offset=" + this.limit);
             }
             this.all_data = response.data.data;
         },
@@ -28,9 +29,9 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + "&offset=" + this.limit);
             } else {
-                response = await axios.get("account-expenses?bm=true&status=pending");
+                response = await axios.get("account-expenses?bm=true&status=pending" + "&offset=" + this.limit);
             }
             this.all_data = response.data.data;
         },
@@ -118,5 +119,10 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             this.all_data = response;
 
         },
+
+        set_limit: function (limit) {
+            this.limit = limit;
+            this.all();
+        }
     },
 });

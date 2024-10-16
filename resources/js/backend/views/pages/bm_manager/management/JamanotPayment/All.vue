@@ -162,10 +162,10 @@
                     </div>
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_data" :method="get_all_data" />
-                        <!-- <div class="float-right">
+                        <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="" v-model="offset">
+                                <select class="" @change="set_limit($event.target.value)">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -177,7 +177,7 @@
                                 <span>Total:</span>
                                 <span>{{ all_data.total }}</span>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -214,6 +214,7 @@ export default {
             delete_data: 'delete',
             bulk_action: 'bulk_action',
             get_data_by_search: 'get_data_by_search',
+            set_limit: 'set_limit'
         }),
         toggleParentCheckbox() {
             this.child_items = event.target.checked ? this.all_data.data.map(item => item.id) : []

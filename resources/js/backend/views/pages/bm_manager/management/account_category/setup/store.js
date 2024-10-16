@@ -15,9 +15,9 @@ export const account_category_setup_store = defineStore("account_category_setup_
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + `&type=income`);
             } else {
-                response = await axios.get(url);
+                response = await axios.get(`account-categories?type=income`);
             }
             this.all_data = response.data.data;
         },
@@ -25,9 +25,9 @@ export const account_category_setup_store = defineStore("account_category_setup_
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + `&type=expense`);
             } else {
-                response = await axios.get(url);
+                response = await axios.get(`account-categories?type=expense`);
             }
             this.all_data = response.data.data;
         },

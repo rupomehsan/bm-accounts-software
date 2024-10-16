@@ -10,6 +10,7 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
         all_branch: {},
         all_accounts: {},
         account_number_data: {},
+        limit: 10,
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -19,9 +20,9 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + "&offset=" + this.limit);
             } else {
-                response = await axios.get("account-incomes");
+                response = await axios.get("account-incomes" + "?offset=" + this.limit);
             }
             this.all_data = response.data.data;
         },
@@ -112,6 +113,11 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
             let response = await axios.get("get-receipt-book-remaining-pages/" + id);
             response = response.data.data;
             return response
+        },
+
+        set_limit: function (limit) {
+            this.limit = limit;
+            this.all();
         },
 
     },

@@ -5,7 +5,8 @@ export const not_approved_by_bm_voucher_setup_store = defineStore("not_approved_
         all_data: {},
         single_data: {},
         AllAccountExpenseCategories: {},
-        api_url: new URL(location.origin + '/api/v1/bm-not-approval-voucher')
+        api_url: new URL(location.origin + '/api/v1/bm-not-approval-voucher'),
+        offset : 10
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -17,7 +18,7 @@ export const not_approved_by_bm_voucher_setup_store = defineStore("not_approved_
             if (url) {
                 response = await axios.get(url);
             } else {
-                response = await axios.get("bm-not-approval-voucher");
+                response = await axios.get("bm-not-approval-voucher" + "?offset=" + this.offset);
             }
             this.all_data = response.data.data;
         },
@@ -73,5 +74,10 @@ export const not_approved_by_bm_voucher_setup_store = defineStore("not_approved_
             this.all_data = response;
 
         },
+
+        set_limit: function (limit) {
+            this.limit = limit;
+            this.all();
+        }
     },
 });

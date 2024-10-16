@@ -162,9 +162,10 @@
                     <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
                         <pagination :data="all_users" :method="get_all_pending_vouchers" />
                         <div class="float-right">
-                            <!-- <div class="show-limit d-inline-block">
+                            <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="" v-model="offset">
+                                <select class=""
+                                    @change="set_limit($event.target.value)">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -175,7 +176,7 @@
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -226,6 +227,7 @@ export default {
             get_all_pending_vouchers: "get_all_pending_vouchers",
             user_delete: "delete",
             get_data_by_search: "get_data_by_search",
+            set_limit: "set_limit",
 
         }),
         ExportData(data = [], prefix_name = 'voucher') {

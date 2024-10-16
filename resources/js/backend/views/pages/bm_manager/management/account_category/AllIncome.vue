@@ -218,8 +218,7 @@ export default {
         role: roleSetup.role
     }),
     created: async function () {
-        this.api_url.searchParams.set('type', 'income');
-        await this.get_all_categories(this.api_url.href);
+        await this.get_all_categories();
         this.loaded = true;
     },
     methods: {
@@ -254,14 +253,11 @@ export default {
 
     },
     watch: {
-        offset: async function (newOffset, oldOffset) {
-            await this.get_all_categories("users");
-        },
         search_data: async function (newSearchData, oldSearchData) {
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(async () => {
                 this.api_url.searchParams.set('search', this.search_data);
-                await this.get_all_categories(this.api_url.href);
+                await this.get_all_categories();
             }, 500);
         },
     },

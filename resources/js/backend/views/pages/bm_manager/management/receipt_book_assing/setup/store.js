@@ -16,9 +16,9 @@ export const receipt_book_assign_store = defineStore("receipt_book_assign_store"
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url+"&limit="+this.limit);
+                response = await axios.get(url+"&offset="+this.limit);
             } else {
-                response = await axios.get(`account-receipt-book-assigns?limit=${this.limit}`);
+                response = await axios.get(`account-receipt-book-assigns?offset=${this.limit}`);
             }
             this.all_data = response.data.data;
         },
@@ -70,6 +70,7 @@ export const receipt_book_assign_store = defineStore("receipt_book_assign_store"
 
         set_limit: async function (limit) {
             this.limit = limit;
+            this.all();
         },
     },
 });
