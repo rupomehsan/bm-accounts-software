@@ -11,6 +11,8 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
         all_accounts: {},
         account_number_data: {},
         limit: 10,
+        sort_by_col: 'id',
+        sort_by_type: 'asc',
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -22,7 +24,7 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
             if (url) {
                 response = await axios.get(url + "&offset=" + this.limit);
             } else {
-                response = await axios.get("account-incomes" + "?offset=" + this.limit);
+                response = await axios.get(`account-incomes?offset=${this.limit}&sort_by_col=${this.sort_by_col}&sort_by_type=${this.sort_by_type}`);
             }
             this.all_data = response.data.data;
         },
@@ -117,6 +119,11 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
 
         set_limit: function (limit) {
             this.limit = limit;
+            this.all();
+        },
+        set_sorting: function (sort_by_col, sort_by_type) {
+            this.sort_by_type = sort_by_type;
+            this.sort_by_col = sort_by_col;
             this.all();
         },
 

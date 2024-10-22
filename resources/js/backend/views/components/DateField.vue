@@ -1,6 +1,6 @@
 <template>
     <label :for="name || 'date'" class="text-capitalize d-block date_custom_control">
-        <span class="mb-2 d-block"></span>
+        <span class=" d-block"></span>
         <input type="date" :ref="`date_input`" @click="$event.target.showPicker()" @focus="$event.target.showPicker()"
             @change="format_date(); keyup_handler($event.target.value)" :id="name || 'date'" :name="name || 'date'"
             class="form-control">

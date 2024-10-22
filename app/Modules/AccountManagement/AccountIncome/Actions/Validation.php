@@ -38,6 +38,7 @@ class Validation extends FormRequest
             'account_category_id' => 'required|sometimes',
             'central_division_id' => 'required|sometimes',
             'account_receipt_no' => 'required|sometimes',
+            'income_source_type' => 'required|sometimes',
             'branch_id' => 'sometimes',
             'date' => 'required|sometimes',
             'description' => 'required|sometimes',

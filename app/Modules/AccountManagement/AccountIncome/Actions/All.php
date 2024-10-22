@@ -14,8 +14,8 @@ class All
             // dd(request()->all());
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $orderByCol = 'id';
-            $orderByType = 'desc';
+            $orderByCol =  request()->input('sort_by_col') ?? 'id';
+            $orderByType = request()->input('sort_by_type') ?? 'asc';
             $with = ['user_roles:id,name', 'account_category:id,title','receipt_book'];
             $data = self::$model::query();
 
@@ -44,22 +44,23 @@ class All
             }
 
             if (request()->has('orderByCol') && request()->input('orderByCol')) {
-                
+
                 $orderByCol = request()->input('orderByCol');
             }
             if (request()->has('orderByType') && request()->input('orderByType')) {
                 $orderByType = request()->input('orderByType');
             }
 
+
             if (request()->has('get_all') && (int)request()->input('get_all') === 1) {
                 $data = $data->with($with)->where($condition)->latest()->get();
             } else {
                 $data = $data->with($with)
                     ->where($condition)
-                    ->latest()
                     ->orderBy($orderByCol, $orderByType)
                     ->paginate($offset);
             }
+
             return entityResponse($data);
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');

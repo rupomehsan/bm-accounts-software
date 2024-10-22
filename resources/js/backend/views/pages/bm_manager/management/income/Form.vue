@@ -11,10 +11,9 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <div class="btns">
-                                <router-link
-                                    :to="{ name: `${role}AllIncome` }"
-                                    class="btn rounded-pill btn-outline-warning router-link-active"
-                                    ><i class="fa fa-arrow-left me-5px"></i>
+                                <router-link :to="{ name: `${role}AllIncome` }"
+                                    class="btn rounded-pill btn-outline-warning router-link-active"><i
+                                        class="fa fa-arrow-left me-5px"></i>
                                     Back
                                 </router-link>
                             </div>
@@ -22,31 +21,20 @@
                     </div>
                 </div>
                 <div class="my-1">
-                    <form
-                        @submit.prevent="submitHandler"
-                        class="user_create_form card"
-                    >
+                    <form @submit.prevent="submitHandler" class="user_create_form card">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
                                     <div class="admin_form form_1">
-                                        <template
-                                            v-for="(
+                                        <template v-for="(
                                                 form_field, index
-                                            ) in form_fields"
-                                            :key="index"
-                                        >
-                                            <common-input
-                                                :label="form_field.label"
-                                                :type="form_field.type"
-                                                :onchange="getRespose"
-                                                :name="form_field.name"
-                                                :multiple="form_field.multiple"
-                                                :value="form_field.value"
-                                                :data_list="
-                                                    form_field.data_list
-                                                "
-                                            />
+                                            ) in form_fields" :key="index">
+                                            <common-input :label="form_field.label" :type="form_field.type"
+                                                :onchange="getRespose" :onchangeAction="form_field.onchangeAction"
+                                                :name="form_field.name" :multiple="form_field.multiple"
+                                                :value="form_field.value" :is_visible="form_field.is_visible"
+                                                :data_list="form_field.data_list
+                                                    " />
                                         </template>
                                     </div>
                                 </div>
@@ -58,13 +46,9 @@
                                 <i class="fa fa-upload"></i>
                                 Submit
                             </button>
-                            <button
-                                type="button"
-                                class="btn btn-outline-info mx-2"
-                                @click="showDetails"
-                            >
+                            <!-- <button type="button" class="btn btn-outline-info mx-2" @click="showDetails">
                                 Show history
-                            </button>
+                            </button> -->
                         </div>
                     </form>
                 </div>
@@ -80,11 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="item in branch_target_data.data"
-                                :key="item"
-                                class="text-white text-center"
-                            >
+                            <tr v-for="item in branch_target_data.data" :key="item" class="text-white text-center">
                                 <td>{{ item.session }}</td>
                                 <td>{{ item.target_amount ?? 0 }}</td>
                                 <td>{{ item.total_payable ?? 0 }}</td>
@@ -121,18 +101,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                v-for="item in branch_target_data.application"
-                                :key="item"
-                                class="text-white text-center"
-                            >
+                            <tr v-for="item in branch_target_data.application" :key="item"
+                                class="text-white text-center">
                                 <td v-if="!item.applied">
-                                    <input
-                                        name="application_id"
-                                        :value="item.id"
-                                        v-model="application_id"
-                                        type="radio"
-                                    />
+                                    <input name="application_id" :value="item.id" v-model="application_id"
+                                        type="radio" />
                                 </td>
                                 <td v-if="!item.applied">
                                     {{
@@ -159,6 +132,7 @@ import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
 import { income_setup_store } from "./setup/store";
 import roleSetup from "../../partials/role_setup";
+import axios from 'axios';
 
 export default {
     data: () => ({
@@ -308,7 +282,7 @@ export default {
                     this.application_id
                 );
                 if (response.data.status === "success") {
-                    window.s_alert("Data successcully created");
+                    window.s_alert("Data successfully created");
                     this.$router.push({ name: `${role}AllIncome` });
                 }
             }
@@ -351,8 +325,11 @@ export default {
             }
         },
 
-        getRespose: async function () {
-            console.log("event", event);
+        getRespose: async function (event, actionTitle = null, ref = null) {
+
+            if (actionTitle && event && ref) {
+                this[actionTitle](actionTitle, event, ref)
+            }
 
             if (event.target.name == "account_id") {
                 await this.get_account_numbers_by_account_id(
@@ -375,16 +352,80 @@ export default {
             if (event.target.name == "account_receipt_book_id") {
                 let receipt_book_id = event.target.value;
                 if (receipt_book_id) {
-                    await this.get_receipt_book_remaining_pages(
+                    let response = await this.get_receipt_book_remaining_pages(
                         event.target.value
                     );
+
+                    if (response.data.length) {
+                        response.data.forEach((item) => {
+                            let selectData = {}
+                            selectData.label = item.number
+                            selectData.value = item.number
+                            selectData.is_disabled = item.is_disabled
+                            this.form_fields.find(item => item.name == "account_receipt_no").data_list.push(selectData)
+
+                        })
+
+
+
+
+
+
+                    }
+
+                    console.log(response);
+
                 }
             }
+
             if (event.target.name == "amount") {
                 this.amountHandleKeyup(event);
             }
+
+
+
         },
+        getSelectedField: function (actionTitle, event, ref) {
+            let value = event.target.value
+            if (value == "শাখা") {
+                let branch = this.form_fields.find(item => item.name == "branch_id")
+                branch.is_visible = true
+
+                let division = this.form_fields.find(item => item.name == "central_division_id")
+                division.is_visible = false
+
+                let random = this.form_fields.find(item => item.name == "random_user")
+                random.is_visible = false
+
+            } else if (value == "বিভাগ") {
+                let division = this.form_fields.find(item => item.name == "central_division_id")
+                division.is_visible = true
+
+                let branch = this.form_fields.find(item => item.name == "branch_id")
+                branch.is_visible = false
+
+                let random = this.form_fields.find(item => item.name == "random_user")
+                random.is_visible = false
+
+
+            } else if (value == "ব্যাক্তি/প্রতিষ্ঠান") {
+                let random = this.form_fields.find(item => item.name == "random_user")
+                random.is_visible = true
+
+                let division = this.form_fields.find(item => item.name == "central_division_id")
+                division.is_visible = false
+
+                let branch = this.form_fields.find(item => item.name == "branch_id")
+                branch.is_visible = false
+            }
+
+
+        },
+
+
+
     },
+
 
     computed: {
         ...mapState(income_setup_store, {

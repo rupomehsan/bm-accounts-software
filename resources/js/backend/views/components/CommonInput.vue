@@ -1,10 +1,10 @@
 <template>
-    <div class="form-group">
+    <div class="form-group" v-if="is_visible">
         <label for="">
             {{ label || name }}
         </label>
         <div v-if="['text', 'number', 'password', 'email', 'month'].includes(type)
-                " class="mt-1 mb-3">
+        " class="mt-1 mb-3">
             <input class="form-control" :type="type" :name="name" :id="name" :value="value" @change="errorReset"
                 :disabled="disabled" />
         </div>
@@ -26,7 +26,7 @@
         <div v-if="type === 'select'" class="mt-1 mb-3">
             <select :name="name" class="form-select" :id="name" :disabled="disabled" @change="errorReset">
                 <option value="">Select item</option>
-                <option v-for="data in data_list" :key="data" :value="data.value" :selected="data.value == value">
+                <option  v-for="data in data_list" :disabled="data.is_disabled" :key="data" :value="data.value" :selected="data.value == value">
                     {{ data.label }}
                 </option>
             </select>
@@ -77,6 +77,11 @@ export default {
             type: String,
             default: 'YYYY-MM-DD'
         },
+        is_visible: {
+            required: false,
+            type: Boolean,
+            default: true
+        },
         onchange: {
             required: false,
             type: Function,
@@ -100,7 +105,7 @@ export default {
 
             if (this.onchange) {
                 if (this.onchangeAction) {
-                    this.onchange(this.onchangeAction, event, this)
+                    this.onchange(event, this.onchangeAction, this)
                 } else {
                     this.onchange(event);
                 }

@@ -32,9 +32,11 @@ class Store
             }
 
             $receiptNo = $request->input('account_receipt_no');
+
             if ($receiptNo < $receiptBook->receipt_start_serial_no || $receiptNo > $receiptBook->receipt_end_serial_no) {
                 return messageResponse('This receipt page no does not exist in this receipt book', 404, 'error');
             }
+
 
 
             if ($income = self::$model::query()->create($request->validated())) {
@@ -64,6 +66,7 @@ class Store
 
                 $accountLogModel = LogStore::execute($data);
                 $income->account_log_id =  $accountLogModel->id;
+                $income->account_receipt_book_no =  $receiptBook->receipt_book_no;
                 $income->update();
 
                 if ($request->input('application_id') && $request->input('application_id') != "null") {

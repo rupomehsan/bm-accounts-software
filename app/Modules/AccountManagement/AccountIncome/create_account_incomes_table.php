@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('central_division_id')->nullable();
             $table->bigInteger('branch_id')->nullable();
 
+            $table->string('income_source_type')->nullable();
             $table->string('account_receipt_no', 100)->nullable();
             $table->date('date')->nullable();
             $table->text('description')->nullable();

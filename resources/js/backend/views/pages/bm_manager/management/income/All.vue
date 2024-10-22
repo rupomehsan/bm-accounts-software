@@ -4,8 +4,9 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">All Income Management</h5>
+                        <h5 class="m-0">All Income List</h5>
                     </div>
+
                     <div class="col-lg-6 text-end">
                         <span>
                             <router-link :to="{ name: `${role}CreateIncome` }"
@@ -33,7 +34,7 @@
                                         <date-field :label="`End Date`" :name="`end_date`" />
                                     </div>
                                     <div v-if="loaded">
-                                        <label for="" class="my-1">Depertment</label>
+                                        <label for="" class="">Depertment</label>
                                         <select v-model="user_id" name="central_division_id" class="form-control" id="">
                                             <option value="">Select depertment</option>
                                             <template v-for="user in all_central_division" :key="user.id">
@@ -42,7 +43,7 @@
                                         </select>
                                     </div>
                                     <div v-if="loaded">
-                                        <label for="" class="my-1">Branch</label>
+                                        <label for="" class="">Branch</label>
                                         <select v-model="user_id" name="branch_id" class="form-control" id="">
                                             <option value="">Select branch</option>
                                             <template v-for="user in all_branch" :key="user.id">
@@ -50,19 +51,14 @@
                                             </template>
                                         </select>
                                     </div>
-                                    <div class="pt-2">
+                                    <div class="">
                                         <button class="btn btn-primary mt-4">Search</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="d-flex gap-2 my-3">
-                            <div class="search">
-                                <!-- <form action="#">
-                                    <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                        class="form-control border border-info" />
-                                </form> -->
-                            </div>
+
                             <div class="btns d-flex gap-2 align-items-center">
                                 <div class="table_actions">
                                     <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
@@ -74,9 +70,31 @@
                                                 Export All
                                             </a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <label for="">Sort by colum </label>
+                            <div>
+                                <select name="" id="" class="form-select" v-model="sort_by_col">
+                                    <option value="account_receipt_book_id">রশিদ বই নং</option>
+                                    <option value="account_receipt_book_no">রশিদ নং</option>
+                                    <option value="account_category_id">আয়ের খাতসমূহ</option>
+                                </select>
+                            </div>
+                            <label for="">Sort by type </label>
+                            <div>
+                                <select name="" id="" class="form-select" v-model="sort_by_type">
+                                    <option value="asc">Assending</option>
+                                    <option value="desc">Dessending</option>
+                                </select>
+                            </div>
+                            <div class="">
+                                <button class="btn btn-info " @click="set_sorting(this.sort_by_col,this.sort_by_type)">Sort</button>
+                            </div>
+
                         </div>
 
                     </div>
@@ -99,7 +117,7 @@
                                         রশিদ বই নং
                                     </th>
                                     <th class="cursor_n_resize">
-                                        আয়ের মাধ্যম
+                                        আয়ের খাতসমূহ
                                     </th>
                                     <th class="cursor_n_resize">
                                         রশিদ নং
@@ -252,6 +270,8 @@ export default {
         search_data: "",
         loaded: false,
         user_id: '',
+        sort_by_col: '',
+        sort_by_type: '',
     }),
     created: async function () {
         await this.get_all_branch_income();
@@ -268,6 +288,7 @@ export default {
             get_all_branch: "get_all_branch",
             income_search: "income_search",
             set_limit: "set_limit",
+            set_sorting: "set_sorting",
 
         }),
 

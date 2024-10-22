@@ -12,8 +12,9 @@ export default [
     {
         name: "account_receipt_no",
         label: "রশিদ নং",
-        type: "number",
+        type: "select",
         value: "",
+        data_list: [],
     },
     {
         name: "date",
@@ -30,18 +31,52 @@ export default [
         data_list: [],
     },
     {
+        name: "income_source_type",
+        label: "আয়ের উৎসের  ধরণ",
+        type: "select",
+        value: "",
+        multiple: false,
+        onchangeAction: 'getSelectedField',
+        data_list: [
+            {
+                label: "শাখা",
+                value: "শাখা"
+            },
+            {
+                label: "বিভাগ",
+                value: "বিভাগ"
+            },
+            {
+                label: "ব্যাক্তি/প্রতিষ্ঠান",
+                value: "ব্যাক্তি/প্রতিষ্ঠান"
+            }
+        ],
+
+    },
+    {
         name: "branch_id",
-        label: "শাখার নাম",
+        label: "শাখার সমূহের ",
         type: "select",
         value: "",
         multiple: false,
         data_list: [],
+        is_visible: false
+    },
+    {
+        name: "central_division_id",
+        label: "বিভাগ সমূহের ",
+        type: "select",
+        value: "",
+        multiple: false,
+        data_list: [],
+        is_visible: false
     },
     {
         name: "random_user",
-        label: "র‍্যান্ডোম ইউজার",
+        label: "ব্যাক্তি/প্রতিষ্ঠানের নাম",
         type: "text",
         value: "",
+        is_visible: false
     },
     {
         name: "description",
