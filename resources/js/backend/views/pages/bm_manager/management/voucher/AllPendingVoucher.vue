@@ -26,14 +26,14 @@
                                 <div class="d-flex gap-2">
                                     <div>
                                         <label for="">Start date</label>
-                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                        <date-field :label="`Start Date`" :name="`start_date`"  />
                                     </div>
                                     <div>
                                         <label for="">End date</label>
-                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                        <date-field :label="`End Date`" :name="`end_date`"  />
                                     </div>
 
-                                    <div class="pt-2">
+                                    <div class="">
                                         <button type="submit" class="btn btn-primary mt-4">Search</button>
                                     </div>
                                 </div>

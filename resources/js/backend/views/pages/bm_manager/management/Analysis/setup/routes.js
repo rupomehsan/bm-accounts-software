@@ -7,7 +7,7 @@ let route_prefix = setup.route_prefix;
 const role = window.role.bm
 const routes =
 {
-    path: 'audit',
+    path: 'analysis',
     component: Layout,
     children: [
         {

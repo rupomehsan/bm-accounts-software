@@ -4,7 +4,7 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">At A Glance</h5>
+                        <h5 class="m-0">Branch income</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>

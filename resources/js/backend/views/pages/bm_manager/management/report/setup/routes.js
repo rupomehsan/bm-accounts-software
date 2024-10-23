@@ -17,6 +17,7 @@ import AssetRegister from "../AssetRegister.vue";
 import EkkalinProdan from "../EkkalinProdan.vue";
 import NiyomitoProdan from "../NiyomitoProdan.vue";
 import KendriyoSuvakankhiThekeAy from "../KendriyoSuvakankhiThekeAy.vue";
+import AtAGlance from "../AtAGlance.vue";
 
 const routes = {
     path: 'reports',
@@ -102,6 +103,11 @@ const routes = {
             path: "Central-Auspicious-to-Income",
             name: prefix + "KendriyoSuvakankhiThekeAy",
             component: KendriyoSuvakankhiThekeAy,
+        },
+        {
+            path: "at-a-glance",
+            name: prefix + "AtAGlance",
+            component: AtAGlance,
         },
 
     ]

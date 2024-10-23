@@ -68,6 +68,7 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+
 const pinia = createPinia();
 const app = createApp({});
 // Vue.prototype.number_format = (number = 0) => new Intl.NumberFormat().format(number);

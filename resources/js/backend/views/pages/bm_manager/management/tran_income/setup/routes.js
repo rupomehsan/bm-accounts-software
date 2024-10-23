@@ -2,18 +2,27 @@ import Layout from "./Layout.vue";
 import All from "../All.vue";
 import Form from "../Form.vue";
 import BalanceForm from "../BalanceForm.vue";
-
+import TranFundLedger from "../MainLedger.vue";
+import AllBranchIncome from "../AllBranchIncome.vue";
 const role = window.role.bm
-
 const routes = {
-
-    path: 'tran-income',
+    path: 'tran-fund',
     component: Layout,
     children: [
         {
-            path: '',
-            name: role + "AllTranIncome",
+            path: 'ledger',
+            name: role + "TranFundLedger",
+            component: TranFundLedger
+        },
+        {
+            path: 'at-a-glance',
+            name: role + "AllTranFundAtAGlance",
             component: All
+        },
+        {
+            path: 'branch-income',
+            name: role + "TranFundAllBranchIncome",
+            component: AllBranchIncome
         },
         {
             path: 'create',
@@ -22,11 +31,10 @@ const routes = {
         },
         {
             path: 'balance',
-            name: role + "TranIncomeBalanceForm",
+            name: role + "TranBalanceForm",
             component: BalanceForm
         },
     ]
-
 }
 
 

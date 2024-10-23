@@ -10,6 +10,7 @@ export const sohid_fund_setup_store = defineStore("sohid_fund_setup_store", {
         all_branch: {},
         all_accounts: {},
         account_number_data: {},
+        main_ledger_data: {},
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -25,6 +26,14 @@ export const sohid_fund_setup_store = defineStore("sohid_fund_setup_store", {
             }
             this.all_data = response.data.data;
         },
+
+        main_ledger: async function (form) {
+            let formData = new FormData(form)
+            let response = await axios.post("main-ledger-shit", formData);
+            response = response.data.data;
+            this.main_ledger_data = response;
+        },
+
 
         get: async function (id) {
             let response = await axios.get("account-incomes/" + id);

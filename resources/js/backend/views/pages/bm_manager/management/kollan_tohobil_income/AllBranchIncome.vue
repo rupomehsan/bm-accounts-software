@@ -4,11 +4,11 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">At A Glance</h5>
+                        <h5 class="m-0">Branch Income</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `${role}CreateTranIncome` }"
+                            <router-link :to="{ name: `${role}CreateKollanTohobilIncome` }"
                                 class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
@@ -148,7 +148,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: `${role}TranIncomeBalanceForm`,
+                                name: `${role}KollanTohobilIncomeBalanceForm`,
                                 query: {
                                     id: item.id,
                                 },
@@ -234,7 +234,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { tran_income_setup_store } from "./setup/store";
+import { kollan_tohobil_income_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
@@ -251,7 +251,7 @@ export default {
         this.loaded = true
     },
     methods: {
-        ...mapActions(tran_income_setup_store, {
+        ...mapActions(kollan_tohobil_income_setup_store, {
             get_all_branch_income: "all",
             delete_branch_income: "delete",
             get_all_central_division: "get_all_central_division",
@@ -288,7 +288,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(tran_income_setup_store, {
+        ...mapState(kollan_tohobil_income_setup_store, {
             all_users: "all_data",
 
             all_central_division: "all_central_division",

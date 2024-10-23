@@ -4,12 +4,18 @@
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">At A Glance</h5>
+                        <h5 class="m-0">Branch income</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `${role}CreateTranIncome` }"
-                                class="btn rounded-pill btn-outline-info">
+                            <router-link :to="{ name: `${role}AllSohidFamily` }"
+                                class="btn rounded-pill btn-outline-info mx-2">
+                                <i class="fa fa-book me-5px"></i>
+                                All Sohid Family
+                            </router-link>
+                        </span>
+                        <span>
+                            <router-link :to="{ name: `${role}CreateSohidFund` }" class="btn rounded-pill btn-outline-info">
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,8 +25,9 @@
             </div>
             <div class="conatiner">
                 <div class="card list_card">
-                    <div class="card-header align-items-center ">
-                        <div>
+                    <div class="card-header align-items-center">
+
+                        <div class="search">
                             <!-- <h6>All Branch Income</h6> -->
                             <form @submit.prevent="incomeSearchHandler">
                                 <div class="d-flex gap-2">
@@ -48,20 +55,21 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="btns d-flex gap-2 align-items-center">
+                            <div class="table_actions">
+                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
+                                        class="fa fa-list"></i></a>
+                                <ul>
+                                    <li>
+                                        <a href="" @click.prevent="exportData(all_users.data)">
+                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            Export All
+                                        </a>
+                                    </li>
 
-                        <div class="table_actions">
-                            <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                    class="fa fa-list"></i></a>
-                            <ul>
-                                <li>
-                                    <a href="" @click.prevent="exportData(all_users.data)">
-                                        <i class="fa-regular fa-hand-point-right"></i>
-                                        Export All
-                                    </a>
-                                </li>
 
-
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="table-responsive card-body text-nowrap">
@@ -148,7 +156,7 @@
                                                 <li>
                                                     <span>
                                                         <router-link :to="{
-                                name: `${role}TranIncomeBalanceForm`,
+                                name: `${role}SohidFundBalanceForm`,
                                 query: {
                                     id: item.id,
                                 },
@@ -234,31 +242,32 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { tran_income_setup_store } from "./setup/store";
+import { sohid_fund_setup_store } from "./setup/store";
 import { CsvBuilder } from 'filefy';
 export default {
     data: () => ({
         role: window.role.bm,
         offset: "5",
         search_data: "",
-        loaded: false,
+        loaded:false,
         user_id: '',
     }),
     created: async function () {
         await this.get_all_branch_income();
         await this.get_all_central_division();
         await this.get_all_branch();
-        this.loaded = true
+        this.loaded=true
     },
     methods: {
-        ...mapActions(tran_income_setup_store, {
+        ...mapActions(sohid_fund_setup_store, {
             get_all_branch_income: "all",
             delete_branch_income: "delete",
             get_all_central_division: "get_all_central_division",
             get_all_branch: "get_all_branch",
             income_search: "income_search",
         }),
-        exportData(data = [], prefix_name = 'monthly_income') {
+        exportData(data = [], prefix_name = 'sohid_fund_income') {
+
             let dataArray = []
             data.forEach((item) => {
                 let temp = {}
@@ -283,12 +292,9 @@ export default {
                 .addRows(values)
                 .exportFile();
         },
-        incomeSearchHandler() {
-            this.income_search(event.target, this.user_id)
-        },
     },
     computed: {
-        ...mapState(tran_income_setup_store, {
+        ...mapState(sohid_fund_setup_store, {
             all_users: "all_data",
 
             all_central_division: "all_central_division",
