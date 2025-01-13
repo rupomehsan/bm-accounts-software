@@ -2,6 +2,7 @@ import Layout from "./Layout.vue";
 import Dashboard from "../Dashboard.vue";
 import receipt_book_routes from "../management/receipt_book/setup/routes";
 import receipt_book_assign_routes from "../management/receipt_book_assing/setup/routes";
+import rejected_receipt_book_routes from "../management/rejected_receipt_book/setup/routes";
 import branch_target_routes from "../management/branch_target/setup/routes";
 import branch_income_routes from "../management/branch_income/setup/routes";
 import income_routes from "../management/income/setup/routes";
@@ -64,6 +65,7 @@ const routes = {
         },
         receipt_book_routes,
         receipt_book_assign_routes,
+        rejected_receipt_book_routes,
         branch_target_routes,
         branch_income_routes,
         income_routes,

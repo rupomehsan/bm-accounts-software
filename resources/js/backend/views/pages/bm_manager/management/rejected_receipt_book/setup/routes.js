@@ -14,7 +14,7 @@ const routes = {
         },
         {
             path: "create",
-            name: role + "ReceiptBookCreate",
+            name: role + "RejectedReceiptBookCreate",
             component: Form,
         },
     ],

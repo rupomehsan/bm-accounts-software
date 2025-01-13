@@ -8,15 +8,17 @@
                     </div>
                     <div class="col-lg-6 text-end"></div>
                     <div class="col-lg-3 text-end">
-                        <!-- <span>
+                        <span>
                             <router-link
-                                :to="{ name: `${role}ReceiptBookCreate` }"
+                                :to="{
+                                    name: `${role}RejectedReceiptBookCreate`,
+                                }"
                                 class="btn rounded-pill btn-outline-info"
                             >
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
-                        </span> -->
+                        </span>
                     </div>
                 </div>
             </div>
