@@ -10,12 +10,15 @@ console.log(origin);
 axios.defaults.baseURL = location.origin + "/api/v1/";
 
 async function setToken(config = {}) {
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem("token");
     if (!token) {
-        localStorage.removeItem('token');
-        return location.href = "/login";
+        localStorage.removeItem("token");
+        return (location.href = "/login");
     }
-    config.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    config.headers.set(
+        "Authorization",
+        `Bearer ${localStorage.getItem("token")}`
+    );
     // await window.cookieStore
     //     .get("AXRF-TOKEN")
     //     .then((cookie) => {
@@ -65,13 +68,12 @@ window.remove_form_action_classes = function () {
     $(`.error.text-warning`).remove();
 };
 
-
 // window.errorReset = function (event) {
 //     console.log(event.target)
 // }
 
-function errorReset(event){
-    console.log(event.target)
+function errorReset(event) {
+    console.log(event.target);
 }
 
 window.render_form_errors = function (object, selector = "name") {
@@ -114,11 +116,11 @@ window.axios.interceptors.response.use(
             );
         } else {
             console.log(error.response || error);
-            if (error.response.data.status == "server_error") {
-                window.s_warning(error.response.data.message);
+            if (error.response?.data?.status == "server_error") {
+                window.s_warning(error.response?.data?.message);
             }
-            if (error.response.data.status == "error") {
-                window.s_error(error.response.data.message);
+            if (error.response?.data?.status == "error") {
+                window.s_error(error.response?.data?.message);
             }
         }
 

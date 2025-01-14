@@ -12,7 +12,14 @@
                                 : ''
                         "
                         @click.prevent="
-                            () => (link.url ? method(link.url) : '')
+                            () =>
+                                link.url
+                                    ? method(
+                                          isProduction
+                                              ? forceHttps(link.url)
+                                              : link.url
+                                      )
+                                    : ''
                         "
                         :href="link.url"
                         v-html="`<span>${link.label}</span>`"
@@ -29,6 +36,30 @@ export default {
     props: {
         data: Object,
         method: Function,
+    },
+    computed: {
+        /**
+         * Check if the environment is production
+         */
+        isProduction() {
+            return process.env.NODE_ENV === "production";
+        },
+    },
+    methods: {
+        /**
+         * Ensure the URL uses HTTPS
+         */
+        forceHttps(url) {
+            if (!url) return url;
+            try {
+                const urlObject = new URL(url);
+                urlObject.protocol = "https:";
+                return urlObject.toString();
+            } catch (error) {
+                console.error("Invalid URL:", url);
+                return url; // Return as is if URL parsing fails
+            }
+        },
     },
 };
 </script>

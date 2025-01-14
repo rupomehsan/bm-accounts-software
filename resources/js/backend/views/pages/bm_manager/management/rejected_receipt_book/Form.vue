@@ -105,6 +105,10 @@ export default {
                     });
                 });
             }
+        } else {
+            this.form_fields.forEach((field, index) => {
+                field.value = "";
+            });
         }
 
         if (this.all_account_receipt_book_data) {
