@@ -7,10 +7,16 @@
                         <h5 class="m-0">Voucher Management</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <button class="btn btn-primary" @click="allApprovedVucherByCp">
+                        <button
+                            class="btn btn-primary"
+                            @click="allApprovedVucherByCp"
+                        >
                             All approved vouchers
                         </button>
-                        <button class="btn btn-primary mx-2" @click="allNotApprovedVucherByCp">
+                        <button
+                            class="btn btn-primary mx-2"
+                            @click="allNotApprovedVucherByCp"
+                        >
                             All not approved vouchers
                         </button>
                     </div>
@@ -21,31 +27,58 @@
                     <div class="card-header align-items-center">
                         <h6>All not approved vouchers</h6>
                         <div class="search">
-                            <form @submit.prevent="SearchHandler($event)" ref="myForm">
+                            <form
+                                @submit.prevent="SearchHandler($event)"
+                                ref="myForm"
+                            >
                                 <div class="d-flex gap-2">
                                     <div>
                                         <label for="">Start date</label>
-                                        <date-field :label="`Start Date`" :name="`start_date`" :value="from_date" />
+                                        <date-field
+                                            :label="`Start Date`"
+                                            :name="`start_date`"
+                                            :value="from_date"
+                                        />
                                     </div>
                                     <div>
                                         <label for="">End date</label>
-                                        <date-field :label="`End Date`" :name="`end_date`" :value="end_date" />
+                                        <date-field
+                                            :label="`End Date`"
+                                            :name="`end_date`"
+                                            :value="end_date"
+                                        />
                                     </div>
 
                                     <div class="pt-2">
-                                        <button type="submit" class="btn btn-primary mt-3">Search</button>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary mt-3"
+                                        >
+                                            Search
+                                        </button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
-                                        <a href="" @click.prevent="ExportData(all_users.data)">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href=""
+                                            @click.prevent="
+                                                ExportData(all_users.data)
+                                            "
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
@@ -75,56 +108,69 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Date
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Category
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Amount
-
-                                    </th>
+                                    <th class="cursor_n_resize">Date</th>
+                                    <th class="cursor_n_resize">Category</th>
+                                    <th class="cursor_n_resize">Amount</th>
                                     <th class="cursor_n_resize">
                                         Total voucher
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         Sompadok approved
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         Bm SP approved
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         Bm approved
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
                                     <th class="cursor_n_resize">
                                         CP approved
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
-
 
                                     <th class="cursor_n_resize">
                                         Overall Approval
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Status
-
-                                    </th>
+                                    <th class="cursor_n_resize">Status</th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr
+                                    v-for="(item, index) in all_users.data"
+                                    :key="item.id"
+                                >
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
@@ -136,25 +182,65 @@
                                         {{ item.account_category?.title }}
                                     </td>
                                     <td>{{ item.amount }}</td>
-                                    <td>{{ item.approval?.total_sub_voucher }}</td>
-                                    <td>{{ item.approval?.approved_by_admin_total }}</td>
-                                    <td>{{ item.approval?.approved_by_sp_bm_total }}</td>
-                                    <td>{{ item.approval?.approved_by_bm_total }}</td>
-                                    <td>{{ item.approval?.approved_by_cp_total }}</td>
-                                    <td>{{ item.approved == 0 ? 'Not approved' : 'Approved' }}</td>
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
-
+                                        {{ item.approval?.total_sub_voucher }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            item.approval
+                                                ?.approved_by_admin_total
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            item.approval
+                                                ?.approved_by_sp_bm_total
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            item.approval?.approved_by_bm_total
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            item.approval?.approved_by_cp_total
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{
+                                            item.approved == 0
+                                                ? "Not approved"
+                                                : "Approved"
+                                        }}
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="badge bg-label-success me-1"
+                                            >{{ item.status }}</span
+                                        >
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
                                                 <li>
                                                     <router-link
-                                                        :to="{ name: `CpTopShit`, params: { id: item.id } }">
-                                                        <i class="fa text-info fa-book"></i>
+                                                        :to="{
+                                                            name: `CpTopShit`,
+                                                            params: {
+                                                                id: item.id,
+                                                            },
+                                                        }"
+                                                    >
+                                                        <i
+                                                            class="fa text-info fa-book"
+                                                        ></i>
                                                         Topshit
                                                     </router-link>
                                                 </li>
@@ -165,12 +251,22 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="get_all_approved_voucher" />
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
+                    >
+                        <pagination
+                            :data="all_users"
+                            :method="get_all_approved_voucher"
+                        />
+
                         <div class="float-right">
-                            <!-- <div class="show-limit d-inline-block">
+                            <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="" v-model="offset">
+                                <select
+                                    class=""
+                                    v-model="offset"
+                                    @change="set_limit($event.target.value)"
+                                >
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -181,7 +277,7 @@
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
                                 <span>{{ all_users.total }}</span>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -214,7 +310,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { voucher_setup_store } from "./setup/store";
-import { CsvBuilder } from 'filefy';
+import { CsvBuilder } from "filefy";
 export default {
     data: () => ({
         offset: "5",
@@ -230,6 +326,7 @@ export default {
             all_approved_vucher_by_cp: "all_approved_vucher_by_cp",
             all_not_approved_vucher_by_cp: "all_not_approved_vucher_by_cp",
             get_data_by_search: "get_data_by_search",
+            set_limit: "set_limit",
         }),
 
         allApprovedVucherByCp() {
@@ -238,16 +335,17 @@ export default {
         allNotApprovedVucherByCp() {
             this.all_not_approved_vucher_by_cp();
         },
-        ExportData(data = [], prefix_name = 'vouchers') {
-            let dataArray = []
+        ExportData(data = [], prefix_name = "vouchers") {
+            let dataArray = [];
             data.forEach((item) => {
-                let temp = {}
-                temp.date = item.date
-                temp.account_category = item.account_category?.title
-                temp.amount = item.amount
-                temp.approval = item.approved == 0 ? "Not approved" : "Approved"
-                dataArray.push(temp)
-            })
+                let temp = {};
+                temp.date = item.date;
+                temp.account_category = item.account_category?.title;
+                temp.amount = item.amount;
+                temp.approval =
+                    item.approved == 0 ? "Not approved" : "Approved";
+                dataArray.push(temp);
+            });
             let col = Object.keys(dataArray[0]);
             let values = dataArray.map((i) => Object.values(i));
             new CsvBuilder(`${prefix_name}_list.csv`)
@@ -257,7 +355,7 @@ export default {
                 .exportFile();
         },
         SearchHandler() {
-            this.get_data_by_search(this.$refs.myForm)
+            this.get_data_by_search(this.$refs.myForm);
         },
     },
     computed: {

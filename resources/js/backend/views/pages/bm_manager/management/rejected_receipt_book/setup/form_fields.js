@@ -15,7 +15,7 @@ export default [
         data_list: [],
     },
     {
-        name: "rejected_reason",
+        name: "reason",
         label: "রশিদ বাতিল করার কারণ",
         type: "textarea",
         value: "",

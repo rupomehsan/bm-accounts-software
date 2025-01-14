@@ -22,10 +22,7 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Sohid Family Funds
-
-                        </h6>
+                        <h6>All Sohid Family Funds</h6>
                         <div class="search">
                             <form action="#">
                                 <input
@@ -87,29 +84,20 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
 
-                                    <th class="cursor_n_resize">
-                                        Date
-
-                                    </th>
+                                    <th class="cursor_n_resize">Date</th>
                                     <th class="cursor_n_resize">
                                         Account receipt book No
-
                                     </th>
                                     <th class="cursor_n_resize">
                                         Account category
-
                                     </th>
                                     <th class="cursor_n_resize">
                                         Account receipt no
                                     </th>
                                     <th class="cursor_n_resize">Amount</th>
-                                    <th class="cursor_n_resize">
-                                        Status
-
-                                    </th>
+                                    <th class="cursor_n_resize">Status</th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
@@ -122,7 +110,7 @@
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
                                         {{ item.date }}
@@ -136,7 +124,6 @@
                                             class="badge bg-label-success me-1"
                                             >{{ item.status }}</span
                                         >
-
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -185,7 +172,6 @@
                                                             ></i>
                                                             Edit
                                                         </router-link>
-
                                                     </span>
                                                 </li>
                                                 <li>
@@ -238,9 +224,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">

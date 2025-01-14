@@ -16,14 +16,19 @@
             class="uploaded_image_preview my-2 d-flex gap-1 flex-wrap"
             v-if="component_images[0] != ''"
         >
-            <img
+            <a
                 v-for="i in component_images"
                 :key="i"
-                :src="i"
-                class="img-fulid img-thumbnail"
-                :id="i"
-                style="width: 80px; height: 80px; object-fit: contain"
-            />
+                :href="i"
+                data-lightbox="image-1"
+            >
+                <img
+                    :src="i"
+                    class="img-fulid img-thumbnail"
+                    :id="i"
+                    style="width: 80px; height: 80px; object-fit: contain"
+                />
+            </a>
         </div>
     </div>
 </template>

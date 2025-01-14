@@ -85,7 +85,7 @@
                                     ) in all_applications_by_category.applications"
                                     :key="item.id"
                                 >
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
                                         <span
@@ -148,9 +148,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">

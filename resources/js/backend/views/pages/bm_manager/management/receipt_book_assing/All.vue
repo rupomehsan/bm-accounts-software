@@ -105,7 +105,7 @@
                                         <input type="checkbox" class="form-check-input"
                                             :checked="child_item.includes(item.id)" @click="toggleChildItem(item.id)" />
                                     </td> -->
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>{{ item.user?.full_name }}</td>
                                     <td>
                                         {{

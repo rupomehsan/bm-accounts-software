@@ -9,6 +9,7 @@ include_once  base_path("app/Modules/AccountManagement/AccountLog/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountIncomeExtrafield/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountReceiptBook/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountReceiptBookAssign/Route.php");
+include_once  base_path("app/Modules/AccountManagement/AccountReceiptBookRejectPage/Route.php");
 include_once  base_path("app/Modules/AccountManagement/Account/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountNumber/Route.php");
 

@@ -8,8 +8,12 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `${role}CreateAccountExpenseCategory` }"
-                                class="btn rounded-pill btn-outline-info">
+                            <router-link
+                                :to="{
+                                    name: `${role}CreateAccountExpenseCategory`,
+                                }"
+                                class="btn rounded-pill btn-outline-info"
+                            >
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -20,21 +24,35 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
-                                        <a href="" @click.prevent="ExportData(all_users.data)">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href=""
+                                            @click.prevent="
+                                                ExportData(all_users.data)
+                                            "
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
@@ -54,7 +72,6 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                     <div class="table-responsive card-body text-nowrap">
                         <table class="table table-hover table-bordered">
@@ -65,31 +82,24 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         আইডি
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        ব্যয়ের খাত
+                                    <th class="cursor_n_resize">ব্যয়ের খাত</th>
+                                    <th class="cursor_n_resize">সিরিয়াল নং</th>
 
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        সিরিয়াল নং
-
-                                    </th>
-
-                                    <th class="cursor_n_resize">
-                                        স্টাটাস
-
-                                    </th>
+                                    <th class="cursor_n_resize">স্টাটাস</th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr
+                                    v-for="(item, index) in all_users.data"
+                                    :key="item.id"
+                                >
                                     <!-- <td style="width: 10px">
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
-                                    <td>{{ index+1 }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>
                                         {{ item.title }}
                                     </td>
@@ -98,13 +108,19 @@
                                     </td>
 
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
-
+                                        <span
+                                            class="badge bg-label-success me-1"
+                                            >{{ item.status }}</span
+                                        >
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -130,26 +146,36 @@
                                                 </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{
-                                                            name: `${role}CreateAccountExpenseCategory`,
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
+                                                        <router-link
+                                                            :to="{
+                                                                name: `${role}CreateAccountExpenseCategory`,
+                                                                query: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-warning fa-pencil"
+                                                            ></i>
                                                             Edit
                                                         </router-link>
-
                                                     </span>
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
+                                                        <a
+                                                            @click.prevent="
+                                                                user_delete(
+                                                                    item.id
+                                                                )
+                                                            "
+                                                            href="#"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-danger fa-trash"
+                                                            ></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -161,12 +187,22 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="get_all_categories" />
+
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
+                    >
+                        <pagination
+                            :data="all_users"
+                            :method="get_all_expense_categories"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
-                                <select class="" @change="set_limit($event.target.value)">
+                                <select
+                                    class=""
+                                    v-model="offset"
+                                    @change="set_limit($event.target.value)"
+                                >
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="25">25</option>
@@ -181,9 +217,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">
@@ -212,14 +246,13 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { account_expense_category_setup_store } from "./setup/store";
-import roleSetup from '../../partials/role_setup';
-import { CsvBuilder } from 'filefy';
+import roleSetup from "../../partials/role_setup";
+import { CsvBuilder } from "filefy";
 export default {
     data: () => ({
-        offset: "5",
         search_data: "",
         loaded: false,
-        role: roleSetup.role
+        role: roleSetup.role,
     }),
     created: async function () {
         await this.get_all_expense_categories();
@@ -232,15 +265,15 @@ export default {
             set_limit: "set_limit",
             set_search_data: "set_search_data",
         }),
-        ExportData(data = [], prefix_name = 'account_category') {
-            let dataArray = []
+        ExportData(data = [], prefix_name = "account_category") {
+            let dataArray = [];
             data.forEach((item) => {
-                let temp = {}
-                temp.id = item.id
-                temp.name = item.title
-                temp.status = item.status
-                dataArray.push(temp)
-            })
+                let temp = {};
+                temp.id = item.id;
+                temp.name = item.title;
+                temp.status = item.status;
+                dataArray.push(temp);
+            });
             let col = Object.keys(dataArray[0]);
             let values = dataArray.map((i) => Object.values(i));
             new CsvBuilder(`${prefix_name}_list.csv`)
@@ -248,18 +281,16 @@ export default {
                 // .addRow(["Eve", "Holt"])
                 .addRows(values)
                 .exportFile();
-
         },
     },
     computed: {
         ...mapState(account_expense_category_setup_store, {
             all_users: "all_data",
             api_url: "api_url",
+            offset: "offset",
         }),
-
     },
     watch: {
-
         search_data: async function (newSearchData, oldSearchData) {
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(async () => {

@@ -22,10 +22,7 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Users
-
-                        </h6>
+                        <h6>All Users</h6>
                         <div class="search">
                             <form action="#">
                                 <input
@@ -38,7 +35,8 @@
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent=""
+                                <a
+                                    @click.prevent=""
                                     href="#"
                                     class="btn px-3 btn-outline-secondary"
                                     ><i class="fa fa-list"></i
@@ -89,20 +87,10 @@
                                     </th>
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Photo
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Name
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Email
-
-                                    </th>
+                                    <th class="cursor_n_resize">Photo</th>
+                                    <th class="cursor_n_resize">Name</th>
+                                    <th class="cursor_n_resize">Email</th>
                                     <th class="cursor_n_resize">
                                         Mobile NO
                                         <span
@@ -111,10 +99,7 @@
                                             ></i
                                         ></span>
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Status
-
-                                    </th>
+                                    <th class="cursor_n_resize">Status</th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
@@ -130,7 +115,7 @@
                                             class="form-check-input"
                                         />
                                     </td>
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>
                                         <img
                                             :src="item.image"
@@ -153,7 +138,6 @@
                                             class="badge bg-label-success me-1"
                                             >{{ item.status }}</span
                                         >
-
                                     </td>
                                     <td>
                                         <div class="table_actions">
@@ -202,7 +186,6 @@
                                                             ></i>
                                                             Edit
                                                         </router-link>
-
                                                     </span>
                                                 </li>
                                                 <li>
@@ -252,9 +235,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">

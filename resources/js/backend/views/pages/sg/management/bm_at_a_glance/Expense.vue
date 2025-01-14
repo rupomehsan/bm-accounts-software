@@ -50,10 +50,7 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            খরচের খাতা
-
-                        </h6>
+                        <h6>খরচের খাতা</h6>
                         <div class="search">
                             <form action="#">
                                 <input
@@ -127,7 +124,7 @@
 
                             <tbody class="table-border-bottom-0">
                                 <tr v-for="(item, index) in []" :key="item.id">
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
                                         <span
@@ -190,9 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">

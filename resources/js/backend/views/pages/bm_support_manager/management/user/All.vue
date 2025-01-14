@@ -8,7 +8,10 @@
                     </div>
                     <div class="col-lg-6 text-end">
                         <span>
-                            <router-link :to="{ name: `${role}CreateUser` }" class="btn rounded-pill btn-outline-info">
+                            <router-link
+                                :to="{ name: `${role}CreateUser` }"
+                                class="btn rounded-pill btn-outline-info"
+                            >
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -19,28 +22,39 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            All Users
-
-                        </h6>
+                        <h6>All Users</h6>
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
-                                        <a href="" @click.prevent="ExportData(all_users.data)">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href=""
+                                            @click.prevent="
+                                                ExportData(all_users.data)
+                                            "
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -54,66 +68,71 @@
                                     </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Photo
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Name
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        User Role
-
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Email
-
-                                    </th>
+                                    <th class="cursor_n_resize">Photo</th>
+                                    <th class="cursor_n_resize">Name</th>
+                                    <th class="cursor_n_resize">User Role</th>
+                                    <th class="cursor_n_resize">Email</th>
                                     <th class="cursor_n_resize">
                                         Mobile NO
-                                        <span><i class="fa-solid fa-arrow-up-z-a text-warning"></i></span>
+                                        <span
+                                            ><i
+                                                class="fa-solid fa-arrow-up-z-a text-warning"
+                                            ></i
+                                        ></span>
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Status
-
-                                    </th>
+                                    <th class="cursor_n_resize">Status</th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
+                                <tr
+                                    v-for="(item, index) in all_users.data"
+                                    :key="item.id"
+                                >
                                     <!-- <td>
                                         <input type="checkbox" class="form-check-input" />
                                     </td> -->
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
                                     <td>
-                                        <img :src="item.image" alt="Avatar" class="rounded-circle"
-                                            style="height: 30px; width: 30px" />
+                                        <img
+                                            :src="item.image"
+                                            alt="Avatar"
+                                            class="rounded-circle"
+                                            style="height: 30px; width: 30px"
+                                        />
                                     </td>
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.full_name }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.roles?.[0].name }}
                                         </span>
                                     </td>
                                     <td>{{ item.email }}</td>
                                     <td>{{ item.phone ?? "N/A" }}</td>
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{ item.status }}</span>
-
+                                        <span
+                                            class="badge bg-label-success me-1"
+                                            >{{ item.status }}</span
+                                        >
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -139,26 +158,36 @@
                                                 </li> -->
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{
-                                name: `${role}CreateUser`,
-                                query: {
-                                    id: item.id,
-                                },
-                            }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
+                                                        <router-link
+                                                            :to="{
+                                                                name: `${role}CreateUser`,
+                                                                query: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-warning fa-pencil"
+                                                            ></i>
                                                             Edit
                                                         </router-link>
-
                                                     </span>
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a @click.prevent="
-                                user_delete(
-                                    item.id
-                                )
-                                " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
+                                                        <a
+                                                            @click.prevent="
+                                                                user_delete(
+                                                                    item.id
+                                                                )
+                                                            "
+                                                            href="#"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-danger fa-trash"
+                                                            ></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -170,7 +199,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
+                    >
                         <pagination :data="all_users" :method="user_get_all" />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
@@ -190,9 +221,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">
@@ -221,7 +250,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { user_setup_store } from "./setup/store";
-import { CsvBuilder } from 'filefy';
+import { CsvBuilder } from "filefy";
 export default {
     data: () => ({
         role: window.role.bmSupport,
@@ -230,7 +259,7 @@ export default {
         loaded: false,
     }),
     created: async function () {
-        this.api_url.searchParams.set('is_blocked', 0);
+        this.api_url.searchParams.set("is_blocked", 0);
         await this.user_get_all(this.api_url.href);
         this.loaded = true;
     },
@@ -239,18 +268,18 @@ export default {
             user_get_all: "all",
             user_delete: "delete",
         }),
-        ExportData(data = [], prefix_name = 'user') {
-            let dataArray = []
+        ExportData(data = [], prefix_name = "user") {
+            let dataArray = [];
             data.forEach((item) => {
-                let temp = {}
-                temp.id = item.id
-                temp.name = item.full_name
-                temp.phone = item.phone
-                temp.role = item.roles[0]?.name
-                temp.email = item.email
-                temp.status = item.is_blocked ? "Blocked" : "Active"
-                dataArray.push(temp)
-            })
+                let temp = {};
+                temp.id = item.id;
+                temp.name = item.full_name;
+                temp.phone = item.phone;
+                temp.role = item.roles[0]?.name;
+                temp.email = item.email;
+                temp.status = item.is_blocked ? "Blocked" : "Active";
+                dataArray.push(temp);
+            });
             let col = Object.keys(dataArray[0]);
             let values = dataArray.map((i) => Object.values(i));
             new CsvBuilder(`${prefix_name}_list.csv`)
@@ -259,7 +288,6 @@ export default {
                 .addRows(values)
                 .exportFile();
         },
-
     },
     computed: {
         ...mapState(user_setup_store, {
@@ -269,13 +297,13 @@ export default {
     },
     watch: {
         offset: async function (newOffset, oldOffset) {
-            this.api_url.searchParams.set('offset', newOffset);
+            this.api_url.searchParams.set("offset", newOffset);
             await this.user_get_all(this.api_url.href);
         },
         search_data: async function (newSearchData, oldSearchData) {
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(async () => {
-                this.api_url.searchParams.set('search', this.search_data);
+                this.api_url.searchParams.set("search", this.search_data);
                 await this.user_get_all(this.api_url.href);
             }, 500);
         },

@@ -2,26 +2,47 @@
     <div class="page-body">
         <div class="pt-2">
             <div class="page-header my-2">
-                <div class="row align-items-center justify-content-between rounded-2">
+                <div
+                    class="row align-items-center justify-content-between rounded-2"
+                >
                     <div class="col-lg-6">
                         <h5 class="m-0">BM at a glance</h5>
                     </div>
                     <div class="col-lg-6 text-end w-25 float-right">
-                        <select name="" id="" class="form-select" v-model="page">
+                        <select
+                            name=""
+                            id=""
+                            class="form-select"
+                            v-model="page"
+                        >
                             <option value="">Goto page</option>
-                            <option value="IncomeLedger">আয়ের লেজার/খতিয়ান</option>
-                            <option value="ExpenseLedger">ব্যয়ের লেজার/খতিয়ান</option>
+                            <option value="IncomeLedger">
+                                আয়ের লেজার/খতিয়ান
+                            </option>
+                            <option value="ExpenseLedger">
+                                ব্যয়ের লেজার/খতিয়ান
+                            </option>
                             <option value="LoanRegister">ঋণ রেজিস্টার</option>
                             <option value="Jamanot">জামানত</option>
                             <option value="Salary">বেতন</option>
                             <option value="OfficeRent">অফিস ভাড়া</option>
                             <option value="HouseRent">বাসা ভাড়া</option>
                             <option value="AssetList">সম্পদ তালিকা</option>
-                            <option value="BMStockRegister">বিএম স্টক রেজিস্টার</option>
-                            <option value="AssetRegister">সম্পদ রেজিস্টার</option>
-                            <option value="EkkalinProdan">এককালীন প্রদান</option>
-                            <option value="NiyomitoProdan">নিয়মিত প্রদান</option>
-                            <option value="KendriyoSuvakankhiThekeAy">কেন্দ্রীয় শুভাকাঙ্খী থেকে আয়</option>
+                            <option value="BMStockRegister">
+                                বিএম স্টক রেজিস্টার
+                            </option>
+                            <option value="AssetRegister">
+                                সম্পদ রেজিস্টার
+                            </option>
+                            <option value="EkkalinProdan">
+                                এককালীন প্রদান
+                            </option>
+                            <option value="NiyomitoProdan">
+                                নিয়মিত প্রদান
+                            </option>
+                            <option value="KendriyoSuvakankhiThekeAy">
+                                কেন্দ্রীয় শুভাকাঙ্খী থেকে আয়
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -29,37 +50,52 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6>
-                            বেতন
-
-                        </h6>
+                        <h6>বেতন</h6>
                         <div class="search">
                             <form action="#">
-                                <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
-                                    class="form-control border border-info" />
+                                <input
+                                    v-model.debounce:1000ms="search_data"
+                                    placeholder="search..."
+                                    type="search"
+                                    class="form-control border border-info"
+                                />
                             </form>
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
                                         <a href="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
 
                                     <li>
                                         <a href="#/user/import" class="">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Import
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="display data that has been deactivated" class="d-flex">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href="#"
+                                            title="display data that has been deactivated"
+                                            class="d-flex"
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Deactivated data
                                         </a>
                                     </li>
@@ -71,71 +107,46 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-
                                     <th aria-label="id" class="cursor_n_resize">
                                         ক্রম
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        নাম
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        পদবী
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        জানুয়ারী
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        ফেব্রুয়ারী
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        মার্চ
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        এপ্রিল
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        মে
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        জুন
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        জুলাই
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        আগস্ট
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        সেপ্টেম্বর
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        অক্টোবর
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        নভেম্বর
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        ডিসেম্বর
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        মন্তব্য
-                                    </th>
-
+                                    <th class="cursor_n_resize">নাম</th>
+                                    <th class="cursor_n_resize">পদবী</th>
+                                    <th class="cursor_n_resize">জানুয়ারী</th>
+                                    <th class="cursor_n_resize">ফেব্রুয়ারী</th>
+                                    <th class="cursor_n_resize">মার্চ</th>
+                                    <th class="cursor_n_resize">এপ্রিল</th>
+                                    <th class="cursor_n_resize">মে</th>
+                                    <th class="cursor_n_resize">জুন</th>
+                                    <th class="cursor_n_resize">জুলাই</th>
+                                    <th class="cursor_n_resize">আগস্ট</th>
+                                    <th class="cursor_n_resize">সেপ্টেম্বর</th>
+                                    <th class="cursor_n_resize">অক্টোবর</th>
+                                    <th class="cursor_n_resize">নভেম্বর</th>
+                                    <th class="cursor_n_resize">ডিসেম্বর</th>
+                                    <th class="cursor_n_resize">মন্তব্য</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
                                 <tr v-for="(item, index) in []" :key="item.id">
-
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
-                                        <span class="text-warning cursor_pointer">
-                                            {{ new Date(item.created_at).toDateString() }}
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
+                                            {{
+                                                new Date(
+                                                    item.created_at
+                                                ).toDateString()
+                                            }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.account_logs.receipt_no }}
                                         </span>
                                     </td>
@@ -149,39 +160,62 @@
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
-
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{ name: 'Show', params: { id: item.id } }"
-                                                            title="disapproved"><i class="fa text-secondary fa-eye"></i>
-                                                            Details </router-link>
+                                                        <router-link
+                                                            :to="{
+                                                                name: 'Show',
+                                                                params: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            title="disapproved"
+                                                            ><i
+                                                                class="fa text-secondary fa-eye"
+                                                            ></i>
+                                                            Details
+                                                        </router-link>
                                                     </span>
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <router-link :to="{
-                                                            name: 'Create',
-                                                            query: {
-                                                                id: item.id,
-                                                            },
-                                                        }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
+                                                        <router-link
+                                                            :to="{
+                                                                name: 'Create',
+                                                                query: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-warning fa-pencil"
+                                                            ></i>
                                                             Edit
                                                         </router-link>
-
                                                     </span>
                                                 </li>
                                                 <li>
                                                     <span>
-                                                        <a @click.prevent="
-                                                            user_delete(
-                                                                item.id
-                                                            )
-                                                            " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
+                                                        <a
+                                                            @click.prevent="
+                                                                user_delete(
+                                                                    item.id
+                                                                )
+                                                            "
+                                                            href="#"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-danger fa-trash"
+                                                            ></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -194,8 +228,12 @@
                         </table>
                     </div>
                     <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_incomes" :method="get_all_incomes" />
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1"
+                    >
+                        <pagination
+                            :data="all_incomes"
+                            :method="get_all_incomes"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -214,9 +252,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">
@@ -250,7 +286,7 @@ export default {
     data: () => ({
         offset: "5",
         search_data: "",
-        page: ""
+        page: "",
     }),
     created: async function () {
         await this.get_all_incomes();
@@ -274,8 +310,8 @@ export default {
             console.log(newSearchData);
         },
         page: function () {
-            this.$router.push({ name: this.page })
-        }
+            this.$router.push({ name: this.page });
+        },
     },
 };
 </script>

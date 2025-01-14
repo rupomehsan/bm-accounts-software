@@ -70,17 +70,13 @@
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
                                     </th>
+                                    <th class="cursor_n_resize">রশিদ বই নং</th>
+                                    <th class="cursor_n_resize">রশিদ নং</th>
                                     <th class="cursor_n_resize">
-                                        Receipt Book No
+                                        বাতিলের কারণ
                                     </th>
                                     <th class="cursor_n_resize">
-                                        Receipt Start Serial No
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Receipt End Serial No
-                                    </th>
-                                    <th class="cursor_n_resize">
-                                        Remaining page
+                                        রশিদের পাতার ছবি
                                     </th>
 
                                     <th class="cursor_n_resize">Status</th>
@@ -90,8 +86,9 @@
 
                             <tbody class="table-border-bottom-0" v-if="loaded">
                                 <tr
-                                    v-for="(item, index) in all_receipt_books
-                                        .data?.data"
+                                    v-for="(
+                                        item, index
+                                    ) in all_receipt_books.data"
                                     :key="item.id"
                                 >
                                     <!-- <td>
@@ -100,13 +97,20 @@
                                     </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
-                                        {{ item.receipt_book_no }}
+                                        {{ item.receipt_book?.receipt_book_no }}
                                     </td>
                                     <td>
-                                        {{ item.receipt_start_serial_no }}
+                                        {{ item.account_receipt_no }}
                                     </td>
-                                    <td>{{ item.receipt_end_serial_no }}</td>
-                                    <td>{{ item.remaining_page }}</td>
+                                    <td>{{ item.reason.substr(0, 20) }}</td>
+                                    <td>
+                                        <img
+                                            :src="item.image"
+                                            height="20"
+                                            width="30"
+                                            alt=""
+                                        />
+                                    </td>
 
                                     <td>
                                         <span
@@ -149,7 +153,7 @@
                                                     <span>
                                                         <router-link
                                                             :to="{
-                                                                name: `${role}ReceiptBookCreate`,
+                                                                name: `${role}RejectedReceiptBookCreate`,
                                                                 query: {
                                                                     id: item.id,
                                                                 },
@@ -245,7 +249,7 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { receipt_book_store } from "./setup/store";
+import { rejected_receipt_book_store } from "./setup/store";
 import { CsvBuilder } from "filefy";
 import roleSetup from "../../partials/role_setup";
 
@@ -263,7 +267,7 @@ export default {
         this.loaded = true;
     },
     methods: {
-        ...mapActions(receipt_book_store, {
+        ...mapActions(rejected_receipt_book_store, {
             get_all_receipt_books: "all",
             user_delete: "delete",
             set_limit: "set_limit",
@@ -317,7 +321,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(receipt_book_store, {
+        ...mapState(rejected_receipt_book_store, {
             all_receipt_books: "all_data",
             get_receipt_book_by_status: "get_receipt_book_by_status",
         }),

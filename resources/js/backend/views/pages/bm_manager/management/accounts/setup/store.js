@@ -6,7 +6,7 @@ export const account_setup_store = defineStore("account_setup_store", {
         single_data: {},
         account_info_data: {},
         selected_account_numbers: {},
-        api_url: new URL(location.origin + '/api/v1/accounts')
+        api_url: new URL(location.origin + "/api/v1/accounts"),
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -35,7 +35,10 @@ export const account_setup_store = defineStore("account_setup_store", {
         },
         update: async function (form, id) {
             let formData = new FormData(form);
-            let response = await axios.post(`accounts/${id}?_method=PATCH`, formData);
+            let response = await axios.post(
+                `accounts/${id}?_method=PATCH`,
+                formData
+            );
             window.s_alert("Data successcully updated");
             console.log("res", response.data);
         },
@@ -56,6 +59,11 @@ export const account_setup_store = defineStore("account_setup_store", {
 
         set_selected_account_numbers: function (data) {
             this.selected_account_numbers = data;
+        },
+
+        set_limit: async function (limit) {
+            this.offset = limit;
+            this.all();
         },
     },
 });

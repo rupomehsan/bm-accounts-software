@@ -8,7 +8,9 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         month_for_voucher_data: {},
         top_shit_data: {},
         active_month: {},
-        api_url: new URL(location.origin + '/api/v1/account-expenses?bm=true&approved=1'),
+        api_url: new URL(
+            location.origin + "/api/v1/account-expenses?bm=true&approved=1"
+        ),
         limit: 10,
     }),
     getters: {
@@ -21,7 +23,11 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             if (url) {
                 response = await axios.get(url + "&offset=" + this.limit);
             } else {
-                response = await axios.get("account-expenses?bm=true&approved=1" + "&offset=" + this.limit);
+                response = await axios.get(
+                    "account-expenses?bm=true&approved=1" +
+                        "&offset=" +
+                        this.limit
+                );
             }
             this.all_data = response.data.data;
         },
@@ -31,7 +37,11 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             if (url) {
                 response = await axios.get(url + "&offset=" + this.limit);
             } else {
-                response = await axios.get("account-expenses?bm=true&approved=0" + "&offset=" + this.limit);
+                response = await axios.get(
+                    "account-expenses?bm=true&approved=0" +
+                        "&offset=" +
+                        this.limit
+                );
             }
             this.all_data = response.data.data;
         },
@@ -51,7 +61,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         },
         store: async function (form, supportVoucher) {
             let formData = new FormData(form);
-            formData.append("bm_admin", 1)
+            formData.append("bm_admin", 1);
             let response = await axios.post("account-expenses", formData);
             return response;
         },
@@ -90,7 +100,10 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         },
         SupportVoucherApprovedByAdmin: async function (form) {
             let formData = new FormData(form);
-            let response = await axios.post("support-voucher-approval-by-admin", formData);
+            let response = await axios.post(
+                "support-voucher-approval-by-admin",
+                formData
+            );
             return response;
         },
 
@@ -114,16 +127,15 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         },
         get_data_by_search: async function (formData) {
             let form = new FormData(formData);
-            form.append('approved',0)
+            form.append("approved", 0);
             let response = await axios.post(`account-expenses/search`, form);
             response = response.data.data;
             this.all_data = response;
-
         },
 
         set_limit: function (limit) {
             this.limit = limit;
-            this.all();
-        }
+            this.get_all_pending_vouchers();
+        },
     },
 });

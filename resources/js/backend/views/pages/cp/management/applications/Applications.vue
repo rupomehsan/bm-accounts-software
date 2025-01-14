@@ -37,13 +37,25 @@
                         </div>
                         <div class="btns d-flex gap-2 align-items-center">
                             <div class="table_actions">
-                                <a @click.prevent="" href="#" class="btn px-3 btn-outline-secondary"><i
-                                        class="fa fa-list"></i></a>
+                                <a
+                                    @click.prevent=""
+                                    href="#"
+                                    class="btn px-3 btn-outline-secondary"
+                                    ><i class="fa fa-list"></i
+                                ></a>
                                 <ul>
                                     <li>
-                                        <a href=""
-                                            @click.prevent="ExportData(all_applications_by_category.applications)">
-                                            <i class="fa-regular fa-hand-point-right"></i>
+                                        <a
+                                            href=""
+                                            @click.prevent="
+                                                ExportData(
+                                                    all_applications_by_category.applications
+                                                )
+                                            "
+                                        >
+                                            <i
+                                                class="fa-regular fa-hand-point-right"
+                                            ></i>
                                             Export All
                                         </a>
                                     </li>
@@ -79,20 +91,30 @@
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(
+                                <tr
+                                    v-for="(
                                         item, index
-                                    ) in all_applications_by_category.applications" :key="item.id">
-                                    <td>{{ index + 1 }}</td>
+                                    ) in all_applications_by_category.applications"
+                                    :key="item.id"
+                                >
+                                    <td>{{ item.id }}</td>
 
                                     <td>
-                                        <span class="text-warning cursor_pointer">
+                                        <span
+                                            class="text-warning cursor_pointer"
+                                        >
                                             {{ item.user.full_name }}
                                         </span>
-                                        <div class="text-start action_btns_inline">
-                                            <router-link :to="{
-                                name: 'ApplicationsDetails',
-                                params: { id: item.id },
-                            }" class="d-inline-block text-info text-capitalize">
+                                        <div
+                                            class="text-start action_btns_inline"
+                                        >
+                                            <router-link
+                                                :to="{
+                                                    name: 'ApplicationsDetails',
+                                                    params: { id: item.id },
+                                                }"
+                                                class="d-inline-block text-info text-capitalize"
+                                            >
                                                 details
                                             </router-link>
                                         </div>
@@ -107,15 +129,23 @@
                                     </td>
 
                                     <td>
-                                        {{ new Date(item.created_at).toDateString() }}
+                                        {{
+                                            new Date(
+                                                item.created_at
+                                            ).toDateString()
+                                        }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div
-                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1">
-                        <pagination :data="all_applications_by_category" :method="get_applications_by_category" />
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between align-items-center border border-1"
+                    >
+                        <pagination
+                            :data="all_applications_by_category"
+                            :method="get_applications_by_category"
+                        />
                         <div class="float-right">
                             <!-- <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -134,9 +164,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">
@@ -165,7 +193,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { application_setup_store } from "./setup/store";
-import { CsvBuilder } from 'filefy';
+import { CsvBuilder } from "filefy";
 export default {
     data: () => ({
         applicationType: "",
@@ -186,17 +214,17 @@ export default {
             get_data_by_search: "get_data_by_search",
         }),
         SearchHandler() {
-            this.get_data_by_search(this.$refs.myForm)
+            this.get_data_by_search(this.$refs.myForm);
         },
-        ExportData(data = [], prefix_name = 'cp_not_approved_application') {
-            let dataArray = []
+        ExportData(data = [], prefix_name = "cp_not_approved_application") {
+            let dataArray = [];
             data.forEach((item) => {
-                let temp = {}
-                temp.applicant_name = item.user?.full_name
-                temp.category = this.all_applications_by_category.title
-                temp.subject = item.subject
-                dataArray.push(temp)
-            })
+                let temp = {};
+                temp.applicant_name = item.user?.full_name;
+                temp.category = this.all_applications_by_category.title;
+                temp.subject = item.subject;
+                dataArray.push(temp);
+            });
             let col = Object.keys(dataArray[0]);
             let values = dataArray.map((i) => Object.values(i));
             new CsvBuilder(`${prefix_name}_list.csv`)
@@ -205,7 +233,6 @@ export default {
                 .addRows(values)
                 .exportFile();
         },
-
     },
     computed: {
         ...mapState(application_setup_store, {

@@ -5,9 +5,7 @@
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
                         <h5 class="m-0">
-                            {{
-                                all_applications_by_category.title
-                            }}
+                            {{ all_applications_by_category.title }}
                             Applications
                         </h5>
                     </div>
@@ -101,7 +99,7 @@
                                             class="form-check-input"
                                         />
                                     </td>
-                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.id }}</td>
 
                                     <td>
                                         <span
@@ -168,7 +166,6 @@
                                                             ></i>
                                                             Edit
                                                         </router-link>
-
                                                     </span>
                                                 </li>
                                                 <li>
@@ -223,9 +220,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">

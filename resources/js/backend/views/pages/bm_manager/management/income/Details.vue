@@ -33,14 +33,17 @@
                                 <th>রশিদ বই নং</th>
                                 <th class="text-center">:</th>
                                 <th>
-                                    {{ single_data.account_receipt_book_id }}
+                                    {{
+                                        single_data.receipt_book
+                                            ?.receipt_book_no
+                                    }}
                                 </th>
                             </tr>
                             <tr>
                                 <th>রশিদ নং</th>
                                 <th class="text-center">:</th>
                                 <th>
-                                    {{ single_data.account_receipt_book_no }}
+                                    {{ single_data.account_receipt_no }}
                                 </th>
                             </tr>
                             <tr>
@@ -293,7 +296,7 @@ export default {
                 this[actionTitle](actionTitle, event, ref);
             }
 
-            if (event.target.name == "account_id") {
+            if (event?.target.name == "account_id") {
                 await this.get_account_numbers_by_account_id(
                     event.target.value
                 );
@@ -311,7 +314,7 @@ export default {
                 });
             }
 
-            if (event.target.name == "account_receipt_book_id") {
+            if (event?.target.name == "account_receipt_book_id") {
                 let receipt_book_id = event.target.value;
                 if (receipt_book_id) {
                     let response = await this.get_receipt_book_remaining_pages(
@@ -334,7 +337,7 @@ export default {
                 }
             }
 
-            if (event.target.name == "amount") {
+            if (event?.target.name == "amount") {
                 this.amountHandleKeyup(event);
             }
         },

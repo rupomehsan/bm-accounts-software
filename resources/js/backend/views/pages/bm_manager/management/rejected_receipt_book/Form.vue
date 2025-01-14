@@ -30,7 +30,10 @@
                         class="user_create_form card"
                     >
                         <div class="card-body">
-                            <div class="row justify-content-center">
+                            <div
+                                class="row justify-content-center"
+                                v-if="loaded"
+                            >
                                 <div
                                     class="col-lg-12"
                                     v-for="(form_field, index) in form_fields"
@@ -44,6 +47,7 @@
                                             :multiple="form_field.multiple"
                                             :value="form_field.value"
                                             :data_list="form_field.data_list"
+                                            :onchange="getResponse"
                                         />
                                     </div>
                                 </div>
@@ -65,7 +69,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import form_fields from "./setup/form_fields.js";
-import { receipt_book_store } from "./setup/store";
+import { rejected_receipt_book_store } from "./setup/store";
 import roleSetup from "../../partials/role_setup";
 
 export default {
@@ -73,10 +77,12 @@ export default {
         role: roleSetup.role,
         form_fields,
         param_id: null,
+        loaded: false,
     }),
 
     created: async function () {
         let id = this.$route.query.id;
+        await this.get_all_account_receipt_book();
 
         if (id) {
             this.param_id = id;
@@ -87,38 +93,41 @@ export default {
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
+
+                        if (
+                            field.name == "account_receipt_book_id" &&
+                            value[0] == "account_receipt_book_id"
+                        ) {
+                            this.get_account_recept_no_by_receipt_book_id(
+                                value[1]
+                            );
+                        }
                     });
                 });
             }
-        } else {
-            form_fields.forEach((item) => {
-                item.value = "";
-            });
-
-            await this.latest_account_receipt_book();
-            if (this.latest_account_receipt_book_data) {
-                this.form_fields[0].value =
-                    this.latest_account_receipt_book_data.receipt_book_no + 1;
-                this.form_fields[1].value =
-                    this.latest_account_receipt_book_data
-                        .receipt_end_serial_no + 1;
-                this.form_fields[2].value =
-                    this.latest_account_receipt_book_data
-                        .receipt_end_serial_no + 40;
-            } else {
-                this.form_fields[0].value = 1;
-                this.form_fields[1].value = 1;
-                this.form_fields[2].value = 40;
-            }
         }
+
+        if (this.all_account_receipt_book_data) {
+            form_fields[0].data_list = [];
+            this.all_account_receipt_book_data?.data.forEach((item) => {
+                let fielData = {};
+                fielData.label = item.receipt_book_no;
+                fielData.value = item.id;
+                form_fields[0].data_list.push(fielData);
+            });
+        }
+
+        this.loaded = true;
     },
 
     methods: {
-        ...mapActions(receipt_book_store, {
+        ...mapActions(rejected_receipt_book_store, {
             user_update: "update",
             user_get: "get",
             user_store: "store",
-            latest_account_receipt_book: "latest_account_receipt_book",
+            get_all_account_receipt_book: "get_all_account_receipt_book",
+            get_receipt_book_remaining_pages:
+                "get_receipt_book_remaining_pages",
         }),
 
         submitHandler: async function ($event) {
@@ -133,12 +142,40 @@ export default {
                 }
             }
         },
+        getResponse: async function (event, actionTitle = null, ref = null) {
+            if (event.target.name == "account_receipt_book_id") {
+                let account_receipt_book_id = event.target.value;
+                if (account_receipt_book_id) {
+                    this.get_account_recept_no_by_receipt_book_id(
+                        account_receipt_book_id
+                    );
+                }
+            }
+        },
+        get_account_recept_no_by_receipt_book_id: async function (
+            account_receipt_book_id
+        ) {
+            let response = await this.get_receipt_book_remaining_pages(
+                account_receipt_book_id
+            );
+
+            if (response.data.length) {
+                response.data.forEach((item) => {
+                    let selectData = {};
+                    selectData.label = item.number;
+                    selectData.value = item.number;
+                    selectData.is_disabled = item.is_disabled;
+                    this.form_fields
+                        .find((item) => item.name == "account_receipt_no")
+                        .data_list.push(selectData);
+                });
+            }
+        },
     },
     computed: {
-        ...mapState(receipt_book_store, {
+        ...mapState(rejected_receipt_book_store, {
             single_user: "single_data",
-            latest_account_receipt_book_data:
-                "latest_account_receipt_book_data",
+            all_account_receipt_book_data: "all_account_receipt_book_data",
         }),
     },
 };

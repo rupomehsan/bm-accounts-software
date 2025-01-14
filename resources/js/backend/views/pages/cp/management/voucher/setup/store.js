@@ -7,6 +7,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
         AllAccountExpenseCategories: {},
         month_for_voucher_data: {},
         top_shit_data: {},
+        offset: 5,
     }),
     getters: {
         doubleCount: (state) => state.count * 2,
@@ -16,9 +17,11 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url);
+                response = await axios.get(url + "?offset=" + this.offset);
             } else {
-                response = await axios.get("cp-not-approval-voucher");
+                response = await axios.get(
+                    "cp-not-approval-voucher" + "?offset=" + this.offset
+                );
             }
             this.all_data = response.data.data;
         },
@@ -125,6 +128,10 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             let response = await axios.post(`account-expenses/search`, form);
             response = response.data.data;
             this.all_data = response;
+        },
+        set_limit: async function (limit) {
+            this.offset = limit;
+            this.all();
         },
     },
 });

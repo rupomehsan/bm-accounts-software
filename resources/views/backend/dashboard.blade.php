@@ -32,12 +32,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/custom.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/backend.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/lightbox.css') }}">
     <!-- latest jquery-->
     <script src="/plugins/sweet_alert.js" defer></script>
     <script src="/backend/assets/js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap js-->
     <script src="/plugins/pace.js"></script>
     <script src="/backend/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/backend/assets/js/lightbox.min.js"></script>
     <!-- Theme js-->
     <script src="/backend/assets/js/script.js" defer></script>
     @vite(['resources/js/backend/app.js', 'resources/sass/app.scss'])
