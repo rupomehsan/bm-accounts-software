@@ -45,6 +45,7 @@ class Validation extends FormRequest
             'amount' => 'required|sometimes',
             'amount_in_text' => 'required|sometimes',
             'folio' => 'sometimes',
+            'random_user' => 'sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
 

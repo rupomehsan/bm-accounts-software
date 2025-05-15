@@ -12,6 +12,7 @@ import monthly_income_routes from "../management/monthly_income/setup/routes";
 import kollan_tohobil_income_routes from "../management/kollan_tohobil_income/setup/routes";
 import tran_income_routes from "../management/tran_income/setup/routes";
 import accounts_routes from "../management/accounts/setup/routes";
+import accounts_group_routes from "../management/account_group/setup/routes";
 import sohid_family_fund_routes from "../management/sohid_family_fund/setup/routes";
 import sohid_fund_routes from "../management/sohid_fund/setup/routes";
 import sohid_family_routes from "../management/sohid_family/setup/routes";
@@ -75,6 +76,7 @@ const routes = {
         kollan_tohobil_income_routes,
         tran_income_routes,
         accounts_routes,
+        accounts_group_routes,
         sohid_fund_routes,
         sohid_family_fund_routes,
         sohid_family_routes,

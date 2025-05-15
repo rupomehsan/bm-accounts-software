@@ -51,7 +51,7 @@
             <div class="conatiner">
                 <div class="card list_card">
                     <div class="card-header align-items-center">
-                        <h6> সকল রশিদ বই তালিকা  </h6>
+                        <h6>সকল রশিদ বই তালিকা</h6>
                         <div class="search">
                             <!-- <form action="#">
                                 <input v-model.debounce:1000ms="search_data" placeholder="search..." type="search"
@@ -244,7 +244,8 @@
                             </div>
                             <div class="show-limit d-inline-block">
                                 <span>Total:</span>
-                                <span>{{ all_receipt_books.total }}</span>
+
+                                <span>{{ all_receipt_books.data?.total }}</span>
                             </div>
                         </div>
                     </div>

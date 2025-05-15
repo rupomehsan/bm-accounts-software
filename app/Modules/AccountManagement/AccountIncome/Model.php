@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $accountLogModel = \App\Modules\AccountManagement\AccountLog\Model::class;
-    static $userRoleModel = \App\Modules\UserRole\Model::class;
+    static $userModel = \App\Modules\User\Model::class;
     static $accountCategoryModel = \App\Modules\AccountManagement\AccountCategory\Model::class;
     static $accountReceiptBookModel = \App\Modules\AccountManagement\AccountReceiptBook\Model::class;
 
@@ -34,9 +34,13 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(self::$accountLogModel, 'account_log_id');
     }
-    public function user_roles()
+    public function branch_user()
     {
-        return $this->belongsTo(self::$userRoleModel, 'branch_id');
+        return $this->belongsTo(self::$userModel, 'branch_id');
+    }
+    public function central_division_user()
+    {
+        return $this->belongsTo(self::$userModel, 'central_division_id');
     }
     public function account_category()
     {
@@ -46,6 +50,4 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(self::$accountReceiptBookModel, 'account_receipt_book_id');
     }
-
-
 }

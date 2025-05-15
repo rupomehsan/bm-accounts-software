@@ -3,6 +3,7 @@
 include_once  base_path("app/Modules/AccountManagement/AccountBranchBudget/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountBranchTarget/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountCategory/Route.php");
+include_once  base_path("app/Modules/AccountManagement/AccountGroup/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountIncome/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountExpense/Route.php");
 include_once  base_path("app/Modules/AccountManagement/AccountLog/Route.php");

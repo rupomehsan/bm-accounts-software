@@ -101,7 +101,7 @@ class Store
             }
 
 
-            return messageResponse('Item added successfully', 201);
+            return entityResponse($voucher, 200, 'success');
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), 500, 'server_error');
         }

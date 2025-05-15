@@ -104,12 +104,16 @@
                                     </td>
                                     <td>{{ item.reason.substr(0, 20) }}</td>
                                     <td>
-                                        <img
-                                            :src="item.image"
-                                            height="20"
-                                            width="30"
-                                            alt=""
-                                        />
+                                        <a
+                                            :href="item.image"
+                                            :data-lightbox="`image-${index}`"
+                                        >
+                                            <img
+                                                :src="item.image"
+                                                height="20"
+                                                width="30"
+                                                alt=""
+                                        /></a>
                                     </td>
 
                                     <td>

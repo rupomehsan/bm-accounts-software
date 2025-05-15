@@ -26,12 +26,12 @@
                         <thead>
                             <tr>
                                 <th class="w-25">id</th>
-                                <th class="text-center">:</th>
+
                                 <th>{{ single_data.id }}</th>
                             </tr>
                             <tr>
                                 <th>রশিদ বই নং</th>
-                                <th class="text-center">:</th>
+
                                 <th>
                                     {{
                                         single_data.receipt_book
@@ -41,47 +41,82 @@
                             </tr>
                             <tr>
                                 <th>রশিদ নং</th>
-                                <th class="text-center">:</th>
+
                                 <th>
                                     {{ single_data.account_receipt_no }}
                                 </th>
                             </tr>
                             <tr>
                                 <th>তারিখ</th>
-                                <th class="text-center">:</th>
+
                                 <th>
                                     {{ single_data.date }}
                                 </th>
                             </tr>
                             <tr>
                                 <th>আয়ের খাত</th>
-                                <th class="text-center">:</th>
+
                                 <th>
                                     {{ single_data.account_category?.title }}
                                 </th>
                             </tr>
                             <tr>
-                                <th>আয়ের উৎসের ধরণ</th>
-                                <th class="text-center">:</th>
+                                <th>আয়ের উৎসের মাধ্যম</th>
+
                                 <th>
                                     {{ single_data.income_source_type }}
                                 </th>
                             </tr>
+
+                            <tr>
+                                <th>আয়ের উৎসের নাম</th>
+
+                                <th>
+                                    <template
+                                        v-if="
+                                            single_data.income_source_type ==
+                                            'শাখা'
+                                        "
+                                    >
+                                        {{ single_data.branch_user?.full_name }}
+                                    </template>
+                                    <template
+                                        v-if="
+                                            single_data.income_source_type ==
+                                            'বিভাগ'
+                                        "
+                                    >
+                                        {{
+                                            single_data.central_division_user
+                                                ?.full_name
+                                        }}
+                                    </template>
+                                    <template
+                                        v-if="
+                                            single_data.income_source_type ==
+                                            'ব্যাক্তি/প্রতিষ্ঠান'
+                                        "
+                                    >
+                                        {{ single_data.random_user }}
+                                    </template>
+                                </th>
+                            </tr>
+
                             <tr>
                                 <th>বিবরণ</th>
-                                <th class="text-center">:</th>
+
                                 <th>
                                     {{ single_data.description }}
                                 </th>
                             </tr>
                             <tr>
                                 <th>আয়ের পরিমাণ</th>
-                                <th class="text-center">:</th>
+
                                 <th>{{ single_data.amount }}</th>
                             </tr>
                             <tr>
                                 <th>আয়ের পরিমাণ (কথায়)</th>
-                                <th class="text-center">:</th>
+
                                 <th>{{ single_data.amount_in_text }}</th>
                             </tr>
                         </thead>

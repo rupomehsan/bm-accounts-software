@@ -16,7 +16,15 @@ class All
             $condition = [];
             $orderByCol =  request()->input('sort_by_col') ?? 'id';
             $orderByType = request()->input('sort_by_type') ?? 'asc';
-            $with = ['user_roles:id,name', 'account_category:id,title','receipt_book'];
+            $with = [
+                'branch_user:id,full_name',
+                'branch_user.roles:id,name',
+                'central_division_user:id,full_name',
+                'central_division_user.roles:id,name',
+                'account_logs',
+                'account_category:id,title',
+                'receipt_book'
+            ];
             $data = self::$model::query();
 
             if (request()->has('branch_id') && request()->input('branch_id')) {
@@ -25,7 +33,6 @@ class All
 
             if (request()->has('central_division_id') && request()->input('central_division_id')) {
                 $condition['central_division_id'] = auth()->id();
-
             }
             if (request()->has('central_division_id') && request()->input('central_division_id')) {
                 $data = $data->whereNotNull('central_division_id');

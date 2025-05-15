@@ -164,6 +164,9 @@ export default {
             );
 
             if (response.data.length) {
+                this.form_fields.find(
+                    (item) => item.name == "account_receipt_no"
+                ).data_list = [];
                 response.data.forEach((item) => {
                     let selectData = {};
                     selectData.label = item.number;

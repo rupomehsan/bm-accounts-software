@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 class Model extends EloquentModel
 {
     static $accountNumberModel = \App\Modules\AccountManagement\AccountNumber\Model::class;
+    static $accountGroupModel = \App\Modules\AccountManagement\AccountGroup\Models\Model::class;
+
     protected $table = "accounts";
     protected $guarded = [];
 
@@ -30,6 +32,12 @@ class Model extends EloquentModel
     {
         return $this->hasMany(self::$accountNumberModel, 'account_id');
     }
+
+    public function account_group()
+    {
+        return $this->belongsTo(self::$accountGroupModel, 'account_group_id');
+    }
+
 
     public function account_logs()
     {

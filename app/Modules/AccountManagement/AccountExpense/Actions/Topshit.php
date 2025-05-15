@@ -18,7 +18,7 @@ class Topshit
                 $chunck_count = ceil(self::$SupportModel::where('expense_id', $id)->count() / $limit);
                 $support = [];
                 for ($i = 0; $i < $chunck_count; $i++) {
-                    $support[] = self::$SupportModel::where('expense_id', $id)->take($limit)->skip($limit * $i)->get();
+                    $support[] = self::$SupportModel::with('image_url')->where('expense_id', $id)->take($limit)->skip($limit * $i)->get();
                 }
 
                 // $support = collect(self::$SupportModel::where('expense_id', $id)->get()->toArray())->chunk(5);
