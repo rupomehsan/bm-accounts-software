@@ -2,22 +2,22 @@ name: BM Software
 
 on:
   push:
-  branches: [main]
+    branches: [main]
 
 jobs:
   build:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Deploy using ssh
-    uses: appleboy/ssh-action@master
-    with:
-      host: ${{ secrets.VPS_HOST }}
-      username: ${{ secrets.VPS_USER }}
-      key: ${{ secrets.SSH_PRIVATE_KEY }}
-      port: 22
-      script: |
-      cd ${{ secrets.PROJECT_PATH }}
-      git reset --hard HEAD
-      git clean -fd
-      git pull origin master --prune --force || true
+    steps:
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ${{ secrets.PROJECT_PATH }}
+            git reset --hard HEAD
+            git clean -fd
+            git pull origin master --prune --force || true
