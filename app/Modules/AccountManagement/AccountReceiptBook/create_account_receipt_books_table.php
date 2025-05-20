@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('remaining_page')->unsigned()->default(40);
             $table->tinyInteger('is_approvel')->nullable();
             $table->tinyInteger('is_rejected')->nullable();
+            $table->text('comment')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -215,7 +215,9 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <table class="table text-center">
+                                            <table
+                                                class="table text-center m-0"
+                                            >
                                                 <tr>
                                                     <td>
                                                         Sompadok

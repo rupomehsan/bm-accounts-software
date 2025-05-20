@@ -13,7 +13,7 @@
                         >
                             All
                             <span v-if="all_receipt_books" class="fw-bold">{{
-                                `(${all_receipt_books.data?.total ?? 0})`
+                                `(${all_receipt_books?.totalData ?? 0})`
                             }}</span>
                         </button>
                         <button

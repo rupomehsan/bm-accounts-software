@@ -45,7 +45,6 @@ class All
                         $data = $data->where('remaining_page', '>', 0)->where('is_approvel', 1)->whereHas('receipt_book_assing', function ($q) {
                             $q->where('division_id', auth()->user()->parent);
                         })->get();
-
                     } else {
 
                         $data = $data->where('remaining_page', '>', 0)->where('is_approvel', 1)->whereHas('receipt_book_assing', function ($q) {
@@ -63,7 +62,6 @@ class All
                         }
 
                         $data = $newData;
-
                     }
                 } else {
                     $data = $data->with($with)->where($condition)->latest()->get();
@@ -76,6 +74,7 @@ class All
                 'data' => $data,
                 'totalApproved' => self::$model::where('is_approvel', 1)->count(),
                 'totalNotApproved' => self::$model::where('is_approvel', 0)->count(),
+                'totalData' => self::$model::count(),
             ];
             return entityResponse($response);
         } catch (\Exception $e) {
