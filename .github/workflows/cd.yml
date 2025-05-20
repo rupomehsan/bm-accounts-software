@@ -20,4 +20,4 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
             git reset --hard HEAD
             git clean -fd
-            git pull origin master --prune --force || true
+            git pull origin main --prune --force || true
