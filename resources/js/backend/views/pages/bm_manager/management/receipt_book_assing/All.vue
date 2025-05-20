@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-lg-3">

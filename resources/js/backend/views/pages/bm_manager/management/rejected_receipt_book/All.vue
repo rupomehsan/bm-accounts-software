@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-3">
@@ -104,12 +104,16 @@
                                     </td>
                                     <td>{{ item.reason.substr(0, 20) }}</td>
                                     <td>
-                                        <img
-                                            :src="item.image"
-                                            height="20"
-                                            width="30"
-                                            alt=""
-                                        />
+                                        <a
+                                            :href="item.image"
+                                            :data-lightbox="`image-${index}`"
+                                        >
+                                            <img
+                                                :src="item.image"
+                                                height="20"
+                                                width="30"
+                                                alt=""
+                                        /></a>
                                     </td>
 
                                     <td>

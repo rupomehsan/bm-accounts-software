@@ -40,7 +40,7 @@ export const account_income_category_setup_store = defineStore(
 
             store: async function (form) {
                 let formData = new FormData(form);
-                let response = await axios.post("account-categories", formData);
+                let response = await axios.post("account-categories?type=income", formData);
                 return response;
             },
             update: async function (form, id) {

@@ -52,7 +52,7 @@
                 <ul class="nav-menus">
                     <li class="onhover-dropdown mx-3">
                         <router-link
-                            :to="{ name: 'MyNotification' }"
+                            :to="{ name: `${role}MyNotification` }"
                             class="txt-dark"
                         >
                             <img
@@ -111,8 +111,7 @@
                             <li class="text-center">
                                 You have Check
                                 <router-link
-                                    :to="{ name: 'BmNotifications' }"
-                                    href="#"
+                                    :to="{ name: `${role}Notifications` }"
                                     >all</router-link
                                 >
                                 notification
@@ -163,6 +162,7 @@ import { use_auth_store } from "../../../../store/auth_store";
 
 export default {
     data: () => ({
+        role: window.role.bm,
         toggleSwitch: true,
     }),
     created: async function () {

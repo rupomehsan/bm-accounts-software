@@ -50,7 +50,7 @@ class ApprovalVoucher
     {
         try {
 
-            // dd(request()->all());
+
             if (!$data = self::$supportVoucermodel::query()->where('id', request()->id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
@@ -59,6 +59,7 @@ class ApprovalVoucher
                 return messageResponse('Select status ...', 404, 'error');
             }
             if (request()->voucher_status == 'canceled') {
+
                 if (request()->cancel_comment == '') {
                     return messageResponse('Comment should not be empty...', 404, 'error');
                 }
@@ -82,6 +83,7 @@ class ApprovalVoucher
                 $data->cancel_by = auth()->id();
                 $data->cancel_comment = request()->input('cancel_comment');
                 $data->update();
+
             } elseif (request()->voucher_status == 'approved') {
 
                 if (auth()->user()->roles[0]->serial == 7) {

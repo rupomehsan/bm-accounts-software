@@ -219,8 +219,9 @@ export default {
             } else {
                 let response = await this.user_store($event.target);
                 if (response.data.status === "success") {
+                    $event.target.reset();
+
                     window.s_alert("Data successcully created");
-                    this.$router.push({ name: `AllBmAllVouchers` });
                 }
             }
         },

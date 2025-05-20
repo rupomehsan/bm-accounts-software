@@ -1,15 +1,26 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
-                        <h5 class="m-0">Account Management</h5>
+                        <h5 class="m-0">একাউন্ট ম্যানেজমেন্ট</h5>
                     </div>
                     <div class="col-lg-6 text-end">
+                        <span class="mx-1">
+                            <router-link
+                                :to="{ name: `${role}AllAccoutGroup` }"
+                                class="btn rounded-pill btn-outline-info"
+                            >
+                                <i class="fa fa-list me-5px"></i>
+                                একাউন্ট গ্রুপ
+                            </router-link>
+                        </span>
                         <span>
-                            <router-link :to="{ name: `${role}CreatePaymentMethod` }"
-                                class="btn rounded-pill btn-outline-info">
+                            <router-link
+                                :to="{ name: `${role}CreatePaymentMethod` }"
+                                class="btn rounded-pill btn-outline-info"
+                            >
                                 <i class="fa fa-pencil me-5px"></i>
                                 Create
                             </router-link>
@@ -51,57 +62,60 @@
                         <table class="table table-hover table-bordered">
                             <thead class="table-light">
                                 <tr class="t-head">
-                                    <th class="w-10">
-                                        <!-- <input type="checkbox" class="form-check-input" /> -->
-                                    </th>
+                                    <!-- <th class="w-10">
+                                        <input type="checkbox" class="form-check-input" />
+                                    </th> -->
                                     <th aria-label="id" class="cursor_n_resize">
                                         ID
-
                                     </th>
-                                    <th class="cursor_n_resize">
-                                        Name
-
-                                    </th>
+                                    <th class="cursor_n_resize">Account Group</th>
+                                    <th class="cursor_n_resize">Name</th>
                                     <th class="cursor_n_resize">
                                         Account Number
-
                                     </th>
 
-                                    <th class="cursor_n_resize">
-                                        Status
-
-                                    </th>
+                                    <th class="cursor_n_resize">Status</th>
                                     <th aria-label="actions">Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody class="table-border-bottom-0">
-                                <tr v-for="(item, index) in all_users.data" :key="item.id">
-                                    <td>
-                                        <!-- <input type="checkbox" class="form-check-input" /> -->
-                                    </td>
+                                <tr
+                                    v-for="(item, index) in all_users.data"
+                                    :key="item.id"
+                                >
+                                    <!-- <td>
+                                        <input type="checkbox" class="form-check-input" />
+                                    </td> -->
                                     <td>{{ item.id }}</td>
                                     <td>
+                                        {{ item.account_group?.name }}
+                                    </td>
+                                     <td>
                                         {{ item.name }}
                                     </td>
                                     <td>
-                                        {{
-                                item.account_number?.value ?? "N/A"
-                            }}
+                                        {{ item.value ?? "N/A" }}
                                     </td>
 
                                     <td>
-                                        <span class="badge bg-label-success me-1">{{
-                                    item.status == 1
-                                        ? "active"
-                                        : "inactive"
-                                }}</span>
-
+                                        <span
+                                            class="badge bg-label-success me-1"
+                                            >{{
+                                                item.status == 1
+                                                    ? "active"
+                                                    : "inactive"
+                                            }}</span
+                                        >
                                     </td>
                                     <td>
                                         <div class="table_actions">
-                                            <a @click.prevent="" href="#" class="btn btn-sm btn-outline-secondary"><i
-                                                    class="fa fa-gears"></i></a>
+                                            <a
+                                                @click.prevent=""
+                                                href="#"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                ><i class="fa fa-gears"></i
+                                            ></a>
                                             <ul>
                                                 <!-- <li>
                                                     <a href="">
@@ -127,28 +141,42 @@
                                                 </li> -->
                                                 <li v-if="item.name !== 'cash'">
                                                     <span>
-                                                        <router-link :to="{
-                                name: `${role}CreatePaymentMethod`,
-                                query: {
-                                    id: item.id,
-                                },
-                            }" class="">
-                                                            <i class="fa text-warning fa-pencil"></i>
+                                                        <router-link
+                                                            :to="{
+                                                                name: `${role}CreatePaymentMethod`,
+                                                                query: {
+                                                                    id: item.id,
+                                                                },
+                                                            }"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-warning fa-pencil"
+                                                            ></i>
                                                             Edit
                                                         </router-link>
                                                     </span>
                                                 </li>
-                                                <li v-if="item.name !==
-                                'bank_account' &&
-                                item.name !== 'cash'
-                                ">
+                                                <li
+                                                    v-if="
+                                                        item.name !==
+                                                            'bank_account' &&
+                                                        item.name !== 'cash'
+                                                    "
+                                                >
                                                     <span>
-                                                        <a @click.prevent="
-                                user_delete(
-                                    item.id
-                                )
-                                " href="#" class="">
-                                                            <i class="fa text-danger fa-trash"></i>
+                                                        <a
+                                                            @click.prevent="
+                                                                user_delete(
+                                                                    item.id
+                                                                )
+                                                            "
+                                                            href="#"
+                                                            class=""
+                                                        >
+                                                            <i
+                                                                class="fa text-danger fa-trash"
+                                                            ></i>
                                                             Delete
                                                         </a>
                                                     </span>
@@ -160,8 +188,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1">
-                        <pagination :data="all_users" :method="get_all_accounts" />
+                    <div
+                        class="card-footer py-1 border-top-0 d-flex justify-content-between border border-1"
+                    >
+                        <pagination
+                            :data="all_users"
+                            :method="get_all_accounts"
+                        />
                         <div class="float-right">
                             <div class="show-limit d-inline-block">
                                 <span>Limit:</span>
@@ -180,9 +213,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="canvas_backdrop">
-
-                </div>
+                <div class="canvas_backdrop"></div>
                 <div class="canvas_backdrop">
                     <div class="content right">
                         <div class="content_header">
@@ -211,7 +242,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { account_setup_store } from "./setup/store";
-import { CsvBuilder } from 'filefy';
+import { CsvBuilder } from "filefy";
 export default {
     data: () => ({
         role: window.role.bm,
@@ -226,7 +257,7 @@ export default {
             get_all_accounts: "all",
             user_delete: "delete",
         }),
-        exportData(data = [], prefix_name = 'accounts') {
+        exportData(data = [], prefix_name = "accounts") {
             let col = Object.keys(data[0]);
             let values = data.map((i) => Object.values(i));
             new CsvBuilder(`${prefix_name}_list.csv`)
@@ -248,7 +279,7 @@ export default {
         search_data: async function (newSearchData, oldSearchData) {
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(async () => {
-                this.api_url.searchParams.set('search', this.search_data);
+                this.api_url.searchParams.set("search", this.search_data);
                 await this.get_all_accounts(this.api_url.href);
             }, 500);
         },

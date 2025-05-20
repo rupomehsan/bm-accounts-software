@@ -12,8 +12,6 @@ const routes = {
             name: "BmNotifications",
             component: All,
         },
-
-
     ],
 };
 

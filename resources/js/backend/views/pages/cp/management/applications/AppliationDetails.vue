@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
@@ -10,7 +10,7 @@
             </div>
             <div
                 class="conatiner"
-                v-if="single_applications_data.application_values?.length"
+
             >
                 <div class="card list_card">
                     <div class="card-header align-items-center">
@@ -24,7 +24,7 @@
                                     <table class="table d-inline-block">
                                         <tbody>
                                             <tr
-                                                v-for="item in single_applications_data.application_values.filter(
+                                                v-for="item in single_applications_data.application_values?.filter(
                                                     (i) =>
                                                         i.title != 'description'
                                                 )"
@@ -134,7 +134,7 @@ export default {
     }),
     created: async function () {
         this.param_id = this.$route.params.id;
-        let response = await this.get_single_application(this.param_id);
+        await this.get_single_application(this.param_id);
 
         // console.log("single_applications_data", this.single_applications_data);
     },

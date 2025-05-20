@@ -12,7 +12,7 @@ class All
 
             $offset = request()->input('offset') ?? 10;
             $condition = [];
-            $with = ['account_number'];
+            $with = ['account_group'];
             $data = self::$model::query();
 
             if (request()->has('status') && request()->input('status')) {

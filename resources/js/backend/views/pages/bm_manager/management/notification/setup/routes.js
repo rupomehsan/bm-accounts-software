@@ -9,11 +9,14 @@ const routes = {
     children: [
         {
             path: "",
-            name: "BmNotifications",
+            name: "bmNotifications",
             component: All,
         },
-
-
+        {
+            path: "",
+            name: "bmMyNotification",
+            component: MyNotification,
+        },
     ],
 };
 

@@ -45,7 +45,7 @@ export const income_setup_store = defineStore("branch_income_setup_store", {
         },
 
         get_all_account_categories: async function () {
-            let response = await axios.get("account-categories?get_all=1");
+            let response = await axios.get("account-categories?get_all=1&type=income");
             response = response.data.data;
             // console.log("data", response);
             this.all_account_categories = response;

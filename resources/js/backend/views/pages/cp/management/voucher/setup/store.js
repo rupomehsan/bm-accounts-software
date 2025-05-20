@@ -17,7 +17,7 @@ export const voucher_setup_store = defineStore("voucher_setup_store", {
             let response;
             // let page = `?page=${pageLimit}`;
             if (url) {
-                response = await axios.get(url + "?offset=" + this.offset);
+                response = await axios.get(url + "&offset=" + this.offset);
             } else {
                 response = await axios.get(
                     "cp-not-approval-voucher" + "?offset=" + this.offset

@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
@@ -32,7 +32,7 @@
                                         <date-field :label="`End Date`" :name="`end_date`" />
                                     </div>
 
-                                    <div class="pt-2">
+                                    <div>
                                         <button class="btn btn-primary mt-4">Search</button>
                                     </div>
                                 </div>

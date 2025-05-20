@@ -9,7 +9,9 @@ class Show
     public static function execute($id)
     {
         try {
-            $with = ['account_logs', 'account_category:id,title', 'receipt_book'];
+            $with = ['branch_user:id,full_name', 'branch_user.roles:id,name', 'account_logs', 'account_category:id,title', 'receipt_book'];
+
+
             if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }

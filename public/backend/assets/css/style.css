@@ -13784,7 +13784,7 @@ th {
 }
 
 .table {
-  margin-bottom: 0;
+  margin-bottom: 50px;
 }
 
 .table> :not(:last-child)> :last-child>* {

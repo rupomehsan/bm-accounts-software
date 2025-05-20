@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
@@ -21,7 +21,7 @@
                     <div class="card-header align-items-center">
                         <div>
                             <form @submit.prevent="incomeSearchHandler">
-                                <div class="d-flex gap-2">
+                                <div class="d-flex gap-2 align-items-center">
                                     <div>
                                         <label for="">Start date</label>
                                         <date-field :label="`Start Date`" :name="`start_date`" />
@@ -32,7 +32,7 @@
                                     </div>
 
                                     <div v-if="loaded">
-                                        <label for="" class="my-1">Branch</label>
+                                        <label for="" >Branch</label>
                                         <select v-model="user_id" name="branch_id" class="form-control" id="">
                                             <option value="">Selecet branch</option>
                                             <template v-for="user in all_branch" :key="user.id">
@@ -40,7 +40,7 @@
                                             </template>
                                         </select>
                                     </div>
-                                    <div class="pt-2">
+                                    <div>
                                         <button class="btn btn-primary mt-4">Search</button>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                         {{ item.date }}
                                     </td>
                                     <td>{{ item.account_receipt_book_id }}</td>
-                                    <td>{{ item.account_category.title }}</td>
+                                    <td>{{ item.account_category?.title }}</td>
                                     <td>{{ item.account_receipt_no }}</td>
                                     <td>{{ item.amount }}</td>
                                     <td>

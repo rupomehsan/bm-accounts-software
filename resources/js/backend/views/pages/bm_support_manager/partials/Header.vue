@@ -108,7 +108,7 @@
                                 </li>
                             </template>
 
-                            <li class="text-center">
+                            <!-- <li class="text-center">
                                 You have Check
                                 <router-link
                                     :to="{ name: 'BmSupportNotifications' }"
@@ -116,7 +116,7 @@
                                     >all</router-link
                                 >
                                 notification
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                     <li class="onhover-dropdown">
@@ -136,12 +136,12 @@
                             </div>
                         </div>
                         <ul class="profile-dropdown onhover-show-div p-20">
-                            <li>
+                            <!-- <li>
                                 <router-link :to="{ name: 'BMSupoortUpdateProfile' }">
                                     <i class="icon-user"></i>
                                     Edit Profile
                                 </router-link>
-                            </li>
+                            </li> -->
                             <li>
                                 <a @click="logOut">
                                     <i class="icon-power-off"></i>

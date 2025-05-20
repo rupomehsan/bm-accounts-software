@@ -14,14 +14,15 @@
                                 </div>
                                 <div class="col-lg-6 text-end">
                                     <div class="btns">
-                                        <router-link
-                                            :to="{ name: `CpAllVouchers` }"
-                                            class="btn rounded-pill btn-outline-warning router-link-active"
-                                            ><i
+                                        <button
+                                            class="btn rounded-pill btn-outline-warning"
+                                            @click="$router.go(-1)"
+                                        >
+                                            <i
                                                 class="fa fa-arrow-left me-5px"
                                             ></i>
                                             Back
-                                        </router-link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

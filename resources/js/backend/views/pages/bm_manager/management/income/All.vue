@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <div class="pt-2">
+        <div>
             <div class="page-header my-2">
                 <div class="row align-items-center rounded-2">
                     <div class="col-lg-6">
@@ -181,11 +181,14 @@
 
                                     <th class="cursor_n_resize">তারিখ</th>
                                     <th class="cursor_n_resize">রশিদ বই নং</th>
+                                    <th class="cursor_n_resize">রশিদ নং</th>
                                     <th class="cursor_n_resize">আয়ের খাত</th>
+                                    <th class="cursor_n_resize">
+                                        আয়ের উৎসের মাধ্যম
+                                    </th>
                                     <th class="cursor_n_resize">
                                         আয়ের উৎসের নাম
                                     </th>
-                                    <th class="cursor_n_resize">রশিদ নং</th>
                                     <th class="cursor_n_resize">আয়ের পরিমাণ</th>
                                     <th class="cursor_n_resize">Status</th>
                                     <th aria-label="actions">Actions</th>
@@ -208,11 +211,41 @@
                                     <td>
                                         {{ item.receipt_book?.receipt_book_no }}
                                     </td>
-                                    <td>{{ item.account_category.title }}</td>
+                                    <td>{{ item.account_receipt_no }}</td>
+                                    <td>{{ item.account_category?.title }}</td>
                                     <td>
                                         {{ item.income_source_type }}
                                     </td>
-                                    <td>{{ item.account_receipt_no }}</td>
+                                    <td>
+                                        <template
+                                            v-if="
+                                                item.income_source_type ==
+                                                'শাখা'
+                                            "
+                                        >
+                                            {{ item.branch_user?.full_name }}
+                                        </template>
+                                        <template
+                                            v-if="
+                                                item.income_source_type ==
+                                                'বিভাগ'
+                                            "
+                                        >
+                                            {{
+                                                item.central_division_user
+                                                    ?.full_name
+                                            }}
+                                        </template>
+                                        <template
+                                            v-if="
+                                                item.income_source_type ==
+                                                'ব্যাক্তি/প্রতিষ্ঠান'
+                                            "
+                                        >
+                                            {{ item.random_user }}
+                                        </template>
+                                    </td>
+
                                     <td>{{ item.amount }}</td>
                                     <td>
                                         <span
@@ -311,6 +344,8 @@
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
                                 </select>
                             </div>
                             <div class="show-limit d-inline-block">
